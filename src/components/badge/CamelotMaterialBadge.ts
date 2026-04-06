@@ -22,7 +22,7 @@ export class CamelotMaterialBadge extends LitElement {
       padding: 2px 8px;
       border-radius: 6px;
       font-family: var(--cml-font-family);
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: var(--cml-font-weight-medium);
       white-space: nowrap;
       transition: all 0.2s;

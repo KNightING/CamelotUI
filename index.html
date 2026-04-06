@@ -38,26 +38,29 @@
     .style-column {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      padding: 20px;
+      gap: 20px;
+      padding: 24px;
       border-radius: var(--cml-radius-l);
       background-color: var(--cml-color-surface-container-lowest);
       border: 1px solid var(--cml-color-outline-variant);
       min-height: 100px;
+      box-shadow: var(--cml-shadow-m);
     }
 
     .style-name {
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: var(--cml-font-weight-bold);
       color: var(--cml-color-primary);
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       opacity: 0.7;
+      border-bottom: 1px dashed var(--cml-color-outline-variant);
+      padding-bottom: 8px;
     }
 
     .component-label {
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: var(--cml-font-weight-medium);
       color: var(--cml-color-on-surface-variant);
       margin-bottom: 4px;
@@ -91,7 +94,7 @@
     }
 
     .control-group label {
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: var(--cml-font-weight-bold);
       color: var(--cml-color-on-surface-variant);
     }
@@ -104,6 +107,14 @@
       color: var(--cml-color-on-surface);
       font-family: inherit;
       cursor: pointer;
+    }
+
+    .value-display {
+      font-size: 0.75rem;
+      color: var(--cml-color-primary);
+      margin-top: 4px;
+      font-style: italic;
+      min-height: 1.2em;
     }
   </style>
 </head>
@@ -130,30 +141,18 @@
     </div>
 
     <header>
-    <h1>CamelotUI Design System</h1>
-    <p>Modern, Multi-style Component Library based on Lit & Material 3</p>
-  </header>
+      <h1>CamelotUI Design System</h1>
+      <p>Modern, Multi-style Component Library based on Lit & Material 3</p>
+    </header>
 
-  <main>
-    <!-- 1. Buttons Comparison -->
-    <section class="comparison-section">
-      <h2 class="section-title">1. Buttons & Variants</h2>
-      <div class="comparison-grid">
-        <!-- Material -->
-        <div class="style-column">
-          <div class="style-name">Material 3 (Default)</div>
-          <camelot-button label="Primary"></camelot-button>
-          <camelot-button label="Secondary" color="secondary"></camelot-button>
-          <camelot-button label="Outlined" variant="outlined"></camelot-button>
-          <div style="display: flex; gap: 8px;">
-            <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
-            <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
-          </div>
-        </div>
-        <!-- Cupertino -->
-        <camelot-theme mode="cupertino">
+    <main>
+      <!-- 1. Buttons Comparison -->
+      <section class="comparison-section">
+        <h2 class="section-title">1. Buttons & Variants</h2>
+        <div class="comparison-grid">
+          <!-- Material -->
           <div class="style-column">
-            <div class="style-name">Cupertino (iOS)</div>
+            <div class="style-name">Material 3 (Default)</div>
             <camelot-button label="Primary"></camelot-button>
             <camelot-button label="Secondary" color="secondary"></camelot-button>
             <camelot-button label="Outlined" variant="outlined"></camelot-button>
@@ -162,250 +161,315 @@
               <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
             </div>
           </div>
-        </camelot-theme>
-        <!-- Soft UI -->
-        <camelot-theme mode="soft">
-          <div class="style-column">
-            <div class="style-name">Soft UI (Neumorphism)</div>
-            <camelot-button label="Primary"></camelot-button>
-            <camelot-button label="Secondary" color="secondary"></camelot-button>
-            <camelot-button label="Outlined" variant="outlined"></camelot-button>
-            <div style="display: flex; gap: 8px;">
-              <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
-              <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
+          <!-- Cupertino -->
+          <camelot-theme mode="cupertino">
+            <div class="style-column">
+              <div class="style-name">Cupertino (iOS)</div>
+              <camelot-button label="Primary"></camelot-button>
+              <camelot-button label="Secondary" color="secondary"></camelot-button>
+              <camelot-button label="Outlined" variant="outlined"></camelot-button>
+              <div style="display: flex; gap: 8px;">
+                <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
+                <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
+              </div>
             </div>
-          </div>
-        </camelot-theme>
-      </div>
-    </section>
-
-    <!-- 2. Form Selections Comparison -->
-    <section class="comparison-section">
-      <h2 class="section-title">2. Form Selection (Switch, Radio, Checkbox)</h2>
-      <div class="comparison-grid">
-        <div class="style-column">
-          <div class="style-name">Material 3</div>
-          <camelot-switch checked label="WiFi"></camelot-switch>
-          <camelot-radio label="Option A" name="m-r" checked></camelot-radio>
-          <camelot-checkbox label="Accept Rules" checked></camelot-checkbox>
-          <camelot-checkbox label="Disabled" disabled></camelot-checkbox>
+          </camelot-theme>
+          <!-- Soft UI -->
+          <camelot-theme mode="soft">
+            <div class="style-column">
+              <div class="style-name">Soft UI (Neumorphism)</div>
+              <camelot-button label="Primary"></camelot-button>
+              <camelot-button label="Secondary" color="secondary"></camelot-button>
+              <camelot-button label="Outlined" variant="outlined"></camelot-button>
+              <div style="display: flex; gap: 8px;">
+                <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
+                <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
+              </div>
+            </div>
+          </camelot-theme>
         </div>
-        <camelot-theme mode="cupertino">
-          <div class="style-column">
-            <div class="style-name">Cupertino</div>
-            <camelot-switch checked label="WiFi"></camelot-switch>
-            <camelot-radio label="Option A" name="c-r" checked></camelot-radio>
-            <camelot-checkbox label="Accept Rules" checked color="secondary"></camelot-checkbox>
-            <camelot-checkbox label="Disabled" disabled></camelot-checkbox>
-          </div>
-        </camelot-theme>
-        <camelot-theme mode="soft">
-          <div class="style-column">
-            <div class="style-name">Soft UI</div>
-            <camelot-switch checked label="WiFi"></camelot-switch>
-            <camelot-radio label="Option A" name="s-r" checked></camelot-radio>
-            <camelot-checkbox label="Accept Rules" checked color="tertiary"></camelot-checkbox>
-            <camelot-checkbox label="Disabled" disabled></camelot-checkbox>
-          </div>
-        </camelot-theme>
-      </div>
-    </section>
+      </section>
 
-    <!-- 3. Form Inputs Comparison -->
-    <section class="comparison-section">
-      <h2 class="section-title">3. Inputs & Selects</h2>
-      <div class="comparison-grid">
-        <div class="style-column">
-          <div class="style-name">Material 3</div>
-          <camelot-input label="Username" placeholder="Type here..."></camelot-input>
-          <camelot-select label="Material Order" class="demo-select"></camelot-select>
-        </div>
-        <camelot-theme mode="cupertino">
+      <!-- 2. Form Selections Comparison (Grouped) -->
+      <section class="comparison-section">
+        <h2 class="section-title">2. Form Selections (Managed Groups)</h2>
+        <div class="comparison-grid">
+          <!-- Material Style Groups -->
           <div class="style-column">
-            <div class="style-name">Cupertino</div>
+            <div class="style-name">Material 3</div>
+            
+            <camelot-switch checked label="System WiFi"></camelot-switch>
+
+            <camelot-radio-group label="Payment Type" value="credit" id="radio-group-m">
+              <camelot-radio label="Credit Card" value="credit"></camelot-radio>
+              <camelot-radio label="PayPal" value="paypal"></camelot-radio>
+            </camelot-radio-group>
+            <div class="value-display">Selected: <span id="val-radio-m">credit</span></div>
+
+            <camelot-checkbox-group label="User Interests" orientation="horizontal" id="cb-group-m">
+              <camelot-checkbox label="Design" value="design" checked></camelot-checkbox>
+              <camelot-checkbox label="Code" value="code" checked></camelot-checkbox>
+            </camelot-checkbox-group>
+            <div class="value-display">Selected: <span id="val-cb-m">design, code</span></div>
+          </div>
+
+          <!-- Cupertino Style Groups -->
+          <camelot-theme mode="cupertino">
+            <div class="style-column">
+              <div class="style-name">Cupertino</div>
+              
+              <camelot-switch checked label="WiFi"></camelot-switch>
+
+              <camelot-radio-group label="Subscription" value="monthly" id="radio-group-c">
+                <camelot-radio label="Monthly Plan" value="monthly"></camelot-radio>
+                <camelot-radio label="Yearly Plan" value="yearly"></camelot-radio>
+              </camelot-radio-group>
+              <div class="value-display">Selected: <span id="val-radio-c">monthly</span></div>
+
+              <camelot-checkbox-group label="Notifications" orientation="horizontal" id="cb-group-c">
+                <camelot-checkbox label="Email" value="email" checked></camelot-checkbox>
+                <camelot-checkbox label="Push" value="push"></camelot-checkbox>
+                <camelot-checkbox label="SMS" value="sms"></camelot-checkbox>
+              </camelot-checkbox-group>
+              <div class="value-display">Selected: <span id="val-cb-c">email</span></div>
+            </div>
+          </camelot-theme>
+
+          <!-- Soft Style Groups -->
+          <camelot-theme mode="soft">
+            <div class="style-column">
+              <div class="style-name">Soft UI</div>
+              
+              <camelot-switch checked label="Active Mode"></camelot-switch>
+
+              <camelot-radio-group label="Storage" value="ssd" id="radio-group-s">
+                <camelot-radio label="SSD" value="ssd"></camelot-radio>
+                <camelot-radio label="Cloud" value="cloud"></camelot-radio>
+              </camelot-radio-group>
+              <div class="value-display">Selected: <span id="val-radio-s">ssd</span></div>
+
+              <camelot-checkbox-group label="Privacy" orientation="vertical" id="cb-group-s">
+                <camelot-checkbox label="Global Tracking" value="tracking"></camelot-checkbox>
+                <camelot-checkbox label="Personal Ads" value="ads" checked></camelot-checkbox>
+              </camelot-checkbox-group>
+              <div class="value-display">Selected: <span id="val-cb-s">ads</span></div>
+            </div>
+          </camelot-theme>
+        </div>
+      </section>
+
+      <!-- 3. Form Inputs Comparison -->
+      <section class="comparison-section">
+        <h2 class="section-title">3. Inputs & Selects</h2>
+        <div class="comparison-grid">
+          <div class="style-column">
+            <div class="style-name">Material 3</div>
             <camelot-input label="Username" placeholder="Type here..."></camelot-input>
-            <camelot-select label="iOS Style" class="demo-select"></camelot-select>
+            <camelot-select label="Material Order" class="demo-select"></camelot-select>
           </div>
-        </camelot-theme>
-        <camelot-theme mode="soft">
-          <div class="style-column">
-            <div class="style-name">Soft UI</div>
-            <camelot-input label="Username" placeholder="Type here..."></camelot-input>
-            <camelot-select label="Soft Depth" class="demo-select"></camelot-select>
-          </div>
-        </camelot-theme>
-      </div>
-    </section>
-
-    <!-- 4. Badges Comparison -->
-    <section class="comparison-section">
-      <h2 class="section-title">4. Badges</h2>
-      <div class="comparison-grid">
-        <div class="style-column">
-          <div class="style-name">Material 3</div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <camelot-badge label="Primary"></camelot-badge>
-            <camelot-badge label="Error" color="error"></camelot-badge>
-            <camelot-badge label="Outlined" variant="outlined" color="success"></camelot-badge>
-          </div>
+          <camelot-theme mode="cupertino">
+            <div class="style-column">
+              <div class="style-name">Cupertino</div>
+              <camelot-input label="Username" placeholder="Type here..."></camelot-input>
+              <camelot-select label="iOS Style" class="demo-select"></camelot-select>
+            </div>
+          </camelot-theme>
+          <camelot-theme mode="soft">
+            <div class="style-column">
+              <div class="style-name">Soft UI</div>
+              <camelot-input label="Username" placeholder="Type here..."></camelot-input>
+              <camelot-select label="Soft Depth" class="demo-select"></camelot-select>
+            </div>
+          </camelot-theme>
         </div>
-        <camelot-theme mode="cupertino">
+      </section>
+
+      <!-- 4. Badges Comparison -->
+      <section class="comparison-section">
+        <h2 class="section-title">4. Badges</h2>
+        <div class="comparison-grid">
           <div class="style-column">
-            <div class="style-name">Cupertino</div>
+            <div class="style-name">Material 3</div>
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
               <camelot-badge label="Primary"></camelot-badge>
               <camelot-badge label="Error" color="error"></camelot-badge>
               <camelot-badge label="Outlined" variant="outlined" color="success"></camelot-badge>
             </div>
           </div>
-        </camelot-theme>
-        <camelot-theme mode="soft">
-          <div class="style-column">
-            <div class="style-name">Soft UI</div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <camelot-badge label="Primary"></camelot-badge>
-              <camelot-badge label="Error" color="error"></camelot-badge>
-              <camelot-badge label="Outlined" variant="outlined" color="success"></camelot-badge>
+          <camelot-theme mode="cupertino">
+            <div class="style-column">
+              <div class="style-name">Cupertino</div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <camelot-badge label="Primary"></camelot-badge>
+                <camelot-badge label="Error" color="error"></camelot-badge>
+                <camelot-badge label="Outlined" variant="outlined" color="success"></camelot-badge>
+              </div>
             </div>
-          </div>
-        </camelot-theme>
-      </div>
-    </section>
-
-    <!-- 5. Cards Comparison -->
-    <section class="comparison-section">
-      <h2 class="section-title">5. Containers (Cards)</h2>
-      <div class="comparison-grid">
-        <div class="style-column">
-          <div class="style-name">Material 3</div>
-          <camelot-card>
-            <h4 style="margin:0 0 8px 0">Material Card</h4>
-            <p style="margin:0; font-size: 14px; opacity: 0.8;">Standard surface shadow.</p>
-          </camelot-card>
+          </camelot-theme>
+          <camelot-theme mode="soft">
+            <div class="style-column">
+              <div class="style-name">Soft UI</div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <camelot-badge label="Primary"></camelot-badge>
+                <camelot-badge label="Error" color="error"></camelot-badge>
+                <camelot-badge label="Outlined" variant="outlined" color="success"></camelot-badge>
+              </div>
+            </div>
+          </camelot-theme>
         </div>
-        <camelot-theme mode="cupertino">
+      </section>
+
+      <!-- 5. Containers (Cards) -->
+      <section class="comparison-section">
+        <h2 class="section-title">5. Containers (Cards)</h2>
+        <div class="comparison-grid">
           <div class="style-column">
-            <div class="style-name">Cupertino</div>
+            <div class="style-name">Material 3</div>
             <camelot-card>
-              <h4 style="margin:0 0 8px 0">iOS Card</h4>
-              <p style="margin:0; font-size: 14px; opacity: 0.8;">Clean border and radius.</p>
+              <h4 style="margin:0 0 8px 0">Material Card</h4>
+              <p style="margin:0; font-size: 0.875rem; opacity: 0.8;">Standard surface shadow.</p>
             </camelot-card>
           </div>
-        </camelot-theme>
-        <camelot-theme mode="soft">
-          <div class="style-column">
-            <div class="style-name">Soft UI</div>
-            <camelot-card>
-              <h4 style="margin:0 0 8px 0">Soft Card</h4>
-              <p style="margin:0; font-size: 14px; opacity: 0.8;">Realistic depth shadows.</p>
-            </camelot-card>
-          </div>
-        </camelot-theme>
-      </div>
-    </section>
-
-    <!-- 6. Tabs Comparison -->
-    <section class="comparison-section">
-      <h2 class="section-title">6. Navigation (Tabs)</h2>
-      <div class="comparison-grid" style="grid-template-columns: 1fr;">
-        <div class="style-column">
-          <div class="style-name">Material 3</div>
-          <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
+          <camelot-theme mode="cupertino">
+            <div class="style-column">
+              <div class="style-name">Cupertino</div>
+              <camelot-card>
+                <h4 style="margin:0 0 8px 0">iOS Card</h4>
+                <p style="margin:0; font-size: 0.875rem; opacity: 0.8;">Clean border and radius.</p>
+              </camelot-card>
+            </div>
+          </camelot-theme>
+          <camelot-theme mode="soft">
+            <div class="style-column">
+              <div class="style-name">Soft UI</div>
+              <camelot-card>
+                <h4 style="margin:0 0 8px 0">Soft Card</h4>
+                <p style="margin:0; font-size: 0.875rem; opacity: 0.8;">Realistic depth shadows.</p>
+              </camelot-card>
+            </div>
+          </camelot-theme>
         </div>
-        <camelot-theme mode="cupertino">
+      </section>
+
+      <!-- 6. Navigation (Tabs) -->
+      <section class="comparison-section">
+        <h2 class="section-title">6. Navigation (Tabs)</h2>
+        <div class="comparison-grid" style="grid-template-columns: 1fr;">
           <div class="style-column">
-            <div class="style-name">Cupertino</div>
+            <div class="style-name">Material 3</div>
             <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
           </div>
-        </camelot-theme>
-        <camelot-theme mode="soft">
-          <div class="style-column">
-            <div class="style-name">Soft UI</div>
-            <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
-          </div>
-        </camelot-theme>
-      </div>
-    </section>
-  </main>
+          <camelot-theme mode="cupertino">
+            <div class="style-column">
+              <div class="style-name">Cupertino</div>
+              <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
+            </div>
+          </camelot-theme>
+          <camelot-theme mode="soft">
+            <div class="style-column">
+              <div class="style-name">Soft UI</div>
+              <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
+            </div>
+          </camelot-theme>
+        </div>
+      </section>
+    </main>
   </camelot-theme>
 
   <style>
-    .style-label {
-      display: block;
-      margin-bottom: 16px;
-      font-size: var(--cml-font-size-label);
-      font-weight: var(--cml-font-weight-medium);
-      color: var(--cml-color-primary);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      opacity: 0.6;
+    .section-title {
+      border-bottom: 2px solid var(--cml-color-outline-variant);
+      padding-bottom: 12px;
+      margin-top: 40px;
     }
   </style>
 
   <script type="module">
-    import './src/components/theme/CamelotTheme.ts';
-    import { THEME_DEFAULT, THEME_SAPPHIRE, THEME_EMERALD } from './src/styles/themes.ts';
-    
+    import './src/components/theme/CamelotTheme.ts'
+    import { THEME_DEFAULT, THEME_SAPPHIRE, THEME_EMERALD } from './src/styles/themes.ts'
+
     // Buttons
-    import './src/components/button/CamelotButton.ts';
-    import './src/components/button/CamelotIconButton.ts';
-    import './src/components/button/CamelotOutlineButton.ts';
-    
+    import './src/components/button/CamelotButton.ts'
+    import './src/components/button/CamelotIconButton.ts'
+    import './src/components/button/CamelotOutlineButton.ts'
+
     // Inputs & Selections
-    import './src/components/input/CamelotInput.ts';
-    import './src/components/checkbox/CamelotCheckbox.ts';
-    import './src/components/switch/CamelotSwitch.ts';
-    import './src/components/radio/CamelotRadio.ts';
-    import './src/components/select/CamelotSelect.ts';
-    
+    import './src/components/input/CamelotInput.ts'
+    import './src/components/checkbox/CamelotCheckbox.ts'
+    import './src/components/checkbox/CamelotCheckboxGroup.ts'
+    import './src/components/switch/CamelotSwitch.ts'
+    import './src/components/radio/CamelotRadio.ts'
+    import './src/components/radio/CamelotRadioGroup.ts'
+    import './src/components/select/CamelotSelect.ts'
+
     // Navigation & Others
-    import './src/components/tabs/CamelotTabs.ts';
-    import './src/components/card/CamelotCard.ts';
-    import './src/components/badge/CamelotBadge.ts';
+    import './src/components/tabs/CamelotTabs.ts'
+    import './src/components/card/CamelotCard.ts'
+    import './src/components/badge/CamelotBadge.ts'
 
     // Global Controller Logic
-    const rootTheme = document.getElementById('root-theme');
-    const themeSelector = document.getElementById('theme-selector');
-    const paletteSelector = document.getElementById('palette-selector');
+    const rootTheme = document.getElementById('root-theme')
+    const themeSelector = document.getElementById('theme-selector')
+    const paletteSelector = document.getElementById('palette-selector')
 
     // 初始化 Select
-    const demoSelects = document.querySelectorAll('.demo-select');
+    const demoSelects = document.querySelectorAll('.demo-select')
     demoSelects.forEach(select => {
       select.options = [
         { label: 'Standard Option', value: 'opt1' },
         { label: 'Extended Choice', value: 'opt2' },
         { label: 'Material Logic', value: 'opt3' }
-      ];
-    });
+      ]
+    })
 
     // 初始化 Tabs
     const tabItems = [
       { label: 'Overview', value: 'tab1' },
       { label: 'Features', value: 'tab2' },
       { label: 'Settings', value: 'tab3' }
-    ];
-    const demoTabs = document.querySelectorAll('.demo-tabs');
+    ]
+    const demoTabs = document.querySelectorAll('.demo-tabs')
     demoTabs.forEach(tabs => {
-      tabs.items = tabItems;
-    });
+      tabs.items = tabItems
+    })
+
+    // Group Demo Logic Helper
+    const setupGroup = (groupId, displayId) => {
+      const group = document.getElementById(groupId);
+      const display = document.getElementById(displayId);
+      if (group && display) {
+        group.addEventListener('change', (e) => {
+          const val = e.detail.value;
+          display.textContent = Array.isArray(val) ? val.join(', ') : val;
+        });
+      }
+    };
+
+    // Setup all groups
+    setupGroup('radio-group-m', 'val-radio-m');
+    setupGroup('cb-group-m', 'val-cb-m');
+    setupGroup('radio-group-c', 'val-radio-c');
+    setupGroup('cb-group-c', 'val-cb-c');
+    setupGroup('radio-group-s', 'val-radio-s');
+    setupGroup('cb-group-s', 'val-cb-s');
 
     // 初始設定使用預設主題物件
-    rootTheme.config = THEME_DEFAULT;
+    rootTheme.config = THEME_DEFAULT
 
     themeSelector.addEventListener('change', (e) => {
-      rootTheme.setAttribute('theme', e.target.value);
-    });
+      rootTheme.setAttribute('theme', e.target.value)
+    })
 
     paletteSelector.addEventListener('change', (e) => {
-      const val = e.target.value;
+      const val = e.target.value
       if (val === 'sapphire') {
-        rootTheme.config = THEME_SAPPHIRE;
+        rootTheme.config = THEME_SAPPHIRE
       } else if (val === 'emerald') {
-        rootTheme.config = THEME_EMERALD;
+        rootTheme.config = THEME_EMERALD
       } else {
-        rootTheme.config = THEME_DEFAULT;
+        rootTheme.config = THEME_DEFAULT
       }
-    });
+    })
 
     // 演示：動態修改非顏色的變數 (字體與間距)
     window.setCustomAesthetics = () => {
@@ -416,15 +480,15 @@
           'size-headline': '2.5rem'
         },
         spacing: {
-          '4': '32px' 
+          '4': '2rem'
         }
-      };
-      console.log('Custom Aesthetics Applied: Serif Font & Large Spacing');
-    };
+      }
+      console.log('Custom Aesthetics Applied: Serif Font & Large Spacing')
+    }
 
     window.setCustomColor = (color) => {
-      rootTheme.config = { ...rootTheme.config, color: { primary: color } };
-      console.log(`Global Primary Color set to: ${color}`);
+      rootTheme.config = { ...rootTheme.config, color: { primary: color } }
+      console.log(`Global Primary Color set to: ${color}`)
     };
   </script>
 </body>

@@ -16,6 +16,12 @@ export class CamelotCupertinoCheckbox extends LitElement {
   @property({ type: String })
   color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
+  /**
+   * 勾選框形狀：'square' (預設，圓角正方形) 或 'circle' (圓形)
+   */
+  @property({ type: String })
+  shape: 'square' | 'circle' = 'square';
+
   static styles = css`
     :host {
       display: inline-flex;
@@ -33,13 +39,20 @@ export class CamelotCupertinoCheckbox extends LitElement {
       width: 22px;
       height: 22px;
       border: 1px solid var(--cml-color-outline-variant);
-      border-radius: 50%;
       margin-right: 8px;
-      transition: background-color 0.2s, border-color 0.2s;
+      transition: background-color 0.2s, border-color 0.2s, border-radius 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
+    }
+
+    /* Shape options */
+    .shape-square {
+      border-radius: 5px; /* iOS standard rounded square */
+    }
+    .shape-circle {
+      border-radius: 50%;
     }
 
     /* Checked style with color variations */
@@ -84,7 +97,7 @@ export class CamelotCupertinoCheckbox extends LitElement {
         class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
         @click="${this._toggle}"
       >
-        <div class="checkbox-container">
+        <div class="checkbox-container shape-${this.shape}">
           <div class="check-icon"></div>
         </div>
         ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}"></camelot-label>` : ''}

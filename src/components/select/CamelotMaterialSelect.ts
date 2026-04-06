@@ -47,7 +47,7 @@ export class CamelotMaterialSelect extends LitElement {
       border-radius: var(--cml-radius-s);
       padding: 12px 16px;
       font-family: var(--cml-font-family);
-      font-size: 16px;
+      font-size: 1rem;
       color: var(--cml-color-on-surface);
       cursor: pointer;
       box-sizing: border-box;
@@ -121,7 +121,7 @@ export class CamelotMaterialSelect extends LitElement {
       background-color: var(--cml-color-surface);
       color: var(--cml-color-on-surface);
       font-family: var(--cml-font-family);
-      font-size: 14px;
+      font-size: 0.875rem;
       outline: none;
       box-sizing: border-box;
     }
@@ -159,7 +159,7 @@ export class CamelotMaterialSelect extends LitElement {
       padding: 16px;
       text-align: center;
       color: var(--cml-color-outline);
-      font-size: 14px;
+      font-size: 0.875rem;
     }
 
     .disabled {

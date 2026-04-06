@@ -26,6 +26,9 @@ export class CamelotRadio extends CamelotBaseElement {
   @property({ type: String })
   name: string = '';
 
+  @property({ type: String })
+  value: string = '';
+
   /**
    * 單選色彩：'primary', 'secondary', 'tertiary'
    */

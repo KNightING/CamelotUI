@@ -36,7 +36,7 @@ export class CamelotSoftInput extends LitElement {
 
     input {
       font-family: var(--cml-font-family);
-      font-size: 16px;
+      font-size: 1rem;
       padding: 16px 20px;
       border: none;
       border-radius: 16px;

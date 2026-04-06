@@ -27,7 +27,7 @@ export class CamelotCupertinoButton extends LitElement {
     button {
       font-family: var(--cml-font-family);
       font-weight: 400;
-      font-size: 17px;
+      font-size: 1.0625rem;
       padding: 12px 20px;
       border: none;
       border-radius: 12px;

@@ -46,7 +46,7 @@ export class CamelotCupertinoSelect extends LitElement {
       border-radius: 10px;
       padding: 11px 16px;
       font-family: var(--cml-font-family);
-      font-size: 17px;
+      font-size: 1.0625rem;
       color: var(--cml-color-on-background);
       cursor: pointer;
       box-sizing: border-box;
@@ -113,7 +113,7 @@ export class CamelotCupertinoSelect extends LitElement {
       background-color: rgba(118, 118, 128, 0.12);
       color: var(--cml-color-on-surface);
       font-family: var(--cml-font-family);
-      font-size: 15px;
+      font-size: 0.9375rem;
       outline: none;
       box-sizing: border-box;
     }
@@ -128,7 +128,7 @@ export class CamelotCupertinoSelect extends LitElement {
       cursor: pointer;
       color: var(--cml-color-on-background);
       font-family: var(--cml-font-family);
-      font-size: 17px;
+      font-size: 1.0625rem;
       border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
       transition: background-color 0.1s;
     }
@@ -152,7 +152,7 @@ export class CamelotCupertinoSelect extends LitElement {
       padding: 20px;
       text-align: center;
       color: var(--cml-color-on-surface-variant);
-      font-size: 15px;
+      font-size: 0.9375rem;
     }
 
     .disabled {

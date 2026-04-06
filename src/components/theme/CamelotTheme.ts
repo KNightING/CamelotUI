@@ -44,6 +44,7 @@ export class CamelotTheme extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this._darkMediaQuery.addEventListener('change', this._handleSystemThemeChange);
+    this.style.setProperty('--cml-active-ui-style', `"${this.mode}"`);
     this._applyPalette(); 
   }
 

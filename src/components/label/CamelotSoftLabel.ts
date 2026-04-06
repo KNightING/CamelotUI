@@ -18,12 +18,11 @@ export class CamelotSoftLabel extends LitElement {
   static styles = css`
     label {
       font-family: var(--cml-font-family);
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 0.875rem;
+      font-weight: var(--cml-font-weight-medium);
       color: var(--cml-color-on-background);
       margin-left: 8px;
-      opacity: 0.8;
-      transition: all 0.2s;
+      transition: color 0.2s;
     }
 
     .required::after {
@@ -32,7 +31,7 @@ export class CamelotSoftLabel extends LitElement {
       margin-left: 4px;
     }
 
-    /* Color variations sync with theme colors */
+    /* Color variations in Soft UI are subtle, mostly for active states */
     .primary { color: var(--cml-color-primary); }
     .secondary { color: var(--cml-color-secondary); }
     .tertiary { color: var(--cml-color-tertiary); }

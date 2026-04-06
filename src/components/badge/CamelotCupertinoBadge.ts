@@ -20,7 +20,7 @@ export class CamelotCupertinoBadge extends LitElement {
       padding: 2px 10px;
       border-radius: 999px;
       font-family: var(--cml-font-family);
-      font-size: 13px;
+      font-size: 0.8125rem;
       font-weight: 500;
       white-space: nowrap;
       transition: opacity 0.2s;

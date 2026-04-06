@@ -29,6 +29,15 @@ export class CamelotCheckbox extends CamelotBaseElement {
   @property({ type: String })
   color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
+  /**
+   * 勾選框形狀 (僅專對 Cupertino 風格)：'square' 或 'circle'
+   */
+  @property({ type: String })
+  shape: 'square' | 'circle' = 'square';
+
+  @property({ type: String })
+  value: string = '';
+
   static styles = css`
     :host {
       display: inline-block;
@@ -53,6 +62,7 @@ export class CamelotCheckbox extends CamelotBaseElement {
             .label="${this.label}" 
             .checked="${this.checked}"
             .color="${this.color}"
+            .shape="${this.shape}"
             ?disabled="${this.disabled}"
             @change="${this._handleChanged}">
           </camelot-cupertino-checkbox>

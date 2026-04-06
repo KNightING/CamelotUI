@@ -20,7 +20,7 @@ export class CamelotSoftBadge extends LitElement {
       padding: 4px 14px;
       border-radius: 999px;
       font-family: var(--cml-font-family);
-      font-size: 11px;
+      font-size: 0.6875rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.1em;

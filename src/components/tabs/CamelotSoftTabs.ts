@@ -34,7 +34,7 @@ export class CamelotSoftTabs extends LitElement {
       padding: 10px 12px;
       text-align: center;
       font-family: var(--cml-font-family);
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 500;
       color: var(--cml-color-on-background);
       cursor: pointer;

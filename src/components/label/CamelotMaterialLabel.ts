@@ -18,7 +18,7 @@ export class CamelotMaterialLabel extends LitElement {
   static styles = css`
     label {
       font-family: var(--cml-font-family);
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 500;
       color: var(--cml-color-outline);
       margin-left: 4px;

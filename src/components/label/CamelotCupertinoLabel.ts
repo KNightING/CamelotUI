@@ -7,7 +7,7 @@ export class CamelotCupertinoLabel extends LitElement {
   text: string = '';
 
   @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  color: 'primary' | 'secondary' | 'tertiary' | 'outline' = 'primary';
 
   @property({ type: Boolean })
   required: boolean = false;
@@ -18,29 +18,30 @@ export class CamelotCupertinoLabel extends LitElement {
   static styles = css`
     label {
       font-family: var(--cml-font-family);
-      font-size: 13px;
-      color: var(--cml-color-primary); /* Default to primary as suggested by user's recent edit */
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--cml-color-primary);
       margin-left: 12px;
       text-transform: uppercase;
       letter-spacing: -0.01em;
-      font-weight: 400;
+      transition: color 0.2s;
     }
+
+    .outline { color: var(--cml-color-on-surface-variant); opacity: 0.6; }
+    .primary { color: var(--cml-color-primary); }
+    .secondary { color: var(--cml-color-secondary); }
+    .tertiary { color: var(--cml-color-tertiary); }
 
     .required::after {
       content: '*';
       color: var(--cml-color-error);
-      margin-left: 2px;
+      margin-left: 4px;
     }
-
-    /* Color variations sync with theme colors */
-    .primary { color: var(--cml-color-primary); }
-    .secondary { color: var(--cml-color-secondary); }
-    .tertiary { color: var(--cml-color-tertiary); }
   `;
 
   render() {
     return html`
-      <label for="${this.for}" class="${this.required ? 'required' : ''} ${this.color}">
+      <label for="${this.for}" class="${this.color} ${this.required ? 'required' : ''}">
         ${this.text}
       </label>
     `;

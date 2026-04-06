@@ -56,7 +56,7 @@ export class CamelotMaterialInput extends LitElement {
       border: none;
       outline: none;
       padding: 20px 0 8px 0;
-      font-size: 16px;
+      font-size: 1rem;
       color: var(--cml-color-on-surface);
       caret-color: var(--cml-color-primary);
     }

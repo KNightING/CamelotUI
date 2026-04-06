@@ -124,7 +124,7 @@ export class CamelotSoftSelect extends LitElement {
       background-color: var(--cml-color-background);
       color: var(--cml-color-on-background);
       font-family: var(--cml-font-family);
-      font-size: 14px;
+      font-size: 0.875rem;
       outline: none;
       box-shadow: 
         inset 3px 3px 6px var(--cml-soft-color-dark), 
@@ -171,7 +171,7 @@ export class CamelotSoftSelect extends LitElement {
       padding: 16px;
       text-align: center;
       color: var(--cml-color-on-surface-variant);
-      font-size: 14px;
+      font-size: 0.875rem;
     }
 
     .disabled {

@@ -36,7 +36,7 @@ export class CamelotCupertinoInput extends LitElement {
 
     input {
       font-family: var(--cml-font-family);
-      font-size: 17px;
+      font-size: 1.0625rem;
       padding: 12px 16px;
       border: none;
       border-radius: 10px;

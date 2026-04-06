@@ -32,7 +32,7 @@ export class CamelotCupertinoTabs extends LitElement {
       padding: 6px 4px;
       text-align: center;
       font-family: var(--cml-font-family);
-      font-size: 13px;
+      font-size: 0.8125rem;
       font-weight: 500;
       color: var(--cml-color-on-surface);
       cursor: pointer;
