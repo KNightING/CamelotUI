@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CamelotUI Design System</title>
+  <link rel="stylesheet" href="./src/styles/tokens.css">
+  <style>
+    body {
+      font-family: var(--cml-font-family);
+      background-color: var(--cml-color-background);
+      color: var(--cml-color-on-background);
+      padding: 48px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-left: 4px solid var(--cml-color-primary);
+      padding-left: 16px;
+    }
+
+    section {
+      margin-bottom: 64px;
+    }
+
+    .section-title {
+      font-size: var(--cml-font-size-headline);
+      font-weight: var(--cml-font-weight-bold);
+      margin-bottom: 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .demo-box {
+      padding: 24px;
+      border-radius: var(--cml-radius-m);
+      border: 1px solid var(--cml-color-outline-variant);
+      background-color: var(--cml-color-surface);
+    }
+
+    /* 懸浮控制台樣式 */
+    .control-panel {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--cml-color-surface);
+      padding: 16px 24px;
+      margin: -48px -24px 48px -24px;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      border-bottom: 1px solid var(--cml-color-outline-variant);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .control-group label {
+      font-size: 14px;
+      font-weight: var(--cml-font-weight-bold);
+      color: var(--cml-color-on-surface-variant);
+    }
+
+    .control-group select {
+      padding: 6px 12px;
+      border-radius: var(--cml-radius-xs);
+      border: 1px solid var(--cml-color-outline);
+      background-color: var(--cml-color-surface);
+      color: var(--cml-color-on-surface);
+      font-family: inherit;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <camelot-theme id="root-theme">
+    <div class="control-panel">
+      <div class="control-group">
+        <label>Color Theme</label>
+        <select id="theme-selector">
+          <option value="auto">Auto (System)</option>
+          <option value="light">Light Mode</option>
+          <option value="dark">Dark Mode</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Color Palette</label>
+        <select id="palette-selector">
+          <option value="default">Amethyst (Purple)</option>
+          <option value="sapphire">Sapphire (Blue)</option>
+          <option value="emerald">Emerald (Green)</option>
+        </select>
+      </div>
+    </div>
+
+    <header>
+    <h1>CamelotUI Design System</h1>
+    <p>Modern, Multi-style Component Library based on Lit & Material 3</p>
+  </header>
+
+  <main>
+    <!-- 1. 按鈕與裝飾風格展示 -->
+    <section>
+      <h2 class="section-title">1. Buttons & Badges</h2>
+      <div class="grid">
+        <div class="demo-box">
+          <span class="style-label">Material 3</span>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <camelot-button label="Submit Form"></camelot-button>
+            <div style="display: flex; gap: 8px;">
+              <camelot-badge label="NEW" variant="primary"></camelot-badge>
+              <camelot-badge label="DRAFT" variant="secondary"></camelot-badge>
+            </div>
+          </div>
+        </div>
+        <div class="demo-box">
+          <span class="style-label">Cupertino</span>
+          <camelot-theme mode="cupertino">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <camelot-button label="Confirm Action"></camelot-button>
+              <div style="display: flex; gap: 8px;">
+                <camelot-badge label="Update" variant="primary"></camelot-badge>
+                <camelot-badge label="Critical" variant="error"></camelot-badge>
+              </div>
+            </div>
+          </camelot-theme>
+        </div>
+        <div class="demo-box">
+          <span class="style-label">Soft UI</span>
+          <camelot-theme mode="soft">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <camelot-button label="Soft Interaction"></camelot-button>
+              <div style="display: flex; gap: 8px;">
+                <camelot-badge label="STATUS" variant="primary"></camelot-badge>
+              </div>
+            </div>
+          </camelot-theme>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 選取與輸入風格展示 -->
+    <section>
+      <h2 class="section-title">2. Inputs & Selections</h2>
+      <div class="grid">
+        <div class="demo-box">
+          <span class="style-label">Material 3</span>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <camelot-input label="Username" value="CamelotAgent"></camelot-input>
+            <camelot-checkbox label="I agree to the terms" checked></camelot-checkbox>
+          </div>
+        </div>
+        <div class="demo-box">
+          <span class="style-label">Cupertino</span>
+          <camelot-theme mode="cupertino">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <camelot-input label="Password" value="123456"></camelot-input>
+              <camelot-checkbox label="Enable Notifications" checked></camelot-checkbox>
+            </div>
+          </camelot-theme>
+        </div>
+        <div class="demo-box">
+          <span class="style-label">Soft UI</span>
+          <camelot-theme mode="soft">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <camelot-input label="Search" placeholder="Type here..."></camelot-input>
+              <camelot-checkbox label="Keep me signed in"></camelot-checkbox>
+            </div>
+          </camelot-theme>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 容器展示 -->
+    <section>
+      <h2 class="section-title">3. Containers (Cards)</h2>
+      <div class="grid">
+        <div class="demo-box">
+          <span class="style-label">Material 3</span>
+          <camelot-card>
+            <div style="padding: 4px;">
+              <h3 style="margin-top: 0;">Material Elevated</h3>
+              <p>Standard surface with subtle elevation.</p>
+              <camelot-button label="Action"></camelot-button>
+            </div>
+          </camelot-card>
+        </div>
+        
+        <div class="demo-box">
+          <span class="style-label">Cupertino</span>
+          <camelot-theme mode="cupertino">
+            <camelot-card>
+              <div style="padding: 4px;">
+                <h3 style="margin-top: 0;">iOS Style Card</h3>
+                <p>Refined borders and rounded corners.</p>
+                <camelot-button label="View"></camelot-button>
+              </div>
+            </camelot-card>
+          </camelot-theme>
+        </div>
+
+        <div class="demo-box">
+          <span class="style-label">Soft UI</span>
+          <camelot-theme mode="soft">
+            <camelot-card>
+              <div style="padding: 4px;">
+                <h3 style="margin-top: 0;">Neumorphic Card</h3>
+                <p>Responsive light source shadows.</p>
+                <camelot-button label="Press"></camelot-button>
+              </div>
+            </camelot-card>
+          </camelot-theme>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 主題切換展示 -->
+    <section>
+      <h2 class="section-title">4. Contextual Theme Switching</h2>
+      <div class="grid">
+        <camelot-theme mode="soft">
+          <div
+            style="padding: 24px; border: 2px dashed var(--cml-color-outline); border-radius: var(--cml-radius-m); background-color: var(--cml-color-background);">
+            <span class="style-label">Local Context: Soft UI</span>
+            <camelot-button label="Material Component in Soft Context"></camelot-button>
+            <div style="margin-top: 16px;">
+              <camelot-input label="Nested Soft Input"></camelot-input>
+            </div>
+          </div>
+        </camelot-theme>
+      </div>
+    </section>
+  </main>
+  </camelot-theme>
+
+  <style>
+    .style-label {
+      display: block;
+      margin-bottom: 16px;
+      font-size: var(--cml-font-size-label);
+      font-weight: var(--cml-font-weight-medium);
+      color: var(--cml-color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+  </style>
+
+  <script type="module">
+    import './src/components/theme/CamelotTheme.ts';
+    import { THEME_DEFAULT, THEME_SAPPHIRE, THEME_EMERALD } from './src/styles/themes.ts';
+    import './src/components/button/CamelotButton.ts';
+    import './src/components/button/CamelotMaterialButton.ts';
+    import './src/components/button/CamelotCupertinoButton.ts';
+    import './src/components/button/CamelotSoftButton.ts';
+    import './src/components/input/CamelotInput.ts';
+    import './src/components/input/CamelotMaterialInput.ts';
+    import './src/components/input/CamelotCupertinoInput.ts';
+    import './src/components/input/CamelotSoftInput.ts';
+    import './src/components/card/CamelotCard.ts';
+    import './src/components/checkbox/CamelotCheckbox.ts';
+    import './src/components/checkbox/CamelotMaterialCheckbox.ts';
+    import './src/components/checkbox/CamelotCupertinoCheckbox.ts';
+    import './src/components/checkbox/CamelotSoftCheckbox.ts';
+    import './src/components/badge/CamelotBadge.ts';
+    import './src/components/badge/CamelotMaterialBadge.ts';
+    import './src/components/badge/CamelotCupertinoBadge.ts';
+    import './src/components/badge/CamelotSoftBadge.ts';
+
+    // Global Controller Logic
+    const rootTheme = document.getElementById('root-theme');
+    const themeSelector = document.getElementById('theme-selector');
+    const paletteSelector = document.getElementById('palette-selector');
+
+    // 初始設定使用預設主題物件
+    rootTheme.config = THEME_DEFAULT;
+
+    themeSelector.addEventListener('change', (e) => {
+      rootTheme.setAttribute('theme', e.target.value);
+    });
+
+    paletteSelector.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (val === 'sapphire') {
+        rootTheme.config = THEME_SAPPHIRE;
+      } else if (val === 'emerald') {
+        rootTheme.config = THEME_EMERALD;
+      } else {
+        rootTheme.config = THEME_DEFAULT;
+      }
+    });
+
+    // 演示：動態修改非顏色的變數 (字體與間距)
+    window.setCustomAesthetics = () => {
+      rootTheme.config = {
+        ...rootTheme.config,
+        font: {
+          family: "'Georgia', serif",
+          'size-headline': '2.5rem'
+        },
+        spacing: {
+          '4': '32px' // 加大垂直間距感
+        }
+      };
+      console.log('Custom Aesthetics Applied: Serif Font & Large Spacing');
+    };
+
+    // 提供一個全域方法方便測試
+    window.setCustomColor = (color) => {
+      rootTheme.config = { primary: color };
+      console.log(`Global Primary Color set to: ${color}`);
+    };
+  </script>
+</body>
+
+</html>

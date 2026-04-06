@@ -1,0 +1,81 @@
+:root {
+  /* 1. Color System (Material 3 base, Simplified Naming) */
+  --cml-color-primary: #6750A4;
+  --cml-color-on-primary: #FFFFFF;
+  --cml-color-primary-container: #EADDFF;
+  --cml-color-on-primary-container: #21005D;
+
+  --cml-color-secondary: #625B71;
+  --cml-color-on-secondary: #FFFFFF;
+  --cml-color-secondary-container: #E8DEF8;
+  --cml-color-on-secondary-container: #1D192B;
+
+  --cml-color-tertiary: #7D5260;
+  --cml-color-on-tertiary: #FFFFFF;
+  --cml-color-tertiary-container: #FFD8E4;
+  --cml-color-on-tertiary-container: #31111D;
+
+  --cml-color-error: #B3261E;
+  --cml-color-on-error: #FFFFFF;
+  --cml-color-error-container: #F9DEDC;
+  --cml-color-on-error-container: #410E0B;
+
+  --cml-color-background: #FEF7FF;
+  --cml-color-on-background: #1D1B20;
+  --cml-color-surface: #FEF7FF;
+  --cml-color-on-surface: #1D1B20;
+  --cml-color-surface-variant: #E7E0EC;
+  --cml-color-on-surface-variant: #49454F;
+
+  --cml-color-outline: #79747E;
+  --cml-color-outline-variant: #CAC4D0;
+
+  /* 2. Typography (Noto Sans TC) */
+  --cml-font-family: 'Noto Sans TC', sans-serif;
+  --cml-font-weight-regular: 400;
+  --cml-font-weight-medium: 500;
+  --cml-font-weight-bold: 700;
+
+  --cml-font-size-label: 0.875rem;
+  --cml-font-size-body: 1rem;
+  --cml-font-size-title: 1.25rem;
+  --cml-font-size-headline: 1.75rem;
+
+  /* 3. Shapes & Spacing */
+  --cml-radius-xs: 4px;
+  --cml-radius-s: 8px;
+  --cml-radius-m: 12px;
+  --cml-radius-l: 28px;
+  --cml-radius-full: 9999px;
+
+  --cml-spacing-1: 4px;
+  --cml-spacing-2: 8px;
+  --cml-spacing-3: 12px;
+  --cml-spacing-4: 16px;
+  --cml-spacing-6: 24px;
+  --cml-spacing-8: 32px;
+
+  /* 4. Style Configs */
+  --cml-active-ui-style: "material"; /* material | cupertino | soft */
+
+  /* 5. Soft UI (Neumorphism) Defaults */
+  --cml-soft-distance: 8px;
+  --cml-soft-blur: 16px;
+  --cml-soft-intensity: 0.1;
+  --cml-soft-color-light: rgba(255, 255, 255, 0.8);
+  --cml-soft-color-dark: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Support (System Default Fallback) */
+/* 
+ * 註：大部份色彩切換現在由 CamelotTheme.ts 透過 JS 配置處理。
+ * 此處僅保留最基礎的系統級媒體查詢作為 Fallback。
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([theme="light"]) {
+    --cml-color-background: #141218;
+    --cml-color-on-background: #E6E1E5;
+    --cml-color-surface: #141218;
+    --cml-color-on-surface: #E6E1E5;
+  }
+}
