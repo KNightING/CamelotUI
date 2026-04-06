@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 /**
  * <CamelotMaterialInput>
@@ -21,6 +22,9 @@ export class CamelotMaterialInput extends LitElement {
 
   @property({ type: String })
   placeholder: string = '';
+
+  @state()
+  private _focused = false;
 
   static styles = css`
     :host {
@@ -59,25 +63,27 @@ export class CamelotMaterialInput extends LitElement {
     .secondary input { caret-color: var(--cml-color-secondary); }
     .tertiary input { caret-color: var(--cml-color-tertiary); }
 
-    label {
+    /* Placeholder 只有在 Focus 時才顯示，避免與 Label 重疊 */
+    input::placeholder {
+      color: transparent;
+      transition: color 0.1s;
+    }
+    
+    input:focus::placeholder {
+      color: var(--cml-color-on-surface-variant);
+    }
+
+    camelot-label {
       position: absolute;
       left: 16px;
       top: 18px;
-      color: var(--cml-color-on-surface-variant);
       pointer-events: none;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    input:focus + label,
-    input:not(:placeholder-shown) + label {
+    .floating camelot-label {
       transform: translateY(-14px);
-      font-size: 12px;
-      color: var(--cml-color-primary);
     }
-    .secondary input:focus + label,
-    .secondary input:not(:placeholder-shown) + label { color: var(--cml-color-secondary); }
-    .tertiary input:focus + label,
-    .tertiary input:not(:placeholder-shown) + label { color: var(--cml-color-tertiary); }
 
     .disabled {
       opacity: 0.38;
@@ -86,17 +92,38 @@ export class CamelotMaterialInput extends LitElement {
     }
   `;
 
+  private _handleFocus() {
+    this._focused = true;
+  }
+
+  private _handleBlur() {
+    this._focused = false;
+  }
+
+  private _handleInput(e: Event) {
+    this.value = (e.target as HTMLInputElement).value;
+    this.dispatchEvent(new CustomEvent('change', {
+      detail: { value: this.value },
+      bubbles: true,
+      composed: true
+    }));
+  }
+
   render() {
+    const isFloating = this._focused || (this.value && this.value.length > 0);
+    
     return html`
-      <div class="md-field ${this.color} ${this.disabled ? 'disabled' : ''}">
+      <div class="md-field ${this.color} ${isFloating ? 'floating' : ''} ${this.disabled ? 'disabled' : ''}">
         <input 
           id="input"
-          placeholder="${this.placeholder || ' '}"
+          placeholder="${this.placeholder || ''}"
           .value=${this.value}
           ?disabled=${this.disabled}
-          @input=${(e: Event) => this.value = (e.target as HTMLInputElement).value}
+          @focus=${this._handleFocus}
+          @blur=${this._handleBlur}
+          @input=${this._handleInput}
         />
-        ${this.label ? html`<label for="input">${this.label}</label>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${isFloating ? this.color : 'outline'}" .for="input"></camelot-label>` : ''}
       </div>
     `;
   }

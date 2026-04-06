@@ -1,9 +1,10 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 /**
  * <CamelotCupertinoInput>
- * iOS 風格的輸入框，圓角與半透明模糊效果。
+ * iOS 風格的輸入框，具備 Apple 設計語言的標籤。
  */
 @customElement('camelot-cupertino-input')
 export class CamelotCupertinoInput extends LitElement {
@@ -33,17 +34,8 @@ export class CamelotCupertinoInput extends LitElement {
       gap: 6px;
     }
 
-    label {
-      font-family: -apple-system, sans-serif;
-      font-size: 13px;
-      color: rgba(60, 60, 67, 0.6);
-      margin-left: 12px;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-    }
-
     input {
-      font-family: -apple-system, system-ui, sans-serif;
+      font-family: var(--cml-font-family);
       font-size: 17px;
       padding: 12px 16px;
       border: none;
@@ -58,8 +50,8 @@ export class CamelotCupertinoInput extends LitElement {
       background-color: var(--cml-color-surface);
       box-shadow: inset 0 0 0 1px var(--cml-color-primary);
     }
-    .secondary input:focus { box-shadow: inset 0 0 0 1px var(--cml-color-secondary); }
-    .tertiary input:focus { box-shadow: inset 0 0 0 1px var(--cml-color-tertiary); }
+    .secondary.container input:focus { box-shadow: inset 0 0 0 1px var(--cml-color-secondary); }
+    .tertiary.container input:focus { box-shadow: inset 0 0 0 1px var(--cml-color-tertiary); }
 
     .disabled {
       opacity: 0.3;
@@ -68,15 +60,25 @@ export class CamelotCupertinoInput extends LitElement {
     }
   `;
 
+  private _handleInput(e: Event) {
+    this.value = (e.target as HTMLInputElement).value;
+    this.dispatchEvent(new CustomEvent('change', {
+      detail: { value: this.value },
+      bubbles: true,
+      composed: true
+    }));
+  }
+
   render() {
     return html`
       <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
-        ${this.label ? html`<label>${this.label}</label>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="input"></camelot-label>` : ''}
         <input 
+          id="input"
           .value=${this.value}
           placeholder=${this.placeholder}
           ?disabled=${this.disabled}
-          @input=${(e: Event) => this.value = (e.target as HTMLInputElement).value}
+          @input=${this._handleInput}
         />
       </div>
     `;

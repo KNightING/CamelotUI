@@ -25,7 +25,7 @@ export class CamelotCupertinoButton extends LitElement {
     }
 
     button {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--cml-font-family);
       font-weight: 400;
       font-size: 17px;
       padding: 12px 20px;

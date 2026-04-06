@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 @customElement('camelot-soft-checkbox')
 export class CamelotSoftCheckbox extends LitElement {
@@ -33,7 +34,7 @@ export class CamelotSoftCheckbox extends LitElement {
       height: 24px;
       border-radius: 6px;
       background: var(--cml-color-background);
-      margin-right: 12px;
+      margin-right: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -68,12 +69,6 @@ export class CamelotSoftCheckbox extends LitElement {
       transform: scale(1);
     }
 
-    .label {
-      font-family: var(--cml-font-family);
-      font-size: var(--cml-font-size-body);
-      color: var(--cml-color-on-background);
-    }
-
     .disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -100,7 +95,7 @@ export class CamelotSoftCheckbox extends LitElement {
         <div class="checkbox-container">
           <div class="check-mark"></div>
         </div>
-        ${this.label ? html`<span class="label">${this.label}</span>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}"></camelot-label>` : ''}
       </div>
     `;
   }

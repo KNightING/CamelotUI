@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 @customElement('camelot-material-select')
 export class CamelotMaterialSelect extends LitElement {
@@ -36,15 +37,6 @@ export class CamelotMaterialSelect extends LitElement {
       gap: 4px;
     }
 
-    label {
-      font-family: var(--cml-font-family);
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--cml-color-outline);
-      margin-left: 4px;
-      transition: color 0.2s;
-    }
-
     .select-trigger {
       display: flex;
       align-items: center;
@@ -72,6 +64,8 @@ export class CamelotMaterialSelect extends LitElement {
       border-width: 2px;
       padding: 11px 15px; /* Adjust for border width change */
     }
+    .secondary .select-trigger.active { border-color: var(--cml-color-secondary); }
+    .tertiary .select-trigger.active { border-color: var(--cml-color-tertiary); }
 
     .arrow {
       width: 0;
@@ -86,6 +80,8 @@ export class CamelotMaterialSelect extends LitElement {
       transform: rotate(180deg);
       border-top-color: var(--cml-color-primary);
     }
+    .secondary .active .arrow { border-top-color: var(--cml-color-secondary); }
+    .tertiary .active .arrow { border-top-color: var(--cml-color-tertiary); }
 
     /* Dropdown */
     .dropdown {
@@ -95,7 +91,7 @@ export class CamelotMaterialSelect extends LitElement {
       right: 0;
       background-color: var(--cml-color-surface-container-high);
       border-radius: var(--cml-radius-s);
-      box-shadow: var(--cml-shadow-3); /* Increased shadow for better separation */
+      box-shadow: var(--cml-shadow-3);
       z-index: 1000;
       overflow: hidden;
       display: none;
@@ -108,9 +104,8 @@ export class CamelotMaterialSelect extends LitElement {
       display: flex;
     }
 
-    /* Dropdown Header (Search) */
     .dropdown-header {
-      padding: 12px;
+      padding: 8px;
       border-bottom: 1px solid var(--cml-color-outline-variant);
       background-color: var(--cml-color-surface-container-high);
       position: sticky;
@@ -120,82 +115,51 @@ export class CamelotMaterialSelect extends LitElement {
 
     .search-input {
       width: 100%;
-      padding: 10px 12px;
-      padding-left: 36px;
-      border: 1px solid var(--cml-color-outline);
-      border-radius: var(--cml-radius-s);
-      background-color: var(--cml-color-surface-container-low);
+      padding: 8px 12px;
+      border: 1px solid var(--cml-color-outline-variant);
+      border-radius: var(--cml-radius-xs);
+      background-color: var(--cml-color-surface);
       color: var(--cml-color-on-surface);
+      font-family: var(--cml-font-family);
       font-size: 14px;
       outline: none;
       box-sizing: border-box;
-      transition: border-color 0.2s;
     }
 
     .search-input:focus {
       border-color: var(--cml-color-primary);
-      border-width: 2px;
-      padding: 9px 11px 9px 35px; /* Adjust for border width */
     }
 
-    .search-icon {
-      position: absolute;
-      left: 22px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 16px;
-      opacity: 0.7;
-    }
-
-    /* Option List */
-    .option-list {
+    .dropdown-content {
       overflow-y: auto;
       flex: 1;
     }
 
-    .option-item {
+    .option {
       padding: 12px 16px;
       cursor: pointer;
-      font-family: var(--cml-font-family);
-      font-size: 14px;
+      transition: background-color 0.2s;
       color: var(--cml-color-on-surface);
-      transition: background-color 0.2s, color 0.2s;
-      position: relative;
+      font-family: var(--cml-font-family);
     }
 
-    .option-item:hover {
-      background-color: var(--cml-color-surface-container-highest);
+    .option:hover {
+      background-color: var(--cml-color-surface-variant);
     }
 
-    .option-item.selected {
+    .option.selected {
       background-color: var(--cml-color-primary-container);
       color: var(--cml-color-on-primary-container);
       font-weight: 500;
     }
+    .secondary .option.selected { background-color: var(--cml-color-secondary-container); color: var(--cml-color-on-secondary-container); }
+    .tertiary .option.selected { background-color: var(--cml-color-tertiary-container); color: var(--cml-color-on-tertiary-container); }
 
     .no-results {
       padding: 16px;
       text-align: center;
-      font-size: 14px;
       color: var(--cml-color-outline);
-    }
-
-    /* Color States - Sync with Theme Colors */
-    .primary .search-input:focus { border-color: var(--cml-color-primary); }
-    .secondary .search-input:focus { border-color: var(--cml-color-secondary); }
-    .tertiary .search-input:focus { border-color: var(--cml-color-tertiary); }
-
-    .primary .option-item.selected { 
-      background-color: var(--cml-color-primary-container);
-      color: var(--cml-color-on-primary-container);
-    }
-    .secondary .option-item.selected { 
-      background-color: var(--cml-color-secondary-container);
-      color: var(--cml-color-on-secondary-container);
-    }
-    .tertiary .option-item.selected { 
-      background-color: var(--cml-color-tertiary-container);
-      color: var(--cml-color-on-tertiary-container);
+      font-size: 14px;
     }
 
     .disabled {
@@ -205,53 +169,70 @@ export class CamelotMaterialSelect extends LitElement {
     }
   `;
 
-  private _onToggle(e: Event) {
-    e.stopPropagation();
-    this.dispatchEvent(new CustomEvent('toggle'));
+  private _toggleDropdown() {
+    if (this.disabled) return;
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      setTimeout(() => {
+        this.shadowRoot?.querySelector<HTMLInputElement>('.search-input')?.focus();
+      }, 0);
+    }
   }
 
-  private _onSearch(e: Event) {
-    const val = (e.target as HTMLInputElement).value;
-    this.dispatchEvent(new CustomEvent('search', { detail: { value: val } }));
+  private _selectOption(option: { label: string, value: string }) {
+    this.value = option.value;
+    this.isOpen = false;
+    this.searchTerm = '';
+    this.dispatchEvent(new CustomEvent('change', {
+      detail: { value: this.value },
+      bubbles: true,
+      composed: true
+    }));
   }
 
-  private _onSelect(val: string) {
-    this.dispatchEvent(new CustomEvent('change', { detail: { value: val } }));
+  private _handleSearch(e: Event) {
+    this.searchTerm = (e.target as HTMLInputElement).value;
   }
 
   render() {
     const selectedOption = this.options.find(opt => opt.value === this.value);
-    
+    const filteredOptions = this.options.filter(opt => 
+      opt.label.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+
     return html`
       <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
-        ${this.label ? html`<label>${this.label}</label>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.isOpen ? this.color : 'outline'}"></camelot-label>` : ''}
         
-        <div class="select-trigger ${this.isOpen ? 'active' : ''} ${this.color}" @click="${this._onToggle}">
-          <span class="value-text">${selectedOption ? selectedOption.label : 'Select...'}</span>
+        <div class="select-trigger ${this.isOpen ? 'active' : ''}" @click=${this._toggleDropdown}>
+          <span>${selectedOption ? selectedOption.label : 'Select...'}</span>
           <div class="arrow"></div>
         </div>
 
-        <div class="dropdown ${this.isOpen ? 'open' : ''} ${this.color}">
+        <div class="dropdown ${this.isOpen ? 'open' : ''}">
           <div class="dropdown-header">
-            <span class="search-icon">🔍</span>
             <input 
               type="text" 
               class="search-input" 
               placeholder="Search..." 
-              .value="${this.searchTerm}"
-              @input="${this._onSearch}"
-              @click="${(e: Event) => e.stopPropagation()}"
-            >
+              .value=${this.searchTerm}
+              @input=${this._handleSearch}
+              @click=${(e: Event) => e.stopPropagation()}
+            />
           </div>
-          <div class="option-list">
-            ${this.options.length > 0 ? this.options.map(opt => html`
+          <div class="dropdown-content">
+            ${filteredOptions.map(opt => html`
               <div 
-                class="option-item ${this.value === opt.value ? 'selected' : ''}" 
-                @click="${() => this._onSelect(opt.value)}"
+                class="option ${opt.value === this.value ? 'selected' : ''}"
+                @click=${(e: Event) => {
+                  e.stopPropagation();
+                  this._selectOption(opt);
+                }}
               >
                 ${opt.label}
               </div>
-            `) : html`<div class="no-results">No results found</div>`}
+            `)}
+            ${filteredOptions.length === 0 ? html`<div class="no-results">No results found</div>` : ''}
           </div>
         </div>
       </div>

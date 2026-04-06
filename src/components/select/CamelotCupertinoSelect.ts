@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 @customElement('camelot-cupertino-select')
 export class CamelotCupertinoSelect extends LitElement {
@@ -36,15 +37,6 @@ export class CamelotCupertinoSelect extends LitElement {
       gap: 6px;
     }
 
-    label {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 13px;
-      color: rgba(60, 60, 67, 0.6);
-      margin-left: 12px;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-    }
-
     .select-trigger {
       display: flex;
       align-items: center;
@@ -53,7 +45,7 @@ export class CamelotCupertinoSelect extends LitElement {
       background-color: rgba(120, 120, 128, 0.12);
       border-radius: 10px;
       padding: 11px 16px;
-      font-family: -apple-system, sans-serif;
+      font-family: var(--cml-font-family);
       font-size: 17px;
       color: var(--cml-color-on-background);
       cursor: pointer;
@@ -73,7 +65,7 @@ export class CamelotCupertinoSelect extends LitElement {
       transform: rotate(45deg);
       transition: transform 0.2s;
       margin-top: -4px;
-      opacity: 0.5; /* iOS style chevron is subtle but visible */
+      opacity: 0.5;
     }
 
     .active .chevron {
@@ -104,158 +96,136 @@ export class CamelotCupertinoSelect extends LitElement {
       display: flex;
     }
 
-    /* Search Header */
     .dropdown-header {
-      padding: 10px 12px;
-      background-color: var(--cml-color-surface-container-high);
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.05);
       border-bottom: 0.5px solid var(--cml-color-outline-variant);
       position: sticky;
       top: 0;
-      z-index: 2;
-    }
-
-    .search-wrapper {
-      position: relative;
-      background-color: var(--cml-color-surface-container-low);
-      border-radius: 8px;
-      padding: 6px 8px 6px 32px;
-      display: flex;
-      align-items: center;
+      z-index: 1;
     }
 
     .search-input {
       width: 100%;
-      background: transparent;
+      padding: 8px 12px;
       border: none;
-      font-size: 14px;
+      border-radius: 8px;
+      background-color: rgba(118, 118, 128, 0.12);
       color: var(--cml-color-on-surface);
+      font-family: var(--cml-font-family);
+      font-size: 15px;
       outline: none;
+      box-sizing: border-box;
     }
 
-    .search-icon {
-      position: absolute;
-      left: 10px;
-      font-size: 14px;
-      opacity: 0.5;
-    }
-
-    /* Option List */
-    .option-list {
+    .dropdown-content {
       overflow-y: auto;
+      flex: 1;
     }
 
-    .option-item {
-      padding: 12px 16px;
-      font-size: 16px;
-      color: var(--cml-color-on-surface);
-      border-bottom: 0.5px solid var(--cml-color-outline-variant);
+    .option {
+      padding: 14px 16px;
       cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background-color 0.2s;
+      color: var(--cml-color-on-background);
+      font-family: var(--cml-font-family);
+      font-size: 17px;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+      transition: background-color 0.1s;
     }
 
-    .option-item:last-child {
+    .option:last-child {
       border-bottom: none;
     }
 
-    .option-item:hover {
-      background-color: var(--cml-color-surface-container-highest);
+    .option:active {
+      background-color: rgba(0, 0, 0, 0.05);
     }
 
-    .option-item.selected {
-      background-color: var(--cml-color-secondary-container);
-      color: var(--cml-color-on-secondary-container);
+    .option.selected {
+      color: var(--cml-color-primary);
+      font-weight: 600;
     }
-
-    .check-icon {
-      display: none;
-      font-weight: bold;
-    }
-
-    .option-item.selected .check-icon {
-      display: block;
-    }
+    .secondary.container .option.selected { color: var(--cml-color-secondary); }
+    .tertiary.container .option.selected { color: var(--cml-color-tertiary); }
 
     .no-results {
       padding: 20px;
       text-align: center;
-      font-size: 14px;
-      color: var(--cml-color-outline);
-    }
-
-    /* Color States - Selected Theme Colors */
-    .primary .option-item.selected { 
-      background-color: var(--cml-color-primary-container);
-      color: var(--cml-color-on-primary-container);
-    }
-    .secondary .option-item.selected { 
-      background-color: var(--cml-color-secondary-container);
-      color: var(--cml-color-on-secondary-container);
-    }
-    .tertiary .option-item.selected { 
-      background-color: var(--cml-color-tertiary-container);
-      color: var(--cml-color-on-tertiary-container);
+      color: var(--cml-color-on-surface-variant);
+      font-size: 15px;
     }
 
     .disabled {
-      opacity: 0.3;
-      filter: grayscale(1);
+      opacity: 0.5;
+      cursor: not-allowed;
       pointer-events: none;
     }
   `;
 
-  private _onToggle(e: Event) {
-    e.stopPropagation();
-    this.dispatchEvent(new CustomEvent('toggle'));
+  private _toggleDropdown() {
+    if (this.disabled) return;
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      setTimeout(() => {
+        this.shadowRoot?.querySelector<HTMLInputElement>('.search-input')?.focus();
+      }, 0);
+    }
   }
 
-  private _onSearch(e: Event) {
-    const val = (e.target as HTMLInputElement).value;
-    this.dispatchEvent(new CustomEvent('search', { detail: { value: val } }));
+  private _selectOption(option: { label: string, value: string }) {
+    this.value = option.value;
+    this.isOpen = false;
+    this.searchTerm = '';
+    this.dispatchEvent(new CustomEvent('change', {
+      detail: { value: this.value },
+      bubbles: true,
+      composed: true
+    }));
   }
 
-  private _onSelect(val: string) {
-    this.dispatchEvent(new CustomEvent('change', { detail: { value: val } }));
+  private _handleSearch(e: Event) {
+    this.searchTerm = (e.target as HTMLInputElement).value;
   }
 
   render() {
     const selectedOption = this.options.find(opt => opt.value === this.value);
+    const filteredOptions = this.options.filter(opt => 
+      opt.label.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
 
     return html`
       <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
-        ${this.label ? html`<label>${this.label}</label>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="select"></camelot-label>` : ''}
         
-        <div class="select-trigger ${this.isOpen ? 'active' : ''}" @click="${this._onToggle}">
-          <span class="value-text">${selectedOption ? selectedOption.label : 'Select...'}</span>
+        <div class="select-trigger ${this.isOpen ? 'active' : ''}" @click=${this._toggleDropdown}>
+          <span>${selectedOption ? selectedOption.label : 'Select...'}</span>
           <div class="chevron"></div>
         </div>
 
-        <div class="dropdown ${this.isOpen ? 'open' : ''} ${this.color}">
+        <div class="dropdown ${this.isOpen ? 'open' : ''}">
           <div class="dropdown-header">
-            <div class="search-wrapper">
-              <span class="search-icon">🔍</span>
-              <input 
-                type="text" 
-                class="search-input" 
-                placeholder="Search" 
-                .value="${this.searchTerm}"
-                @input="${this._onSearch}"
-                @click="${(e: Event) => e.stopPropagation()}"
-              >
-            </div>
+            <input 
+              type="text" 
+              class="search-input" 
+              placeholder="Search..." 
+              .value=${this.searchTerm}
+              @input=${this._handleSearch}
+              @click=${(e: Event) => e.stopPropagation()}
+            />
           </div>
-          <div class="option-list">
-            ${this.options.length > 0 ? this.options.map(opt => html`
+          <div class="dropdown-content">
+            ${filteredOptions.map(opt => html`
               <div 
-                class="option-item ${this.value === opt.value ? 'selected' : ''}" 
-                @click="${() => this._onSelect(opt.value)}"
+                class="option ${opt.value === this.value ? 'selected' : ''}"
+                @click=${(e: Event) => {
+                  e.stopPropagation();
+                  this._selectOption(opt);
+                }}
               >
-                <span>${opt.label}</span>
-                <span class="check-icon">✓</span>
+                ${opt.label}
               </div>
-            `) : html`<div class="no-results">No Results</div>`}
+            `)}
+            ${filteredOptions.length === 0 ? html`<div class="no-results">No results found</div>` : ''}
           </div>
         </div>
       </div>

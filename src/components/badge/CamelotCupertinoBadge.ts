@@ -19,7 +19,7 @@ export class CamelotCupertinoBadge extends LitElement {
     .badge {
       padding: 2px 10px;
       border-radius: 999px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+      font-family: var(--cml-font-family);
       font-size: 13px;
       font-weight: 500;
       white-space: nowrap;

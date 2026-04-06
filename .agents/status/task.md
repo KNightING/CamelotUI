@@ -1,19 +1,21 @@
-# Select 下拉選單視覺修復任務清單
+# Label 元件化與字體規範統一任務清單
 
-## 風格視覺校準
-- [x] **Cupertino (CamelotCupertinoSelect)**
-    - [x] 提高箭頭 (`.chevron`) 的配色對比度 (使用 `currentColor` 並調整透明度)
-    - [x] 調整 `dropdown` 背景色使用主題變數，修復視覺異常問題
-    - [x] 新增選項懸停 (Hover) 背景色變化 (`surface-container-highest`)
-    - [x] 新增選中項目 (Selected) 的配色強化並支援 `color` 屬性
-- [x] **Material 3 (CamelotMaterialSelect)**
-    - [x] 修復 `dropdown` 背景色缺失問題，改為實體表面 (`surface-container-high`)
-    - [x] 新增選項懸停 (Hover) 覆蓋層效果
-    - [x] 新增選中項目 (Selected) 的配色強化 (Primary/Secondary/Tertiary Container)
-- [x] **Soft UI (CamelotSoftSelect)**
-    - [x] 新增選項懸停 (Hover) 內凹感 (Subtle Inset)
-    - [x] 新增選中項目 (Selected) 的深度感強化 (Deep Inset) 與文字主題色
+## 1. 全域字體標準化
+- [ ] 尋找並取代所有元件中的硬編碼字體 (如 `-apple-system`)
+- [ ] 確保所有 CSS `font-family` 白名單僅允許使用 `var(--cml-font-family)`
 
-## 驗證
-- [x] 確認亮/暗模式下的 UI 表現一致性
-- [x] 檢查三種配色變體 (Primary, Secondary, Tertiary) 的選取視覺連動
+## 2. 建立標籤獨立元件 (Label Component)
+- [ ] **建立目錄結構** (`src/components/label/`)
+- [ ] **CamelotLabel.ts**: 負責分流與管理 Label 屬性
+- [ ] **CamelotMaterialLabel.ts**: 實作 M3 過往各元件散落的 Label 樣式
+- [ ] **CamelotCupertinoLabel.ts**: 實作 iOS 風格 Label (大寫、間距等)
+- [ ] **CamelotSoftLabel.ts**: 實作 Soft UI (Neumorphism) Label 樣式
+
+## 3. 元件重構 (Refactoring)
+- [ ] **重構 Input 系列**: 替換 `<label>` 為 `<camelot-label>`
+- [ ] **重構 Select 系列**: 替換 `<label>` 為 `<camelot-label>`
+- [ ] **重構按鈕/擴展元件**: 確保內部 Label 呼叫統一 (視需要)
+
+## 4. 驗證與完工
+- [ ] 驗證切換主題後字體是否穩定
+- [ ] 確認 Label 顏色 (Color Property) 與對齊正確

@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 @customElement('camelot-soft-radio')
 export class CamelotSoftRadio extends LitElement {
@@ -24,8 +25,8 @@ export class CamelotSoftRadio extends LitElement {
     .container {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 10px;
+      gap: 8px;
+      padding: 6px 10px;
     }
 
     .radio-outer {
@@ -37,8 +38,8 @@ export class CamelotSoftRadio extends LitElement {
       align-items: center;
       justify-content: center;
       box-shadow: 
-        inset 4px 4px 8px var(--cml-soft-color-dark), 
-        inset -4px -4px 8px var(--cml-soft-color-light);
+        inset var(--cml-soft-distance) var(--cml-soft-distance) var(--cml-soft-blur) var(--cml-soft-color-dark), 
+        inset calc(-1 * var(--cml-soft-distance)) calc(-1 * var(--cml-soft-distance)) var(--cml-soft-blur) var(--cml-soft-color-light);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -63,16 +64,11 @@ export class CamelotSoftRadio extends LitElement {
     .secondary .radio-inner { background-color: var(--cml-color-secondary); }
     .tertiary .radio-inner { background-color: var(--cml-color-tertiary); }
 
-    .label {
-      font-family: var(--cml-font-family);
-      font-size: var(--cml-font-size-body);
-      color: var(--cml-color-on-background);
-    }
-
     .disabled {
       cursor: not-allowed;
       opacity: 0.3;
       box-shadow: none !important;
+      pointer-events: none;
     }
   `;
 
@@ -80,7 +76,9 @@ export class CamelotSoftRadio extends LitElement {
     if (this.disabled || this.checked) return;
     this.checked = true;
     this.dispatchEvent(new CustomEvent('change', {
-      detail: { checked: this.checked }
+      detail: { checked: this.checked },
+      bubbles: true,
+      composed: true
     }));
   }
 
@@ -93,7 +91,7 @@ export class CamelotSoftRadio extends LitElement {
         <div class="radio-outer">
           <div class="radio-inner"></div>
         </div>
-        ${this.label ? html`<span class="label">${this.label}</span>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}"></camelot-label>` : ''}
       </div>
     `;
   }

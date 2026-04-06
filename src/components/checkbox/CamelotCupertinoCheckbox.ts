@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 @customElement('camelot-cupertino-checkbox')
 export class CamelotCupertinoCheckbox extends LitElement {
@@ -33,7 +34,7 @@ export class CamelotCupertinoCheckbox extends LitElement {
       height: 22px;
       border: 1px solid var(--cml-color-outline-variant);
       border-radius: 50%;
-      margin-right: 12px;
+      margin-right: 8px;
       transition: background-color 0.2s, border-color 0.2s;
       display: flex;
       align-items: center;
@@ -58,12 +59,6 @@ export class CamelotCupertinoCheckbox extends LitElement {
 
     .checked .check-icon {
       opacity: 1;
-    }
-
-    .label {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      font-size: 17px;
-      color: var(--cml-color-on-background);
     }
 
     .disabled {
@@ -92,7 +87,7 @@ export class CamelotCupertinoCheckbox extends LitElement {
         <div class="checkbox-container">
           <div class="check-icon"></div>
         </div>
-        ${this.label ? html`<span class="label">${this.label}</span>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}"></camelot-label>` : ''}
       </div>
     `;
   }

@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 /**
  * <CamelotSoftInput>
@@ -33,20 +34,6 @@ export class CamelotSoftInput extends LitElement {
       gap: 12px;
     }
 
-    label {
-      font-family: var(--cml-font-family);
-      font-size: var(--cml-font-size-label);
-      font-weight: var(--cml-font-weight-medium);
-      color: var(--cml-color-on-background);
-      margin-left: 12px;
-      transition: color 0.2s;
-    }
-
-    /* Color Tints for Label */
-    .primary label { color: var(--cml-color-primary); }
-    .secondary label { color: var(--cml-color-secondary); }
-    .tertiary label { color: var(--cml-color-tertiary); }
-
     input {
       font-family: var(--cml-font-family);
       font-size: 16px;
@@ -76,15 +63,25 @@ export class CamelotSoftInput extends LitElement {
     }
   `;
 
+  private _handleInput(e: Event) {
+    this.value = (e.target as HTMLInputElement).value;
+    this.dispatchEvent(new CustomEvent('change', {
+      detail: { value: this.value },
+      bubbles: true,
+      composed: true
+    }));
+  }
+
   render() {
     return html`
       <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
-        ${this.label ? html`<label>${this.label}</label>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="input"></camelot-label>` : ''}
         <input 
+          id="input"
           .value=${this.value}
           placeholder=${this.placeholder}
           ?disabled=${this.disabled}
-          @input=${(e: Event) => this.value = (e.target as HTMLInputElement).value}
+          @input=${this._handleInput}
         />
       </div>
     `;

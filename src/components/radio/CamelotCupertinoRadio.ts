@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 @customElement('camelot-cupertino-radio')
 export class CamelotCupertinoRadio extends LitElement {
@@ -24,7 +25,7 @@ export class CamelotCupertinoRadio extends LitElement {
     .container {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       padding: 4px;
     }
 
@@ -61,15 +62,10 @@ export class CamelotCupertinoRadio extends LitElement {
       height: 8px;
     }
 
-    .label {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 16px;
-      color: var(--cml-color-on-background);
-    }
-
     .disabled {
       cursor: not-allowed;
       opacity: 0.3;
+      pointer-events: none;
     }
   `;
 
@@ -77,7 +73,9 @@ export class CamelotCupertinoRadio extends LitElement {
     if (this.disabled || this.checked) return;
     this.checked = true;
     this.dispatchEvent(new CustomEvent('change', {
-      detail: { checked: this.checked }
+      detail: { checked: this.checked },
+      bubbles: true,
+      composed: true
     }));
   }
 
@@ -90,7 +88,7 @@ export class CamelotCupertinoRadio extends LitElement {
         <div class="radio-circle">
           <div class="radio-inner"></div>
         </div>
-        ${this.label ? html`<span class="label">${this.label}</span>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}"></camelot-label>` : ''}
       </div>
     `;
   }

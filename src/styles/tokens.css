@@ -30,6 +30,11 @@
   --cml-color-outline: #79747E;
   --cml-color-outline-variant: #CAC4D0;
 
+  --cml-color-surface-container-low: #F7F2FA;
+  --cml-color-surface-container: #F3EDF7;
+  --cml-color-surface-container-high: #ECE6F0;
+  --cml-color-surface-container-highest: #E6E0E9;
+
   /* 2. Typography (Noto Sans TC) */
   --cml-font-family: 'Noto Sans TC', sans-serif;
   --cml-font-weight-regular: 400;

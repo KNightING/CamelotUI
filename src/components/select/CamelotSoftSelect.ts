@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 @customElement('camelot-soft-select')
 export class CamelotSoftSelect extends LitElement {
@@ -34,15 +35,6 @@ export class CamelotSoftSelect extends LitElement {
       display: flex;
       flex-direction: column;
       gap: 10px;
-    }
-
-    label {
-      font-family: var(--cml-font-family);
-      font-size: var(--cml-font-size-label);
-      font-weight: var(--cml-font-weight-medium);
-      color: var(--cml-color-on-background);
-      margin-left: 12px;
-      transition: color 0.2s;
     }
 
     .select-trigger {
@@ -90,6 +82,8 @@ export class CamelotSoftSelect extends LitElement {
       transform: rotate(-135deg);
       border-color: var(--cml-color-primary);
     }
+    .secondary .active .chevron { border-color: var(--cml-color-secondary); }
+    .tertiary .active .chevron { border-color: var(--cml-color-tertiary); }
 
     /* Dropdown Overlay */
     .dropdown {
@@ -107,152 +101,151 @@ export class CamelotSoftSelect extends LitElement {
       display: none;
       flex-direction: column;
       max-height: 320px;
-      padding: 8px;
     }
 
     .dropdown.open {
       display: flex;
     }
 
-    /* Search Header */
     .dropdown-header {
       padding: 12px;
+      background-color: var(--cml-color-background);
+      border-bottom: 1px solid var(--cml-soft-color-dark);
       position: sticky;
       top: 0;
       z-index: 1;
-      background-color: var(--cml-color-background);
-    }
-
-    .search-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-      background-color: var(--cml-color-background);
-      border-radius: 12px;
-      padding: 10px 12px;
-      box-shadow: 
-        inset 3px 3px 6px var(--cml-soft-color-dark), 
-        inset -3px -3px 6px var(--cml-soft-color-light);
     }
 
     .search-input {
       width: 100%;
-      background: transparent;
+      padding: 10px 16px;
       border: none;
-      font-size: 14px;
-      color: var(--cml-color-on-background);
-      outline: none;
-    }
-
-    .search-icon {
-      margin-right: 8px;
-      opacity: 0.5;
-    }
-
-    /* Option List */
-    .option-list {
-      overflow-y: auto;
-      padding: 4px;
-    }
-
-    .option-item {
-      padding: 12px 16px;
       border-radius: 12px;
-      margin-bottom: 4px;
-      cursor: pointer;
-      font-size: 15px;
+      background-color: var(--cml-color-background);
       color: var(--cml-color-on-background);
-      transition: all 0.2s ease;
+      font-family: var(--cml-font-family);
+      font-size: 14px;
+      outline: none;
+      box-shadow: 
+        inset 3px 3px 6px var(--cml-soft-color-dark), 
+        inset -3px -3px 6px var(--cml-soft-color-light);
+      box-sizing: border-box;
     }
 
-    .option-item:hover {
-      background-color: var(--cml-color-background);
-      box-shadow: 
-        inset 2px 2px 5px var(--cml-soft-color-dark), 
-        inset -2px -2px 5px var(--cml-soft-color-light);
+    .dropdown-content {
+      overflow-y: auto;
+      flex: 1;
+      padding: 8px;
     }
 
-    .option-item.selected {
+    .option {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--cml-color-on-background);
+      font-family: var(--cml-font-family);
+      border-radius: 12px;
+      transition: all 0.2s;
+      margin-bottom: 4px;
+    }
+
+    .option:last-child {
+      margin-bottom: 0;
+    }
+
+    .option:hover {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    .option.selected {
       background-color: var(--cml-color-background);
-      box-shadow: 
-        inset 4px 4px 8px var(--cml-soft-color-dark), 
-        inset -4px -4px 8px var(--cml-soft-color-light);
       color: var(--cml-color-primary);
-      font-weight: var(--cml-font-weight-bold);
+      box-shadow: 
+        inset 3px 3px 6px var(--cml-soft-color-dark), 
+        inset -3px -3px 6px var(--cml-soft-color-light);
+      font-weight: 600;
     }
+    .secondary .option.selected { color: var(--cml-color-secondary); }
+    .tertiary .option.selected { color: var(--cml-color-tertiary); }
 
     .no-results {
-      padding: 24px;
+      padding: 16px;
       text-align: center;
+      color: var(--cml-color-on-surface-variant);
       font-size: 14px;
-      color: var(--cml-color-outline);
     }
-
-    /* Color States - Sync Selected Text with Theme Colors */
-    .primary label { color: var(--cml-color-primary); }
-    .secondary label { color: var(--cml-color-secondary); }
-    .tertiary label { color: var(--cml-color-tertiary); }
-    
-    .primary .option-item.selected { color: var(--cml-color-primary); }
-    .secondary .option-item.selected { color: var(--cml-color-secondary); }
-    .tertiary .option-item.selected { color: var(--cml-color-tertiary); }
 
     .disabled {
       opacity: 0.5;
+      cursor: not-allowed;
       pointer-events: none;
       box-shadow: none !important;
     }
   `;
 
-  private _onToggle(e: Event) {
-    e.stopPropagation();
-    this.dispatchEvent(new CustomEvent('toggle'));
+  private _toggleDropdown() {
+    if (this.disabled) return;
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      setTimeout(() => {
+        this.shadowRoot?.querySelector<HTMLInputElement>('.search-input')?.focus();
+      }, 0);
+    }
   }
 
-  private _onSearch(e: Event) {
-    const val = (e.target as HTMLInputElement).value;
-    this.dispatchEvent(new CustomEvent('search', { detail: { value: val } }));
+  private _selectOption(option: { label: string, value: string }) {
+    this.value = option.value;
+    this.isOpen = false;
+    this.searchTerm = '';
+    this.dispatchEvent(new CustomEvent('change', {
+      detail: { value: this.value },
+      bubbles: true,
+      composed: true
+    }));
   }
 
-  private _onSelect(val: string) {
-    this.dispatchEvent(new CustomEvent('change', { detail: { value: val } }));
+  private _handleSearch(e: Event) {
+    this.searchTerm = (e.target as HTMLInputElement).value;
   }
 
   render() {
     const selectedOption = this.options.find(opt => opt.value === this.value);
-    
+    const filteredOptions = this.options.filter(opt => 
+      opt.label.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+
     return html`
       <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
-        ${this.label ? html`<label>${this.label}</label>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="select"></camelot-label>` : ''}
         
-        <div class="select-trigger ${this.isOpen ? 'active' : ''}" @click="${this._onToggle}">
+        <div class="select-trigger ${this.isOpen ? 'active' : ''}" @click=${this._toggleDropdown}>
           <span>${selectedOption ? selectedOption.label : 'Select...'}</span>
           <div class="chevron"></div>
         </div>
 
-        <div class="dropdown ${this.isOpen ? 'open' : ''} ${this.color}">
+        <div class="dropdown ${this.isOpen ? 'open' : ''}">
           <div class="dropdown-header">
-            <div class="search-wrapper">
-              <span class="search-icon">🔍</span>
-              <input 
-                type="text" 
-                class="search-input" 
-                placeholder="Search..." 
-                .value="${this.searchTerm}"
-                @input="${this._onSearch}"
-                @click="${(e: Event) => e.stopPropagation()}"
-              >
-            </div>
+            <input 
+              type="text" 
+              class="search-input" 
+              placeholder="Search..." 
+              .value=${this.searchTerm}
+              @input=${this._handleSearch}
+              @click=${(e: Event) => e.stopPropagation()}
+            />
           </div>
-          <div class="option-list">
-            ${this.options.length > 0 ? this.options.map(opt => html`
+          <div class="dropdown-content">
+            ${filteredOptions.map(opt => html`
               <div 
-                class="option-item ${this.value === opt.value ? 'selected' : ''}" 
-                @click="${() => this._onSelect(opt.value)}"
+                class="option ${opt.value === this.value ? 'selected' : ''}"
+                @click=${(e: Event) => {
+                  e.stopPropagation();
+                  this._selectOption(opt);
+                }}
               >
                 ${opt.label}
               </div>
-            `) : html`<div class="no-results">No Results</div>`}
+            `)}
+            ${filteredOptions.length === 0 ? html`<div class="no-results">No results found</div>` : ''}
           </div>
         </div>
       </div>

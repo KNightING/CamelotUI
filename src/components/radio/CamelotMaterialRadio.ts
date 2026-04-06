@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../label/CamelotLabel';
 
 @customElement('camelot-material-radio')
 export class CamelotMaterialRadio extends LitElement {
@@ -24,8 +25,8 @@ export class CamelotMaterialRadio extends LitElement {
     .container {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 8px;
+      gap: 8px;
+      padding: 4px 8px;
     }
 
     .radio-outer {
@@ -38,10 +39,7 @@ export class CamelotMaterialRadio extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .container:hover .radio-outer {
-      background-color: rgba(0, 0, 0, 0.04);
+      box-sizing: border-box;
     }
 
     .checked .radio-outer {
@@ -64,15 +62,10 @@ export class CamelotMaterialRadio extends LitElement {
     .checked.secondary .radio-inner { background-color: var(--cml-color-secondary); }
     .checked.tertiary .radio-inner { background-color: var(--cml-color-tertiary); }
 
-    .label {
-      font-family: var(--cml-font-family);
-      font-size: var(--cml-font-size-body);
-      color: var(--cml-color-on-background);
-    }
-
     .disabled {
       cursor: not-allowed;
       opacity: 0.38;
+      pointer-events: none;
     }
   `;
 
@@ -80,7 +73,9 @@ export class CamelotMaterialRadio extends LitElement {
     if (this.disabled || this.checked) return;
     this.checked = true;
     this.dispatchEvent(new CustomEvent('change', {
-      detail: { checked: this.checked }
+      detail: { checked: this.checked },
+      bubbles: true,
+      composed: true
     }));
   }
 
@@ -93,7 +88,7 @@ export class CamelotMaterialRadio extends LitElement {
         <div class="radio-outer">
           <div class="radio-inner"></div>
         </div>
-        ${this.label ? html`<span class="label">${this.label}</span>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}"></camelot-label>` : ''}
       </div>
     `;
   }
