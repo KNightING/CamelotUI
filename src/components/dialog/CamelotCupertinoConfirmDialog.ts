@@ -22,7 +22,7 @@ export class CamelotCupertinoConfirmDialog extends CamelotBaseDialog {
       }
 
       .dialog-content {
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: color-mix(in srgb, var(--cml-color-surface-container-high) 85%, transparent);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-radius: 14px;
@@ -37,7 +37,7 @@ export class CamelotCupertinoConfirmDialog extends CamelotBaseDialog {
       }
 
       .title {
-        color: #000000;
+        color: var(--cml-color-on-surface);
         font-family: var(--cml-font-family);
         font-size: 1.0625rem;
         font-weight: 600;
@@ -45,7 +45,8 @@ export class CamelotCupertinoConfirmDialog extends CamelotBaseDialog {
       }
 
       .message {
-        color: #000000;
+        color: var(--cml-color-on-surface);
+        opacity: 0.8;
         font-family: var(--cml-font-family);
         font-size: 0.8125rem;
         font-weight: 400;
@@ -54,7 +55,7 @@ export class CamelotCupertinoConfirmDialog extends CamelotBaseDialog {
 
       .actions {
         display: flex;
-        border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+        border-top: 0.5px solid var(--cml-color-outline-variant);
       }
 
       .action-btn {
@@ -62,7 +63,7 @@ export class CamelotCupertinoConfirmDialog extends CamelotBaseDialog {
         padding: 12px;
         background: transparent;
         border: none;
-        color: #007AFF;
+        color: var(--cml-color-primary);
         font-family: var(--cml-font-family);
         font-size: 1.0625rem;
         font-weight: 400;
@@ -71,12 +72,12 @@ export class CamelotCupertinoConfirmDialog extends CamelotBaseDialog {
       }
 
       .action-btn:active {
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: var(--cml-color-surface-container-highest);
       }
 
       .action-btn.confirm {
         font-weight: 600;
-        border-left: 0.5px solid rgba(0, 0, 0, 0.2);
+        border-left: 0.5px solid var(--cml-color-outline-variant);
       }
     `
   ];
