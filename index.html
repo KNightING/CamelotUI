@@ -373,6 +373,67 @@
           </camelot-theme>
         </div>
       </section>
+
+      <!-- 7. Dialogs Comparison -->
+      <section class="comparison-section">
+        <h2 class="section-title">7. Popups & Dialogs</h2>
+        <div class="comparison-grid">
+          <!-- Material Dialog -->
+          <div class="style-column">
+            <div class="style-name">Material 3</div>
+            <camelot-button 
+              label="Show Material Dialog" 
+              onclick="document.getElementById('dlg-m').show()"
+            ></camelot-button>
+            <camelot-confirm-dialog
+              id="dlg-m"
+              title="Delete account?"
+              message="This action cannot be undone. All your data will be permanently removed."
+              confirmText="Delete"
+              cancelText="Cancel"
+            ></camelot-confirm-dialog>
+          </div>
+
+          <!-- Cupertino Dialog -->
+          <camelot-theme mode="cupertino">
+            <div class="style-column">
+              <div class="style-name">Cupertino</div>
+              <camelot-button 
+                label="Show iOS Alert" 
+                onclick="document.getElementById('dlg-c').show()"
+              ></camelot-button>
+              <camelot-confirm-dialog
+                id="dlg-c"
+                title="Low Battery"
+                message="10% of battery remaining. Connect to a power source soon."
+                confirmText="OK"
+                cancelText="Close"
+              ></camelot-confirm-dialog>
+            </div>
+          </camelot-theme>
+
+          <!-- Soft UI Dialog -->
+          <camelot-theme mode="soft">
+            <div class="style-column">
+              <div class="style-name">Soft UI</div>
+              <camelot-button 
+                label="Show Soft Dialog" 
+                onclick="document.getElementById('dlg-s').show()"
+              ></camelot-button>
+              <camelot-confirm-dialog
+                id="dlg-s"
+                title="Unsaved Changes"
+                message="You have unsaved changes in your profile. Do you want to save them now?"
+                confirmText="Save"
+                cancelText="Discard"
+              ></camelot-confirm-dialog>
+            </div>
+          </camelot-theme>
+        </div>
+        <div class="value-display" style="text-align: center; margin-top: 20px;">
+          Last Action: <span id="dlg-action">None</span>
+        </div>
+      </section>
     </main>
   </camelot-theme>
 
@@ -406,6 +467,7 @@
     import './src/components/tabs/CamelotTabs.ts'
     import './src/components/card/CamelotCard.ts'
     import './src/components/badge/CamelotBadge.ts'
+    import './src/components/dialog/CamelotConfirmDialog.ts'
 
     // Global Controller Logic
     const rootTheme = document.getElementById('root-theme')
@@ -452,6 +514,24 @@
     setupGroup('cb-group-c', 'val-cb-c');
     setupGroup('radio-group-s', 'val-radio-s');
     setupGroup('cb-group-s', 'val-cb-s');
+
+    // Dialog Event Logic
+    const dlgActionDisplay = document.getElementById('dlg-action');
+    const setupDialog = (id) => {
+      const dlg = document.getElementById(id);
+      dlg.addEventListener('confirm', () => {
+        dlgActionDisplay.textContent = `[${id}] Confirmed`;
+        dlgActionDisplay.style.color = 'var(--cml-color-success)';
+      });
+      dlg.addEventListener('cancel', () => {
+        dlgActionDisplay.textContent = `[${id}] Cancelled`;
+        dlgActionDisplay.style.color = 'var(--cml-color-error)';
+      });
+    };
+
+    setupDialog('dlg-m');
+    setupDialog('dlg-c');
+    setupDialog('dlg-s');
 
     // 初始設定使用預設主題物件
     rootTheme.config = THEME_DEFAULT
