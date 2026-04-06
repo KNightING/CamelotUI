@@ -434,6 +434,72 @@
           Last Action: <span id="dlg-action">None</span>
         </div>
       </section>
+      <!-- 8. Drawers Comparison -->
+      <section class="comparison-section">
+        <h2 class="section-title">8. Side Panels (Drawers) - All Directions</h2>
+        <div class="comparison-grid" style="grid-template-columns: 1fr;">
+          
+          <!-- Material Drawer Matrix -->
+          <div class="style-column">
+            <div class="style-name">Material 3</div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <camelot-button label="Left" onclick="document.getElementById('drw-m-l').show()"></camelot-button>
+              <camelot-button label="Right" onclick="document.getElementById('drw-m-r').show()"></camelot-button>
+              <camelot-button label="Top" onclick="document.getElementById('drw-m-t').show()"></camelot-button>
+              <camelot-button label="Bottom" onclick="document.getElementById('drw-m-b').show()"></camelot-button>
+            </div>
+          </div>
+
+          <!-- Cupertino Drawer Matrix -->
+          <camelot-theme mode="cupertino">
+            <div class="style-column">
+              <div class="style-name">Cupertino</div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <camelot-button label="Left" onclick="document.getElementById('drw-c-l').show()"></camelot-button>
+                <camelot-button label="Right" onclick="document.getElementById('drw-c-r').show()"></camelot-button>
+                <camelot-button label="Top" onclick="document.getElementById('drw-c-t').show()"></camelot-button>
+                <camelot-button label="Bottom" onclick="document.getElementById('drw-c-b').show()"></camelot-button>
+              </div>
+            </div>
+          </camelot-theme>
+
+          <!-- Soft UI Drawer Matrix -->
+          <camelot-theme mode="soft">
+            <div class="style-column">
+              <div class="style-name">Soft UI</div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <camelot-button label="Left" onclick="document.getElementById('drw-s-l').show()"></camelot-button>
+                <camelot-button label="Right" onclick="document.getElementById('drw-s-r').show()"></camelot-button>
+                <camelot-button label="Top" onclick="document.getElementById('drw-s-t').show()"></camelot-button>
+                <camelot-button label="Bottom" onclick="document.getElementById('drw-s-b').show()"></camelot-button>
+              </div>
+            </div>
+          </camelot-theme>
+        </div>
+
+        <!-- Matrix of Drawers -->
+        <!-- Material -->
+        <camelot-drawer id="drw-m-l" anchor="left" headline="Material Left"></camelot-drawer>
+        <camelot-drawer id="drw-m-r" anchor="right" headline="Material Right"></camelot-drawer>
+        <camelot-drawer id="drw-m-t" anchor="top" headline="Material Top"></camelot-drawer>
+        <camelot-drawer id="drw-m-b" anchor="bottom" headline="Material Bottom"></camelot-drawer>
+
+        <!-- Cupertino -->
+        <camelot-theme mode="cupertino">
+          <camelot-drawer id="drw-c-l" anchor="left" label="iCloud"></camelot-drawer>
+          <camelot-drawer id="drw-c-r" anchor="right" label="Settings"></camelot-drawer>
+          <camelot-drawer id="drw-c-t" anchor="top" label="Notifications"></camelot-drawer>
+          <camelot-drawer id="drw-c-b" anchor="bottom" label="Share Sheet"></camelot-drawer>
+        </camelot-theme>
+
+        <!-- Soft UI -->
+        <camelot-theme mode="soft">
+          <camelot-drawer id="drw-s-l" anchor="left" label="Soft Left"></camelot-drawer>
+          <camelot-drawer id="drw-s-r" anchor="right" label="Soft Right"></camelot-drawer>
+          <camelot-drawer id="drw-s-t" anchor="top" label="Soft Top"></camelot-drawer>
+          <camelot-drawer id="drw-s-b" anchor="bottom" label="Soft Bottom"></camelot-drawer>
+        </camelot-theme>
+      </section>
     </main>
   </camelot-theme>
 
@@ -468,6 +534,7 @@
     import './src/components/card/CamelotCard.ts'
     import './src/components/badge/CamelotBadge.ts'
     import './src/components/dialog/CamelotConfirmDialog.ts'
+    import './src/components/drawer/CamelotDrawer.ts'
 
     // Global Controller Logic
     const rootTheme = document.getElementById('root-theme')
