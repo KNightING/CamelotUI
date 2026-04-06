@@ -12,6 +12,9 @@ export class CamelotMaterialCheckbox extends LitElement {
   @property({ type: Boolean })
   disabled: boolean = false;
 
+  @property({ type: String })
+  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+
   static styles = css`
     :host {
       display: inline-flex;
@@ -31,25 +34,26 @@ export class CamelotMaterialCheckbox extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
+      box-sizing: border-box;
     }
 
-    :host([checked]) .checkbox-container {
-      background-color: var(--cml-color-primary);
-      border-color: var(--cml-color-primary);
-    }
+    /* Checked style with color variations */
+    .checked.primary .checkbox-container { background-color: var(--cml-color-primary); border-color: var(--cml-color-primary); }
+    .checked.secondary .checkbox-container { background-color: var(--cml-color-secondary); border-color: var(--cml-color-secondary); }
+    .checked.tertiary .checkbox-container { background-color: var(--cml-color-tertiary); border-color: var(--cml-color-tertiary); }
 
     .checkbox-container::after {
       content: '';
-      width: 5px;
-      height: 10px;
+      width: 4px;
+      height: 8px;
       border: solid white;
       border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
+      transform: rotate(45deg) translate(-1px, -1px);
       opacity: 0;
       transition: opacity 0.2s;
     }
 
-    :host([checked]) .checkbox-container::after {
+    .checked .checkbox-container::after {
       opacity: 1;
     }
 
@@ -59,16 +63,17 @@ export class CamelotMaterialCheckbox extends LitElement {
       color: var(--cml-color-on-background);
     }
 
-    :host([disabled]) {
-      opacity: 0.5;
+    .disabled {
+      opacity: 0.38;
       cursor: not-allowed;
+      pointer-events: none;
     }
   `;
 
   private _toggle() {
     if (this.disabled) return;
     this.checked = !this.checked;
-    this.dispatchEvent(new CustomEvent('checked-changed', {
+    this.dispatchEvent(new CustomEvent('change', {
       detail: { checked: this.checked },
       bubbles: true,
       composed: true
@@ -77,8 +82,13 @@ export class CamelotMaterialCheckbox extends LitElement {
 
   render() {
     return html`
-      <div class="checkbox-container" @click="${this._toggle}"></div>
-      <span class="label" @click="${this._toggle}">${this.label}</span>
+      <div 
+        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        @click="${this._toggle}"
+      >
+        <div class="checkbox-container"></div>
+        ${this.label ? html`<span class="label">${this.label}</span>` : ''}
+      </div>
     `;
   }
 }

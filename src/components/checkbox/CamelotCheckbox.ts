@@ -23,9 +23,16 @@ export class CamelotCheckbox extends CamelotBaseElement {
   @property({ type: Boolean, reflect: true })
   disabled: boolean = false;
 
+  /**
+   * 勾選框色彩：'primary', 'secondary', 'tertiary'
+   */
+  @property({ type: String })
+  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+
   static styles = css`
     :host {
       display: inline-block;
+      vertical-align: middle;
     }
   `;
 
@@ -45,8 +52,9 @@ export class CamelotCheckbox extends CamelotBaseElement {
           <camelot-cupertino-checkbox 
             .label="${this.label}" 
             .checked="${this.checked}"
+            .color="${this.color}"
             ?disabled="${this.disabled}"
-            @checked-changed="${this._handleChanged}">
+            @change="${this._handleChanged}">
           </camelot-cupertino-checkbox>
         `;
       case 'soft':
@@ -54,8 +62,9 @@ export class CamelotCheckbox extends CamelotBaseElement {
           <camelot-soft-checkbox 
             .label="${this.label}" 
             .checked="${this.checked}"
+            .color="${this.color}"
             ?disabled="${this.disabled}"
-            @checked-changed="${this._handleChanged}">
+            @change="${this._handleChanged}">
           </camelot-soft-checkbox>
         `;
       case 'material':
@@ -64,8 +73,9 @@ export class CamelotCheckbox extends CamelotBaseElement {
           <camelot-material-checkbox 
             .label="${this.label}" 
             .checked="${this.checked}"
+            .color="${this.color}"
             ?disabled="${this.disabled}"
-            @checked-changed="${this._handleChanged}">
+            @change="${this._handleChanged}">
           </camelot-material-checkbox>
         `;
     }

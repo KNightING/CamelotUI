@@ -18,23 +18,27 @@ export class CamelotBadge extends CamelotBaseElement {
   label: string = '';
 
   @property({ type: String })
-  variant: string = 'primary';
+  color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' = 'primary';
+
+  @property({ type: String })
+  variant: 'filled' | 'outlined' = 'filled';
 
   static styles = css`
     :host {
       display: inline-block;
+      vertical-align: middle;
     }
   `;
 
   render() {
     switch (this._activeStyle) {
       case 'cupertino':
-        return html`<camelot-cupertino-badge .label="${this.label}" .variant="${this.variant}"></camelot-cupertino-badge>`;
+        return html`<camelot-cupertino-badge .label="${this.label}" .color="${this.color}" .variant="${this.variant}"></camelot-cupertino-badge>`;
       case 'soft':
-        return html`<camelot-soft-badge .label="${this.label}" .variant="${this.variant}"></camelot-soft-badge>`;
+        return html`<camelot-soft-badge .label="${this.label}" .color="${this.color}" .variant="${this.variant}"></camelot-soft-badge>`;
       case 'material':
       default:
-        return html`<camelot-material-badge .label="${this.label}" .variant="${this.variant}"></camelot-material-badge>`;
+        return html`<camelot-material-badge .label="${this.label}" .color="${this.color}" .variant="${this.variant}"></camelot-material-badge>`;
     }
   }
 }

@@ -3,23 +3,17 @@ import { customElement, property } from 'lit/decorators.js';
 import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 // 確保風格元件已載入
-import './CamelotMaterialButton.ts';
-import './CamelotCupertinoButton.ts';
-import './CamelotSoftButton.ts';
+import './CamelotMaterialIconButton.ts';
+import './CamelotCupertinoIconButton.ts';
+import './CamelotSoftIconButton.ts';
 
 /**
- * <CamelotButton>
- * 通用按鈕元件，根據主題切換風格。
+ * <CamelotIconButton>
+ * 圖示按鈕元件，適合放置單一圖示。
  * 繼承自 CamelotBaseElement 以獲取自動風格偵測能力。
  */
-@customElement('camelot-button')
-export class CamelotButton extends CamelotBaseElement {
-  @property({ type: String })
-  label: string = 'Button';
-
-  @property({ type: Boolean, reflect: true })
-  disabled: boolean = false;
-
+@customElement('camelot-icon-button')
+export class CamelotIconButton extends CamelotBaseElement {
   /**
    * 按鈕色彩：'primary', 'secondary', 'tertiary'
    */
@@ -27,46 +21,46 @@ export class CamelotButton extends CamelotBaseElement {
   color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   /**
-   * 按鈕變體：'filled', 'outlined', 'text'
+   * 按鈕形狀：'circle', 'square'
    */
   @property({ type: String })
-  variant: 'filled' | 'outlined' | 'text' = 'filled';
+  shape: 'circle' | 'square' = 'circle';
+
+  @property({ type: Boolean, reflect: true })
+  disabled: boolean = false;
 
   render() {
     switch (this._activeStyle) {
       case 'soft':
         return html`
-          <camelot-soft-button 
-            .label=${this.label} 
+          <camelot-soft-icon-button 
             .color=${this.color}
-            .variant=${this.variant}
+            .shape=${this.shape}
             ?disabled=${this.disabled}
           >
             <slot></slot>
-          </camelot-soft-button>
+          </camelot-soft-icon-button>
         `;
       case 'cupertino':
         return html`
-          <camelot-cupertino-button 
-            .label=${this.label} 
+          <camelot-cupertino-icon-button 
             .color=${this.color}
-            .variant=${this.variant}
+            .shape=${this.shape}
             ?disabled=${this.disabled}
           >
             <slot></slot>
-          </camelot-cupertino-button>
+          </camelot-cupertino-icon-button>
         `;
       case 'material':
       default:
         return html`
-          <camelot-material-button 
-            .label=${this.label} 
+          <camelot-material-icon-button 
             .color=${this.color}
-            .variant=${this.variant}
+            .shape=${this.shape}
             ?disabled=${this.disabled}
           >
             <slot></slot>
-          </camelot-material-button>
+          </camelot-material-icon-button>
         `;
     }
   }
@@ -81,6 +75,6 @@ export class CamelotButton extends CamelotBaseElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'camelot-button': CamelotButton;
+    'camelot-icon-button': CamelotIconButton;
   }
 }

@@ -1,56 +1,34 @@
-# CamelotUI 元件庫開發計畫
+# 重構 index.html 展示頁面：風格對照佈局
 
-本計畫旨在建立一套名為 **CamelotUI** 的 UI 元件庫。該庫將採用 **Lit** (Web Components) 為核心技術，確保能無縫整合於 Vue3、React 等主流前端框架。設計語彙將遵循 **Material 3 (M3)** 標準，並透過 Figma 進行先期設計與 Design Token 管理。
+目前的展示頁面較為分散，無法直觀比較不同風格（Material 3, Cupertino, Soft UI）在相同組件上的表現。本計畫旨在重構佈局，改為「組件導向，風格對照」的模式。
 
-## 使用者評論需求 (User Review Required)
+## 使用者評論請求
+- 本計畫將把佈局改為格狀對照，請確認是否符合您的預期。
+- 每個組件將同時展示其三種風格的實作。
 
-> [!IMPORTANT]
-> 1. **元件命名規範**：所有元件均以 `Camelot` 開頭，例如 `<CamelotTheme>`、`<CamelotButton>`。
-> 2. **CSS 變數命名**：遵循 `--cml-xxx` 格式，移除中間的層級描述（如 `sys`），例如 `--cml-primary`。
-> 3. **多樣化風格支援**：`<CamelotButton>` 等基礎元件能透過主題配置切換不同的 UI 風格（Material, Cupertino, Soft UI）。
-> 4. **字體與模式**：預設字體為 `Noto Sans TC`，支援自動暗色模式 (Dark Mode)。
+## 擬議變更
 
-## 預計變更 (Proposed Changes)
+### [展示頁面] [index.html](file:///Users/knighting/Documents/Project/MyApp/camelot-ui/index.html)
 
-### 1. 基礎建設與環境設定
-- [NEW] 初始化專案：使用 `Vite + Lit + TypeScript`。
-- [NEW] 配置 `.agents` 路徑下的規格與記錄檔案。
-- [NEW] 建立層級化 Design System：
-    - **Primitives**: 基礎色譜 (Ref Tokens)。
-    - **Semantic/System**: M3 標準語義變數 (Sys Tokens)。
-    - **Component**: 元件專屬變數 (Comp Tokens)。
+- **樣式調整**：
+    - 增加 `.comparison-grid` 樣式，設定為三欄佈局（Material | Cupertino | Soft）。
+    - 優化 `.demo-box` 以適應並排顯示。
+    - 增加標籤區分不同風格。
 
-### 2. Figma 設計 (Design-First Workflow)
-- [NEW] 使用 Figma MCP 建立檔案 `CamelotUI Design System`。
-- [NEW] 分頁規劃 (Page Planning)：
-    - `Foundations` (Tokens, Typography, Colors)
-    - `Components` (Button, Input, etc.)
-    - `Sandbox` (Prototyping)
-- [NEW] 定義 M3 顏色 Variables 與不同風格的屬性集 (如 Soft UI 的光源配置)。
+- **內容重構**：
+    - **Buttons Section**：並排展示三種風格的按鈕（Primary, Secondary, Outlined）。
+    - **Selection Section**：並排展示三種風格的 Switch 與 Radio。
+    - **Inputs Section**：並排展示三種風格的 Input 與 Select。
+    - **Badges Section**：並排展示三種風格的 Badge。
+    - **Cards Section**：並排展示三種風格的 Card（雖然 Card 屬性已還原，但視覺仍有差異）。
+    - **Tabs Section**：並排展示三種風格的分頁標籤。
 
-### 3. 主題管理與 Design Tokens
-- [NEW] `src/styles/tokens.css`: 定義 `:root` 下的全域變數（Light/Dark 模式）。
-- [NEW] `src/components/theme/CamelotTheme.ts`: 實作 `<CamelotTheme>` 元件，支援動態風格切換 (`mode="material|cupertino|soft"`)。
-
-### 4. 元件開發 (Lit)
-- [NEW] 多風格結構實作：
-    - `CamelotButton` (控制器元組，根據主題選擇渲染對應風格)
-    - `CamelotMaterialButton` (Material 3 風格實作)
-    - `CamelotCupertinoButton` (iOS 風格實作)
-    - `CamelotSoftButton` (Soft UI 擬態風格實作)
-
-## 開放問題 (Open Questions)
-
-> [!NOTE]
-> 1. 是否需要支援 **暗色模式 (Dark Mode)** 的自動切換？ -> 已確認：需要。
-> 2. Figma 文件是否需要特定的 Page 規劃？ -> 已確認：需要 (Foundations, Components, Sandbox)。
-> 3. 是否有偏好的字體系統？ -> 已確認：Noto Sans TC。
-
-## 驗證計畫 (Verification Plan)
-
-### 自動化測試
-- 使用 `Playwright` 或 `Web Test Runner` 進行跨框架相容性測試。
+## 驗證計畫
 
 ### 手動驗證
-- 建立一個簡單的 `index.html` 測試頁面，展示 `<CamelotTheme>` 局部覆蓋變數的效果。
-- 檢查變數是否正確應用於元件的 Shadow DOM。
+- 開啟 `index.html`，檢查佈局是否整齊。
+- 切換全域主題與調色盤，確保所有風格的組件都能正確響應（Material 使用全域設定，而 Cupertino/Soft 使用局部覆蓋）。
+- 檢查三種風格在相同 `color="primary"` 下的視覺對比。
+
+### 自動化測試
+- 使用瀏覽器工具截圖，確認對照組件顯示無誤。

@@ -7,27 +7,44 @@ export class CamelotCupertinoBadge extends LitElement {
   label: string = '';
 
   @property({ type: String })
-  variant: string = 'primary';
+  color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' = 'primary';
+
+  @property({ type: String })
+  variant: 'filled' | 'outlined' = 'filled';
 
   static styles = css`
     :host {
       display: inline-block;
     }
     .badge {
-      padding: 0 8px;
-      border-radius: 4px;
+      padding: 2px 10px;
+      border-radius: 999px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
       font-size: 13px;
       font-weight: 500;
-      color: #FFFFFF;
+      white-space: nowrap;
+      transition: opacity 0.2s;
     }
-    .primary { background-color: #007AFF; }
-    .secondary { background-color: #8E8E93; }
-    .error { background-color: #FF3B30; }
-    .success { background-color: #34C759; }
+
+    /* Apple Colors */
+    .filled.primary { background-color: #007AFF; color: #FFFFFF; }
+    .filled.secondary { background-color: #8E8E93; color: #FFFFFF; }
+    .filled.tertiary { background-color: #5856D6; color: #FFFFFF; }
+    .filled.error { background-color: #FF3B30; color: #FFFFFF; }
+    .filled.success { background-color: #34C759; color: #FFFFFF; }
+
+    .outlined {
+      background-color: transparent;
+      border: 1px solid currentColor;
+    }
+    .outlined.primary { color: #007AFF; }
+    .outlined.secondary { color: #8E8E93; }
+    .outlined.tertiary { color: #5856D6; }
+    .outlined.error { color: #FF3B30; }
+    .outlined.success { color: #34C759; }
   `;
 
   render() {
-    return html`<div class="badge ${this.variant}">${this.label}</div>`;
+    return html`<div class="badge ${this.variant} ${this.color}">${this.label}</div>`;
   }
 }

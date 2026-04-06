@@ -12,12 +12,20 @@ export class CamelotSoftCheckbox extends LitElement {
   @property({ type: Boolean })
   disabled: boolean = false;
 
+  @property({ type: String })
+  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+
   static styles = css`
     :host {
       display: inline-flex;
       align-items: center;
       cursor: pointer;
       user-select: none;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
     }
 
     .checkbox-container {
@@ -35,7 +43,7 @@ export class CamelotSoftCheckbox extends LitElement {
       transition: all 0.2s;
     }
 
-    :host([checked]) .checkbox-container {
+    .checked .checkbox-container {
       box-shadow: 
         var(--cml-soft-distance) var(--cml-soft-distance) var(--cml-soft-blur) var(--cml-soft-color-dark), 
         calc(-1 * var(--cml-soft-distance)) calc(-1 * var(--cml-soft-distance)) var(--cml-soft-blur) var(--cml-soft-color-light);
@@ -45,13 +53,17 @@ export class CamelotSoftCheckbox extends LitElement {
       width: 12px;
       height: 12px;
       border-radius: 2px;
-      background-color: var(--cml-color-primary);
       opacity: 0;
       transform: scale(0.5);
       transition: all 0.2s;
     }
 
-    :host([checked]) .check-mark {
+    /* Colors for check-mark */
+    .primary .check-mark { background-color: var(--cml-color-primary); }
+    .secondary .check-mark { background-color: var(--cml-color-secondary); }
+    .tertiary .check-mark { background-color: var(--cml-color-tertiary); }
+
+    .checked .check-mark {
       opacity: 1;
       transform: scale(1);
     }
@@ -61,12 +73,18 @@ export class CamelotSoftCheckbox extends LitElement {
       font-size: var(--cml-font-size-body);
       color: var(--cml-color-on-background);
     }
+
+    .disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   `;
 
   private _toggle() {
     if (this.disabled) return;
     this.checked = !this.checked;
-    this.dispatchEvent(new CustomEvent('checked-changed', {
+    this.dispatchEvent(new CustomEvent('change', {
       detail: { checked: this.checked },
       bubbles: true,
       composed: true
@@ -75,10 +93,15 @@ export class CamelotSoftCheckbox extends LitElement {
 
   render() {
     return html`
-      <div class="checkbox-container" @click="${this._toggle}">
-        <div class="check-mark"></div>
+      <div 
+        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        @click="${this._toggle}"
+      >
+        <div class="checkbox-container">
+          <div class="check-mark"></div>
+        </div>
+        ${this.label ? html`<span class="label">${this.label}</span>` : ''}
       </div>
-      <span class="label" @click="${this._toggle}">${this.label}</span>
     `;
   }
 }

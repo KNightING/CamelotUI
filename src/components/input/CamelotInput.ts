@@ -26,6 +26,12 @@ export class CamelotInput extends CamelotBaseElement {
   @property({ type: String })
   error: string = '';
 
+  @property({ type: String })
+  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+
+  @property({ type: Boolean, reflect: true })
+  disabled: boolean = false;
+
   render() {
     switch (this._activeStyle) {
       case 'soft':
@@ -35,7 +41,9 @@ export class CamelotInput extends CamelotBaseElement {
             .label=${this.label}
             .placeholder=${this.placeholder}
             .error=${this.error}
-            @input=${(e: CustomEvent) => this.value = (e.target as any).value}
+            .color=${this.color}
+            ?disabled=${this.disabled}
+            @input=${(e: any) => this.value = e.target.value}
           ></camelot-soft-input>
         `;
       case 'cupertino':
@@ -45,7 +53,9 @@ export class CamelotInput extends CamelotBaseElement {
             .label=${this.label}
             .placeholder=${this.placeholder}
             .error=${this.error}
-            @input=${(e: CustomEvent) => this.value = (e.target as any).value}
+            .color=${this.color}
+            ?disabled=${this.disabled}
+            @input=${(e: any) => this.value = e.target.value}
           ></camelot-cupertino-input>
         `;
       case 'material':
@@ -56,7 +66,9 @@ export class CamelotInput extends CamelotBaseElement {
             .label=${this.label}
             .placeholder=${this.placeholder}
             .error=${this.error}
-            @input=${(e: CustomEvent) => this.value = (e.target as any).value}
+            .color=${this.color}
+            ?disabled=${this.disabled}
+            @input=${(e: any) => this.value = e.target.value}
           ></camelot-material-input>
         `;
     }

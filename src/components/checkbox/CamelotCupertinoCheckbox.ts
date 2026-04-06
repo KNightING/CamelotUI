@@ -12,12 +12,20 @@ export class CamelotCupertinoCheckbox extends LitElement {
   @property({ type: Boolean })
   disabled: boolean = false;
 
+  @property({ type: String })
+  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+
   static styles = css`
     :host {
       display: inline-flex;
       align-items: center;
       cursor: pointer;
       user-select: none;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
     }
 
     .checkbox-container {
@@ -30,12 +38,13 @@ export class CamelotCupertinoCheckbox extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
+      box-sizing: border-box;
     }
 
-    :host([checked]) .checkbox-container {
-      background-color: var(--cml-color-primary);
-      border-color: var(--cml-color-primary);
-    }
+    /* Checked style with color variations */
+    .checked.primary .checkbox-container { background-color: var(--cml-color-primary); border-color: var(--cml-color-primary); }
+    .checked.secondary .checkbox-container { background-color: var(--cml-color-secondary); border-color: var(--cml-color-secondary); }
+    .checked.tertiary .checkbox-container { background-color: var(--cml-color-tertiary); border-color: var(--cml-color-tertiary); }
 
     .check-icon {
       width: 10px;
@@ -47,7 +56,7 @@ export class CamelotCupertinoCheckbox extends LitElement {
       transition: opacity 0.2s;
     }
 
-    :host([checked]) .check-icon {
+    .checked .check-icon {
       opacity: 1;
     }
 
@@ -57,16 +66,17 @@ export class CamelotCupertinoCheckbox extends LitElement {
       color: var(--cml-color-on-background);
     }
 
-    :host([disabled]) {
-      opacity: 0.5;
+    .disabled {
+      opacity: 0.4;
       cursor: not-allowed;
+      pointer-events: none;
     }
   `;
 
   private _toggle() {
     if (this.disabled) return;
     this.checked = !this.checked;
-    this.dispatchEvent(new CustomEvent('checked-changed', {
+    this.dispatchEvent(new CustomEvent('change', {
       detail: { checked: this.checked },
       bubbles: true,
       composed: true
@@ -75,10 +85,15 @@ export class CamelotCupertinoCheckbox extends LitElement {
 
   render() {
     return html`
-      <div class="checkbox-container" @click="${this._toggle}">
-        <div class="check-icon"></div>
+      <div 
+        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        @click="${this._toggle}"
+      >
+        <div class="checkbox-container">
+          <div class="check-icon"></div>
+        </div>
+        ${this.label ? html`<span class="label">${this.label}</span>` : ''}
       </div>
-      <span class="label" @click="${this._toggle}">${this.label}</span>
     `;
   }
 }
