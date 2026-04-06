@@ -27,6 +27,8 @@ export class CamelotCupertinoRadio extends LitElement {
       align-items: center;
       gap: 8px;
       padding: 4px;
+      min-height: 32px;
+      box-sizing: border-box;
     }
 
     .radio-circle {
@@ -39,6 +41,8 @@ export class CamelotCupertinoRadio extends LitElement {
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
 
     .checked .radio-circle {
@@ -49,17 +53,17 @@ export class CamelotCupertinoRadio extends LitElement {
     .checked.tertiary .radio-circle { background-color: var(--cml-color-tertiary); border-color: var(--cml-color-tertiary); }
 
     .radio-inner {
-      width: 0px;
-      height: 0px;
+      width: 8px;
+      height: 8px;
       background-color: #FFFFFF;
       border-radius: 50%;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-      transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scale(0);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .checked .radio-inner {
-      width: 8px;
-      height: 8px;
+      transform: scale(1);
     }
 
     .disabled {

@@ -4,9 +4,13 @@ import { state } from 'lit/decorators.js';
 /**
  * CamelotBaseElement 基礎類別
  * 封裝了所有 CamelotUI 組件共用的底層邏輯，包括：
- * 1. 自動偵測主題風格 (優先從 DOM 樹尋找 camelot-theme，次之從 CSS 變數偵測)
- * 2. 監控全域主題變更事件
+ * 1. 自動偵測主題風格 (優先從 DOM 樹尋找 camelot-theme)
+ * 2. 監控全域主題變更事件 (camelot-theme-changed)
  * 3. 管理 _activeStyle 狀態，供子組件進行風格分流
+ * 
+ * 優化筆記：
+ * - 移除 updated() 中的偵測，避免觸發 Layout Thrashing (Reflow)。
+ * - 僅在元件連接 (connected) 或主題顯式變更時更新狀態。
  */
 export class CamelotBaseElement extends LitElement {
   /**
@@ -15,7 +19,11 @@ export class CamelotBaseElement extends LitElement {
   @state()
   protected _activeStyle: string = 'material';
 
-  private _themeChangeListener = () => this._updateActiveStyle();
+  private _themeChangeListener = () => {
+    // 當全域主題發生變動時，所有元件重新掃描「自己」所屬的 Theme Context。
+    // 這能確保在同一個頁面中，Material 與 Soft UI 主題可以各自獨立工作，互不干擾。
+    this._updateActiveStyle();
+  };
 
   connectedCallback() {
     super.connectedCallback();
@@ -28,22 +36,12 @@ export class CamelotBaseElement extends LitElement {
     super.disconnectedCallback();
   }
 
-  protected updated(changedProperties: Map<string | number | symbol, unknown>) {
-    super.updated(changedProperties);
-    // 每次組件更新時執行一次偵測，確保變數異動時能即時反應
-    this._updateActiveStyle();
-  }
-
-  protected firstUpdated() {
-    // 首幀完成後再次強制檢查，確保 CSS 變數已完全傳遞
-    this._updateActiveStyle();
-  }
-
   /**
    * 偵測目前的 UI 風格
+   * 此方法應謹慎呼叫，因為 getComputedStyle 可能觸發重排。
    */
   protected _updateActiveStyle() {
-    // 優先權 1: 尋找最近的 camelot-theme 元件
+    // 優先權 1: 尋找最近的 camelot-theme 元件 (快速，不觸發排版)
     const themeParent = this.closest('camelot-theme') as any;
     if (themeParent && themeParent.mode) {
       if (this._activeStyle !== themeParent.mode) {
@@ -52,7 +50,7 @@ export class CamelotBaseElement extends LitElement {
       return;
     }
 
-    // 優先權 2: 從 CSS 變數中讀取目前的 UI 風格 (作為備援)
+    // 優先權 2: 從 CSS 變數中讀取目前的 UI 風格 (作為備援，儘量少用)
     const style = getComputedStyle(this)
       .getPropertyValue('--cml-active-ui-style')
       .replace(/"/g, '')

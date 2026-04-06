@@ -27,6 +27,8 @@ export class CamelotSoftRadio extends LitElement {
       align-items: center;
       gap: 8px;
       padding: 6px 10px;
+      min-height: 40px;
+      box-sizing: border-box;
     }
 
     .radio-outer {
@@ -41,19 +43,20 @@ export class CamelotSoftRadio extends LitElement {
         inset var(--cml-soft-distance) var(--cml-soft-distance) var(--cml-soft-blur) var(--cml-soft-color-dark), 
         inset calc(-1 * var(--cml-soft-distance)) calc(-1 * var(--cml-soft-distance)) var(--cml-soft-blur) var(--cml-soft-color-light);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
     }
 
     .radio-inner {
-      width: 0px;
-      height: 0px;
+      width: 12px;
+      height: 12px;
       background-color: var(--cml-color-background);
       border-radius: 50%;
-      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: scale(0);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .checked .radio-inner {
-      width: 12px;
-      height: 12px;
+      transform: scale(1);
       box-shadow: 
         3px 3px 6px var(--cml-soft-color-dark), 
         -3px -3px 6px var(--cml-soft-color-light);

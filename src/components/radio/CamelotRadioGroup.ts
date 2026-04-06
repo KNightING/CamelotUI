@@ -59,6 +59,7 @@ export class CamelotRadioGroup extends LitElement {
     .container {
       display: flex;
       gap: 12px;
+      align-items: stretch;
     }
 
     .vertical {
