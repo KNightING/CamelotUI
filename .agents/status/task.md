@@ -1,23 +1,19 @@
-# CamelotUI 展示頁面重構與組件標準化補全
+# Select 下拉選單視覺修復任務清單
 
-## 組件標準化 (Checkbox)
-- [x] 標準化 `CamelotCheckbox` 屬性與事件
-    - [x] 更新 `CamelotCheckbox.ts` (增加 color, 統一事件名)
-    - [x] 實作 `CamelotMaterialCheckbox` 色彩支援
-    - [x] 實作 `CamelotCupertinoCheckbox` 色彩支援
-    - [x] 實作 `CamelotSoftCheckbox` 色彩支援
-
-## 展示頁面重構 (index.html)
-- [x] 設計風格對照格狀佈局 CSS
-- [x] 重構展示內容塊
-    - [x] 按鈕對比組 (Normal, Icon, Outline)
-    - [x] 標籤對比組 (Badge)
-    - [x] 選取控制項對比組 (Switch, Radio, Checkbox)
-    - [x] 輸入框對比組 (Input, Select)
-    - [x] 容器對比組 (Card - 保持視覺對比)
-    - [x] 導航對比組 (Tabs)
+## 風格視覺校準
+- [x] **Cupertino (CamelotCupertinoSelect)**
+    - [x] 提高箭頭 (`.chevron`) 的配色對比度 (使用 `currentColor` 並調整透明度)
+    - [x] 調整 `dropdown` 背景色使用主題變數，修復視覺異常問題
+    - [x] 新增選項懸停 (Hover) 背景色變化 (`surface-container-highest`)
+    - [x] 新增選中項目 (Selected) 的配色強化並支援 `color` 屬性
+- [x] **Material 3 (CamelotMaterialSelect)**
+    - [x] 修復 `dropdown` 背景色缺失問題，改為實體表面 (`surface-container-high`)
+    - [x] 新增選項懸停 (Hover) 覆蓋層效果
+    - [x] 新增選中項目 (Selected) 的配色強化 (Primary/Secondary/Tertiary Container)
+- [x] **Soft UI (CamelotSoftSelect)**
+    - [x] 新增選項懸停 (Hover) 內凹感 (Subtle Inset)
+    - [x] 新增選中項目 (Selected) 的深度感強化 (Deep Inset) 與文字主題色
 
 ## 驗證
-- [ ] 檢查全域主題切換響應
-- [ ] 檢查 Checkbox 事件與屬性連動
-- [ ] 進行介面視覺核對
+- [x] 確認亮/暗模式下的 UI 表現一致性
+- [x] 檢查三種配色變體 (Primary, Secondary, Tertiary) 的選取視覺連動
