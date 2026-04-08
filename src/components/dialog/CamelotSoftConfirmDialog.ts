@@ -1,7 +1,7 @@
 import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { CamelotBaseDialog } from './CamelotBaseDialog';
-import '../button/CamelotButton';
+import '../button/filled/CamelotButton';
 
 /**
  * <CamelotSoftConfirmDialog>
@@ -76,12 +76,12 @@ export class CamelotSoftConfirmDialog extends CamelotBaseDialog {
           <p class="message">${this.message}</p>
           <div class="actions">
             <camelot-button 
-              variant="secondary" 
+              color="secondary" 
               .label="${this.cancelText}"
               @click="${this._onCancelClick}"
             ></camelot-button>
             <camelot-button 
-              variant="primary" 
+              color="primary" 
               .label="${this.confirmText}"
               @click="${this._onConfirmClick}"
             ></camelot-button>

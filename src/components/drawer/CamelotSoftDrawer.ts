@@ -14,48 +14,59 @@ export class CamelotSoftDrawer extends CamelotBaseDrawer {
     ...CamelotBaseDrawer.styles,
     css`
       :host {
+        /* Soft UI variables for the component scope */
+        --cml-soft-shadow: 
+          10px 10px 20px var(--cml-soft-color-dark), 
+          -10px -10px 20px var(--cml-soft-color-light);
       }
 
       .drawer-content {
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        background: color-mix(in srgb, var(--cml-color-surface, #fff), transparent 40%);
+        background: var(--cml-color-background);
+        border: none;
         margin: 0;
         border-radius: 0;
         overflow: hidden;
+        box-shadow: var(--cml-soft-shadow);
       }
 
       :host([anchor="bottom"]) .drawer-content {
         width: 100vw;
         height: auto;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
+        /* Shadow only towards top */
+        box-shadow: 0 -10px 30px var(--cml-soft-color-dark), 0 -5px 15px var(--cml-soft-color-light);
       }
 
       :host([anchor="top"]) .drawer-content {
         width: 100vw;
         height: auto;
-        border-bottom-left-radius: 30px;
-        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        /* Shadow only towards bottom */
+        box-shadow: 0 10px 30px var(--cml-soft-color-dark), 0 5px 15px var(--cml-soft-color-light);
       }
 
       :host([anchor="left"]) .drawer-content {
         height: 100dvh;
         width: var(--cml-drawer-width);
-        border-top-right-radius: 30px;
-        border-bottom-right-radius: 30px;
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 40px;
+        /* Shadow only towards right */
+        box-shadow: 10px 0 30px var(--cml-soft-color-dark), 5px 0 15px var(--cml-soft-color-light);
       }
 
       :host([anchor="right"]) .drawer-content {
         height: 100dvh;
         width: var(--cml-drawer-width);
-        border-top-left-radius: 30px;
-        border-bottom-left-radius: 30px;
+        border-top-left-radius: 40px;
+        border-bottom-left-radius: 40px;
+        /* Shadow only towards left */
+        box-shadow: -10px 0 30px var(--cml-soft-color-dark), -5px 0 15px var(--cml-soft-color-light);
       }
 
       .header {
-        padding: 24px 24px 12px;
+        padding: 32px 32px 16px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -64,23 +75,20 @@ export class CamelotSoftDrawer extends CamelotBaseDrawer {
       .title {
         margin: 0;
         font-family: inherit;
-        font-size: 20px;
-        font-weight: 700;
-        color: #444;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--cml-color-primary);
+        letter-spacing: -0.5px;
       }
 
       .body {
-        padding: 24px;
+        padding: 0 32px 32px;
         overflow-y: auto;
       }
 
       @media (prefers-color-scheme: dark) {
-        :host {
-          --cml-drawer-bg: rgba(45, 45, 45, 0.7);
-          --cml-drawer-shadow: 10px 10px 30px rgba(0,0,0,0.5), -10px -10px 30px rgba(80,80,80,0.2);
-        }
         .title {
-          color: #eee;
+          color: var(--cml-color-primary-container);
         }
       }
     `

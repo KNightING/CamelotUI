@@ -153,9 +153,10 @@
           <!-- Material -->
           <div class="style-column">
             <div class="style-name">Material 3 (Default)</div>
-            <camelot-button label="Primary"></camelot-button>
+            <camelot-button label="Filled"></camelot-button>
             <camelot-button label="Secondary" color="secondary"></camelot-button>
-            <camelot-button label="Outlined" variant="outlined"></camelot-button>
+            <camelot-outline-button label="Outlined"></camelot-outline-button>
+            <camelot-text-button label="Text Button"></camelot-text-button>
             <div style="display: flex; gap: 8px;">
               <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
               <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
@@ -165,9 +166,11 @@
           <camelot-theme mode="cupertino">
             <div class="style-column">
               <div class="style-name">Cupertino (iOS)</div>
-              <camelot-button label="Primary"></camelot-button>
+              <camelot-button label="Filled"></camelot-button>
               <camelot-button label="Secondary" color="secondary"></camelot-button>
-              <camelot-button label="Outlined" variant="outlined"></camelot-button>
+              <camelot-outline-button label="Outlined"></camelot-outline-button>
+            <camelot-text-button label="Text Button"></camelot-text-button>
+
               <div style="display: flex; gap: 8px;">
                 <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
                 <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
@@ -178,9 +181,11 @@
           <camelot-theme mode="soft">
             <div class="style-column">
               <div class="style-name">Soft UI (Neumorphism)</div>
-              <camelot-button label="Primary"></camelot-button>
+              <camelot-button label="Filled"></camelot-button>
               <camelot-button label="Secondary" color="secondary"></camelot-button>
-              <camelot-button label="Outlined" variant="outlined"></camelot-button>
+              <camelot-outline-button label="Outlined"></camelot-outline-button>
+            <camelot-text-button label="Text Button"></camelot-text-button>
+
               <div style="display: flex; gap: 8px;">
                 <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
                 <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
@@ -516,9 +521,10 @@
     import { THEME_DEFAULT, THEME_SAPPHIRE, THEME_EMERALD } from './src/styles/themes.ts'
 
     // Buttons
-    import './src/components/button/CamelotButton.ts'
-    import './src/components/button/CamelotIconButton.ts'
-    import './src/components/button/CamelotOutlineButton.ts'
+    import './src/components/button/filled/CamelotButton.ts'
+    import './src/components/button/icon/CamelotIconButton.ts'
+    import './src/components/button/outline/CamelotOutlineButton.ts'
+    import './src/components/button/text/CamelotTextButton.ts'
 
     // Inputs & Selections
     import './src/components/input/CamelotInput.ts'

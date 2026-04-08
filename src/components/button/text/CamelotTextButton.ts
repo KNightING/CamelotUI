@@ -1,72 +1,59 @@
 import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import { CamelotBaseElement } from '../../base/CamelotBaseElement';
 
 // 確保風格元件已載入
-import './CamelotMaterialButton.ts';
-import './CamelotCupertinoButton.ts';
-import './CamelotSoftButton.ts';
+import './CamelotMaterialTextButton.ts';
+import './CamelotCupertinoTextButton.ts';
+import './CamelotSoftTextButton.ts';
 
 /**
- * <CamelotButton>
- * 通用按鈕元件，根據主題切換風格。
- * 繼承自 CamelotBaseElement 以獲取自動風格偵測能力。
+ * <CamelotTextButton>
+ * 通用文字按鈕元件 (Text Button)，根據主題切換風格。
  */
-@customElement('camelot-button')
-export class CamelotButton extends CamelotBaseElement {
+@customElement('camelot-text-button')
+export class CamelotTextButton extends CamelotBaseElement {
   @property({ type: String })
-  label: string = 'Button';
+  label: string = 'Text Button';
 
   @property({ type: Boolean, reflect: true })
   disabled: boolean = false;
 
-  /**
-   * 按鈕色彩：'primary', 'secondary', 'tertiary'
-   */
   @property({ type: String })
   color: 'primary' | 'secondary' | 'tertiary' = 'primary';
-
-  /**
-   * 按鈕變體：'filled', 'outlined', 'text'
-   */
-  @property({ type: String })
-  variant: 'filled' | 'outlined' | 'text' = 'filled';
 
   render() {
     switch (this._activeStyle) {
       case 'soft':
         return html`
-          <camelot-soft-button 
+          <camelot-soft-text-button 
             .label=${this.label} 
             .color=${this.color}
-            .variant=${this.variant}
             ?disabled=${this.disabled}
           >
             <slot></slot>
-          </camelot-soft-button>
+          </camelot-soft-text-button>
         `;
       case 'cupertino':
         return html`
-          <camelot-cupertino-button 
+          <camelot-cupertino-text-button 
             .label=${this.label} 
             .color=${this.color}
-            .variant=${this.variant}
             ?disabled=${this.disabled}
           >
             <slot></slot>
-          </camelot-cupertino-button>
+          </camelot-cupertino-text-button>
         `;
       case 'material':
       default:
         return html`
-          <camelot-material-button 
+          <camelot-material-text-button 
             .label=${this.label} 
             .color=${this.color}
-            .variant=${this.variant}
             ?disabled=${this.disabled}
           >
             <slot></slot>
-          </camelot-material-button>
+          </camelot-material-text-button>
         `;
     }
   }
@@ -81,6 +68,6 @@ export class CamelotButton extends CamelotBaseElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'camelot-button': CamelotButton;
+    'camelot-text-button': CamelotTextButton;
   }
 }

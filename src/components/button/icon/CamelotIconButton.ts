@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import { CamelotBaseElement } from '../../base/CamelotBaseElement';
 
 // 確保風格元件已載入
 import './CamelotMaterialIconButton.ts';

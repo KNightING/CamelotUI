@@ -1,6 +1,7 @@
 import { html, css } from 'lit';
 import { property } from 'lit/decorators.js';
 import { CamelotBaseDrawer } from './CamelotBaseDrawer';
+import '../button/text/CamelotTextButton';
 
 /**
  * <CamelotCupertinoDrawer>
@@ -107,7 +108,11 @@ export class CamelotCupertinoDrawer extends CamelotBaseDrawer {
     return html`
       <header class="header">
         <h2 class="title">${this.label}</h2>
-        <button class="close-button" @click="${this.hide}">Done</button>
+        <camelot-text-button 
+          class="close-button" 
+          label="Done"
+          @click="${this.hide}"
+        ></camelot-text-button>
       </header>
 
       <div class="body">
