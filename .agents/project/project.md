@@ -18,6 +18,7 @@
 ## 現有功能模組 (Existing Modules)
 - **Button**: 完備的按鈕系統，分為 Filled (`<camelot-button>`), Outline (`<camelot-outline-button>`), Text (`<camelot-text-button>`), Icon (`<camelot-icon-button>`) 四大類，並以變體資料夾結構模組化實作。
 - **Drawer**: 已完成，支援 4 個方向（Left, Right, Top, Bottom）與 3 種風格。其中 Soft UI 風格已優化為正統 Neumorphism。
+- **Menu**: 已完成，採資料驅動設計。支援 Material 3 (整合自原 Cupertino) 與 Soft UI (Neumorphism) 風格。具備 N-階層遞迴彈出選單、Horizontal (水平) 與 Collapsed (收合) 四向互動模式。
 - **Theme**: 支援動態主題切換。
 
 ## 全域規則 (Global Rules)

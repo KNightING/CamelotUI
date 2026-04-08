@@ -505,6 +505,48 @@
           <camelot-drawer id="drw-s-b" anchor="bottom" label="Soft Bottom"></camelot-drawer>
         </camelot-theme>
       </section>
+
+      <!-- 9. Navigation Menus -->
+      <section class="demo-section">
+        <h2 class="section-title">9. Navigation Menus (Data-driven)</h2>
+        <div class="comparison-grid">
+          <div class="style-column">
+            <div class="style-name">Material 3 / Cupertino</div>
+            <camelot-menu id="menu-m" value="dash" style-type="material"></camelot-menu>
+            <div class="value-display">Selected: <span id="val-menu-m">dash</span></div>
+          </div>
+          <div class="style-column">
+            <div class="style-name">Soft UI</div>
+            <camelot-theme mode="soft">
+              <camelot-menu id="menu-s" value="dash" style-type="soft"></camelot-menu>
+            </camelot-theme>
+            <div class="value-display">Selected: <span id="val-menu-s">dash</span></div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 32px;">Horizontal & Collapsed Demos</h3>
+        <div style="margin-bottom: 24px; padding: 24px; border-radius: 12px; border: 1px solid var(--demo-border);">
+          <div class="style-name">Material 3 Horizontal</div>
+          <camelot-menu id="menu-h-m" mode="horizontal" value="dash" style-type="material"></camelot-menu>
+        </div>
+        
+        <div class="comparison-grid">
+          <div class="style-column">
+            <div class="style-name">Material 3 Collapsed</div>
+            <camelot-menu id="menu-col-m" collapsed style="width: 80px;" style-type="material"></camelot-menu>
+          </div>
+          <div class="style-column">
+            <div class="style-name">Soft UI Collapsed</div>
+            <camelot-theme mode="soft">
+              <camelot-menu id="menu-col-s" collapsed style="width: 80px;" style-type="soft"></camelot-menu>
+            </camelot-theme>
+          </div>
+        </div>
+        
+        <div style="margin-top: 24px; text-align: center;">
+          <button onclick="toggleAllCollapses()">Toggle Global Collapse</button>
+        </div>
+      </section>
     </main>
   </camelot-theme>
 
@@ -535,12 +577,13 @@
     import './src/components/radio/CamelotRadioGroup.ts'
     import './src/components/select/CamelotSelect.ts'
 
-    // Navigation & Others
+    import { html } from 'lit'
     import './src/components/tabs/CamelotTabs.ts'
     import './src/components/card/CamelotCard.ts'
     import './src/components/badge/CamelotBadge.ts'
     import './src/components/dialog/CamelotConfirmDialog.ts'
     import './src/components/drawer/CamelotDrawer.ts'
+    import './src/components/menu/CamelotMenu.ts'
 
     // Global Controller Logic
     const rootTheme = document.getElementById('root-theme')
@@ -605,6 +648,61 @@
     setupDialog('dlg-m');
     setupDialog('dlg-c');
     setupDialog('dlg-s');
+
+    // 初始化 Menus
+    const menuOptions = [
+      { label: 'Dashboard', key: 'dash', icon: '📊' },
+      { 
+        label: 'Enterprise', 
+        key: 'ent', 
+        icon: '🏢',
+        children: [
+          { 
+            label: 'Human Resources', 
+            key: 'hr',
+            children: [
+              { 
+                label: 'Employees', 
+                key: 'emp',
+                children: [
+                  { label: 'Full-time', key: 'ft' },
+                  { label: 'Contractors', key: 'cont' },
+                  { label: 'Interns', key: 'int' }
+                ]
+              },
+              { label: 'Payroll', key: 'pay' }
+            ]
+          },
+          { label: 'Marketing', key: 'mkt' }
+        ]
+      },
+      { label: 'Control Center', key: 'ctrl', icon: '🕹️' },
+      { label: 'Settings', key: 'sett', icon: '⚙️' },
+      { label: 'Disabled Item', key: 'dis', icon: '🚫', disabled: true }
+    ];
+    
+    const demoMenus = ['menu-m', 'menu-s', 'menu-h-m', 'menu-col-m', 'menu-col-s'];
+    demoMenus.forEach(id => {
+      const menu = document.getElementById(id);
+      if (menu) {
+        menu.options = menuOptions;
+        menu.addEventListener('select', (e) => {
+          const display = document.getElementById(`val-${id}`);
+          if (display) display.textContent = e.detail;
+        });
+      }
+    });
+
+    window.toggleAllCollapses = () => {
+      const cols = ['menu-col-m', 'menu-col-s'];
+      cols.forEach(id => {
+        const menu = document.getElementById(id);
+        if (menu) {
+          menu.collapsed = !menu.collapsed;
+          menu.style.width = menu.collapsed ? '80px' : '240px';
+        }
+      });
+    };
 
     // 初始設定使用預設主題物件
     rootTheme.config = THEME_DEFAULT
