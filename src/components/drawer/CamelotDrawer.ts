@@ -40,6 +40,7 @@ export class CamelotDrawer extends CamelotBaseElement {
   }
 
   private _handleClose() {
+    this.open = false;
     this.dispatchEvent(new CustomEvent('close', { bubbles: true, composed: true }));
   }
 

@@ -14,38 +14,45 @@ export class CamelotCupertinoDrawer extends CamelotBaseDrawer {
     ...CamelotBaseDrawer.styles,
     css`
       :host {
-        --cml-drawer-bg: rgba(255, 255, 255, 0.75);
-        --cml-drawer-width: 320px;
-        --cml-drawer-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
       }
 
       .drawer-content {
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
         border: 1px solid rgba(255, 255, 255, 0.3);
+        background: color-mix(in srgb, var(--cml-color-surface, #fff), transparent 25%);
       }
 
       :host([anchor="bottom"]) .drawer-content {
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        margin: 10px;
-        width: calc(100% - 20px);
+        border-top-left-radius: 28px;
+        border-top-right-radius: 28px;
+        margin: 0;
+        width: 100vw;
         box-sizing: border-box;
       }
 
       :host([anchor="left"]) .drawer-content,
       :host([anchor="right"]) .drawer-content {
-        margin: 10px;
-        height: calc(100% - 20px);
-        border-radius: 12px;
+        margin: 0;
+        height: 100dvh;
         width: var(--cml-drawer-width);
       }
 
+      :host([anchor="left"]) .drawer-content {
+        border-top-right-radius: 28px;
+        border-bottom-right-radius: 28px;
+      }
+
+      :host([anchor="right"]) .drawer-content {
+        border-top-left-radius: 28px;
+        border-bottom-left-radius: 28px;
+      }
+
       :host([anchor="top"]) .drawer-content {
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-        margin: 10px;
-        width: calc(100% - 20px);
+        border-bottom-left-radius: 28px;
+        border-bottom-right-radius: 28px;
+        margin: 0;
+        width: 100vw;
         box-sizing: border-box;
       }
 

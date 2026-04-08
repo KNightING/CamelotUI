@@ -14,14 +14,12 @@ export class CamelotMaterialDrawer extends CamelotBaseDrawer {
     ...CamelotBaseDrawer.styles,
     css`
       :host {
-        --cml-drawer-bg: var(--md-sys-color-surface-container-low, #fff);
-        --cml-drawer-width: 360px;
-        --cml-drawer-shadow: var(--md-sys-elevation-level-1);
       }
 
       .drawer-content {
         padding: 0;
         border-radius: 0;
+        background: var(--cml-color-surface-container-low, #fff);
       }
 
       :host([anchor="left"]) .drawer-content {

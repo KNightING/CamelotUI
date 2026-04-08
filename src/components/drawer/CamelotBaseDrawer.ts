@@ -44,6 +44,39 @@ export class CamelotBaseDrawer extends CamelotBaseElement {
         pointer-events: none;
       }
 
+      :host([anchor="left"]) dialog {
+        top: 0;
+        left: 0;
+        right: auto;
+        bottom: 0;
+        width: var(--cml-drawer-width, 360px);
+        height: 100dvh;
+      }
+      :host([anchor="right"]) dialog {
+        top: 0;
+        left: auto;
+        right: 0;
+        bottom: 0;
+        width: var(--cml-drawer-width, 360px);
+        height: 100dvh;
+      }
+      :host([anchor="top"]) dialog {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        width: 100vw;
+        height: var(--cml-drawer-height, auto);
+      }
+      :host([anchor="bottom"]) dialog {
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: var(--cml-drawer-height, auto);
+      }
+
       dialog[open] {
         display: flex;
         pointer-events: auto;
@@ -69,7 +102,7 @@ export class CamelotBaseDrawer extends CamelotBaseElement {
       .drawer-content {
         display: flex;
         flex-direction: column;
-        background: var(--cml-drawer-bg, #fff);
+        background: var(--cml-color-surface, #fff);
         box-shadow: var(--cml-drawer-shadow, 0 8px 32px rgba(0,0,0,0.12));
         width: 100%;
         height: 100%;
@@ -88,20 +121,7 @@ export class CamelotBaseDrawer extends CamelotBaseElement {
         transform: translate(0, 0) !important;
       }
 
-      /* 寬高限制 */
-      :host([anchor="left"]) .drawer-content,
-      :host([anchor="right"]) .drawer-content {
-        width: var(--cml-drawer-width, 320px);
-        max-width: 90vw;
-        height: 100dvh;
-      }
-
-      :host([anchor="top"]) .drawer-content,
-      :host([anchor="bottom"]) .drawer-content {
-        width: 100vw;
-        height: var(--cml-drawer-height, auto);
-        max-height: 90vh;
-      }
+      /* 寬高限制屬性已移至 dialog 級別定義以確保點擊判定準確 */
     `
   ];
 

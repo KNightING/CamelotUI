@@ -65,12 +65,19 @@ export interface CamelotThemeSoft {
   'color-dark'?: string;
 }
 
+export interface CamelotThemeDrawer {
+  'width'?: string;
+  'height'?: string;
+  'shadow'?: string;
+}
+
 export interface CamelotThemeConfig {
   color?: CamelotThemeColors;
   font?: CamelotThemeFont;
   spacing?: CamelotThemeSpacing;
   radius?: CamelotThemeRadius;
   soft?: CamelotThemeSoft;
+  drawer?: CamelotThemeDrawer;
   light?: Omit<CamelotThemeConfig, 'light' | 'dark'>;
   dark?: Omit<CamelotThemeConfig, 'light' | 'dark'>;
 }
@@ -91,6 +98,11 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.8)',
       'color-dark': 'rgba(0, 0, 0, 0.1)'
+    },
+    drawer: {
+      'width': '360px',
+      'height': '240px',
+      'shadow': '0 8px 32px rgba(0,0,0,0.12)'
     }
   },
   dark: {
@@ -106,6 +118,11 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.05)',
       'color-dark': 'rgba(0, 0, 0, 0.5)'
+    },
+    drawer: {
+      'width': '360px',
+      'height': '240px',
+      'shadow': '0 8px 32px rgba(0,0,0,0.3)'
     }
   }
 };

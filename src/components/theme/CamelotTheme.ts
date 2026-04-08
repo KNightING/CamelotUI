@@ -100,6 +100,7 @@ export class CamelotTheme extends LitElement {
       spacing: { ...(baseConfig.spacing || {}), ...(modeConfig.spacing || {}) },
       radius: { ...(baseConfig.radius || {}), ...(modeConfig.radius || {}) },
       soft: { ...(baseConfig.soft || {}), ...(modeConfig.soft || {}) },
+      drawer: { ...(baseConfig.drawer || {}), ...(modeConfig.drawer || {}) },
     };
 
     // 注入策略：根主題寫入 :root，嵌套主題寫入自身 style
@@ -117,6 +118,7 @@ export class CamelotTheme extends LitElement {
     this._injectSection(target, 'spacing', finalConfig.spacing);
     this._injectSection(target, 'radius', finalConfig.radius);
     this._injectSection(target, 'soft', finalConfig.soft);
+    this._injectSection(target, 'drawer', finalConfig.drawer);
   }
 
   private _injectSection(target: any, section: string, data?: any) {

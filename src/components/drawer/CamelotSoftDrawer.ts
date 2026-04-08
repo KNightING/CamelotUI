@@ -14,29 +14,44 @@ export class CamelotSoftDrawer extends CamelotBaseDrawer {
     ...CamelotBaseDrawer.styles,
     css`
       :host {
-        --cml-drawer-bg: rgba(255, 255, 255, 0.6);
-        --cml-drawer-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
       }
 
       .drawer-content {
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.3);
-        margin: 20px;
-        border-radius: 30px;
+        background: color-mix(in srgb, var(--cml-color-surface, #fff), transparent 40%);
+        margin: 0;
+        border-radius: 0;
         overflow: hidden;
       }
 
-      :host([anchor="bottom"]) .drawer-content,
-      :host([anchor="top"]) .drawer-content {
-        width: calc(100% - 40px);
+      :host([anchor="bottom"]) .drawer-content {
+        width: 100vw;
         height: auto;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
       }
 
-      :host([anchor="left"]) .drawer-content,
+      :host([anchor="top"]) .drawer-content {
+        width: 100vw;
+        height: auto;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+      }
+
+      :host([anchor="left"]) .drawer-content {
+        height: 100dvh;
+        width: var(--cml-drawer-width);
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+      }
+
       :host([anchor="right"]) .drawer-content {
-        height: calc(100% - 40px);
-        width: var(--cml-drawer-width, 320px);
+        height: 100dvh;
+        width: var(--cml-drawer-width);
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
       }
 
       .header {
