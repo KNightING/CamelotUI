@@ -14,7 +14,7 @@ import { state } from 'lit/decorators.js';
  */
 export class CamelotBaseElement extends LitElement {
   /**
-   * 當前的 UI 風格：'material', 'cupertino', 'soft'
+   * 當前的 UI 風格：'material', 'cupertino', 'soft', 'scifi'
    */
   @state()
   protected _activeStyle: string = 'material';

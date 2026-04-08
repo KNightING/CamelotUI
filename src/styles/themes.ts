@@ -71,6 +71,15 @@ export interface CamelotThemeDrawer {
   'shadow'?: string;
 }
 
+export interface CamelotThemeScifi {
+  'glow-color'?: string;
+  'glow-intensity'?: string | number;
+  'corner-size'?: string;
+  'scanline-opacity'?: string | number;
+  'highlight'?: string;
+  'bracket-color'?: string;
+}
+
 export interface CamelotThemeConfig {
   color?: CamelotThemeColors;
   font?: CamelotThemeFont;
@@ -78,6 +87,7 @@ export interface CamelotThemeConfig {
   radius?: CamelotThemeRadius;
   soft?: CamelotThemeSoft;
   drawer?: CamelotThemeDrawer;
+  scifi?: CamelotThemeScifi;
   light?: Omit<CamelotThemeConfig, 'light' | 'dark'>;
   dark?: Omit<CamelotThemeConfig, 'light' | 'dark'>;
 }
@@ -189,6 +199,37 @@ export const THEME_EMERALD: CamelotThemeConfig = {
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.05)',
       'color-dark': 'rgba(0, 0, 0, 0.6)'
+    },
+    scifi: {
+      'glow-color': 'rgba(125, 218, 155, 0.4)',
+      'glow-intensity': 0.6,
+      'corner-size': '8px',
+      'scanline-opacity': 0.05
+    }
+  }
+};
+
+export const THEME_CYBER: CamelotThemeConfig = {
+  dark: {
+    color: {
+      'primary': '#00f3ff', 'on-primary': '#000000', 'primary-container': '#00373a', 'on-primary-container': '#00f3ff',
+      'secondary': '#ff0055', 'on-secondary': '#ffffff', 'secondary-container': '#4a001a', 'on-secondary-container': '#ff0055',
+      'tertiary': '#bcff00', 'on-tertiary': '#000000', 'tertiary-container': '#2b3a00', 'on-tertiary-container': '#bcff00',
+      'error': '#ff3d3d', 'on-error': '#ffffff', 'error-container': '#410002', 'on-error-container': '#ff3d3d',
+      'background': '#05080a', 'on-background': '#c0d0d0', 'surface': '#0d121b', 'on-surface': '#c0d0d0',
+      'surface-variant': '#1a2b3c', 'on-surface-variant': '#a0b0b0', 'outline': '#304a5f', 'outline-variant': '#1a2b3c',
+      'surface-container-low': '#081018', 'surface-container': '#0d121b', 'surface-container-high': '#1a212d', 'surface-container-highest': '#252e3f'
+    },
+    font: {
+      'family': "'Share Tech Mono', 'Roboto Mono', monospace"
+    },
+    scifi: {
+      'glow-color': '#00f3ff',
+      'glow-intensity': 1,
+      'corner-size': '12px',
+      'scanline-opacity': 0.15,
+      'highlight': '#ffffff',
+      'bracket-color': '#00f3ff'
     }
   }
 };

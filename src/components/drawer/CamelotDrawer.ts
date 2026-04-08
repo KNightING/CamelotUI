@@ -5,6 +5,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialDrawer';
 import './CamelotCupertinoDrawer';
 import './CamelotSoftDrawer';
+import './CamelotScifiDrawer';
 
 /**
  * <CamelotDrawer>
@@ -47,6 +48,20 @@ export class CamelotDrawer extends CamelotBaseElement {
   render() {
     // 根據 _activeStyle 選擇對應的組件標籤
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-drawer
+            .open="${this.open}"
+            .anchor="${this.anchor}"
+            .label="${this.label || this.headline || ''}"
+            @cancel="${this._handleCancel}"
+            @open="${this._handleOpen}"
+            @close="${this._handleClose}"
+          >
+            <slot></slot>
+            <slot name="footer" slot="footer"></slot>
+          </camelot-scifi-drawer>
+        `;
       case 'cupertino':
         return html`
           <camelot-cupertino-drawer

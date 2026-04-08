@@ -11,10 +11,10 @@ import type { CamelotThemeConfig } from '../../styles/themes';
 @customElement('camelot-theme')
 export class CamelotTheme extends LitElement {
   /**
-   * 當前的 UI 風格：'material', 'cupertino', 'soft'
+   * 當前的 UI 風格：'material', 'cupertino', 'soft', 'scifi'
    */
   @property({ type: String, reflect: true })
-  mode: 'material' | 'cupertino' | 'soft' = 'material';
+  mode: 'material' | 'cupertino' | 'soft' | 'scifi' = 'material';
 
   /**
    * 強制設定主題色模式：'light', 'dark', 或 'auto' (隨系統)
@@ -101,6 +101,7 @@ export class CamelotTheme extends LitElement {
       radius: { ...(baseConfig.radius || {}), ...(modeConfig.radius || {}) },
       soft: { ...(baseConfig.soft || {}), ...(modeConfig.soft || {}) },
       drawer: { ...(baseConfig.drawer || {}), ...(modeConfig.drawer || {}) },
+      scifi: { ...(baseConfig.scifi || {}), ...(modeConfig.scifi || {}) },
     };
 
     // 注入策略：根主題寫入 :root，嵌套主題寫入自身 style
@@ -119,6 +120,7 @@ export class CamelotTheme extends LitElement {
     this._injectSection(target, 'radius', finalConfig.radius);
     this._injectSection(target, 'soft', finalConfig.soft);
     this._injectSection(target, 'drawer', finalConfig.drawer);
+    this._injectSection(target, 'scifi', finalConfig.scifi);
   }
 
   private _injectSection(target: any, section: string, data?: any) {

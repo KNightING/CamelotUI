@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../../base/CamelotBaseElement';
 import './CamelotMaterialOutlineButton.ts';
 import './CamelotCupertinoOutlineButton.ts';
 import './CamelotSoftOutlineButton.ts';
+import './CamelotScifiOutlineButton.ts';
 
 /**
  * <CamelotOutlineButton>
@@ -33,6 +34,16 @@ export class CamelotOutlineButton extends CamelotBaseElement {
           >
             <slot></slot>
           </camelot-soft-outline-button>
+        `;
+      case 'scifi':
+        return html`
+          <camelot-scifi-outline-button 
+            .label=${this.label} 
+            .color=${this.color}
+            ?disabled=${this.disabled}
+          >
+            <slot></slot>
+          </camelot-scifi-outline-button>
         `;
       case 'cupertino':
         return html`

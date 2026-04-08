@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CamelotUI Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./src/styles/tokens.css">
   <style>
     body {
@@ -136,6 +139,7 @@
           <option value="default">Amethyst (Purple)</option>
           <option value="sapphire">Sapphire (Blue)</option>
           <option value="emerald">Emerald (Green)</option>
+          <option value="cyber">Cyber (Sci-fi HUD)</option>
         </select>
       </div>
     </div>
@@ -189,6 +193,26 @@
               <div style="display: flex; gap: 8px;">
                 <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
                 <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
+              </div>
+            </div>
+          </camelot-theme>
+          <!-- Sci-fi HUD -->
+          <camelot-theme mode="scifi">
+            <div class="style-column" style="background-color: #05080a; border-color: var(--cml-color-primary);">
+              <div class="style-name" style="color: var(--cml-color-primary);">Sci-fi HUD</div>
+              <div style="display: flex; flex-direction: column; gap: 12px; align-items: stretch;">
+                <camelot-button label="PRIMARY" color="primary"></camelot-button>
+                <camelot-button label="SECONDARY" color="secondary"></camelot-button>
+                
+                <camelot-outline-button label="OUTLINED" color="primary"></camelot-outline-button>
+                <camelot-outline-button label="TERTIARY" color="tertiary"></camelot-outline-button>
+
+                <camelot-text-button label="TEXT" color="primary"></camelot-text-button>
+                <camelot-text-button label="SECONDARY" color="secondary"></camelot-text-button>
+              </div>
+              <div style="display: flex; gap: 8px; margin-top: 12px;">
+                <camelot-icon-button color="primary"><span>⌫</span></camelot-icon-button>
+                <camelot-icon-button color="tertiary" shape="square"><span>⎔</span></camelot-icon-button>
               </div>
             </div>
           </camelot-theme>
@@ -480,6 +504,19 @@
               </div>
             </div>
           </camelot-theme>
+          
+          <!-- Sci-fi HUD Drawer Matrix -->
+          <camelot-theme mode="scifi">
+            <div class="style-column" style="background-color: #05080a; border-color: #00f3ff;">
+              <div class="style-name" style="color: #00f3ff;">Sci-fi HUD</div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <camelot-button label="Left" onclick="document.getElementById('drw-sci-l').show()"></camelot-button>
+                <camelot-button label="Right" onclick="document.getElementById('drw-sci-r').show()"></camelot-button>
+                <camelot-button label="Top" onclick="document.getElementById('drw-sci-t').show()"></camelot-button>
+                <camelot-button label="Bottom" onclick="document.getElementById('drw-sci-b').show()"></camelot-button>
+              </div>
+            </div>
+          </camelot-theme>
         </div>
 
         <!-- Matrix of Drawers -->
@@ -504,6 +541,14 @@
           <camelot-drawer id="drw-s-t" anchor="top" label="Soft Top"></camelot-drawer>
           <camelot-drawer id="drw-s-b" anchor="bottom" label="Soft Bottom"></camelot-drawer>
         </camelot-theme>
+
+        <!-- Sci-fi -->
+        <camelot-theme mode="scifi">
+          <camelot-drawer id="drw-sci-l" anchor="left" label="STATUS_REPORT"></camelot-drawer>
+          <camelot-drawer id="drw-sci-r" anchor="right" label="NETWORK_CONFIG"></camelot-drawer>
+          <camelot-drawer id="drw-sci-t" anchor="top" label="CRITICAL_ALERTS"></camelot-drawer>
+          <camelot-drawer id="drw-sci-b" anchor="bottom" label="DATA_STREAM"></camelot-drawer>
+        </camelot-theme>
       </section>
 
       <!-- 9. Navigation Menus -->
@@ -522,6 +567,13 @@
             </camelot-theme>
             <div class="value-display">Selected: <span id="val-menu-s">dash</span></div>
           </div>
+          <div class="style-column" style="background-color: #05080a; border-color: #00f3ff;">
+            <div class="style-name" style="color: #00f3ff;">Sci-fi HUD</div>
+            <camelot-theme mode="scifi">
+              <camelot-menu id="menu-sci" value="dash" style-type="scifi"></camelot-menu>
+            </camelot-theme>
+            <div class="value-display">Selected: <span id="val-menu-sci">dash</span></div>
+          </div>
         </div>
 
         <h3 style="margin-top: 32px;">Horizontal & Collapsed Demos</h3>
@@ -539,6 +591,12 @@
             <div class="style-name">Soft UI Collapsed</div>
             <camelot-theme mode="soft">
               <camelot-menu id="menu-col-s" collapsed style="width: 80px;" style-type="soft"></camelot-menu>
+            </camelot-theme>
+          </div>
+          <div class="style-column" style="background-color: #05080a; border-color: #00f3ff;">
+            <div class="style-name" style="color: #00f3ff;">Sci-fi HUD Collapsed</div>
+            <camelot-theme mode="scifi">
+              <camelot-menu id="menu-col-sci" collapsed style="width: 80px;" style-type="scifi"></camelot-menu>
             </camelot-theme>
           </div>
         </div>
@@ -560,7 +618,7 @@
 
   <script type="module">
     import './src/components/theme/CamelotTheme.ts'
-    import { THEME_DEFAULT, THEME_SAPPHIRE, THEME_EMERALD } from './src/styles/themes.ts'
+    import { THEME_DEFAULT, THEME_SAPPHIRE, THEME_EMERALD, THEME_CYBER } from './src/styles/themes.ts'
 
     // Buttons
     import './src/components/button/filled/CamelotButton.ts'
@@ -681,7 +739,7 @@
       { label: 'Disabled Item', key: 'dis', icon: '🚫', disabled: true }
     ];
     
-    const demoMenus = ['menu-m', 'menu-s', 'menu-h-m', 'menu-col-m', 'menu-col-s'];
+    const demoMenus = ['menu-m', 'menu-s', 'menu-sci', 'menu-h-m', 'menu-col-m', 'menu-col-s', 'menu-col-sci'];
     demoMenus.forEach(id => {
       const menu = document.getElementById(id);
       if (menu) {
@@ -694,7 +752,7 @@
     });
 
     window.toggleAllCollapses = () => {
-      const cols = ['menu-col-m', 'menu-col-s'];
+      const cols = ['menu-col-m', 'menu-col-s', 'menu-col-sci'];
       cols.forEach(id => {
         const menu = document.getElementById(id);
         if (menu) {
@@ -717,6 +775,8 @@
         rootTheme.config = THEME_SAPPHIRE
       } else if (val === 'emerald') {
         rootTheme.config = THEME_EMERALD
+      } else if (val === 'cyber') {
+        rootTheme.config = THEME_CYBER
       } else {
         rootTheme.config = THEME_DEFAULT
       }

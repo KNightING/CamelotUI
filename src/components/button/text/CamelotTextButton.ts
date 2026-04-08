@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../../base/CamelotBaseElement';
 import './CamelotMaterialTextButton.ts';
 import './CamelotCupertinoTextButton.ts';
 import './CamelotSoftTextButton.ts';
+import './CamelotScifiTextButton.ts';
 
 /**
  * <CamelotTextButton>
@@ -33,6 +34,16 @@ export class CamelotTextButton extends CamelotBaseElement {
           >
             <slot></slot>
           </camelot-soft-text-button>
+        `;
+      case 'scifi':
+        return html`
+          <camelot-scifi-text-button 
+            .label=${this.label} 
+            .color=${this.color}
+            ?disabled=${this.disabled}
+          >
+            <slot></slot>
+          </camelot-scifi-text-button>
         `;
       case 'cupertino':
         return html`

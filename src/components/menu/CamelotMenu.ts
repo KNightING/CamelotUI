@@ -4,6 +4,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import { MenuOption } from './MenuOption';
 import './CamelotMaterialMenu';
 import './CamelotSoftMenu';
+import './CamelotScifiMenu';
 
 /**
  * <camelot-menu>
@@ -16,10 +17,7 @@ export class CamelotMenu extends CamelotBaseElement {
   @property({ type: Boolean }) collapsed = false;
   @property({ type: String }) mode: 'vertical' | 'horizontal' = 'vertical';
   @property({ type: Number }) indent = 24;
-  @property({ type: String, attribute: 'style-type' }) styleType: 'material' | 'cupertino' | 'soft' = 'material';
-
-  @state()
-  private _activeStyle: string = 'material';
+  @property({ type: String, attribute: 'style-type' }) styleType?: 'material' | 'cupertino' | 'soft' | 'scifi';
 
   connectedCallback() {
     super.connectedCallback();
@@ -34,7 +32,9 @@ export class CamelotMenu extends CamelotBaseElement {
   }
 
   private _updateStyle() {
-    this._activeStyle = this.styleType || 'material';
+    if (this.styleType) {
+      this._activeStyle = this.styleType;
+    }
   }
 
   private _handleSelect(e: CustomEvent) {
@@ -48,6 +48,18 @@ export class CamelotMenu extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-menu
+            .options="${this.options}"
+            .value="${this.value}"
+            .collapsed="${this.collapsed}"
+            .mode="${this.mode}"
+            .indent="${this.indent}"
+            @select="${this._handleSelect}"
+            @update:value="${this._handleValueUpdate}"
+          ></camelot-scifi-menu>
+        `;
       case 'soft':
         return html`
           <camelot-soft-menu

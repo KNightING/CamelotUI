@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../../base/CamelotBaseElement';
 import './CamelotMaterialFilledButton.ts';
 import './CamelotCupertinoFilledButton.ts';
 import './CamelotSoftFilledButton.ts';
+import './CamelotScifiFilledButton.ts';
 
 /**
  * <CamelotButton>
@@ -24,6 +25,16 @@ export class CamelotButton extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-filled-button 
+            .label=${this.label} 
+            .color=${this.color}
+            ?disabled=${this.disabled}
+          >
+            <slot></slot>
+          </camelot-scifi-filled-button>
+        `;
       case 'soft':
         return html`
           <camelot-soft-filled-button 
