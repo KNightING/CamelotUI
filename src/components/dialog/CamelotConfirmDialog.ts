@@ -5,6 +5,7 @@ import './CamelotBaseDialog';
 import './CamelotMaterialConfirmDialog';
 import './CamelotCupertinoConfirmDialog';
 import './CamelotSoftConfirmDialog';
+import './CamelotScifiConfirmDialog';
 
 /**
  * <CamelotConfirmDialog>
@@ -55,6 +56,18 @@ export class CamelotConfirmDialog extends CamelotBaseElement {
     };
 
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-confirm-dialog-impl
+            .title=${commonProps.title}
+            .message=${commonProps.message}
+            .confirmText=${commonProps.confirmText}
+            .cancelText=${commonProps.cancelText}
+            ?open=${commonProps.open}
+            @confirm=${this._onConfirm}
+            @cancel=${this._onCancel}
+          ></camelot-scifi-confirm-dialog-impl>
+        `;
       case 'cupertino':
         return html`
           <camelot-cupertino-confirm-dialog

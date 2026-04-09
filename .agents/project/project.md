@@ -20,7 +20,14 @@
     - **Radio Group & Radio**: 核心單選元件。Sci-fi 風格採用菱形框架與中心發光點設計，並整合 `<camelot-scifi-reticle>` 實現選中鎖定效果。
     - **Checkbox Group & Checkbox**: 多選組件。Sci-fi 風格使用方括號 `[ ]` 框架與內部掃描線脈衝表現。
     - **Switch**: 開關組件。Sci-fi 風格捨棄切角改用標準矩形（依用戶需求），配備八角形滑塊與橫向掃描線。
+    - **Input & Select**: 數據輸入組件。採用八角形切角、數據掃描線背景，並在獲取焦點時觸發動態 UI 掃描特效。
     - **Refinement**: 所有 Sci-fi 元件均已 Token 化，嚴格遵循主題顏色系統 (`--cml-color-primary` 等)，並透過 `color-mix` 處理透明與發光度。
+- **UI Components (Sci-fi HUD Suite)**:
+    - **IconButton**: 整合追蹤準星 (Reticle)，滑鼠懸停時觸發光學鎖定與掃描線脈衝。
+    - **Badge**: 高透光 HUD 標籤，具備動態狀態指示器與呼吸發光效果。
+    - **Card**: 特殊數據面板風格，側邊標註序號感應器與網格背景。
+    - **Tabs**: 底線掃描線指示器，整合準星縮放反饋。
+    - **ConfirmDialog**: 八角形 HUD 重點提示框架，配備背景動態數據模糊質感。
 - **Theme**: 支援動態主題切換。
 
 ## 全域規則 (Global Rules)

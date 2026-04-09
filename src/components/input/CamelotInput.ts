@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialInput.ts';
 import './CamelotCupertinoInput.ts';
 import './CamelotSoftInput.ts';
+import './CamelotScifiInput.ts';
 
 /**
  * <CamelotInput>
@@ -34,6 +35,16 @@ export class CamelotInput extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-input-impl
+            .value=${this.value}
+            .label=${this.label}
+            .placeholder=${this.placeholder}
+            ?disabled=${this.disabled}
+            @input=${(e: any) => this.value = e.target.value}
+          ></camelot-scifi-input-impl>
+        `;
       case 'soft':
         return html`
           <camelot-soft-input

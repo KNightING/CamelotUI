@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialTabs.ts';
 import './CamelotCupertinoTabs.ts';
 import './CamelotSoftTabs.ts';
+import './CamelotScifiTabs.ts';
 
 /**
  * <CamelotTabs>
@@ -43,6 +44,15 @@ export class CamelotTabs extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-tabs-impl
+            .items=${this.items}
+            .value=${this.value}
+            .color=${this.color}
+            @change=${this._handleChanged}
+          ></camelot-scifi-tabs-impl>
+        `;
       case 'soft':
         return html`
           <camelot-soft-tabs 

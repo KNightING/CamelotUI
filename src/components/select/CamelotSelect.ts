@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialSelect.ts';
 import './CamelotCupertinoSelect.ts';
 import './CamelotSoftSelect.ts';
+import './CamelotScifiSelect.ts';
 
 /**
  * <CamelotSelect>
@@ -109,8 +110,18 @@ export class CamelotSelect extends CamelotBaseElement {
       isOpen: this._isOpen,
       searchTerm: this._searchTerm
     };
-
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-select-impl
+            .label=${commonProps.label}
+            .value=${commonProps.value}
+            .options=${commonProps.options}
+            .isOpen=${commonProps.isOpen}
+            @toggle=${this._handleToggle}
+            @change=${(e: CustomEvent) => this._handleChanged(e.detail.value)}
+          ></camelot-scifi-select-impl>
+        `;
       case 'soft':
         return html`
           <camelot-soft-select 

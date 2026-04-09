@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialBadge.ts';
 import './CamelotCupertinoBadge.ts';
 import './CamelotSoftBadge.ts';
+import './CamelotScifiBadge.ts';
 
 /**
  * <CamelotBadge>
@@ -32,6 +33,8 @@ export class CamelotBadge extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`<camelot-scifi-badge-impl .label="${this.label}" .color="${this.color}" .variant="${this.variant}"></camelot-scifi-badge-impl>`;
       case 'cupertino':
         return html`<camelot-cupertino-badge .label="${this.label}" .color="${this.color}" .variant="${this.variant}"></camelot-cupertino-badge>`;
       case 'soft':

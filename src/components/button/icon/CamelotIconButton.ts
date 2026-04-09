@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../../base/CamelotBaseElement';
 import './CamelotMaterialIconButton.ts';
 import './CamelotCupertinoIconButton.ts';
 import './CamelotSoftIconButton.ts';
+import './CamelotScifiIconButton.ts';
 
 /**
  * <CamelotIconButton>
@@ -31,6 +32,16 @@ export class CamelotIconButton extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-icon-button-impl
+            .color=${this.color}
+            .shape=${this.shape}
+            ?disabled=${this.disabled}
+          >
+            <slot></slot>
+          </camelot-scifi-icon-button-impl>
+        `;
       case 'soft':
         return html`
           <camelot-soft-icon-button 

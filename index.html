@@ -151,7 +151,7 @@
     <main>
       <!-- 1. Buttons Comparison -->
       <section class="comparison-section">
-        <h2 class="section-title">1. Buttons & Variants</h2>
+        <h2 class="section-title">1. Buttons Comparison</h2>
         <div class="comparison-grid">
           <!-- Material -->
           <div class="style-column">
@@ -195,84 +195,125 @@
               </div>
             </div>
           </camelot-theme>
-  </camelot-theme>
-  <!-- Sci-fi HUD -->
-  <camelot-theme mode="scifi">
-    <div class="style-column" style="background-color: #05080a; border-color: var(--cml-color-primary);">
-      <div class="style-name" style="color: var(--cml-color-primary);">Sci-fi HUD</div>
-      <div style="display: flex; flex-direction: column; gap: 12px; align-items: stretch;">
-        <camelot-button label="PRIMARY" color="primary"></camelot-button>
-        <camelot-outline-button label="OUTLINED" color="secondary"></camelot-outline-button>
-        <camelot-text-button label="TEXT" color="tertiary"></camelot-text-button>
-      </div>
+        </div>
+      </section>
 
-      <!-- Standalone Reticle Demo -->
-      <div class="style-name"
-        style="color: var(--cml-color-primary); margin-top: 24px; font-size: 0.8em; opacity: 0.7;">Standalone Reticle
-      </div>
-      <div
-        style="position: relative; padding: 20px; display: flex; justify-content: center; align-items: center; border: 1px dashed rgba(255,255,255,0.1);">
-        <camelot-scifi-reticle active color="tertiary"></camelot-scifi-reticle>
-        <div style="color: #fff; font-family: 'Share Tech Mono', monospace; text-align: center;">
-          TARGET<br>LOCKED
+      <!-- Sci-fi HUD Specialty Components -->
+      <section class="comparison-section">
+        <h2 class="section-title">2. Sci-fi HUD Specialty Suite</h2>
+        <camelot-theme mode="scifi">
+    <div class="style-column" style="background-color: #05080a; border-color: var(--cml-color-primary); min-width: 600px;">
+      <div class="style-name" style="color: var(--cml-color-primary);">[SYSTEM_STATUS: OPTIMAL] // SCIFI_HUD_RE_INIT</div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px;">
+        <!-- Column 1: Inputs & Selects -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <camelot-input label="USER_ID" placeholder="INPUT_REQUIRED..."></camelot-input>
+           <camelot-select 
+            id="scifi-select-levels"
+            label="ACCESS_LEVEL" 
+            value="05"
+          ></camelot-select>
+          <div style="display: flex; gap: 8px;">
+            <camelot-icon-button color="primary"><span>⌫</span></camelot-icon-button>
+            <camelot-icon-button color="tertiary" shape="square"><span>⎔</span></camelot-icon-button>
+            <camelot-icon-button color="secondary" shape="square" disabled><span>🔒</span></camelot-icon-button>
+          </div>
+        </div>
+
+        <!-- Column 2: Badges & Buttons -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
+            <camelot-badge label="ONLINE" color="success"></camelot-badge>
+            <camelot-badge label="SECURE" color="primary" variant="outlined"></camelot-badge>
+            <camelot-badge label="ALERT" color="error"></camelot-badge>
+          </div>
+          <camelot-button label="EXECUTE_PROCEDURE" color="primary"></camelot-button>
+          <camelot-outline-button label="CANCEL_SYNC" color="secondary"></camelot-outline-button>
+          
+          <div style="margin-top: 8px;">
+            <camelot-button 
+              id="scifi-btn-terminate"
+              label="TERMINATE_PROCEDURE" 
+              color="error"
+            ></camelot-button>
+          </div>
         </div>
       </div>
 
-      <div style="display: flex; gap: 8px; margin-top: 12px;">
-        <camelot-icon-button color="primary"><span>⌫</span></camelot-icon-button>
-        <camelot-icon-button color="tertiary" shape="square"><span>⎔</span></camelot-icon-button>
+      <!-- Layout: Tabs & Cards -->
+      <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 20px;">
+        <camelot-tabs
+          id="scifi-tabs-main"
+          value="1"
+        ></camelot-tabs>
+
+        <camelot-card>
+          <div style="font-size: 0.9em; line-height: 1.6;">
+            [DECRYPTED_INTEL]: The Sci-fi HUD component suite utilizes octagonal clipping and 
+            scanline pulse animations to achieve 1:1 fidelity with high-end Japanese HUD designs.
+          </div>
+        </camelot-card>
       </div>
+
+      <camelot-confirm-dialog
+        id="scifi-dialog"
+        title="CRITICAL_PROCEDURE"
+        message="Are you sure you want to terminate the current sync process? This action cannot be undone."
+        confirmText="PROCEED"
+        cancelText="ABORT"
+        color="error"
+      ></camelot-confirm-dialog>
     </div>
   </camelot-theme>
   </div>
   </section>
 
-  <!-- 2. Form Selections Comparison (Grouped) -->
-  <section class="comparison-section">
-    <h2 class="section-title">2. Expand Component (Layout Utils)</h2>
-    <div style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+      <section class="comparison-section">
+        <h2 class="section-title">3. Expand Component (Layout Utils)</h2>
+        <div style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
 
-      <camelot-theme mode="material">
-        <div style="border: 1px solid #ddd; padding: 16px; border-radius: 8px;">
-          <camelot-expand>
-            <div style="font-weight: bold; color: var(--cml-color-primary); ">
-              ▶ Click to Expand Details
+          <camelot-theme mode="material">
+            <div style="border: 1px solid #ddd; padding: 16px; border-radius: 8px;">
+              <camelot-expand>
+                <div style="font-weight: bold; color: var(--cml-color-primary); ">
+                  ▶ Click to Expand Details
+                </div>
+                <div slot="body" style="padding: 12px; background: #f5f5f5; border-radius: 4px;">
+                  This is the expandable body content. It uses a smooth CSS Grid transition.
+                  <ul>
+                    <li>Dynamic height support</li>
+                    <li>No JS animation needed</li>
+                    <li>Reusable slots</li>
+                  </ul>
+                </div>
+              </camelot-expand>
             </div>
-            <div slot="body" style="padding: 12px; background: #f5f5f5; border-radius: 4px;">
-              This is the expandable body content. It uses a smooth CSS Grid transition.
-              <ul>
-                <li>Dynamic height support</li>
-                <li>No JS animation needed</li>
-                <li>Reusable slots</li>
-              </ul>
+          </camelot-theme>
+
+          <camelot-theme mode="scifi">
+            <div style="background-color: #05080a; border: 1px solid var(--cml-color-primary); padding: 16px;">
+              <camelot-expand>
+                <div
+                  style="color: var(--cml-color-primary); font-family: 'Share Tech Mono', monospace; display: flex; align-items: center; gap: 8px;">
+                  <camelot-scifi-reticle active
+                    style="position: relative; width: 16px; height: 16px; border: none;"></camelot-scifi-reticle>
+                  ACCESS_RESTRICTED_DATA // CLICK_TO_DECRYPT
+                </div>
+                <div slot="body"
+                  style="margin-top: 12px; border-left: 2px solid var(--cml-color-primary); padding-left: 12px; color: #fff; font-size: 0.9em; font-family: 'Share Tech Mono', monospace;">
+                  [DECRYPTED]: This data is wrapped in a CamelotExpand component using Scifi styling tokens.
+                </div>
+              </camelot-expand>
             </div>
-          </camelot-expand>
+          </camelot-theme>
+
         </div>
-      </camelot-theme>
+      </section>
 
-      <camelot-theme mode="scifi">
-        <div style="background-color: #05080a; border: 1px solid var(--cml-color-primary); padding: 16px;">
-          <camelot-expand>
-            <div
-              style="color: var(--cml-color-primary); font-family: 'Share Tech Mono', monospace; display: flex; align-items: center; gap: 8px;">
-              <camelot-scifi-reticle active
-                style="position: relative; width: 16px; height: 16px; border: none;"></camelot-scifi-reticle>
-              ACCESS_RESTRICTED_DATA // CLICK_TO_DECRYPT
-            </div>
-            <div slot="body"
-              style="margin-top: 12px; border-left: 2px solid var(--cml-color-primary); padding-left: 12px; color: #fff; font-size: 0.9em; font-family: 'Share Tech Mono', monospace;">
-              [DECRYPTED]: This data is wrapped in a CamelotExpand component using Scifi styling tokens.
-            </div>
-          </camelot-expand>
-        </div>
-      </camelot-theme>
-
-    </div>
-  </section>
-
-  <!-- 3. Form Selections Comparison (Grouped) -->
+  <!-- 4. Form Selections Comparison (Grouped) -->
   <section class="comparison-section">
-    <h2 class="section-title">3. Form Selections (Managed Groups)</h2>
+    <h2 class="section-title">4. Form Selections (Managed Groups)</h2>
     <div class="comparison-grid">
       <!-- Material Style Groups -->
       <div class="style-column">
@@ -362,9 +403,9 @@
     </div>
   </section>
 
-  <!-- 3. Form Inputs Comparison -->
+  <!-- 5. Form Inputs Comparison -->
   <section class="comparison-section">
-    <h2 class="section-title">3. Inputs & Selects</h2>
+    <h2 class="section-title">5. Inputs & Selects</h2>
     <div class="comparison-grid">
       <div class="style-column">
         <div class="style-name">Material 3</div>
@@ -388,9 +429,9 @@
     </div>
   </section>
 
-  <!-- 4. Badges Comparison -->
+  <!-- 6. Badges Comparison -->
   <section class="comparison-section">
-    <h2 class="section-title">4. Badges</h2>
+    <h2 class="section-title">6. Badge & Status Chips</h2>
     <div class="comparison-grid">
       <div class="style-column">
         <div class="style-name">Material 3</div>
@@ -423,9 +464,9 @@
     </div>
   </section>
 
-  <!-- 5. Containers (Cards) -->
+  <!-- 7. Containers (Cards) -->
   <section class="comparison-section">
-    <h2 class="section-title">5. Containers (Cards)</h2>
+    <h2 class="section-title">7. Cards & Surfaces</h2>
     <div class="comparison-grid">
       <div class="style-column">
         <div class="style-name">Material 3</div>
@@ -455,9 +496,9 @@
     </div>
   </section>
 
-  <!-- 6. Navigation (Tabs) -->
+  <!-- 8. Navigation (Tabs) -->
   <section class="comparison-section">
-    <h2 class="section-title">6. Navigation (Tabs)</h2>
+    <h2 class="section-title">8. Tabs & Navigation</h2>
     <div class="comparison-grid" style="grid-template-columns: 1fr;">
       <div class="style-column">
         <div class="style-name">Material 3</div>
@@ -478,9 +519,9 @@
     </div>
   </section>
 
-  <!-- 7. Dialogs Comparison -->
+  <!-- 9. Dialogs Comparison -->
   <section class="comparison-section">
-    <h2 class="section-title">7. Popups & Dialogs</h2>
+    <h2 class="section-title">9. Popups & Dialogs</h2>
     <div class="comparison-grid">
       <!-- Material Dialog -->
       <div class="style-column">
@@ -517,9 +558,9 @@
       Last Action: <span id="dlg-action">None</span>
     </div>
   </section>
-  <!-- 8. Drawers Comparison -->
+  <!-- 10. Drawers Comparison -->
   <section class="comparison-section">
-    <h2 class="section-title">8. Side Panels (Drawers) - All Directions</h2>
+    <h2 class="section-title">10. Side Panels (Drawers) - All Directions</h2>
     <div class="comparison-grid" style="grid-template-columns: 1fr;">
 
       <!-- Material Drawer Matrix -->
@@ -605,9 +646,9 @@
     </camelot-theme>
   </section>
 
-  <!-- 9. Navigation Menus -->
+  <!-- 11. Navigation Menus -->
   <section class="demo-section">
-    <h2 class="section-title">9. Navigation Menus (Data-driven)</h2>
+    <h2 class="section-title">11. Navigation Menus (Data-driven)</h2>
     <div class="comparison-grid">
       <div class="style-column">
         <div class="style-name">Material 3 / Cupertino</div>
@@ -858,6 +899,34 @@
       rootTheme.config = { ...rootTheme.config, color: { primary: color } }
       console.log(`Global Primary Color set to: ${color}`)
     };
+
+    // --- Sci-fi HUD Demo Initialization ---
+    // Fix for static HTML not supporting property binding
+    const scifiSelect = document.getElementById('scifi-select-levels');
+    if (scifiSelect) {
+      scifiSelect.options = [
+        {label: 'LEVEL_01 (GUEST)', value: '01'},
+        {label: 'LEVEL_05 (ADMIN)', value: '05'},
+        {label: 'LEVEL_09 (ROOT)', value: '09'}
+      ];
+    }
+
+    const scifiTabs = document.getElementById('scifi-tabs-main');
+    if (scifiTabs) {
+      scifiTabs.items = [
+        {label: 'COMM_LOG', value: '1'},
+        {label: 'NAV_DATA', value: '2'},
+        {label: 'SYS_INFO', value: '3'}
+      ];
+    }
+
+    const scifiTermBtn = document.getElementById('scifi-btn-terminate');
+    const scifiDialog = document.getElementById('scifi-dialog');
+    if (scifiTermBtn && scifiDialog) {
+      scifiTermBtn.addEventListener('click', () => {
+        scifiDialog.open = true;
+      });
+    }
   </script>
 </body>
 

@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialCard.ts';
 import './CamelotCupertinoCard.ts';
 import './CamelotSoftCard.ts';
+import './CamelotScifiCard.ts';
 
 /**
  * <CamelotCard>
@@ -22,6 +23,12 @@ export class CamelotCard extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-card-impl>
+            <slot></slot>
+          </camelot-scifi-card-impl>
+        `;
       case 'soft':
         return html`
           <camelot-soft-card .padding=${this.padding}>

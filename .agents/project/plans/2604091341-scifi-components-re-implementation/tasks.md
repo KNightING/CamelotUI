@@ -1,0 +1,17 @@
+# Tasks for 2604091341-scifi-components-re-implementation
+- [x] 實作 Sci-fi HUD 核心元件
+    - [x] CamelotScifiIconButton (圖示按鈕 + 鎖定動畫)
+    - [x] CamelotScifiInput (輸入框 + 脈衝掃描)
+    - [x] CamelotScifiSelect (下拉選單 + 科技格點)
+    - [x] CamelotScifiBadge (標籤 + 發光效果)
+    - [x] CamelotScifiCard (容器 + 數位序列)
+    - [x] CamelotScifiTabs (頁籤 + 掃描線)
+    - [x] CamelotScifiConfirmDialog (對話框 + 八角形)
+- [x] 整合外觀分流 (Facade Integration)
+    - [x] 更新各路 Facade `render()` 邏輯 (Badge, Card, Tabs, ConfirmDialog 已全數完成)
+- [x] 修復與優化展示頁面 (index.html)
+    - [x] 修正標籤嵌套結構
+    - [x] 更新展示區塊內容
+- [x] 驗證與完工
+    - [x] 目錄深層清理檢查
+    - [x] 更新 project.md
