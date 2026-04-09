@@ -45,3 +45,16 @@
 ### Manual Verification
 - 驗證三種按鈕的鎖定動畫是否依然正常（包含 Hover 與 Click）。
 - 測試輔助：在 `index.html` 加入一個獨立展示 Reticle 的區塊，驗證其作為獨立組件的功能。
+
+
+---
+
+## Task Execution History
+
+# Tasks for 2604090901
+- [x] 實作 `<camelot-scifi-reticle>` 組件
+- [x] 重構 `CamelotScifiFilledButton` 改用 Reticle
+- [x] 重構 `CamelotScifiOutlineButton` 改用 Reticle
+- [x] 重構 `CamelotScifiTextButton` 改用 Reticle
+- [x] 更新 `project.md` 紀錄新組件
+- [x] 在 `index.html` 加入測試範例

@@ -29,3 +29,15 @@
 1. 開啟樣板頁面測試各風格選單。
 2. 檢查子選單展開過程是否平滑。
 3. 確保點擊非父項目的葉子節點（Leaf nodes）仍能正常觸發選擇事件。
+
+
+---
+
+## Task Execution History
+
+# Tasks for 2604091018-use-expand-in-menu
+- [x] 調研 `CamelotBaseMenu.ts` 的 `renderItem` 具體改動點
+- [x] 修改 `CamelotBaseMenu.ts` 實作整合 `<camelot-expand>`
+- [x] 調整各選單風格對子選單邊距的處理
+- [x] 測試垂直、水平、收合三種模式下的行為一致性
+- [ ] 更新 `project.md` 紀錄

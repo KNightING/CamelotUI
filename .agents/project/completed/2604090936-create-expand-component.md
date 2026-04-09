@@ -37,3 +37,15 @@
 ### Manual Verification
 - 在 `index.html` 加入範例，測試內容高度變化時的動畫流暢度。
 - 測試嵌套多個 Expand 組件，確保狀態不互相干擾。
+
+
+---
+
+## Task Execution History
+
+# Tasks for 2604090936
+- [/] 建立 `src/components/expand/` 目錄
+- [/] 實作 `<camelot-expand>` 邏輯與樣式
+- [ ] 完成 `src/components/expand/index.ts` 導出
+- [ ] 在 `index.html` 中加入示範代碼
+- [ ] 更新 `project.md` 的組件清單

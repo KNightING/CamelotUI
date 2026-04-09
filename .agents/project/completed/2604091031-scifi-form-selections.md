@@ -39,3 +39,17 @@
 1. 開啟樣板頁面測試 Section 3。
 2. 切換 Scifi 開關、Radio 與 Checkbox，確認點擊區域、動畫與配色正確。
 3. 驗證字體是否統一為 `Share Tech Mono`。
+
+
+---
+
+## Task Execution History
+
+# Tasks for 2604091031-scifi-form-selections
+- [x] 實作 `CamelotScifiSwitch.ts`
+- [x] 實作 `CamelotScifiRadio.ts`
+- [x] 實作 `CamelotScifiCheckbox.ts`
+- [x] 在對應元件中加入 `scifi` 分發邏輯
+- [x] 更新 `index.html` 示範區塊
+- [x] 驗證動畫與交互穩定性
+- [x] 更新 `project.md` 紀錄

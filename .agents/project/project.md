@@ -27,3 +27,4 @@
 - 遵循 Material 3, iOS (Cupertino), Soft UI 與 Sci-fi HUD 設計規範。
 - 使用 `CamelotBaseElement` 作為基礎類別。
 - 嚴格遵守「精準工作流」記錄所有開發活動。
+- **歸檔原則**：完成後的計畫必須進行「扁平化合併」，將 `plan.md` 與 `tasks.md` 整合為單一歷史文件，以維護文件庫的精簡與可檢索性。

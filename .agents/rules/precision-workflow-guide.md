@@ -28,7 +28,9 @@ trigger: always_on
 3. 搜尋是否有相關的 Knowledge Items (KI)。
 
 ### Phase 1: 任務分類與決策 (Categorization) ⚖️
-根據需求複雜度決定執行路徑：
+根據需求複雜度與需求關聯性決定執行路徑：
+- **需求關聯修正 (Iteration)**: 新需求是針對「剛完成」或「執行中」計畫的延續、優化或修復。
+  - 🔄 **計畫迭代流程**：不開立新計畫，直接更新現有計畫目錄下的 `plan.md` 與 `tasks.md`。
 - **微小變動 (Small Task)**: 僅修正錯字、添加註解或 10 行以內的獨立代碼。
   - 🚀 *直接執行，跳過 Phase 2，但在完成時更新 `project.md`（如有需要）。*
 - **功能開發/重構 (Standard/Large Task)**: 涉及邏輯變更、多個文件、或新組件。
@@ -57,15 +59,22 @@ trigger: always_on
 在宣布完成前，必須執行：
 1. **靜態檢查**: 使用 `.\gradlew` (Android) 或 `npm run lint` (Web/POS) 確保無語法錯誤。
 2. **運行測試**: 確保受影響的功能正常運作。
-3. **使用者手動測試**: 通知使用者計畫已就緒，等待使用者進行手動驗證。使用者可透過手動將 `plans.md` 的計畫項目標記為 `[x]` 來確認完成。
+3. **使用者手動測試**: 通知使用者計畫已就緒，等待使用者進行手動驗證。
+   - 若使用者提出優化建議或發現 Bug，應退回 Phase 3 執行「計畫迭代」，**嚴禁**此時開立新計畫。
+   - 使用者透過手動將 `plans.md` 的計畫項目標記為 `[x]` 來確認穩定與完成。
 
 ### Phase 5: 歸檔與大腦更新 (Finalization) 📦
 > [!IMPORTANT]
 > **歸檔觸發條件**：必須等待使用者通知「[計畫代號] 完成」，或偵測到 `plans.md` 中的計畫項目被使用者標記為 `[x]`。
 
-1. 在 `plan.md` 中填入 `Completed: YYYY-MM-DD`。
-2. 將計畫由 `plans.md` 移至 `completed.md`。
-3. 將計畫資料夾整體由 `plans/` 移至 `completed/`。
+1. **扁平化合併 (Consolidation)**:
+   - 將 `.agents/project/plans/${folder}/` 下的 `plan.md` 與 `tasks.md` 合併。
+   - 將 `tasks.md` 的內容以 `## Task Execution History` 章節追加至 `plan.md` 末尾。
+2. **遷移與重命名**:
+   - 將合併後的內容寫入 `.agents/project/completed/${YYMMDDHHmm}-${description}.md`。
+   - **刪除** 原有的計畫資料夾。
+3. **索引更新**:
+   - 將計畫由 `plans.md` 移至 `completed.md`。
 4. **關鍵動作**: 更新 `project.md` 中的「組件說明」或「核心特性」，確保文件永遠反映最新狀態。
 
 ---
@@ -101,7 +110,7 @@ trigger: always_on
 ### completed.md 基礎格式
 ```markdown
 # Completed Plans
-- [YYMMDDHHmm-description](./plans/folder/plan.md): Brief description - Completed: YYYY-MM-DD HH:mm
+- [YYMMDDHHmm-description](./completed/YYMMDDHHmm-description.md): Brief description - Completed: YYYY-MM-DD HH:mm
 ```
 
 ---
