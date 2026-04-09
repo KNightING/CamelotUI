@@ -1,4 +1,4 @@
-﻿# History Plans
+# History Plans
 - [x] [2604081601-refactor-button-variants](./completed/2604081601-refactor-button-variants.md): 重構按鈕組件架構，分為 Filled, Outline, Text, Icon。 - Completed: 2026-04-08
 - [x] [2604081615-enhance-softui-drawer-aesthetics](./completed/2604081615-enhance-softui-drawer-aesthetics.md): 優化 Soft UI Drawer 美學，強化陰影層次。 - Completed: 2026-04-08
 - [x] [2604081629-implement-menu-component](./completed/2604081629-implement-menu-component.md): 實作支援多主題風格的選單組件 (Menu)。 - Completed: 2026-04-08
@@ -11,6 +11,7 @@
 - [x] [2604091111-scifi-bugfix-refinement](./completed/2604091111-scifi-bugfix-refinement.md): 修復 Drawer Import 錯誤、Switch 標籤不對齊並調整鎖定特效為 Hover 觸發。 - Completed: 2026-04-09
 - [x] [2604091127-workflow-refinement](./completed/2604091127-workflow-refinement.md): 精確工作流優化，加入需求分類檢查與計畫自動歸檔。 - Completed: 2026-04-09
 - [x] [2604091140-scifi-components-implementation](./completed/2604091140-scifi-components-implementation.md): 實作 Select, Input, Badges, Cards, Popups, Tabs 的 Sci-fi HUD 風格。 - Completed: 2026-04-09
+- [x] [2604091153-workflow-refinement-v2](./completed/2604091153-workflow-refinement-v2.md): 優化精準工作流規則，強化 Phase 0 脈絡檢索流程並強制相對路徑。 - Completed: 2026-04-09 16:30
 - [x] [2604091354-scifi-refinement](./completed/2604091354-scifi-refinement.md): 修正 Scifi 元件顯示問題與強化視覺效果。 - Completed: 2026-04-09
 - [x] [2604091518-scifi-hover-effects](./completed/2604091518-scifi-hover-effects.md): Sci-Fi HUD 懸浮特效與按鈕遷移重構。 - Completed: 2026-04-09
 - [x] [2604091535-scifi-contrast-fix](./completed/2604091535-scifi-contrast-fix.md): 修正 Sci-Fi 組件文字對比度與顯示問題。 - Completed: 2026-04-09

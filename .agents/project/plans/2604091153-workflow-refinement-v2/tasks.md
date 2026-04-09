@@ -1,5 +1,0 @@
-# Tasks for 2604091153
-- [x] 更新 `.agents/rules/precision-workflow-guide.md` 推動相對路徑與脈絡檢索
-- [x] 修正 `.agents/project/plans.md` 中的摘要與路徑規範
-- [ ] 驗證所有連結與規則生效 [/]
-- [ ] 更新 `project.md` (如有必要)
