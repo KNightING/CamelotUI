@@ -9,13 +9,11 @@ trigger: always_on
 ## 📂 目錄結構 (.agents/project/)
 - **`project.md`**: 專案的核心大腦。包含專案目標、核心技術棧、架構圖、現有功能模組與全域規則。
 - **`plans.md`**: 正在進行中的開發計畫索引。目錄項目必須使用 `- [ ]` 標示。
-- **`completed.md`**: 已歸檔的歷史計畫紀錄與影響摘要。
+- **`archive.md`**: 已歸檔的歷史計畫紀錄與影響摘要。**必須使用表格格式且不包含 [x] 標籤**。
 - **`plans/`**: 計畫詳情目錄。資料夾命名必須遵循：`${YYMMDDHHmm}-${kebab-case-description}`。
-  - `plan.md`: 詳細規格、設計思路、影響範圍。必須包含 **Created** 與 **Completed** 日期。
+  - `plan.md`: 詳細規格、設計思路、影響範圍。必須包含 **Created** 與 **Completed** 日期 (格式：`yyyy-MM-dd HH:mm`)。
   - `tasks.md`: 動態更新的 TODO List。
-- **`completed/`**: 已歸檔的歷史計畫詳情目錄。
-  - `plan.md`: 必須包含建立與完成日期。
-  - `tasks.md`: 動態更新的 TODO List。
+- **`archive/`**: 已歸檔的歷史計畫詳情目錄。每個計畫歸檔後合併為單一的 `.md` 檔案（命名為 `${YYMMDDHHmm}-${description}.md`）。
 
 ---
 
@@ -23,7 +21,7 @@ trigger: always_on
 
 ### Phase 0: 脈絡檢索 與 自動清理 (Retrieval & Auto-Cleanup) 🔍🧹
 在開始任何行動前，**優先順序最高**的動作是：
-1. **讀取 `plans.md` 與 `completed.md`**：檢查執行中計畫以及最近 3-5 個已完成計畫，以建立完整的開發脈絡。
+1. **讀取 `plans.md` 與 `archive.md`**：檢查執行中計畫以及最近 3-5 個已完成計畫，以建立完整的開發脈絡。
 2. **優先自動歸檔**：若偵測到 `plans.md` 中有計畫被標記為 `[x]`，必須**立即執行 Phase 5 (歸檔流程)**。
 3. **讀取 `project.md`**：了解當前系統架構、技術棧與已實現之組件。
 4. **檢查衝突**：確認當前任務是否與現有計畫或近期變更衝突。
@@ -64,8 +62,12 @@ trigger: always_on
 
 ### Phase 5: 歸檔與大腦更新 (Finalization) 📦
 1. **扁平化合併 (Consolidation)**: 合併 `plan.md` 與 `tasks.md`。
-2. **遷移與重命名**: 寫入 `completed/` 目錄並刪除原計畫資料夾。
-3. **索引更新**: 將計畫由 `plans.md` 移至 `completed.md`。
+2. **遷移與重命名**: 將合併後的內容寫入 `archive/` 目錄，命名為 `${folder_name}.md`，並刪除原計畫資料夾。
+3. **索引更新**: 將計畫由 `plans.md` 移至 `archive.md`。**必須符合表格格式**：
+   - **plan name**: 檔案連結 (如 `[2604081601-refactor-button-variants](./archive/2604081601-refactor-button-variants.md)`)
+   - **說明**: 計畫摘要
+   - **建立時間**: 格式 `yyyy-MM-dd HH:mm` (由 ID 解析)
+   - **歸檔時間**: 格式 `yyyy-MM-dd HH:mm`
 4. **關鍵動作**: 更新 `project.md` 中的「組件說明」或「核心特性」。
 
 ---
@@ -77,6 +79,11 @@ trigger: always_on
 # Current Plans
 - [ ] [YYMMDDHHmm-description](./plans/folder/plan.md): [受影響組件] 核心邏輯描述以便檢索
 ```
+
+### archive.md (Historical Archive)
+| plan name | 說明 | 建立時間 (yyyy-MM-dd HH:mm) | 歸檔時間 (yyyy-MM-dd HH:mm) |
+| :--- | :--- | :--- | :--- |
+| [YYMMDDHHmm-description](./archive/folder.md) | 核心邏輯描述以便檢索 | 2026-04-09 11:53 | 2026-04-09 16:30 |
 
 ### plan.md 基礎格式
 ```markdown
@@ -95,7 +102,6 @@ trigger: always_on
 - [x] 調研現有代碼
 - [/] 實作主要 Logic
 - [ ] 撰寫/執行測試
-- [ ] 更新 `project.md` 紀錄
 ```
 
 ---

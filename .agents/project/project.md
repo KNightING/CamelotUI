@@ -34,4 +34,4 @@
 - 使用 `CamelotBaseElement` 作為基礎類別。
 - **精確工作流 (Precision Workflow)**：所有開發任務必須嚴格遵循 `.agents/rules/precision-workflow-guide.md`。
 - **相對路徑優先**：計畫文件中一律使用相對於專案根目錄的路徑。
-- **歸檔規範**：任務完成時強制進行計畫歸檔與大腦更新，保持 `project.md` 紀錄準確。
+- **歸檔規範**：任務完成時強制進行計畫歸檔（使用表格格式且不含 `[x]`，存放於 `archive.md` 與 `archive/`）與大腦更新，保持 `project.md` 紀錄準確。
