@@ -21,11 +21,13 @@ trigger: always_on
 
 ## 🔄 精準執行工作流 (Precision Workflow)
 
-### Phase 0: 脈絡檢索 (Context Retrieval) 🔍
-在開始任何行動前，**必須**：
-1. 讀取 `.agents/project/project.md` 了解當前系統架構。
-2. 檢查 `plans.md` 是否有衝突或重複的開發中任務。
-3. 搜尋是否有相關的 Knowledge Items (KI)。
+### Phase 0: 脈絡檢索 與 自動清理 (Retrieval & Auto-Cleanup) 🔍🧹
+在開始任何行動前，**優先順序最高**的動作是：
+1. **讀取 `plans.md`**：檢查是否有被標記為 `[x]` 的已完成計畫。
+2. **優先自動歸檔**：若偵測到 `[x]`，必須**立即執行 Phase 5 (歸檔流程)**，直到 `plans.md` 中所有已完成計畫皆被清理。
+3. **讀取 `project.md`**：了解當前系統架構與技術棧。
+4. **檢查 `plans.md`**：確認是否有衝突或重複的開發中任務。
+5. **搜尋相關 KI**：檢查 Knowledge Items 以獲取現有模式。
 
 ### Phase 1: 任務分類與決策 (Categorization) ⚖️
 根據需求複雜度與需求關聯性決定執行路徑：
@@ -57,9 +59,12 @@ trigger: always_on
 
 ### Phase 4: 驗證 (Verification) ✅
 在宣布完成前，必須執行：
-1. **靜態檢查**: 使用 `.\gradlew` (Android) 或 `npm run lint` (Web/POS) 確保無語法錯誤。
-2. **運行測試**: 確保受影響的功能正常運作。
-3. **使用者手動測試**: 通知使用者計畫已就緒，等待使用者進行手動驗證。
+1. **工具感知識別 (Tool Detection)**: 
+   - 檢查專案根目錄的 Lockfiles (`pnpm-lock.yaml`, `package-lock.json`, `yarn.lock`, `pyproject.toml`)。
+   - 根據識別出的工具鏈決定執行的指令（如 `pnpm lint`, `npm run lint`, `uv run`, `.\gradlew` 等）。
+2. **靜態檢查**: 使用識別出的工具執行 Lint 或編譯檢查，確保無語法錯誤。
+3. **運行測試**: 確保受影響的功能正常運作。
+4. **使用者手動測試**: 通知使用者計畫已就緒，等待使用者進行手動驗證。
    - 若使用者提出優化建議或發現 Bug，應退回 Phase 3 執行「計畫迭代」，**嚴禁**此時開立新計畫。
    - 使用者透過手動將 `plans.md` 的計畫項目標記為 `[x]` 來確認穩定與完成。
 

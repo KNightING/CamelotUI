@@ -4,7 +4,7 @@
 - Completed: 2026-04-09
 
 ## Goals
-優化 `precision-workflow-guide.md`，增加「計畫迭代」與「回歸修復」的合併規則，避免過度產生計畫資料夾。
+優化 `precision-workflow-guide.md`，增加「計畫迭代」與「回歸修複」的合併規則，避免過度產生計畫資料夾。
 
 ## User Review Required
 > [!IMPORTANT]

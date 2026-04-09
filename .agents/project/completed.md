@@ -9,3 +9,4 @@
 - [x] [2604091031-scifi-form-selections](./completed/2604091031-scifi-form-selections.md): 實作 Sci-fi 風格的表單選取元件 (Switch, Radio, Checkbox)。 - Completed: 2026-04-09
 - [x] [2604091051-scifi-component-refinement](./completed/2604091051-scifi-component-refinement.md): 優化 Sci-fi HUD 系列組件，解決 Radio 抖動、Switch 切角與色彩 Token 化。 - Completed: 2026-04-09
 - [x] [2604091111-scifi-bugfix-refinement](./completed/2604091111-scifi-bugfix-refinement.md): 修復 Drawer Import 錯誤、Switch 標籤不一致，並調整鎖定特效為 Hover 觸發。 - Completed: 2026-04-09
+- [x] [2604091127-workflow-refinement](./completed/2604091127-workflow-refinement.md): �u�ƺ�Ǥu�@�y�A�[�J�ݨD���p���ˬd�P�p�e���N����C - Completed: 2026-04-09
