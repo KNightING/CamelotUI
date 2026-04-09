@@ -33,14 +33,14 @@ export class CamelotSoftMenu extends CamelotBaseMenu {
           -6px -6px 12px var(--cml-soft-color-light);
       }
 
-      .is-selected > .menu-item {
+      .is-selected .menu-item {
         color: var(--cml-color-primary);
         box-shadow: 
           inset 4px 4px 8px var(--cml-soft-color-dark),
           inset -4px -4px 8px var(--cml-soft-color-light);
       }
 
-      .is-active-parent > .menu-item {
+      .is-active-parent .menu-item {
         color: var(--cml-color-primary);
         border: 1px solid rgba(0,0,0,0.05);
       }

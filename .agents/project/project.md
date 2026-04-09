@@ -16,9 +16,12 @@
 - **Theme System**: 位於 `src/styles/themes.ts` 與 `src/components/theme/`，負責色彩與排版標記的注入。
 
 ## 現有功能模組 (Existing Modules)
-- **Button**: 完備的按鈕系統，分為 Filled (`<camelot-button>`), Outline (`<camelot-outline-button>`), Text (`<camelot-text-button>`), Icon (`<camelot-icon-button>`) 四大類。目前支援四種風格：Material 3, Cupertino, Soft UI 與 Sci-fi HUD (Data-HUD)。其中 Sci-fi 風格具備動態「鎖定」鎖定動畫、高對比線條框線，並支援 `primary/secondary/tertiary` 動態配色。
+- **Scifi Components**:
+    - **Reticle (`<camelot-scifi-reticle>`)**: 獨立的鎖定括號組件，支援 `active` 動態觸發鎖定動畫。
+- **Button**: 完備的按鈕系統，分為 Filled (`<camelot-button>`), Outline (`<camelot-outline-button>`), Text (`<camelot-text-button>`), Icon (`<camelot-icon-button>`) 四大類。目前支援四種風格：Material 3, Cupertino, Soft UI 與 Sci-fi HUD (Data-HUD)。其中 Sci-fi 風格透過 Reticle 組件實現鎖定動畫。
 - **Drawer**: 已完成，支援 4 個方向。目前支援四種風格，包括具備動態掃描線與技術座標裝飾的 Sci-fi 模式。
-- **Menu**: 已完成，採資料驅動設計。目前支援四種風格，Sci-fi 模式具備自動編號技術前綴、掃描特效與 Monospace 數據化字體。
+- **Expand**: 純邏輯展開/收合元件。支援絲滑的 CSS Grid 動畫，已整合入 Menu 組件中提供子選單過渡效果。
+- **Menu**: 已完成，採資料驅動設計，整合 Expand 組件實現垂直子選單動畫。目前支援四種風格...
 - **Theme**: 支援動態主題切換。
 
 ## 全域規則 (Global Rules)

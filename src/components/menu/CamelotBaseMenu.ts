@@ -73,29 +73,52 @@ export class CamelotBaseMenu extends CamelotBaseElement {
     const isExpanded = this._expandedKeys.has(option.key);
     const isSelected = this.value === option.key;
     const isActiveParent = this._activePathKeys.has(option.key);
+    const isAccordion = hasChildren && this.mode === 'vertical' && !this.collapsed;
+
+    const itemContent = html`
+      <div 
+        class="menu-item"
+        @click="${(e: Event) => !isAccordion && (hasChildren ? this._toggleExpand(option.key, e) : this._handleSelect(option.key, e))}"
+      >
+        <div class="menu-item-indent" style="width: ${level * this.indent}px"></div>
+        ${option.icon ? html`<div class="menu-item-icon">${this.renderIcon(option.icon)}</div>` : ''}
+        <div class="menu-item-label">${option.label}</div>
+        ${hasChildren ? html`
+          <div class="menu-item-arrow">
+            ${(this.mode === 'vertical' && !this.collapsed) 
+              ? this.renderArrow(isExpanded) 
+              : ((this.mode === 'horizontal' || this.collapsed) && level > 0)
+                ? this.renderArrow(isExpanded, true)
+                : ''}
+          </div>
+        ` : ''}
+      </div>
+    `;
+
+    if (isAccordion) {
+      return html`
+        <div 
+          class="menu-item-container ${isSelected ? 'is-selected' : ''} ${isActiveParent ? 'is-active-parent' : ''} ${isExpanded ? 'is-expanded' : ''} ${option.disabled ? 'is-disabled' : ''}"
+        >
+          <camelot-expand 
+            .expanded="${isExpanded}" 
+            @toggle="${(e: any) => this._toggleExpand(option.key, e)}"
+          >
+            ${itemContent}
+            <div slot="body" class="menu-item-children">
+              ${this.renderMenu(option.children!, level + 1)}
+            </div>
+          </camelot-expand>
+        </div>
+      `;
+    }
 
     return html`
       <div 
         class="menu-item-container ${isSelected ? 'is-selected' : ''} ${isActiveParent ? 'is-active-parent' : ''} ${isExpanded ? 'is-expanded' : ''} ${option.disabled ? 'is-disabled' : ''}"
         style="--level: ${level}"
       >
-        <div 
-          class="menu-item"
-          @click="${(e: Event) => hasChildren ? this._toggleExpand(option.key, e) : this._handleSelect(option.key, e)}"
-        >
-          <div class="menu-item-indent" style="width: ${level * this.indent}px"></div>
-          ${option.icon ? html`<div class="menu-item-icon">${this.renderIcon(option.icon)}</div>` : ''}
-          <div class="menu-item-label">${option.label}</div>
-          ${hasChildren ? html`
-            <div class="menu-item-arrow">
-              ${(this.mode === 'vertical' && !this.collapsed) 
-                ? this.renderArrow(isExpanded) 
-                : ((this.mode === 'horizontal' || this.collapsed) && level > 0)
-                  ? this.renderArrow(isExpanded, true)
-                  : ''}
-            </div>
-          ` : ''}
-        </div>
+        ${itemContent}
         ${hasChildren ? html`
           <div class="menu-item-children" ?hidden="${this.mode === 'vertical' && !this.collapsed && !isExpanded}">
             ${this.renderMenu(option.children!, level + 1)}
@@ -151,6 +174,7 @@ export class CamelotBaseMenu extends CamelotBaseElement {
       :host([collapsed]) .menu-item-container:hover > .menu-item-children {
         display: block !important;
         opacity: 1;
+        margin: 0px 1px;
         visibility: visible;
       }
 
@@ -197,11 +221,21 @@ export class CamelotBaseMenu extends CamelotBaseElement {
 
       .menu-list { display: flex; flex-direction: column; width: 100%; }
       .menu-item-container { width: 100%; position: relative; }
+      
+      /* Reset Expand Header for Menu integration */
+      camelot-expand::part(header) {
+        padding: 0;
+        background: transparent;
+      }
+      camelot-expand::part(header):hover {
+        background: transparent;
+      }
+
       .menu-item { display: flex; align-items: center; cursor: pointer; min-height: 48px; padding: 0 16px; box-sizing: border-box; }
       .menu-item-label { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .menu-item-icon { display: flex; align-items: center; justify-content: center; width: 24px; margin-right: 12px; }
       .menu-item-indent { flex-shrink: 0; }
-      .menu-item-children { overflow: visible; }
+      .menu-item-children { overflow: visible;  }
       [hidden] { display: none !important; }
     `
   ];

@@ -1,4 +1,4 @@
-import { html, css } from 'lit';
+import { css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { CamelotBaseMenu } from './CamelotBaseMenu';
 
@@ -78,7 +78,7 @@ export class CamelotScifiMenu extends CamelotBaseMenu {
       }
 
       /* 選取狀態：高對比框線與發光 */
-      .menu-item-container.is-selected > .menu-item {
+      .menu-item-container.is-selected .menu-item {
         color: var(--cml-scifi-primary);
         background: color-mix(in srgb, var(--cml-scifi-primary), transparent 85%);
         border: 1px solid var(--cml-scifi-primary);
@@ -134,7 +134,7 @@ export class CamelotScifiMenu extends CamelotBaseMenu {
   // 由於我們繼承自 BaseMenu，我們可以使用其 render 方法，
   // 但為了 Sci-fi 特有的 index 裝飾，我們在此微調 label 渲染。
   
-  protected render() {
+  render() {
     // 渲染邏輯維持不變，但在 CSS 中利用 data-index (如果有的話)
     return super.render();
   }

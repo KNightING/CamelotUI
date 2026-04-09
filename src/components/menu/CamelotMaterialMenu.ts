@@ -27,7 +27,7 @@ export class CamelotMaterialMenu extends CamelotBaseMenu {
         background-color: var(--cml-color-surface-container-high);
       }
 
-      .is-selected > .menu-item {
+      .is-selected .menu-item {
         background-color: var(--cml-color-primary-container) !important;
         color: var(--cml-color-on-primary-container) !important;
         font-weight: var(--cml-font-weight-bold);

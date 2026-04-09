@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
+import '../../scifi/CamelotScifiReticle';
 
 /**
  * <CamelotScifiOutlineButton>
@@ -16,22 +17,24 @@ export class CamelotScifiOutlineButton extends LitElement {
   @property({ type: Boolean })
   disabled: boolean = false;
 
+  @state()
+  private _isHovered: boolean = false;
+
+  @state()
+  private _isPressed: boolean = false;
+
   static styles = css`
     :host {
       display: inline-block;
       --cml-scifi-accent: var(--cml-color-primary);
-      --cml-scifi-bracket: var(--cml-color-primary);
-      --cml-scifi-highlight: #ffffff;
     }
 
     :host([color="secondary"]) {
       --cml-scifi-accent: var(--cml-color-secondary);
-      --cml-scifi-bracket: var(--cml-color-secondary);
     }
 
     :host([color="tertiary"]) {
       --cml-scifi-accent: var(--cml-color-tertiary);
-      --cml-scifi-bracket: var(--cml-color-tertiary);
     }
 
     .hud-container {
@@ -74,43 +77,10 @@ export class CamelotScifiOutlineButton extends LitElement {
       transform: translateX(100%);
     }
 
-    /* 角落括號 (L-Brackets) */
-    .bracket {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border: 2px solid var(--cml-scifi-bracket);
-      transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-      pointer-events: none;
-      opacity: 0;
-    }
-
-    .top-left { top: 0; left: 0; border-right: none; border-bottom: none; transform: translate(-10px, -10px); }
-    .top-right { top: 0; right: 0; border-left: none; border-bottom: none; transform: translate(10px, -10px); }
-    .bottom-left { bottom: 0; left: 0; border-right: none; border-top: none; transform: translate(-10px, 10px); }
-    .bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; transform: translate(10px, 10px); }
-
-    /* Hover 鎖定動畫 (Lock-on) */
-    .hud-container:hover .bracket {
-      transform: translate(0, 0);
-      opacity: 1;
-      filter: drop-shadow(0 0 5px var(--cml-scifi-bracket));
-    }
-
-    .hud-container:hover .top-left { transform: translate(2px, 2px); }
-    .hud-container:hover .top-right { transform: translate(-2px, 2px); }
-    .hud-container:hover .bottom-left { transform: translate(2px, -2px); }
-    .hud-container:hover .bottom-right { transform: translate(-2px, -2px); }
-
     /* 點擊效果 */
     button:active:not(:disabled) {
       background-color: color-mix(in srgb, var(--cml-scifi-accent), transparent 80%);
       box-shadow: 0 0 20px color-mix(in srgb, var(--cml-scifi-accent), transparent 50%);
-    }
-
-    .hud-container:active .bracket {
-      transform: scale(0.8) translate(0, 0);
-      opacity: 1;
     }
 
     button:disabled {
@@ -128,11 +98,17 @@ export class CamelotScifiOutlineButton extends LitElement {
 
   render() {
     return html`
-      <div class="hud-container">
-        <div class="bracket top-left"></div>
-        <div class="bracket top-right"></div>
-        <div class="bracket bottom-left"></div>
-        <div class="bracket bottom-right"></div>
+      <div 
+        class="hud-container"
+        @mouseenter=${() => this._isHovered = true}
+        @mouseleave=${() => this._isHovered = false}
+        @mousedown=${() => this._isPressed = true}
+        @mouseup=${() => this._isPressed = false}
+      >
+        <camelot-scifi-reticle 
+          .active=${this._isHovered || this._isPressed}
+          .color=${this.color}
+        ></camelot-scifi-reticle>
         
         <button ?disabled="${this.disabled}">
           <span class="label-text">${this.label}</span>
