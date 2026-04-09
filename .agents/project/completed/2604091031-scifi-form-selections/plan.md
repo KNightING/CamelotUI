@@ -1,8 +1,7 @@
 # Plan: 2604091031-scifi-form-selections
-
 - Created: 2026-04-09
 - Branch: N/A
-- Completed: [Wait for Finish]
+- Completed: 2026-04-09
 
 ## Goals
 實作 Section 3「Form Selections」中所有元件的 Sci-fi HUD 風格版本，包括 Switch, Radio, Checkbox 及其群組。

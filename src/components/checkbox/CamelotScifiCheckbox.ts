@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import '../label/CamelotLabel';
+import { customElement, property, state } from 'lit/decorators.js';
+import '../scifi/CamelotScifiReticle';
 
 /**
  * <CamelotScifiCheckbox>
@@ -21,6 +21,9 @@ export class CamelotScifiCheckbox extends LitElement {
   @property({ type: String })
   color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
+  @state()
+  private _isHovered: boolean = false;
+
   static styles = css`
     :host {
       display: inline-flex;
@@ -28,7 +31,11 @@ export class CamelotScifiCheckbox extends LitElement {
       cursor: pointer;
       user-select: none;
       font-family: 'Share Tech Mono', monospace;
+      --cml-scifi-color: var(--cml-color-primary);
     }
+
+    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
+    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
 
     .container {
       display: flex;
@@ -36,17 +43,18 @@ export class CamelotScifiCheckbox extends LitElement {
       padding: 6px 12px;
       gap: 12px;
       transition: all 0.2s;
+      position: relative;
     }
 
     .container:hover:not(.disabled) {
-      background: rgba(0, 243, 255, 0.05);
+      background: color-mix(in srgb, var(--cml-scifi-color), transparent 95%);
     }
 
     .checkbox-box {
       position: relative;
       width: 18px;
       height: 18px;
-      border: 1px solid rgba(0, 243, 255, 0.2);
+      border: 1px solid color-mix(in srgb, var(--cml-scifi-color), transparent 80%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -61,7 +69,7 @@ export class CamelotScifiCheckbox extends LitElement {
       position: absolute;
       width: 4px;
       height: 100%;
-      border-color: rgba(0, 243, 255, 0.4);
+      border-color: color-mix(in srgb, var(--cml-scifi-color), transparent 60%);
       border-style: solid;
       transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     }
@@ -76,18 +84,18 @@ export class CamelotScifiCheckbox extends LitElement {
     }
 
     .checked .checkbox-box::before, .checked .checkbox-box::after {
-      border-color: var(--cml-color-primary, #00f3ff);
-      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+      border-color: var(--cml-scifi-color);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--cml-scifi-color), transparent 80%);
     }
 
     /* Checked Indicator: Digital Block */
     .indicator {
       width: 10px;
       height: 10px;
-      background: var(--cml-color-primary, #00f3ff);
+      background: var(--cml-scifi-color);
       transform: scale(0);
       transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-      box-shadow: 0 0 15px var(--cml-color-primary, #00f3ff);
+      box-shadow: 0 0 15px var(--cml-scifi-color);
       position: relative;
     }
 
@@ -112,21 +120,6 @@ export class CamelotScifiCheckbox extends LitElement {
       100% { top: 100%; }
     }
 
-    /* Color Variants */
-    .secondary .checkbox-box::before, .secondary .checkbox-box::after { border-color: rgba(var(--cml-color-secondary-rgb), 0.4); }
-    .secondary.checked .checkbox-box::before, .secondary.checked .checkbox-box::after { border-color: var(--cml-color-secondary); }
-    .secondary .indicator { 
-      background: var(--cml-color-secondary);
-      box-shadow: 0 0 15px var(--cml-color-secondary);
-    }
-
-    .tertiary .checkbox-box::before, .tertiary .checkbox-box::after { border-color: rgba(var(--cml-color-tertiary-rgb), 0.4); }
-    .tertiary.checked .checkbox-box::before, .tertiary.checked .checkbox-box::after { border-color: var(--cml-color-tertiary); }
-    .tertiary .indicator { 
-      background: var(--cml-color-tertiary);
-      box-shadow: 0 0 15px var(--cml-color-tertiary);
-    }
-
     .label-text {
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -137,7 +130,7 @@ export class CamelotScifiCheckbox extends LitElement {
 
     .checked .label-text {
       opacity: 1;
-      text-shadow: 0 0 5px var(--cml-color-primary);
+      text-shadow: 0 0 5px var(--cml-scifi-color);
     }
 
     .disabled {
@@ -145,6 +138,11 @@ export class CamelotScifiCheckbox extends LitElement {
       cursor: not-allowed;
       pointer-events: none;
       filter: grayscale(1);
+    }
+
+    /* Reticle integration */
+    camelot-scifi-reticle {
+      inset: 2px;
     }
   `;
 
@@ -163,7 +161,14 @@ export class CamelotScifiCheckbox extends LitElement {
       <div 
         class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
         @click="${this._toggle}"
+        @mouseenter="${() => this._isHovered = true}"
+        @mouseleave="${() => this._isHovered = false}"
       >
+        <camelot-scifi-reticle 
+          ?active="${this._isHovered}" 
+          .color="${this.color}"
+        ></camelot-scifi-reticle>
+
         <div class="checkbox-box">
           <div class="indicator"></div>
         </div>

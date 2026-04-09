@@ -98,6 +98,12 @@ trigger: always_on
 - [ ] 更新 `project.md` 紀錄
 ```
 
+### completed.md 基礎格式
+```markdown
+# Completed Plans
+- [YYMMDDHHmm-description](./plans/folder/plan.md): Brief description - Completed: YYYY-MM-DD HH:mm
+```
+
 ---
 
 ## 📋 全域規則 (Global Rules)

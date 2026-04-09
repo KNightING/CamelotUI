@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import '../label/CamelotLabel';
+import { customElement, property, state } from 'lit/decorators.js';
+import '../scifi/CamelotScifiReticle';
 
 /**
  * <CamelotScifiRadio>
@@ -21,12 +21,19 @@ export class CamelotScifiRadio extends LitElement {
   @property({ type: String })
   color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
+  @state()
+  private _isHovered: boolean = false;
+
   static styles = css`
     :host {
       display: inline-block;
       cursor: pointer;
       font-family: 'Share Tech Mono', monospace;
+      --cml-scifi-color: var(--cml-color-primary);
     }
+
+    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
+    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
 
     .container {
       display: flex;
@@ -36,17 +43,18 @@ export class CamelotScifiRadio extends LitElement {
       min-height: 36px;
       box-sizing: border-box;
       transition: all 0.2s;
+      position: relative;
     }
 
     .container:hover:not(.disabled) {
-      background: rgba(0, 243, 255, 0.05);
+      background: color-mix(in srgb, var(--cml-scifi-color), transparent 95%);
     }
 
     .radio-outer {
       position: relative;
       width: 18px;
       height: 18px;
-      border: 1px solid rgba(0, 243, 255, 0.3);
+      border: 1px solid color-mix(in srgb, var(--cml-scifi-color), transparent 70%);
       transform: rotate(45deg);
       transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
       display: flex;
@@ -62,7 +70,7 @@ export class CamelotScifiRadio extends LitElement {
       position: absolute;
       width: 4px;
       height: 4px;
-      border-color: var(--cml-color-primary, #00f3ff);
+      border-color: var(--cml-scifi-color);
       border-style: solid;
       opacity: 0;
       transition: opacity 0.3s;
@@ -80,8 +88,8 @@ export class CamelotScifiRadio extends LitElement {
     }
 
     .checked .radio-outer {
-      border-color: var(--cml-color-primary, #00f3ff);
-      box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+      border-color: var(--cml-scifi-color);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--cml-scifi-color), transparent 70%);
     }
     
     .checked .radio-outer::before, .checked .radio-outer::after {
@@ -89,34 +97,17 @@ export class CamelotScifiRadio extends LitElement {
     }
 
     .radio-inner {
-      width: 0;
-      height: 0;
-      background-color: var(--cml-color-primary, #00f3ff);
-      transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-      box-shadow: 0 0 10px var(--cml-color-primary, #00f3ff);
+      width: 10px;
+      height: 10px;
+      background-color: var(--cml-scifi-color);
+      transform: scale(0);
+      transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+      box-shadow: 0 0 10px var(--cml-scifi-color);
     }
 
     .checked .radio-inner {
-      width: 10px;
-      height: 10px;
+      transform: scale(1);
     }
-
-    /* Secondary/Tertiary Colors */
-    .secondary .radio-outer { border-color: rgba(var(--cml-color-secondary-rgb), 0.3); }
-    .secondary.checked .radio-outer { border-color: var(--cml-color-secondary); }
-    .secondary .radio-inner { 
-      background-color: var(--cml-color-secondary);
-      box-shadow: 0 0 10px var(--cml-color-secondary);
-    }
-    .secondary .radio-outer::before, .secondary .radio-outer::after { border-color: var(--cml-color-secondary); }
-
-    .tertiary .radio-outer { border-color: rgba(var(--cml-color-tertiary-rgb), 0.3); }
-    .tertiary.checked .radio-outer { border-color: var(--cml-color-tertiary); }
-    .tertiary .radio-inner { 
-      background-color: var(--cml-color-tertiary);
-      box-shadow: 0 0 10px var(--cml-color-tertiary);
-    }
-    .tertiary .radio-outer::before, .tertiary .radio-outer::after { border-color: var(--cml-color-tertiary); }
 
     .label-text {
       text-transform: uppercase;
@@ -128,7 +119,7 @@ export class CamelotScifiRadio extends LitElement {
 
     .checked .label-text {
       opacity: 1;
-      text-shadow: 0 0 5px var(--cml-color-primary);
+      text-shadow: 0 0 5px var(--cml-scifi-color);
     }
 
     .disabled {
@@ -136,6 +127,11 @@ export class CamelotScifiRadio extends LitElement {
       opacity: 0.3;
       pointer-events: none;
       filter: grayscale(1);
+    }
+
+    /* Reticle adjustment */
+    camelot-scifi-reticle {
+      inset: 2px;
     }
   `;
 
@@ -154,7 +150,14 @@ export class CamelotScifiRadio extends LitElement {
       <div 
         class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
         @click="${this._toggle}"
+        @mouseenter="${() => this._isHovered = true}"
+        @mouseleave="${() => this._isHovered = false}"
       >
+        <camelot-scifi-reticle 
+          ?active="${this._isHovered}" 
+          .color="${this.color}"
+        ></camelot-scifi-reticle>
+        
         <div class="radio-outer">
           <div class="radio-inner"></div>
         </div>

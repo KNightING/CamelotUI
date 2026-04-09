@@ -1,6 +1,7 @@
 import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { CamelotBaseDrawer } from './CamelotBaseDrawer';
+import '../scifi/CamelotScifiReticle';
 
 /**
  * <CamelotScifiDrawer>
@@ -20,11 +21,11 @@ export class CamelotScifiDrawer extends CamelotBaseDrawer {
       }
 
       .drawer-content {
-        background: rgba(5, 8, 10, 0.95);
+        background: color-mix(in srgb, var(--cml-color-background), black 20%);
         backdrop-filter: blur(20px);
         border: 1px solid var(--cml-scifi-accent);
         color: var(--cml-scifi-accent);
-        font-family: var(--cml-font-family);
+        font-family: 'Share Tech Mono', monospace;
         overflow: hidden;
         position: relative;
         box-shadow: inset 0 0 30px color-mix(in srgb, var(--cml-scifi-primary), transparent 90%), 0 0 40px rgba(0, 0, 0, 0.5);
@@ -71,7 +72,7 @@ export class CamelotScifiDrawer extends CamelotBaseDrawer {
         align-items: center;
         justify-content: space-between;
         z-index: 3;
-        background: rgba(0, 243, 255, 0.05);
+        background: color-mix(in srgb, var(--cml-scifi-primary), transparent 95%);
       }
 
       .headline-wrapper {
@@ -99,7 +100,7 @@ export class CamelotScifiDrawer extends CamelotBaseDrawer {
         background: transparent;
         border: 1px solid var(--cml-scifi-accent);
         color: var(--cml-scifi-accent);
-        width: 40px;
+        width: 48px;
         height: 32px;
         display: flex;
         align-items: center;
@@ -107,7 +108,7 @@ export class CamelotScifiDrawer extends CamelotBaseDrawer {
         cursor: pointer;
         transition: all 0.2s;
         font-family: inherit;
-        clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+        clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
       }
 
       .close-btn:hover {
@@ -126,12 +127,12 @@ export class CamelotScifiDrawer extends CamelotBaseDrawer {
 
       footer {
         padding: 16px 24px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid color-mix(in srgb, var(--cml-scifi-accent), transparent 90%);
         display: flex;
         justify-content: flex-end;
         gap: 12px;
         z-index: 3;
-        background: rgba(0, 243, 255, 0.02);
+        background: color-mix(in srgb, var(--cml-scifi-primary), transparent 98%);
       }
 
       /* HUD 數據點綴 */
@@ -149,19 +150,10 @@ export class CamelotScifiDrawer extends CamelotBaseDrawer {
       .bl { bottom: 8px; left: 8px; }
       .br { bottom: 8px; right: 8px; }
 
-      /* 四角 L-型括號 (裝飾) */
-      .bracket {
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        border: 2px solid var(--cml-scifi-primary);
-        z-index: 4;
+      /* 四角 Reticle 鎖定感 */
+      camelot-scifi-reticle {
+        inset: 0;
       }
-
-      .b-tl { top: 0; left: 0; border-right: none; border-bottom: none; }
-      .b-tr { top: 0; right: 0; border-left: none; border-bottom: none; }
-      .b-bl { bottom: 0; left: 0; border-right: none; border-top: none; }
-      .b-br { bottom: 0; right: 0; border-left: none; border-top: none; }
     `
   ];
 
@@ -175,10 +167,7 @@ export class CamelotScifiDrawer extends CamelotBaseDrawer {
       <div class="hud-marker bl">COORD_X: 12.049 // Y: 88.22</div>
       <div class="hud-marker br">SECURE_LINK // ON</div>
 
-      <div class="bracket b-tl"></div>
-      <div class="bracket b-tr"></div>
-      <div class="bracket b-bl"></div>
-      <div class="bracket b-br"></div>
+      <camelot-scifi-reticle active></camelot-scifi-reticle>
 
       <header>
         <div class="headline-wrapper">

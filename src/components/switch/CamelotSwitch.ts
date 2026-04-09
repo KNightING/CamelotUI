@@ -40,12 +40,12 @@ export class CamelotSwitch extends CamelotBaseElement {
     switch (this._activeStyle) {
       case 'scifi':
         return html`
-          <camelot-scifi-scifi-switch 
+          <camelot-scifi-switch-impl 
             ?checked=${this.checked} 
             ?disabled=${this.disabled}
             .color=${this.color}
             @change=${this._handleChanged}
-          ></camelot-scifi-scifi-switch>
+          ></camelot-scifi-switch-impl>
         `;
       case 'soft':
         return html`
