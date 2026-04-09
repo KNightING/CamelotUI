@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialSwitch.ts';
 import './CamelotCupertinoSwitch.ts';
 import './CamelotSoftSwitch.ts';
+import './CamelotScifiSwitch.ts';
 
 /**
  * <CamelotSwitch>
@@ -37,6 +38,15 @@ export class CamelotSwitch extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-scifi-switch 
+            ?checked=${this.checked} 
+            ?disabled=${this.disabled}
+            .color=${this.color}
+            @change=${this._handleChanged}
+          ></camelot-scifi-scifi-switch>
+        `;
       case 'soft':
         return html`
           <camelot-soft-switch 

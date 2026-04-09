@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialRadio.ts';
 import './CamelotCupertinoRadio.ts';
 import './CamelotSoftRadio.ts';
+import './CamelotScifiRadio.ts';
 
 /**
  * <CamelotRadio>
@@ -46,6 +47,16 @@ export class CamelotRadio extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-radio-impl 
+            ?checked=${this.checked} 
+            ?disabled=${this.disabled}
+            .label=${this.label}
+            .color=${this.color}
+            @change=${this._handleChanged}
+          ></camelot-scifi-radio-impl>
+        `;
       case 'soft':
         return html`
           <camelot-soft-radio 

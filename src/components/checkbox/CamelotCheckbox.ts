@@ -6,6 +6,7 @@ import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import './CamelotMaterialCheckbox.ts';
 import './CamelotCupertinoCheckbox.ts';
 import './CamelotSoftCheckbox.ts';
+import './CamelotScifiCheckbox.ts';
 
 /**
  * <CamelotCheckbox>
@@ -56,6 +57,16 @@ export class CamelotCheckbox extends CamelotBaseElement {
 
   render() {
     switch (this._activeStyle) {
+      case 'scifi':
+        return html`
+          <camelot-scifi-checkbox-impl 
+            .label="${this.label}" 
+            .checked="${this.checked}"
+            .color="${this.color}"
+            ?disabled="${this.disabled}"
+            @change="${this._handleChanged}">
+          </camelot-scifi-checkbox-impl>
+        `;
       case 'cupertino':
         return html`
           <camelot-cupertino-checkbox 

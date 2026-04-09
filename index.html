@@ -15,7 +15,7 @@
       background-color: var(--cml-color-background);
       color: var(--cml-color-on-background);
       padding: 48px 24px;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       transition: background-color 0.3s, color 0.3s;
     }
@@ -32,8 +32,7 @@
     }
 
     .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
       margin-top: 24px;
     }
@@ -334,6 +333,30 @@
             <camelot-checkbox label="Personal Ads" value="ads" checked></camelot-checkbox>
           </camelot-checkbox-group>
           <div class="value-display">Selected: <span id="val-cb-s">ads</span></div>
+        </div>
+      </camelot-theme>
+
+      <!-- Sci-fi HUD Style Groups -->
+      <camelot-theme mode="scifi">
+        <div class="style-column" style="background-color: #05080a; border: 1px solid var(--cml-color-primary);">
+          <div class="style-name" style="color: var(--cml-color-primary); border-bottom-color: var(--cml-color-primary);">Sci-fi HUD</div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 0.75rem; color: var(--cml-color-primary); opacity: 0.6; font-family: 'Share Tech Mono';">UNIT_POWER_STATUS</div>
+            <camelot-switch checked label="POWER_CORE_ACTIVE"></camelot-switch>
+          </div>
+
+          <camelot-radio-group label="MISSION_TYPE" value="scout" id="radio-group-sci-form" style="--cml-color-on-surface-variant: var(--cml-color-primary);">
+            <camelot-radio label="RECON_SCOUT" value="scout"></camelot-radio>
+            <camelot-radio label="TACTICAL_STRIKE" value="strike"></camelot-radio>
+          </camelot-radio-group>
+          <div class="value-display" style="font-family: 'Share Tech Mono';">TARGET: <span id="val-radio-sci-form">scout</span></div>
+
+          <camelot-checkbox-group label="PERIPHERAL_SYNC" orientation="vertical" id="cb-group-sci-form" style="--cml-color-on-surface-variant: var(--cml-color-primary);">
+            <camelot-checkbox label="HUD_OVERLAY" value="hud" checked></camelot-checkbox>
+            <camelot-checkbox label="AUTOPILOT_V2" value="auto"></camelot-checkbox>
+          </camelot-checkbox-group>
+          <div class="value-display" style="font-family: 'Share Tech Mono';">SYNC_LOG: <span id="val-cb-sci-form">hud</span></div>
         </div>
       </camelot-theme>
     </div>
@@ -720,6 +743,8 @@
     setupGroup('cb-group-c', 'val-cb-c')
     setupGroup('radio-group-s', 'val-radio-s')
     setupGroup('cb-group-s', 'val-cb-s')
+    setupGroup('radio-group-sci-form', 'val-radio-sci-form')
+    setupGroup('cb-group-sci-form', 'val-cb-sci-form')
 
     // Dialog Event Logic
     const dlgActionDisplay = document.getElementById('dlg-action')
