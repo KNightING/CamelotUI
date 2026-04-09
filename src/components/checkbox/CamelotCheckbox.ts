@@ -3,10 +3,10 @@ import { customElement, property } from 'lit/decorators.js';
 import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 // 匯入各風格元件
-import './CamelotMaterialCheckbox.ts';
-import './CamelotCupertinoCheckbox.ts';
-import './CamelotSoftCheckbox.ts';
-import './CamelotScifiCheckbox.ts';
+import './CamelotMaterialCheckbox';
+import './CamelotCupertinoCheckbox';
+import './CamelotSoftCheckbox';
+import './CamelotScifiCheckbox';
 
 /**
  * <CamelotCheckbox>

@@ -3,10 +3,10 @@ import { customElement, property } from 'lit/decorators.js';
 import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 // 匯入樣式元件
-import './CamelotMaterialBadge.ts';
-import './CamelotCupertinoBadge.ts';
-import './CamelotSoftBadge.ts';
-import './CamelotScifiBadge.ts';
+import './CamelotMaterialBadge';
+import './CamelotCupertinoBadge';
+import './CamelotSoftBadge';
+import './CamelotScifiBadge';
 
 /**
  * <CamelotBadge>

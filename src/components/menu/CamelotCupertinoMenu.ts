@@ -105,7 +105,7 @@ export class CamelotCupertinoMenu extends CamelotBaseMenu {
     `
   ];
 
-  protected renderArrow(isExpanded: boolean) {
+  protected renderArrow() {
     return html`
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
         <path d="m9 18 6-6-6-6"/>

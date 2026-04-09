@@ -3,10 +3,10 @@ import { customElement, property } from 'lit/decorators.js';
 import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 // 確保風格元件已載入
-import './CamelotMaterialRadio.ts';
-import './CamelotCupertinoRadio.ts';
-import './CamelotSoftRadio.ts';
-import './CamelotScifiRadio.ts';
+import './CamelotMaterialRadio';
+import './CamelotCupertinoRadio';
+import './CamelotSoftRadio';
+import './CamelotScifiRadio';
 
 /**
  * <CamelotRadio>

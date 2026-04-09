@@ -1,4 +1,2 @@
 # Current Plans
-- [ ] [2604091153-workflow-refinement-v2](./plans/2604091153-workflow-refinement-v2/plan.md): 優化 Phase 0 自動清理優先級與工具感知驗證。
-- [ ] [2604091140-scifi-components-implementation](./plans/2604091140-scifi-components-implementation/plan.md): 實作 Select, Input, Badges, Cards, Popups, Tabs 的 Sci-fi HUD 風格。
-- [ ] [2604091354-scifi-refinement](./plans/2604091354-scifi-refinement/plan.md): 修正 Scifi 元件顯示問題與強化視覺效果（含切角邊框修復）。
+- [ ] [2604091153-workflow-refinement-v2](./plans/2604091153-workflow-refinement-v2/plan.md): [.agents/rules] 優化精準工作流規則，強化 Phase 0 脈絡檢索流程並強制相對路徑，以減少計畫碎裂化並提升檢索準確度。

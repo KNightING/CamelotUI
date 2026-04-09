@@ -1,37 +1,37 @@
 # Project: CamelotUI
 
 ## 目標 (Goals)
-建立一套美觀、現代化且具備高度彈性的 Web UI 元件庫，支援多種風格切換（Material, Cupertino, Soft UI）。
+建立一套美觀、極致且具備動態效果的 Web UI 組件庫，支持多種視覺風格：Material, Cupertino, Soft UI, Sci-fi HUD。
 
 ## 核心技術棧 (Core Tech Stack)
 - **Framework**: Lit
 - **Logic**: TypeScript
 - **Styling**: Vanilla CSS (透過 Lit `css` 標籤)
-- **Styling tokens**: CSS Variables (定義於 `src/styles/tokens.css` 與主題注入)
+- **Styling tokens**: CSS Variables (定義於 `src/styles/tokens.css`)
 
 ## 架構說明 (Architecture)
-- **Base Components**: 位於 `src/components/base/`，提供風格偵測與基準邏輯。
-- **Component Facades**: 位於 `src/components/` 對應目錄下，作為對外統一標籤（如 `<camelot-button>`）。
-- **Style Components**: 底層實作，依據主題（Material, Cupertino, Soft）有不同的實作文件。
-- **Theme System**: 位於 `src/styles/themes.ts` 與 `src/components/theme/`，負責色彩與排版標記的注入。
+- **Base Components**: 位於 `src/components/base/`，為抽象底層組件。
+- **Component Facades**: 位於 `src/components/` 根目錄下，作為對外介面（如 `<camelot-button>`）。
+- **核心組件庫 (Core Components)**:
+    - **基礎框架 (Foundation)**: `CamelotScifiFrame` (提供邊框、內切角、掃描線、發光點等 Sci-Fi 視覺基礎)。
+    - **按鈕 (Button)**: `CamelotButton`, `CamelotScifiFilledButton` (支持 Active 狀態填充、adaptive 寬度等)。
+    - **表單 (Forms)**: `CamelotInput`, `CamelotSelect`, `CamelotCheckbox`, `CamelotRadio`, `CamelotSwitch` (適配 Sci-Fi / Standard 風格變體)。
+    - **數據展示 (Data)**: `CamelotBadge`, `CamelotCard`, `CamelotTabs` (強化對比與 HUD 風格)。
+    - **反饋與對話 (Feedback)**: `CamelotConfirmDialog`, `CamelotNotification` (支持動態滑入與 Sci-Fi 氛圍裝飾)。
+- **Theme System**: 位於 `src/styles/themes.ts` 與 `src/components/theme/`，統一管理不同模式的色彩。
 
 ## 現有功能模組 (Existing Modules)
 - **Form Selections**:
-    - **Radio Group & Radio**: 核心單選元件。Sci-fi 風格採用菱形框架與中心發光點設計，並整合 `<camelot-scifi-reticle>` 實現選中鎖定效果。
-    - **Checkbox Group & Checkbox**: 多選組件。Sci-fi 風格使用方括號 `[ ]` 框架與內部掃描線脈衝表現。
-    - **Switch**: 開關組件。Sci-fi 風格捨棄切角改用標準矩形（依用戶需求），配備八角形滑塊與橫向掃描線。
-    - **Input & Select**: 數據輸入組件。採用八角形切角、數據掃描線背景，並在獲取焦點時觸發動態 UI 掃描特效。
-    - **Refinement**: 所有 Sci-fi 元件均已 Token 化，嚴格遵循主題顏色系統 (`--cml-color-primary` 等)，並透過 `color-mix` 處理透明與發光度。
+    - **Radio & Checkbox**: Sci-Fi 風格適配，使用特殊標線 (Reticle) 與掃描填充效果。
+    - **Input & Select**: 具備高對比度 (On-Colors) 與 Filled 狀態感知，確保在發光背景下依然清晰。
 - **UI Components (Sci-fi HUD Suite)**:
-    - **IconButton**: 整合追蹤準星 (Reticle)，滑鼠懸停時觸發光學鎖定與掃描線脈衝。
-    - **Badge**: 高透光 HUD 標籤，具備動態狀態指示器與呼吸發光效果。
-    - **Card**: 特殊數據面板風格，側邊標註序號感應器與網格背景。
-    - **Tabs**: 底線掃描線指示器，整合準星縮放反饋。
-    - **ConfirmDialog**: 八角形 HUD 重點提示框架，配備背景動態數據模糊質感。
-- **Theme**: 支援動態主題切換。
+    - **Architecture**: 採用 `Frame-first` 設計，所有 Sci-Fi 組件均封裝於 `CamelotScifiFrame` 中。
+    - **IconButton**: 整合十字絲標線動態效果。
+    - **Tabs/Card/Badge**: 強制遵循 HUD 視覺語言，支持狀態填充。
 
 ## 全域規則 (Global Rules)
 - 遵循 Material 3, iOS (Cupertino), Soft UI 與 Sci-fi HUD 設計規範。
 - 使用 `CamelotBaseElement` 作為基礎類別。
-- 嚴格遵守「精準工作流」記錄所有開發活動。
-- **歸檔原則**：完成後的計畫必須進行「扁平化合併」，將 `plan.md` 與 `tasks.md` 整合為單一歷史文件，以維護文件庫的精簡與可檢索性。
+- **精確工作流 (Precision Workflow)**：所有開發任務必須嚴格遵循 `.agents/rules/precision-workflow-guide.md`。
+- **相對路徑優先**：計畫文件中一律使用相對於專案根目錄的路徑。
+- **歸檔規範**：任務完成時強制進行計畫歸檔與大腦更新，保持 `project.md` 紀錄準確。

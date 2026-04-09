@@ -1,7 +1,7 @@
 # Plan: 2604091354 - Sci-fi HUD Refinement & Repairs
 - Created: 2026-04-09
 - Branch: N/A
-- Completed: [Wait for Finish]
+- Completed: 2026-04-09
 
 ## Goals
 1. 修復 `CamelotTabs` 與 `CamelotConfirmDialog` 的顯示問題（Facade 邏輯缺失）。
@@ -18,3 +18,18 @@
 - `src/components/select/CamelotScifiSelect.ts`
 - `src/components/input/CamelotScifiInput.ts`
 - `src/components/card/CamelotScifiCard.ts`
+
+## Task Execution History
+- [x] 修復門面元件 (Facades)
+    - [x] 更新 `CamelotTabs.ts`: 加入 Scifi case
+    - [x] 更新 `CamelotConfirmDialog.ts`: 加入 Scifi 引用與 case
+    - [x] 更新 `CamelotSelect.ts`: 加入 Scifi case
+- [x] 視覺增強與邊框修復
+    - [x] `CamelotScifiSelect.ts`: 強化 HUD 裝飾與邊框 (已完成二角切與狀態同步)
+    - [x] `CamelotScifiInput.ts`: 修正切角邊框並加入 Focus 效果
+    - [x] `CamelotScifiCard.ts`: 修正切角邊框
+    - [x] `CamelotScifiBadge.ts`: 修正切角邊框 (Outlined)
+- [x] 驗證與最終整合 (Recovery)
+    - [x] 修復靜態屬性綁定 (Select options, Tabs items)
+    - [x] 修復事件監聽與 Dialog 觸發
+    - [x] 驗證 Tabs 完整顯示與 Focus 發光效果

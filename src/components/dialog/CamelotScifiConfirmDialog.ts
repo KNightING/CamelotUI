@@ -1,169 +1,105 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import '../scifi/CamelotScifiReticle';
-import '../button/filled/CamelotButton';
+import { CamelotScifiBase } from '../scifi/CamelotScifiBase';
+import '../scifi/CamelotScifiFrame';
 
 /**
  * <CamelotScifiConfirmDialog>
  * 日系科幻風格 (Sci-fi HUD) 的確認對話框實作。
- * 特色：八角形框架、數位掃描解碼感、Reticle 鎖定按鈕。
+ * 已優化：使用 CamelotScifiBase 與 CamelotScifiFrame。
  */
 @customElement('camelot-scifi-confirm-dialog-impl')
-export class CamelotScifiConfirmDialog extends LitElement {
-  @property({ type: String }) title = '';
+export class CamelotScifiConfirmDialog extends CamelotScifiBase {
+  @property({ type: String, attribute: 'title' }) titleText = '';
   @property({ type: String }) message = '';
   @property({ type: String }) confirmText = 'CONFIRM';
   @property({ type: String }) cancelText = 'ABORT';
-  @property({ type: String }) color: 'primary' | 'secondary' | 'tertiary' = 'primary';
-  @property({ type: Boolean }) open = false;
+  @property({ type: Boolean, reflect: true }) open = false;
 
-  static styles = css`
-    :host {
-      display: block;
-      font-family: 'Share Tech Mono', monospace;
-      --cml-scifi-color: var(--cml-color-primary);
-    }
+  static styles = [
+    css`
+      :host {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+      }
+      :host([open]) {
+        display: flex;
+      }
+      .dialog-window {
+        width: 100%;
+        max-width: 450px;
+        margin: 20px;
+      }
+      .dialog-body {
+        padding: 24px;
+      }
+      .dialog-header {
+        margin-bottom: 20px;
+        border-bottom: 1px solid color-mix(in srgb, var(--cml-scifi-color) 30%, transparent);
+        padding-bottom: 10px;
+      }
+      .dialog-title {
+        font-family: var(--cml-font-family-mono, monospace);
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--cml-scifi-color);
+        margin: 0;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .dialog-title::before {
+        content: '>';
+        animation: blink 1s step-end infinite;
+      }
+      .dialog-message {
+        color: #fff;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        font-family: var(--cml-font-family);
+      }
+      .dialog-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: flex-end;
+      }
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+    `
+  ];
 
-    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
-    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* 八角形框架容器 */
-    .dialog {
-      position: relative;
-      width: 450px;
-      max-width: 90vw;
-      background: #05080a;
-      border: 1px solid var(--cml-scifi-color);
-      padding: 32px;
-      transform: scale(0.9) translateY(20px);
-      transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-      box-shadow: 0 0 30px rgba(0,0,0,1), 0 0 20px color-mix(in srgb, var(--cml-scifi-color), transparent 80%);
-      /* 八角形切角 */
-      clip-path: polygon(
-        20px 0, calc(100% - 20px) 0,
-        100% 20px, 100% calc(100% - 20px),
-        calc(100% - 20px) 100%, 20px 100%,
-        0 calc(100% - 20px), 0 20px
-      );
-    }
-
-    .overlay.open .dialog {
-      transform: scale(1) translateY(0);
-    }
-
-    /* 頂部掃描線裝飾 */
-    .dialog::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 2px;
-      background: var(--cml-scifi-color);
-      box-shadow: 0 0 15px var(--cml-scifi-color);
-    }
-
-    .header {
-      margin-bottom: 16px;
-      border-bottom: 1px dashed color-mix(in srgb, var(--cml-scifi-color), transparent 60%);
-      padding-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 1.25rem;
-      color: var(--cml-scifi-color);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .status-tag {
-      font-size: 0.6rem;
-      color: var(--cml-scifi-color);
-      border: 1px solid var(--cml-scifi-color);
-      padding: 2px 6px;
-      opacity: 0.8;
-    }
-
-    .content {
-      margin-bottom: 32px;
-      line-height: 1.6;
-      color: #fff;
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    .actions {
-      display: flex;
-      gap: 16px;
-      justify-content: flex-end;
-    }
-
-    /* 偽元素：裝飾數字 */
-    .dialog-decor {
-      position: absolute;
-      bottom: 8px;
-      left: 12px;
-      font-size: 0.7rem;
-      color: var(--cml-scifi-color);
-      opacity: 0.3;
-    }
-  `;
-
-  private _onConfirm() {
-    this.dispatchEvent(new CustomEvent('confirm', { bubbles: true, composed: true }));
+  private _close(confirmed: boolean) {
     this.open = false;
-  }
-
-  private _onCancel() {
-    this.dispatchEvent(new CustomEvent('cancel', { bubbles: true, composed: true }));
-    this.open = false;
+    this.dispatchEvent(new CustomEvent('close', {
+      detail: { confirmed },
+      bubbles: true,
+      composed: true
+    }));
   }
 
   render() {
     return html`
-      <div class="overlay ${this.open ? 'open' : ''}">
-        <div class="dialog">
-          <div class="header">
-            <h2>${this.title || 'SYSTEM_PROMPT'}</h2>
-            <div class="status-tag">SECURE_LINK</div>
+      <div class="dialog-window">
+        <camelot-scifi-frame .color="${this.color}" ?showGrid="${true}">
+          <div class="dialog-body">
+            <header class="dialog-header">
+              <h2 class="dialog-title">${this.titleText}</h2>
+            </header>
+            <p class="dialog-message">${this.message}</p>
+            <div class="dialog-actions">
+              <camelot-button variant="text" @click="${() => this._close(false)}">${this.cancelText}</camelot-button>
+              <camelot-button style="--cml-color-primary: var(--cml-scifi-color)" @click="${() => this._close(true)}">${this.confirmText}</camelot-button>
+            </div>
           </div>
-          <div class="content">
-            ${this.message}
-          </div>
-          <div class="actions">
-            <camelot-button 
-              label="${this.cancelText}" 
-              color="secondary" 
-              @click="${this._onCancel}"
-            ></camelot-button>
-            <camelot-button 
-              label="${this.confirmText}" 
-              color="${this.color}" 
-              @click="${this._onConfirm}"
-            ></camelot-button>
-          </div>
-          <div class="dialog-decor">0x7F - CODE_AB72</div>
-        </div>
+        </camelot-scifi-frame>
       </div>
     `;
   }

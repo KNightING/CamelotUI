@@ -3,10 +3,10 @@ import { customElement, property } from 'lit/decorators.js';
 import { CamelotBaseElement } from '../../base/CamelotBaseElement';
 
 // 確保風格元件已載入
-import './CamelotMaterialIconButton.ts';
-import './CamelotCupertinoIconButton.ts';
-import './CamelotSoftIconButton.ts';
-import './CamelotScifiIconButton.ts';
+import './CamelotMaterialIconButton';
+import './CamelotCupertinoIconButton';
+import './CamelotSoftIconButton';
+import './CamelotScifiIconButton';
 
 /**
  * <CamelotIconButton>

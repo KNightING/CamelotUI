@@ -3,10 +3,10 @@ import { customElement, property } from 'lit/decorators.js';
 import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 // 確保風格元件已載入
-import './CamelotMaterialInput.ts';
-import './CamelotCupertinoInput.ts';
-import './CamelotSoftInput.ts';
-import './CamelotScifiInput.ts';
+import './CamelotMaterialInput';
+import './CamelotCupertinoInput';
+import './CamelotSoftInput';
+import './CamelotScifiInput';
 
 /**
  * <CamelotInput>
@@ -41,6 +41,7 @@ export class CamelotInput extends CamelotBaseElement {
             .value=${this.value}
             .label=${this.label}
             .placeholder=${this.placeholder}
+            .color=${this.color}
             ?disabled=${this.disabled}
             @input=${(e: any) => this.value = e.target.value}
           ></camelot-scifi-input-impl>

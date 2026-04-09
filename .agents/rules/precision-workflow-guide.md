@@ -2,7 +2,7 @@
 trigger: always_on
 ---
 
-# 精確工作流程 (Precision Workflow Guide)
+# 精確工作流 (Precision Workflow Guide)
 
 所有 Agent 的開發任務必須嚴格遵守以下「精準工作流」。
 
@@ -23,64 +23,50 @@ trigger: always_on
 
 ### Phase 0: 脈絡檢索 與 自動清理 (Retrieval & Auto-Cleanup) 🔍🧹
 在開始任何行動前，**優先順序最高**的動作是：
-1. **讀取 `plans.md`**：檢查是否有被標記為 `[x]` 的已完成計畫。
-2. **優先自動歸檔**：若偵測到 `[x]`，必須**立即執行 Phase 5 (歸檔流程)**，直到 `plans.md` 中所有已完成計畫皆被清理。
-3. **讀取 `project.md`**：了解當前系統架構與技術棧。
-4. **檢查 `plans.md`**：確認是否有衝突或重複的開發中任務。
+1. **讀取 `plans.md` 與 `completed.md`**：檢查執行中計畫以及最近 3-5 個已完成計畫，以建立完整的開發脈絡。
+2. **優先自動歸檔**：若偵測到 `plans.md` 中有計畫被標記為 `[x]`，必須**立即執行 Phase 5 (歸檔流程)**。
+3. **讀取 `project.md`**：了解當前系統架構、技術棧與已實現之組件。
+4. **檢查衝突**：確認當前任務是否與現有計畫或近期變更衝突。
 5. **搜尋相關 KI**：檢查 Knowledge Items 以獲取現有模式。
 
 ### Phase 1: 任務分類與決策 (Categorization) ⚖️
-根據需求複雜度與需求關聯性決定執行路徑：
-- **需求關聯修正 (Iteration)**: 新需求是針對「剛完成」或「執行中」計畫的延續、優化或修復。
-  - 🔄 **計畫迭代流程**：不開立新計畫，直接更新現有計畫目錄下的 `plan.md` 與 `tasks.md`。
+根據需求複雜度與脈絡決定執行路徑：
+- **需求關聯修正 (Iteration)**: 新需求是針對「剛完成」或「執行中」計畫的延續、優化或修復 (包含開發後產生的 Bug)。
+  - 🔄 **計畫迭代流程**：不開立新計畫，直接重啟或更新現有計畫目錄下的 `plan.md` 與 `tasks.md`。
 - **微小變動 (Small Task)**: 僅修正錯字、添加註解或 10 行以內的獨立代碼。
-  - 🚀 *直接執行，跳過 Phase 2，但在完成時更新 `project.md`（如有需要）。*
+  - 🚀 *直接執行，跳過 Phase 2。*
 - **功能開發/重構 (Standard/Large Task)**: 涉及邏輯變更、多個文件、或新組件。
   - 🛠️ *必須啟動「全新規劃流程」。*
 
 ### Phase 2: 計畫初始化 (Initialization) 🏗️
-1. 生成計畫代號：使用當地時間 `${YYMMDDHHmm}` (西元年後兩碼+月日時分)。
+1. 生成計畫代號：使用當地時間 `${YYMMDDHHmm}`。
 2. 在 `.agents/project/plans/` 建立 `${代號}-${description}` 資料夾。
 3. **初始化 `plan.md`**: 
    - 必須包含 `Created: YYYY-MM-DD`。
+   - 所有檔案連結必須使用**相對路徑** (相對於專案根目錄)。
    - 包含 Goals, Architecture, Impact Files。
 4. **初始化 `tasks.md`**: 使用 `[ ]` (待辦), `[/]` (執行中), `[x]` (完成)。
 4. **分支管理 (Branch Management)**: 
-   - 在執行任何修改前，若評估需要開立新分支，**必須先詢問使用者**。
-   - 若使用者未明確同意開立分支，則應在當前分支持續執行計畫。
-   - 分支名稱應與計畫資料夾名稱一致，格式為：`feature/${YYMMDDHHmm}-${kebab-case-description}`。
-   - 一律紀錄執行該plan的分支在 `plan.md` 當中。
-5. **註冊計畫**：將計畫連結與簡述加入 `plans.md`，必須使用 `- [ ]` 標示。
+   - 若評估需開立新分支，**必須先詢問使用者**。
+   - 分支名稱應與計畫資料夾名稱一致。
+5. **註冊計畫**：將計畫連結與簡述加入 `plans.md`。
+   - **[重要] 摘要規則**：簡述必須包含「變更核心邏輯」、「受影響的主要組件」與「開發意圖」，以利後續檢索。
 
 ### Phase 3: 執行與雙向同步 (Execution & Sync) 🔄
 - **同步原則**: 此對話中的 `task.md` 必須是 `.agents/project/plans/${folder_name}/tasks.md` 的即時投影。
-- **每一步驟**: 完成一個子任務後，**必須同時更新**對話中的 `task.md` 與專案中的 `tasks.md`。
-- **重大發現**: 若執行中發現架構需調整，應先更新 `plan.md`。
+- **連結規範**: 所有提及的檔案連結一律使用相對路徑。
 
 ### Phase 4: 驗證 (Verification) ✅
-在宣布完成前，必須執行：
-1. **工具感知識別 (Tool Detection)**: 
-   - 檢查專案根目錄的 Lockfiles (`pnpm-lock.yaml`, `package-lock.json`, `yarn.lock`, `pyproject.toml`)。
-   - 根據識別出的工具鏈決定執行的指令（如 `pnpm lint`, `npm run lint`, `uv run`, `.\gradlew` 等）。
-2. **靜態檢查**: 使用識別出的工具執行 Lint 或編譯檢查，確保無語法錯誤。
-3. **運行測試**: 確保受影響的功能正常運作。
-4. **使用者手動測試**: 通知使用者計畫已就緒，等待使用者進行手動驗證。
-   - 若使用者提出優化建議或發現 Bug，應退回 Phase 3 執行「計畫迭代」，**嚴禁**此時開立新計畫。
-   - 使用者透過手動將 `plans.md` 的計畫項目標記為 `[x]` 來確認穩定與完成。
+1. **工具感知識別 (Tool Detection)**: 檢查 Lockfiles 並決定執行指令。
+2. **靜態檢查**: 使用識別出的工具執行 Lint 或編譯檢查。
+3. **運行測試**: 確保功能正常。
+4. **使用者驗證**: 通知使用者計畫已就緒。使用者透過將 `plans.md` 標記為 `[x]` 來確認完成。
 
 ### Phase 5: 歸檔與大腦更新 (Finalization) 📦
-> [!IMPORTANT]
-> **歸檔觸發條件**：必須等待使用者通知「[計畫代號] 完成」，或偵測到 `plans.md` 中的計畫項目被使用者標記為 `[x]`。
-
-1. **扁平化合併 (Consolidation)**:
-   - 將 `.agents/project/plans/${folder}/` 下的 `plan.md` 與 `tasks.md` 合併。
-   - 將 `tasks.md` 的內容以 `## Task Execution History` 章節追加至 `plan.md` 末尾。
-2. **遷移與重命名**:
-   - 將合併後的內容寫入 `.agents/project/completed/${YYMMDDHHmm}-${description}.md`。
-   - **刪除** 原有的計畫資料夾。
-3. **索引更新**:
-   - 將計畫由 `plans.md` 移至 `completed.md`。
-4. **關鍵動作**: 更新 `project.md` 中的「組件說明」或「核心特性」，確保文件永遠反映最新狀態。
+1. **扁平化合併 (Consolidation)**: 合併 `plan.md` 與 `tasks.md`。
+2. **遷移與重命名**: 寫入 `completed/` 目錄並刪除原計畫資料夾。
+3. **索引更新**: 將計畫由 `plans.md` 移至 `completed.md`。
+4. **關鍵動作**: 更新 `project.md` 中的「組件說明」或「核心特性」。
 
 ---
 
@@ -89,7 +75,7 @@ trigger: always_on
 ### plans.md (Active Plans)
 ```markdown
 # Current Plans
-- [ ] [YYMMDDHHmm-description](./plans/folder/plan.md): Brief description
+- [ ] [YYMMDDHHmm-description](./plans/folder/plan.md): [受影響組件] 核心邏輯描述以便檢索
 ```
 
 ### plan.md 基礎格式
@@ -112,15 +98,11 @@ trigger: always_on
 - [ ] 更新 `project.md` 紀錄
 ```
 
-### completed.md 基礎格式
-```markdown
-# Completed Plans
-- [YYMMDDHHmm-description](./completed/YYMMDDHHmm-description.md): Brief description - Completed: YYYY-MM-DD HH:mm
-```
-
 ---
 
 ## 📋 全域規則 (Global Rules)
-- **禁用自動勾選**：Agent **絕對禁止**自動將 `plans.md` 中的計畫項目標記為 `[x]`。這是使用者的專屬操作空間。
+- **相對路徑優先**：嚴禁在計畫文件中使用絕對路徑。
+- **禁用自動勾選**：Agent 禁止自動將 `plans.md` 標記為 `[x]`。
+- **脈絡感知**：建立計畫前必須確認是否為近期任務的延伸（Bug 修復視為迭代）。
 - **一致性**：使用 `[ ]` (待辦), `[/]` (執行中), `[x]` (完成)。
-- **大腦更新**：計畫歸檔前，必須檢查 `project.md` 是否已加入新的 API、Store 或全域 Enum。
+- **大腦更新**：歸檔前必須更新 `project.md`。

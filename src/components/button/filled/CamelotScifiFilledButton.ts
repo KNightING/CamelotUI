@@ -1,137 +1,91 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import '../../scifi/CamelotScifiReticle';
+import { html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { CamelotScifiBase } from '../../scifi/CamelotScifiBase';
+import '../../scifi/CamelotScifiFrame';
 
 /**
  * <CamelotScifiFilledButton>
- * 日系科幻風格 (Sci-fi HUD) 的實心按鈕
- * 視覺重點：角落括號、高對比白邊、鎖定動畫
+ * 日系科幻風格 (Sci-fi HUD) 的實心按鈕。
+ * 已優化：繼承自 CamelotScifiBase 並使用 CamelotScifiFrame。
  */
 @customElement('camelot-scifi-filled-button')
-export class CamelotScifiFilledButton extends LitElement {
-  @property({ type: String })
-  label: string = 'Button';
+export class CamelotScifiFilledButton extends CamelotScifiBase {
+  @property({ type: String }) label = 'Button';
 
-  @property({ type: String, reflect: true })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  static styles = [
+    css`
+      :host {
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        outline: none;
+      }
+      :host([disabled]) {
+        cursor: not-allowed;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      .btn-inner {
+        padding: 8px 24px;
+        min-width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: transparent;
+        border: none;
+        /* 預設狀態：使用高亮度文字 */
+        color: color-mix(in srgb, var(--cml-scifi-color), white 80%);
+        font-family: var(--cml-font-family-mono, monospace);
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        transition: all 0.2s ease;
+        position: relative;
+        z-index: 10;
+        pointer-events: none;
+      }
+      
+      /* 只有當真的填滿 (filled) 時（即 Active 狀態），才切換至對比色 (on-colors) */
+      :host([filled]) .btn-inner {
+        color: var(--cml-color-on-primary, #000);
+      }
+      
+      :host([filled][color="secondary"]) .btn-inner { color: var(--cml-color-on-secondary, #000); }
+      
+      :host([filled][color="tertiary"]) .btn-inner { color: var(--cml-color-on-tertiary, #000); }
 
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @state()
-  private _isHovered: boolean = false;
-
-  @state()
-  private _isPressed: boolean = false;
-
-  static styles = css`
-    :host {
-      display: inline-block;
-      --cml-scifi-accent: var(--cml-color-primary);
-      --cml-scifi-highlight: #ffffff;
-    }
-
-    :host([color="secondary"]) {
-      --cml-scifi-accent: var(--cml-color-secondary);
-    }
-
-    :host([color="tertiary"]) {
-      --cml-scifi-accent: var(--cml-color-tertiary);
-    }
-
-    .hud-container {
-      position: relative;
-      padding: 4px;
-    }
-
-    button {
-      position: relative;
-      font-family: var(--cml-font-family);
-      font-weight: var(--cml-font-weight-medium);
-      font-size: var(--cml-font-size-label);
-      padding: 8px 24px;
-      border: 1px solid var(--cml-scifi-highlight);
-      background-color: color-mix(in srgb, var(--cml-scifi-accent), transparent 95%);
-      color: var(--cml-scifi-accent);
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-      outline: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      min-width: 120px;
-      overflow: hidden;
-    }
-
-    button::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.5s;
-    }
-
-    button:hover::before {
-      transform: translateX(100%);
-    }
-
-    /* 點擊效果 */
-    button:active {
-      background-color: var(--cml-scifi-accent);
-      color: #000;
-      box-shadow: 0 0 20px var(--cml-scifi-accent);
-    }
-
-    button:disabled {
-      cursor: not-allowed;
-      opacity: 0.4;
-      border-color: #444;
-      color: #666;
-    }
-
-    /* 文字掃描效果 */
-    .label-text {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* 背景點綴：科技格點 */
-    button::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(var(--cml-scifi-accent) 0.5px, transparent 0.5px);
-      background-size: 4px 4px;
-      opacity: 0.1;
-      pointer-events: none;
-    }
-  `;
+      /* 讓內容在 Filled 狀態下始終維持高對比 */
+      :host .btn-inner ::slotted(*) {
+        color: inherit;
+      }
+    `
+  ];
 
   render() {
+    const isFilled = this._isActive;
+
     return html`
-      <div 
-        class="hud-container"
-        @mouseenter=${() => this._isHovered = true}
-        @mouseleave=${() => this._isHovered = false}
-        @mousedown=${() => this._isPressed = true}
-        @mouseup=${() => this._isPressed = false}
+      <camelot-scifi-frame
+        .color="${this.color}"
+        ?focused="${this._isFocused}"
+        ?filled="${isFilled && !this.disabled}"
+        ?showGrid="${false}"
+        ?showScanline="${!this.disabled}"
+        ?showShine="${this._isHovered && !this.disabled}"
+        .activeReticle="${this._isActive || this._isFocused || this._isHovered}"
+        @mouseenter="${this._handleMouseEnter}"
+        @mouseleave="${this._handleMouseLeave}"
+        @mousedown="${() => this._isActive = true}"
+        @mouseup="${() => this._isActive = false}"
+        @focus="${this._handleFocus}"
+        @blur="${this._handleBlur}"
+        tabindex="0"
       >
-        <camelot-scifi-reticle 
-          .active=${this._isHovered || this._isPressed}
-          .color=${this.color}
-        ></camelot-scifi-reticle>
-        
-        <button 
-          ?disabled="${this.disabled}"
-        >
-          <span class="label-text">${this.label}</span>
-          <slot></slot>
-        </button>
-      </div>
+        <div class="btn-inner">
+          ${this.label ? html`<span>${this.label}</span>` : html`<slot></slot>`}
+        </div>
+      </camelot-scifi-frame>
     `;
   }
 }

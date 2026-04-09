@@ -1,12 +1,16 @@
-# History Plans
-- [x] [2604081601-refactor-button-variants](./completed/2604081601-refactor-button-variants.md): 重構按鈕組件架構，拆分為獨立目錄。 - Completed: 2026-04-08
+﻿# History Plans
+- [x] [2604081601-refactor-button-variants](./completed/2604081601-refactor-button-variants.md): 重構按鈕組件架構，分為 Filled, Outline, Text, Icon。 - Completed: 2026-04-08
 - [x] [2604081615-enhance-softui-drawer-aesthetics](./completed/2604081615-enhance-softui-drawer-aesthetics.md): 優化 Soft UI Drawer 美學，強化陰影層次。 - Completed: 2026-04-08
-- [x] [2604081629-implement-menu-component](./completed/2604081629-implement-menu-component.md): 實作支援多主題風格的選單元件 (Menu)。 - Completed: 2026-04-08
-- [x] [2604081745-add-scifi-hud-style](./completed/2604081745-add-scifi-hud-style.md): 建立具備鎖定動畫與動態配色的日系科幻風格 (Sci-fi HUD)。 - Completed: 2026-04-08
-- [x] [2604090901-extract-scifi-reticle-component](./completed/2604090901-extract-scifi-reticle-component.md): 將鎖定括號特效抽離為獨立組件成 `<camelot-scifi-reticle>`。 - Completed: 2026-04-09
-- [x] [2604090936-create-expand-component](./completed/2604090936-create-expand-component.md): 實作具備絲滑動畫的 Expand 元件。 - Completed: 2026-04-09
-- [x] [2604091018-use-expand-in-menu](./completed/2604091018-use-expand-in-menu.md): 將 Expand 組件整合進 Menu 的子選單展開。 - Completed: 2026-04-09
-- [x] [2604091031-scifi-form-selections](./completed/2604091031-scifi-form-selections.md): 實作 Sci-fi 風格的表單選取元件 (Switch, Radio, Checkbox)。 - Completed: 2026-04-09
-- [x] [2604091051-scifi-component-refinement](./completed/2604091051-scifi-component-refinement.md): 優化 Sci-fi HUD 系列組件，解決 Radio 抖動、Switch 切角與色彩 Token 化。 - Completed: 2026-04-09
-- [x] [2604091111-scifi-bugfix-refinement](./completed/2604091111-scifi-bugfix-refinement.md): 修復 Drawer Import 錯誤、Switch 標籤不一致，並調整鎖定特效為 Hover 觸發。 - Completed: 2026-04-09
-- [x] [2604091127-workflow-refinement](./completed/2604091127-workflow-refinement.md): �u�ƺ�Ǥu�@�y�A�[�J�ݨD���p���ˬd�P�p�e���N����C - Completed: 2026-04-09
+- [x] [2604081629-implement-menu-component](./completed/2604081629-implement-menu-component.md): 實作支援多主題風格的選單組件 (Menu)。 - Completed: 2026-04-08
+- [x] [2604081745-add-scifi-hud-style](./completed/2604081745-add-scifi-hud-style.md): 建立並渲染動畫框架以實現日系科幻風格 (Sci-fi HUD)。 - Completed: 2026-04-08
+- [x] [2604090901-extract-scifi-reticle-component](./completed/2604090901-extract-scifi-reticle-component.md): 將鎖定括號特效抽離為獨立組件 <camelot-scifi-reticle>。 - Completed: 2026-04-09
+- [x] [2604090936-create-expand-component](./completed/2604090936-create-expand-component.md): 實作無絲滑動畫的 Expand 組件。 - Completed: 2026-04-09
+- [x] [2604091018-use-expand-in-menu](./completed/2604091018-use-expand-in-menu.md): 將 Expand 組件整合至 Menu 進行選單展開。 - Completed: 2026-04-09
+- [x] [2604091031-scifi-form-selections](./completed/2604091031-scifi-form-selections.md): 實作 Sci-fi 風格的表單選取項 (Switch, Radio, Checkbox)。 - Completed: 2026-04-09
+- [x] [2604091051-scifi-component-refinement](./completed/2604091051-scifi-component-refinement.md): 優化 Sci-fi HUD 系列組件，解決 Radio 對齊與 Switch 特效色 Token 問題。 - Completed: 2026-04-09
+- [x] [2604091111-scifi-bugfix-refinement](./completed/2604091111-scifi-bugfix-refinement.md): 修復 Drawer Import 錯誤、Switch 標籤不對齊並調整鎖定特效為 Hover 觸發。 - Completed: 2026-04-09
+- [x] [2604091127-workflow-refinement](./completed/2604091127-workflow-refinement.md): 精確工作流優化，加入需求分類檢查與計畫自動歸檔。 - Completed: 2026-04-09
+- [x] [2604091140-scifi-components-implementation](./completed/2604091140-scifi-components-implementation.md): 實作 Select, Input, Badges, Cards, Popups, Tabs 的 Sci-fi HUD 風格。 - Completed: 2026-04-09
+- [x] [2604091354-scifi-refinement](./completed/2604091354-scifi-refinement.md): 修正 Scifi 元件顯示問題與強化視覺效果。 - Completed: 2026-04-09
+- [x] [2604091518-scifi-hover-effects](./completed/2604091518-scifi-hover-effects.md): Sci-Fi HUD 懸浮特效與按鈕遷移重構。 - Completed: 2026-04-09
+- [x] [2604091535-scifi-contrast-fix](./completed/2604091535-scifi-contrast-fix.md): 修正 Sci-Fi 組件文字對比度與顯示問題。 - Completed: 2026-04-09

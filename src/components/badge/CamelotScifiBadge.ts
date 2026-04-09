@@ -1,90 +1,79 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotScifiBase } from '../scifi/CamelotScifiBase';
+import '../scifi/CamelotScifiFrame';
 
 /**
  * <CamelotScifiBadge>
  * 日系科幻風格 (Sci-fi HUD) 的標籤元件實作。
+ * 已優化：使用 CamelotScifiBase 與 CamelotScifiFrame。
  */
 @customElement('camelot-scifi-badge-impl')
-export class CamelotScifiBadge extends LitElement {
-  @property({ type: String })
-  label: string = '';
+export class CamelotScifiBadge extends CamelotScifiBase {
+  @property({ type: String }) label = '';
+  @property({ type: String, reflect: true }) variant: 'filled' | 'outlined' = 'filled';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' = 'primary';
+  static styles = [
+    css`
+      :host {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .badge-outer {
+        padding: 2px 10px;
+        min-width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .label-text {
+        font-family: var(--cml-font-family-mono, monospace);
+        font-size: 0.75rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        /* 參考 Tabs：預設使用更高對比的混色，提高白色佔比 */
+        color: color-mix(in srgb, var(--cml-scifi-color) 40%, white);
+        text-transform: uppercase;
+        transition: color 0.2s ease;
+      }
 
-  @property({ type: String })
-  variant: 'filled' | 'outlined' = 'filled';
-
-  static styles = css`
-    :host {
-      display: inline-flex;
-      align-items: center;
-      --cml-scifi-color: var(--cml-color-primary);
-      font-family: 'Share Tech Mono', monospace;
-    }
-
-    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
-    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
-    :host([color="error"]) { --cml-scifi-color: var(--cml-color-error); }
-    :host([color="success"]) { --cml-scifi-color: var(--cml-color-success); }
-
-    .badge {
-      position: relative;
-      padding: 4px 12px;
-      font-size: 0.7rem;
-      font-weight: bold;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      /* 切角造型 */
-      clip-path: polygon(
-        6px 0, 100% 0, 
-        100% calc(100% - 6px), calc(100% - 6px) 100%, 
-        0 100%, 0 6px
-      );
-    }
-
-    .filled {
-      background: var(--cml-scifi-color);
-      color: #000;
-      box-shadow: 0 0 10px color-mix(in srgb, var(--cml-scifi-color), transparent 50%);
-    }
-
-    .outlined {
-      /* 背景/邊框修正 */
-      border: 1px solid transparent;
-      background-image: 
-        linear-gradient(rgba(5, 8, 10, 0.95), rgba(5, 8, 10, 0.95)), 
-        linear-gradient(var(--cml-scifi-color), var(--cml-scifi-color));
-      background-origin: padding-box, border-box;
-      background-clip: padding-box, border-box;
-      
-      color: var(--cml-scifi-color);
-    }
-
-    /* 左右導航裝飾 */
-    .decor {
-      width: 4px;
-      height: 4px;
-      background: currentColor;
-      box-shadow: 0 0 5px currentColor;
-    }
-
-    /* 文字發光效果 */
-    .label-text {
-      text-shadow: 0 0 5px currentColor;
-    }
-  `;
+      /* 當處於變體填充或 Host 被標記為 filled 時，切換至主題對比色 */
+      :host([variant="filled"]) .label-text,
+      :host([filled]) .label-text {
+        color: var(--cml-color-on-primary, #fff);
+      }
+      :host([variant="filled"][color="secondary"]) .label-text,
+      :host([filled][color="secondary"]) .label-text { 
+        color: var(--cml-color-on-secondary, #fff); 
+      }
+      :host([variant="filled"][color="tertiary"]) .label-text,
+      :host([filled][color="tertiary"]) .label-text { 
+        color: var(--cml-color-on-tertiary, #fff); 
+      }
+    `
+  ];
 
   render() {
+    const isFilled = this.variant === 'filled';
+    const onColor = isFilled ? `var(--cml-color-on-${this.color})` : 'inherit';
+    
     return html`
-      <div class="badge ${this.variant}">
-        <div class="decor"></div>
-        <span class="label-text">${this.label}</span>
-      </div>
+      <camelot-scifi-frame 
+        .color="${this.color}"
+        ?filled="${isFilled}"
+        ?showGrid="${false}"
+        ?showScanline="${isFilled}"
+        ?showShine="${this._isHovered && !this.disabled}"
+        .activeReticle="${false}"
+        @mouseenter="${this._handleMouseEnter}"
+        @mouseleave="${this._handleMouseLeave}"
+      >
+        <div class="badge-outer" style="color: ${onColor}">
+          <slot>
+            <span class="label-text">${this.label}</span>
+          </slot>
+        </div>
+      </camelot-scifi-frame>
     `;
   }
 }
