@@ -135,6 +135,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const modeSelector = document.getElementById('mode-selector') as any;
+    if (modeSelector) {
+        modeSelector.options = [
+            { label: 'System (Auto)', value: 'auto' },
+            { label: 'Light Mode', value: 'light' },
+            { label: 'Dark Mode', value: 'dark' }
+        ];
+        modeSelector.addEventListener('change', (e: any) => {
+            rootTheme.setAttribute('theme', e.detail.value);
+        });
+    }
+
     // 3. Setup Groups (Radio, Checkbox)
     const setupGroup = (groupId: string, displayId: string) => {
         const group = document.getElementById(groupId) as any;

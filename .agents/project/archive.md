@@ -20,3 +20,5 @@
 | [2604091535-scifi-contrast-fix](./archive/2604091535-scifi-contrast-fix.md) | 修正 Sci-Fi 組件文字對比度與顯示問題。 | 2026-04-09 15:35 | 2026-04-09 00:00 |
 | [2604091638-standardize-completed-plans-table.md](./archive/2604091638-standardize-completed-plans-table.md) | [歸檔規範] 將 completed.md 轉換為表格格式並更新工作流準則 | 2026-04-09 16:38 | 2026-04-09 17:07 |
 | [2604091710-rename-completed-to-archive.md](./archive/2604091710-rename-completed-to-archive.md) | [優化] 將 completed 更名為 Archive 以提升語意 | 2026-04-09 17:10 | 2026-04-09 17:25 |
+| [2604100933-optimize-index-showcase](./archive/2604100933-optimize-index-showcase.md) | 優化 index.html 展示畫面，封裝 Showcase 組件並移除非自定義元件內容。 | 2026-04-10 09:33 | 2026-04-10 11:20 |
+| [2604101050-refine-scifi-components](./archive/2604101050-refine-scifi-components.md) | 修復 Cyber 主題字體殘留問題，並優化 Sci-fi Select 搜尋功能與 TextButton 流光動畫。 | 2026-04-10 10:50 | 2026-04-10 11:20 |
