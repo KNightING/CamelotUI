@@ -69,10 +69,10 @@ export class CamelotScifiInput extends CamelotScifiBase {
       }
       
       :host([focused]) input {
-        color: var(--cml-color-on-primary, #000);
+        color: var(--cml-scifi-color);
+        text-shadow: 0 0 8px color-mix(in srgb, var(--cml-scifi-color), transparent 50%);
+        font-weight: 600;
       }
-      :host([focused][color="secondary"]) input { color: var(--cml-color-on-secondary); }
-      :host([focused][color="tertiary"]) input { color: var(--cml-color-on-tertiary); }
     `
   ];
 

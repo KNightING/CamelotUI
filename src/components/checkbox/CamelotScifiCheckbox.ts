@@ -42,6 +42,8 @@ export class CamelotScifiCheckbox extends LitElement {
       align-items: center;
       padding: 6px 12px;
       gap: 12px;
+      min-height: 36px;
+      box-sizing: border-box;
       transition: all 0.2s;
       position: relative;
     }
