@@ -23,3 +23,6 @@
 | [2604100933-optimize-index-showcase](./archive/2604100933-optimize-index-showcase.md) | 優化 index.html 展示畫面，封裝 Showcase 組件並移除非自定義元件內容。 | 2026-04-10 09:33 | 2026-04-10 11:20 |
 | [2604101050-refine-scifi-components](./archive/2604101050-refine-scifi-components.md) | 修復 Cyber 主題字體殘留問題，並優化 Sci-fi Select 搜尋功能與 TextButton 流光動畫。 | 2026-04-10 10:50 | 2026-04-10 11:20 |
 | [2604101130-implement-light-scifi-aesthetic](./archive/2604101130-implement-light-scifi-aesthetic.md) | 實作 Sci-fi HUD 的 Light Mode 美學適配，支援磨砂玻璃背景與主題切換 | 2026-04-10 11:30 | 2026-04-10 11:32 |
+| [2604101143-standardize-theme-fonts](./archive/2604101143-standardize-theme-fonts.md) | 建立主題基準配置 (BASE_CONFIG)，修復主題切換時字體無法恢復預設的問題。 | 2026-04-10 11:43 | 2026-04-10 11:55 |
+| [2604101340-fix-scifi-input-label](./archive/2604101340-fix-scifi-input-label.md) | 修復 Sci-fi HUD Text Input 缺少 Label 顯示的問題，並優化視覺風格。 | 2026-04-10 13:40 | 2026-04-10 13:42 |
+| [2604101350-fix-scifi-select-label](./archive/2604101350-fix-scifi-select-label.md) | 修復 Sci-fi HUD Select 缺少 Label 顯示的問題，確保表單系列視覺統一。 | 2026-04-10 13:49 | 2026-04-10 13:51 |

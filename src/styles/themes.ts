@@ -92,9 +92,42 @@ export interface CamelotThemeConfig {
   dark?: Omit<CamelotThemeConfig, 'light' | 'dark'>;
 }
 
+// --- Base Configurations ---
+
+const BASE_FONT_CONFIG: CamelotThemeFont = {
+  'family': "'Noto Sans TC', 'Roboto', sans-serif",
+  'weight-regular': 400,
+  'weight-medium': 500,
+  'weight-bold': 700,
+  'size-label': '0.875rem',
+  'size-body': '1rem',
+  'size-title': '1.25rem',
+  'size-headline': '2rem'
+};
+
+const BASE_SPACING_CONFIG: CamelotThemeSpacing = {
+  '1': '4px',
+  '2': '8px',
+  '3': '12px',
+  '4': '16px',
+  '6': '24px',
+  '8': '32px'
+};
+
+const BASE_RADIUS_CONFIG: CamelotThemeRadius = {
+  'xs': '4px',
+  's': '8px',
+  'm': '12px',
+  'l': '16px',
+  'full': '9999px'
+};
+
 // --- Predefined Themes ---
 
 export const THEME_DEFAULT: CamelotThemeConfig = {
+  font: BASE_FONT_CONFIG,
+  spacing: BASE_SPACING_CONFIG,
+  radius: BASE_RADIUS_CONFIG,
   light: {
     color: {
       'primary': '#6750A4', 'on-primary': '#FFFFFF', 'primary-container': '#EADDFF', 'on-primary-container': '#21005D',
@@ -104,9 +137,6 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
       'background': '#FEF7FF', 'on-background': '#1D1B20', 'surface': '#FEF7FF', 'on-surface': '#1D1B20',
       'surface-variant': '#E7E0EC', 'on-surface-variant': '#49454F', 'outline': '#79747E', 'outline-variant': '#CAC4D0',
       'surface-container-low': '#F7F2FA', 'surface-container': '#F3EDF7', 'surface-container-high': '#ECE6F0', 'surface-container-highest': '#E6E0E9'
-    },
-    font: {
-      'family': "'Noto Sans TC', 'Roboto', sans-serif"
     },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.8)',
@@ -128,9 +158,6 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
       'surface-variant': '#49454F', 'on-surface-variant': '#CAC4D0', 'outline': '#938F99', 'outline-variant': '#44474E',
       'surface-container-low': '#1D1B20', 'surface-container': '#211F26', 'surface-container-high': '#2B2930', 'surface-container-highest': '#36343B'
     },
-    font: {
-      'family': "'Noto Sans TC', 'Roboto', sans-serif"
-    },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.05)',
       'color-dark': 'rgba(0, 0, 0, 0.5)'
@@ -151,6 +178,9 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
 };
 
 export const THEME_SAPPHIRE: CamelotThemeConfig = {
+  font: BASE_FONT_CONFIG,
+  spacing: BASE_SPACING_CONFIG,
+  radius: BASE_RADIUS_CONFIG,
   light: {
     color: {
       'primary': '#0061A4', 'on-primary': '#FFFFFF', 'primary-container': '#D1E4FF', 'on-primary-container': '#001D36',
@@ -198,6 +228,9 @@ export const THEME_SAPPHIRE: CamelotThemeConfig = {
 };
 
 export const THEME_EMERALD: CamelotThemeConfig = {
+  font: BASE_FONT_CONFIG,
+  spacing: BASE_SPACING_CONFIG,
+  radius: BASE_RADIUS_CONFIG,
   light: {
     color: {
       'primary': '#006D3A', 'on-primary': '#FFFFFF', 'primary-container': '#98F7B5', 'on-primary-container': '#00210E',
@@ -221,7 +254,6 @@ export const THEME_EMERALD: CamelotThemeConfig = {
     }
   },
   dark: {
-// ... existing dark emerald
     color: {
       'primary': '#7DDA9B', 'on-primary': '#00391C', 'primary-container': '#00522B', 'on-primary-container': '#98F7B5',
       'secondary': '#B7CCB9', 'on-secondary': '#233427', 'secondary-container': '#394B3C', 'on-secondary-container': '#D2E8D4',
@@ -245,6 +277,9 @@ export const THEME_EMERALD: CamelotThemeConfig = {
 };
 
 export const THEME_CYBER: CamelotThemeConfig = {
+  font: BASE_FONT_CONFIG,
+  spacing: BASE_SPACING_CONFIG,
+  radius: BASE_RADIUS_CONFIG,
   light: {
     color: {
       'primary': '#00b7ff', 'on-primary': '#ffffff', 'primary-container': '#d0f4ff', 'on-primary-container': '#004c66',

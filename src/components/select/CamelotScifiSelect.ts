@@ -10,6 +10,7 @@ import '../scifi/CamelotScifiFrame';
  */
 @customElement('camelot-scifi-select-impl')
 export class CamelotScifiSelect extends CamelotScifiBase {
+  @property({ type: String }) label = '';
   @property({ type: Array }) options: Array<{label: string, value: string}> = [];
   @property({ type: String }) value = '';
   @property({ type: String }) placeholder = 'SELECT_OPTION';
@@ -22,6 +23,27 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         display: block;
         width: 100%;
         position: relative;
+      }
+      .select-container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .label-text {
+        font-family: var(--cml-font-family-mono, monospace);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--cml-color-on-surface);
+        opacity: 0.8;
+        padding-left: 4px;
+        transition: all 0.2s ease;
+      }
+      :host([_is-open]) .label-text,
+      :host([focused]) .label-text {
+        opacity: 1;
+        color: var(--cml-scifi-color);
+        text-shadow: 0 0 8px color-mix(in srgb, var(--cml-scifi-color), transparent 50%);
       }
       .select-trigger {
         padding: 10px 24px;
@@ -141,7 +163,8 @@ export class CamelotScifiSelect extends CamelotScifiBase {
     const isFocused = this._isFocused || this._isOpen;
 
     return html`
-      <div class="select-wrapper">
+      <div class="select-container">
+        ${this.label ? html`<div class="label-text">${this.label}</div>` : ''}
         <camelot-scifi-frame 
           .color="${this.color}"
           ?focused="${isFocused}"

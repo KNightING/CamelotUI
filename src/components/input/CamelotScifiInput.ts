@@ -10,6 +10,7 @@ import '../scifi/CamelotScifiFrame';
  */
 @customElement('camelot-scifi-input-impl')
 export class CamelotScifiInput extends CamelotScifiBase {
+  @property({ type: String }) label = '';
   @property({ type: String }) value = '';
   @property({ type: String }) placeholder = '';
   @property({ type: String }) type = 'text';
@@ -20,11 +21,33 @@ export class CamelotScifiInput extends CamelotScifiBase {
         display: block;
         width: 100%;
       }
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .label-text {
+        font-family: var(--cml-font-family-mono, monospace);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--cml-color-on-surface);
+        opacity: 0.8;
+        padding-left: 4px;
+        transition: all 0.2s ease;
+      }
+      :host([focused]) .label-text {
+        opacity: 1;
+        color: var(--cml-scifi-color);
+        text-shadow: 0 0 8px color-mix(in srgb, var(--cml-scifi-color), transparent 50%);
+      }
+
       .input-wrapper {
         position: relative;
         width: 100%;
         transition: transform 0.2s ease;
       }
+// ... existing input wrapper styles
       .input-wrapper:hover {
         transform: translateY(-1px);
       }
@@ -34,7 +57,6 @@ export class CamelotScifiInput extends CamelotScifiBase {
         background: transparent;
         border: none;
         outline: none;
-        /* 參考 Tabs：預設使用高對比混色 */
         color: var(--cml-color-on-surface);
         font-family: var(--cml-font-family-mono, monospace);
         font-size: 0.95rem;
@@ -46,7 +68,6 @@ export class CamelotScifiInput extends CamelotScifiBase {
         opacity: 0.5;
       }
       
-      /* 當元件處於 Focused 狀態時（此時 Frame 是實心的），切換文字顏色 */
       :host([focused]) input {
         color: var(--cml-color-on-primary, #000);
       }
@@ -67,31 +88,34 @@ export class CamelotScifiInput extends CamelotScifiBase {
 
   render() {
     return html`
-      <camelot-scifi-frame
-        .color="${this.color}"
-        ?focused="${this._isFocused}"
-        ?filled="${this._isFocused}"
-        ?showGrid="${false}"
-        ?showScanline="${this._isFocused}"
-        ?showShine="${this._isFocused || this._isHovered}"
-        .activeReticle="${this._isFocused || (this._isHovered && !this.disabled)}"
-        @mouseenter="${this._handleMouseEnter}"
-        @mouseleave="${this._handleMouseLeave}"
-        @focus="${this._handleFocus}"
-        @blur="${this._handleBlur}"
-      >
-        <div class="input-wrapper">
-          <input 
-            type="${this.type}" 
-            .value="${this.value}"
-            placeholder="${this.placeholder}"
-            ?disabled="${this.disabled}"
-            @input="${this._handleInput}"
-            @focus="${this._handleFocus}"
-            @blur="${this._handleBlur}"
-          />
-        </div>
-      </camelot-scifi-frame>
+      <div class="input-container">
+        ${this.label ? html`<div class="label-text">${this.label}</div>` : ''}
+        <camelot-scifi-frame
+          .color="${this.color}"
+          ?focused="${this._isFocused}"
+          ?filled="${this._isFocused}"
+          ?showGrid="${false}"
+          ?showScanline="${this._isFocused}"
+          ?showShine="${this._isFocused || this._isHovered}"
+          .activeReticle="${this._isFocused || (this._isHovered && !this.disabled)}"
+          @mouseenter="${this._handleMouseEnter}"
+          @mouseleave="${this._handleMouseLeave}"
+          @focus="${this._handleFocus}"
+          @blur="${this._handleBlur}"
+        >
+          <div class="input-wrapper">
+            <input 
+              type="${this.type}" 
+              .value="${this.value}"
+              placeholder="${this.placeholder}"
+              ?disabled="${this.disabled}"
+              @input="${this._handleInput}"
+              @focus="${this._handleFocus}"
+              @blur="${this._handleBlur}"
+            />
+          </div>
+        </camelot-scifi-frame>
+      </div>
     `;
   }
 }

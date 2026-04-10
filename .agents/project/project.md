@@ -10,16 +10,18 @@
 - **Styling tokens**: CSS Variables (定義於 `src/styles/tokens.css`)
 
 - **Project Entry**: `index.html` (精簡畫布) 與 `src/main.ts` (統一邏輯入口)。
-- **Theme System**: 位於 `src/styles/themes.ts` 與 `src/components/theme/`，統一管理不同模式的色彩。支持 **Material 3, Cupertino, Soft UI, Sci-fi HUD** 四大風格。
+- **Theme System**: 位於 `src/styles/themes.ts` 與 `src/components/theme/`，統一管理不同模式的色彩。
+- **智慧主題切換**：支援 Material 3, Cupertino, Soft UI 與 Sci-fi HUD 四種視覺風格。基於 `BASE_CONFIG` 建立基準配置，確保字體、間距與圓角在不同色盤間切換時能精確復原。
+- **Sci-fi HUD 適配**：支援具動態混合背景與自動對比度調整的科幻風格，並完整兼容 Light/Dark 模式。
 - **Base Components**: 位於 `src/components/base/`，為抽象底層組件。
 - **Component Facades**: 位於 `src/components/` 根目錄下，作為對外介面（如 `<camelot-button>`）。
+
 - **核心組件庫 (Core Components)**:
     - **基礎框架 (Foundation)**: `CamelotScifiFrame` (提供邊框、內切角、掃描線、發光點等 Sci-Fi 視覺基礎)。
     - **按鈕 (Button)**: `CamelotButton`, `CamelotScifiFilledButton` (支持 Active 狀態填充、adaptive 寬度等)。
     - **表單 (Forms)**: `CamelotInput`, `CamelotSelect`, `CamelotCheckbox`, `CamelotRadio`, `CamelotSwitch` (適配 Sci-Fi / Standard 風格變體)。
     - **數據展示 (Data)**: `CamelotBadge`, `CamelotCard`, `CamelotTabs` (強化對比與 HUD 風格)。
     - **反饋與對話 (Feedback)**: `CamelotConfirmDialog`, `CamelotNotification` (支持動態滑入與 Sci-Fi 氛圍裝飾)。
-- **Theme System**: 位於 `src/styles/themes.ts` 與 `src/components/theme/`，統一管理不同模式的色彩。
 
 ## 現有功能模組 (Existing Modules)
 - **Form Selections**:
