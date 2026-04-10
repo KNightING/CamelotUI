@@ -86,6 +86,35 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         border-left-color: var(--cml-scifi-color);
         color: #fff;
       }
+      .search-box {
+        padding: 8px 12px;
+        border-bottom: 1px solid color-mix(in srgb, var(--cml-scifi-color) 30%, transparent);
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .search-input {
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-family: var(--cml-font-family-mono, monospace);
+        font-size: 0.8rem;
+        width: 100%;
+        outline: none;
+        padding: 4px 0;
+      }
+      .search-input::placeholder {
+        color: color-mix(in srgb, var(--cml-scifi-color) 30%, transparent);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+      }
+      .search-icon {
+        width: 12px;
+        height: 12px;
+        border: 1px solid var(--cml-scifi-color);
+        opacity: 0.6;
+      }
     `
   ];
 
@@ -135,20 +164,40 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         ${this._isOpen ? html`
           <div class="options-panel">
             <camelot-scifi-frame .color="${this.color}" variant="2-corner" ?showGrid="${false}">
-              ${this.options.map(opt => html`
-                <div 
-                  class="option-item" 
-                  ?selected="${this.value === opt.value}"
-                  @click="${() => this._select(opt.value)}"
-                >
-                  ${opt.label}
-                </div>
-              `)}
+              <div class="search-box">
+                <div class="search-icon"></div>
+                <input 
+                  type="text" 
+                  class="search-input" 
+                  placeholder="SEARCH_FILTER..."
+                  @input="${this._onSearchInput}"
+                  @click="${(e: Event) => e.stopPropagation()}"
+                />
+              </div>
+              <div class="options-list" style="max-height: 200px; overflow-y: auto;">
+                ${this.options.map(opt => html`
+                  <div 
+                    class="option-item" 
+                    ?selected="${this.value === opt.value}"
+                    @click="${() => this._select(opt.value)}"
+                  >
+                    ${opt.label}
+                  </div>
+                `)}
+              </div>
             </camelot-scifi-frame>
           </div>
         ` : ''}
       </div>
     `;
+  }
+
+  private _onSearchInput(e: any) {
+    this.dispatchEvent(new CustomEvent('search', {
+      detail: { value: e.target.value },
+      bubbles: true,
+      composed: true
+    }));
   }
 }
 

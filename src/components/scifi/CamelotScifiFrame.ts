@@ -21,11 +21,11 @@ export class CamelotScifiFrame extends LitElement {
   variant: '2-corner' | '4-corner' = '2-corner';
 
   /** 是否顯示網格背景 */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'show-grid' })
   showGrid: boolean = true;
 
   /** 是否顯示掃描線動畫 */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'show-scanline' })
   showScanline: boolean = true;
 
   /** 是否處於獲取焦點狀態 (顯示發光邊框) */
@@ -47,6 +47,14 @@ export class CamelotScifiFrame extends LitElement {
   /** 是否顯示鎖定準心 (Reticle) */
   @property({ type: Boolean, reflect: true })
   activeReticle: boolean = false;
+  
+  /** 是否顯示外框線 */
+  @property({ type: Boolean, reflect: true, attribute: 'show-borders' })
+  showBorders: boolean = true;
+
+  /** 是否顯示 L 型端角補強裝飾 */
+  @property({ type: Boolean, reflect: true, attribute: 'show-corners' })
+  showCorners: boolean = true;
 
   static styles = css`
     :host {
@@ -85,6 +93,14 @@ export class CamelotScifiFrame extends LitElement {
       display: flex;
       flex-direction: column;
       transition: background 0.3s ease;
+    }
+
+    :host(:not([show-borders])) .frame-container {
+      background: transparent !important;
+      border: none !important;
+    }
+    :host(:not([show-borders])) .frame-inner {
+      background: transparent !important;
     }
 
     .frame-inner {
@@ -129,7 +145,7 @@ export class CamelotScifiFrame extends LitElement {
       );
       transform: skewX(-25deg);
       pointer-events: none;
-      z-index: 1; /* 調低 z-index，避免蓋住文字 */
+      z-index: 10; /* Ensure shine is visible on top of everything if needed, but not blocking text */
       opacity: 0;
     }
 
@@ -145,7 +161,7 @@ export class CamelotScifiFrame extends LitElement {
     }
 
     /* 網格背景 */
-    :host([showGrid]) .grid-bg {
+    .grid-bg {
       position: absolute;
       inset: 0;
       background-image: 
@@ -154,10 +170,14 @@ export class CamelotScifiFrame extends LitElement {
       background-size: 15px 15px;
       pointer-events: none;
       z-index: 0;
+      display: none;
+    }
+    :host([show-grid]) .grid-bg {
+      display: block;
     }
 
     /* 掃描線動畫 */
-    :host([showScanline]) .scanline {
+    .scanline {
       position: absolute;
       inset: 0;
       background: linear-gradient(
@@ -171,8 +191,12 @@ export class CamelotScifiFrame extends LitElement {
       width: 100%;
       opacity: 0.1;
       pointer-events: none;
-      animation: scan 4s linear infinite;
       z-index: 1;
+      display: none;
+    }
+    :host([show-scanline]) .scanline {
+      display: block;
+      animation: scan 4s linear infinite;
     }
 
     @keyframes scan {
@@ -220,8 +244,10 @@ export class CamelotScifiFrame extends LitElement {
 
       <div class="frame-container">
         <!-- 裝飾線放在 Container 內，但與 Inner 對齊 -->
-        <div class="corner-decoration top-left"></div>
-        <div class="corner-decoration bottom-right"></div>
+        ${this.showCorners ? html`
+          <div class="corner-decoration top-left"></div>
+          <div class="corner-decoration bottom-right"></div>
+        ` : ''}
         
         <div class="frame-inner">
           <div class="grid-bg"></div>
