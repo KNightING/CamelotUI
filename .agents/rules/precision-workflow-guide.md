@@ -64,6 +64,9 @@ trigger: always_on
 1. **扁平化合併 (Consolidation)**: 合併 `plan.md` 與 `tasks.md`。
 2. **遷移與重命名**: 將合併後的內容寫入 `archive/` 目錄，命名為 `${folder_name}.md`，並刪除原計畫資料夾。
 3. **索引更新**: 將計畫由 `plans.md` 移至 `archive.md`。**必須符合表格格式**：
+    - 所有檔案連結必須使用**相對路徑** (相對於專案根目錄)。
+    - **[自我檢查]**: 嚴禁出現 `C:/`, `/Users/`, 或 `file:///` 格式的絕對路徑。若偵測到請立即修正。
+    - **[自我檢查]**: 嚴禁出現 `C:/`, `/Users/`, 或 `file:///` 格式的絕對路徑。若偵測到請立即修正。
    - **plan name**: 檔案連結 (如 `[2604081601-refactor-button-variants](./archive/2604081601-refactor-button-variants.md)`)
    - **說明**: 計畫摘要
    - **建立時間**: 格式 `yyyy-MM-dd HH:mm` (由 ID 解析)
@@ -87,6 +90,7 @@ trigger: always_on
 
 ### plan.md 基礎格式
 ```markdown
+<!-- REMINDER: Relative Paths Only! No file:///c:/... -->
 # Plan: [YYMMDDHHmm] - [Description]
 - Created: 2026-04-08
 - Branch: [Branch Name or N/A]

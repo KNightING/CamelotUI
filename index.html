@@ -4,89 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CamelotUI Design System</title>
+  <title>CamelotUI Showcase</title>
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./src/styles/tokens.css">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --showcase-padding: 40px;
+    }
+    
     body {
-      font-family: var(--cml-font-family);
-      background-color: var(--cml-color-background);
-      color: var(--cml-color-on-background);
-      padding: 48px 24px;
-      max-width: 1200px;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--cml-color-background, #ffffff);
+      color: var(--cml-color-on-background, #1a1a1a);
+      transition: background-color 0.3s ease;
+    }
+
+    /* Global Showcase Container */
+    .showcase-root {
+      max-width: 1400px;
       margin: 0 auto;
-      transition: background-color 0.3s, color 0.3s;
+      padding: var(--showcase-padding);
     }
 
-    header {
-      margin-bottom: 48px;
-      padding-bottom: 24px;
-      border-left: 4px solid var(--cml-color-primary);
-      padding-left: 16px;
-    }
-
-    .comparison-section {
-      margin-bottom: 80px;
-    }
-
-    .comparison-grid {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 24px;
-    }
-
-    .style-column {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding: 24px;
-      border-radius: var(--cml-radius-l);
-      background-color: var(--cml-color-surface-container-lowest);
-      border: 1px solid var(--cml-color-outline-variant);
-      min-height: 100px;
-      box-shadow: var(--cml-shadow-m);
-    }
-
-    .style-name {
-      font-size: 0.75rem;
-      font-weight: var(--cml-font-weight-bold);
-      color: var(--cml-color-primary);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-      opacity: 0.7;
-      border-bottom: 1px dashed var(--cml-color-outline-variant);
-      padding-bottom: 8px;
-    }
-
-    .component-label {
-      font-size: 0.875rem;
-      font-weight: var(--cml-font-weight-medium);
-      color: var(--cml-color-on-surface-variant);
-      margin-bottom: 4px;
-    }
-
-    @media (max-width: 900px) {
-      .comparison-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* 懸浮控制台樣式 */
+    /* Floating Control Panel */
     .control-panel {
       position: sticky;
-      top: 0;
+      top: 20px;
       z-index: 1000;
-      background-color: var(--cml-color-surface);
-      padding: 16px 24px;
-      margin: -48px -24px 48px -24px;
       display: flex;
-      gap: 32px;
+      gap: 24px;
       align-items: center;
-      border-bottom: 1px solid var(--cml-color-outline-variant);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      padding: 16px 24px;
+      background: rgba(var(--cml-color-surface-rgb, 255, 255, 255), 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(128, 128, 128, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      margin-bottom: 60px;
     }
 
     .control-group {
@@ -96,838 +56,252 @@
     }
 
     .control-group label {
-      font-size: 0.875rem;
-      font-weight: var(--cml-font-weight-bold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       color: var(--cml-color-on-surface-variant);
     }
 
     .control-group select {
-      padding: 6px 12px;
-      border-radius: var(--cml-radius-xs);
-      border: 1px solid var(--cml-color-outline);
-      background-color: var(--cml-color-surface);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--cml-color-outline-variant);
+      background: var(--cml-color-surface);
       color: var(--cml-color-on-surface);
       font-family: inherit;
       cursor: pointer;
     }
 
+    /* Clean Section Layout */
+    .section {
+      margin-bottom: 100px;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+      border-left: 4px solid var(--cml-color-primary);
+      padding-left: 16px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    /* Flexible Content Grid - NO BORDERS per user request */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 40px;
+      align-items: start;
+    }
+
+    .demo-item {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .demo-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--cml-color-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      opacity: 0.6;
+    }
+
+    /* Specialized Scifi Area */
+    .scifi-context {
+      background: #05080a;
+      margin: 0 -var(--showcase-padding);
+      padding: 60px var(--showcase-padding);
+      color: #fff;
+    }
+
     .value-display {
       font-size: 0.75rem;
+      font-family: 'Share Tech Mono', monospace;
       color: var(--cml-color-primary);
-      margin-top: 4px;
-      font-style: italic;
-      min-height: 1.2em;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .control-panel {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
     }
   </style>
 </head>
 
 <body>
   <camelot-theme id="root-theme">
-    <div class="control-panel">
-      <div class="control-group">
-        <label>Color Theme</label>
-        <select id="theme-selector">
-          <option value="auto">Auto (System)</option>
-          <option value="light">Light Mode</option>
-          <option value="dark">Dark Mode</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>Color Palette</label>
-        <select id="palette-selector">
-          <option value="default">Amethyst (Purple)</option>
-          <option value="sapphire">Sapphire (Blue)</option>
-          <option value="emerald">Emerald (Green)</option>
-          <option value="cyber">Cyber (Sci-fi HUD)</option>
-        </select>
-      </div>
-    </div>
-
-    <header>
-      <h1>CamelotUI Design System</h1>
-      <p>Modern, Multi-style Component Library based on Lit & Material 3</p>
-    </header>
-
-    <main>
-      <!-- 1. Buttons Comparison -->
-      <section class="comparison-section">
-        <h2 class="section-title">1. Buttons Comparison</h2>
-        <div class="comparison-grid">
-          <!-- Material -->
-          <div class="style-column">
-            <div class="style-name">Material 3 (Default)</div>
-            <camelot-button label="Filled"></camelot-button>
-            <camelot-button label="Secondary" color="secondary"></camelot-button>
-            <camelot-outline-button label="Outlined"></camelot-outline-button>
-            <camelot-text-button label="Text Button"></camelot-text-button>
-            <div style="display: flex; gap: 8px;">
-              <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
-              <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
-            </div>
-          </div>
-          <!-- Cupertino -->
-          <camelot-theme mode="cupertino">
-            <div class="style-column">
-              <div class="style-name">Cupertino (iOS)</div>
-              <camelot-button label="Filled"></camelot-button>
-              <camelot-button label="Secondary" color="secondary"></camelot-button>
-              <camelot-outline-button label="Outlined"></camelot-outline-button>
-              <camelot-text-button label="Text Button"></camelot-text-button>
-
-              <div style="display: flex; gap: 8px;">
-                <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
-                <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
-              </div>
-            </div>
-          </camelot-theme>
-          <!-- Soft UI -->
-          <camelot-theme mode="soft">
-            <div class="style-column">
-              <div class="style-name">Soft UI (Neumorphism)</div>
-              <camelot-button label="Filled"></camelot-button>
-              <camelot-button label="Secondary" color="secondary"></camelot-button>
-              <camelot-outline-button label="Outlined"></camelot-outline-button>
-              <camelot-text-button label="Text Button"></camelot-text-button>
-
-              <div style="display: flex; gap: 8px;">
-                <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
-                <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
-              </div>
-            </div>
-          </camelot-theme>
-        </div>
-      </section>
-
-      <!-- Sci-fi HUD Specialty Components -->
-      <section class="comparison-section">
-        <h2 class="section-title">2. Sci-fi HUD Specialty Suite</h2>
-        <camelot-theme mode="scifi">
-    <div class="style-column" style="background-color: #05080a; border-color: var(--cml-color-primary); min-width: 600px;">
-      <div class="style-name" style="color: var(--cml-color-primary);">[SYSTEM_STATUS: OPTIMAL] // SCIFI_HUD_RE_INIT</div>
+    <div class="showcase-root">
       
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px;">
-        <!-- Column 1: Inputs & Selects -->
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <camelot-input label="USER_ID" placeholder="INPUT_REQUIRED..."></camelot-input>
-           <camelot-select 
-            id="scifi-select-levels"
-            label="ACCESS_LEVEL" 
-            value="05"
-          ></camelot-select>
-          <div style="display: flex; gap: 8px;">
-            <camelot-icon-button color="primary"><span>⌫</span></camelot-icon-button>
-            <camelot-icon-button color="tertiary" shape="square"><span>⎔</span></camelot-icon-button>
-            <camelot-icon-button color="secondary" shape="square" disabled><span>🔒</span></camelot-icon-button>
-          </div>
+      <!-- Persistent Controls -->
+      <div class="control-panel">
+        <div class="control-group">
+          <label>Theme Style</label>
+          <select id="theme-selector">
+            <option value="material">Material 3</option>
+            <option value="cupertino">Cupertino (iOS)</option>
+            <option value="soft">Soft UI (Neumorphism)</option>
+            <option value="scifi">Sci-fi HUD</option>
+          </select>
         </div>
-
-        <!-- Column 2: Badges & Buttons -->
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
-            <camelot-badge label="ONLINE" color="success"></camelot-badge>
-            <camelot-badge label="SECURE" color="primary" variant="outlined"></camelot-badge>
-            <camelot-badge label="ALERT" color="error"></camelot-badge>
-          </div>
-          <camelot-button label="EXECUTE_PROCEDURE" color="primary"></camelot-button>
-          <camelot-outline-button label="CANCEL_SYNC" color="secondary"></camelot-outline-button>
-          
-          <div style="margin-top: 8px;">
-            <camelot-button 
-              id="scifi-btn-terminate"
-              label="TERMINATE_PROCEDURE" 
-              color="error"
-            ></camelot-button>
-          </div>
+        <div class="control-group">
+          <label>Color Palette</label>
+          <select id="palette-selector">
+            <option value="default">Amethyst (Purple)</option>
+            <option value="sapphire">Sapphire (Blue)</option>
+            <option value="emerald">Emerald (Green)</option>
+            <option value="cyber">Cyber (Cyberpunk)</option>
+          </select>
         </div>
+        <div style="flex-grow: 1;"></div>
+        <div class="value-display" id="dlg-action">Status: Ready</div>
       </div>
 
-      <!-- Layout: Tabs & Cards -->
-      <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 20px;">
-        <camelot-tabs
-          id="scifi-tabs-main"
-          value="1"
-        ></camelot-tabs>
+      <header class="section-header">
+        <h2>CamelotUI Showcase</h2>
+        <p>Premium multi-style design system. Switch themes above to transform all components instantly.</p>
+      </header>
 
-        <camelot-card>
-          <div style="font-size: 0.9em; line-height: 1.6;">
-            [DECRYPTED_INTEL]: The Sci-fi HUD component suite utilizes octagonal clipping and 
-            scanline pulse animations to achieve 1:1 fidelity with high-end Japanese HUD designs.
+      <main>
+        <!-- 1. Buttons -->
+        <section class="section">
+          <div class="section-header"><h2>Action Components</h2></div>
+          <div class="showcase-grid">
+            <div class="demo-item">
+              <span class="demo-label">Standard Buttons</span>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <camelot-button label="Primary Action"></camelot-button>
+                <camelot-button label="Secondary" color="secondary"></camelot-button>
+                <camelot-button label="Destructive" color="error"></camelot-button>
+              </div>
+            </div>
+            <div class="demo-item">
+              <span class="demo-label">Variants</span>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <camelot-outline-button label="Outline"></camelot-outline-button>
+                <camelot-text-button label="Plain Text"></camelot-text-button>
+              </div>
+            </div>
+            <div class="demo-item">
+              <span class="demo-label">Icon Actions</span>
+              <div style="display: flex; gap: 12px;">
+                <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
+                <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
+              </div>
+            </div>
           </div>
-        </camelot-card>
-      </div>
+        </section>
 
-      <camelot-confirm-dialog
-        id="scifi-dialog"
-        title="CRITICAL_PROCEDURE"
-        message="Are you sure you want to terminate the current sync process? This action cannot be undone."
-        confirmText="PROCEED"
-        cancelText="ABORT"
-        color="error"
-      ></camelot-confirm-dialog>
-    </div>
-  </camelot-theme>
-  </div>
-  </section>
+        <!-- 2. Form Controls -->
+        <section class="section">
+          <div class="section-header"><h2>Selection & Form</h2></div>
+          <div class="showcase-grid">
+            <div class="demo-item">
+              <span class="demo-label">Text Inputs</span>
+              <camelot-input label="System User" placeholder="Identify..."></camelot-input>
+              <camelot-select label="Priority Level" class="demo-select"></camelot-select>
+            </div>
+            <div class="demo-item">
+              <span class="demo-label">Toggles</span>
+              <camelot-switch checked label="Notification Sync"></camelot-switch>
+              <camelot-switch label="Debug Mode"></camelot-switch>
+            </div>
+            <div class="demo-item">
+              <span class="demo-label">Managed Selections</span>
+              <camelot-radio-group label="Payment Plan" value="pro" id="radio-group-m">
+                <camelot-radio label="Basic Tier" value="basic"></camelot-radio>
+                <camelot-radio label="Pro Enterprise" value="pro"></camelot-radio>
+              </camelot-radio-group>
+              <camelot-checkbox-group label="Accessibility" id="cb-group-m" orientation="horizontal">
+                <camelot-checkbox label="High Contrast" value="contrast" checked></camelot-checkbox>
+                <camelot-checkbox label="Screen Reader" value="reader"></camelot-checkbox>
+              </camelot-checkbox-group>
+            </div>
+          </div>
+        </section>
 
-      <section class="comparison-section">
-        <h2 class="section-title">3. Expand Component (Layout Utils)</h2>
-        <div style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+        <!-- 3. Feedback & Indicators -->
+        <section class="section">
+          <div class="section-header"><h2>Status & Indicators</h2></div>
+          <div class="showcase-grid">
+            <div class="demo-item">
+              <span class="demo-label">Badges</span>
+              <div style="display: flex; gap: 8px;">
+                <camelot-badge label="Live"></camelot-badge>
+                <camelot-badge label="Encrypted" variant="outlined" color="success"></camelot-badge>
+                <camelot-badge label="Warning" color="error"></camelot-badge>
+              </div>
+            </div>
+            <div class="demo-item">
+              <span class="demo-label">Interactive Dialogs</span>
+              <div style="display: flex; gap: 12px;">
+                <camelot-button label="Confirm Action" onclick="document.getElementById('dlg-m').show()"></camelot-button>
+              </div>
+              <camelot-confirm-dialog id="dlg-m" title="Database Sync?" 
+                message="Synchronization will overwrite local metadata. Continue?" 
+                confirmText="Sync Now" cancelText="Abort"></camelot-confirm-dialog>
+            </div>
+          </div>
+        </section>
 
-          <camelot-theme mode="material">
-            <div style="border: 1px solid #ddd; padding: 16px; border-radius: 8px;">
+        <!-- 4. Navigation & Layout -->
+        <section class="section">
+          <div class="section-header"><h2>Navigation & Containers</h2></div>
+          <div class="showcase-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="demo-item">
+              <span class="demo-label">Tabs Component</span>
+              <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
+              <camelot-card style="margin-top: 12px;">
+                <h4 style="margin: 0 0 8px 0">Content Surface</h4>
+                <p style="margin: 0; font-size: 0.85rem; opacity: 0.8;">The card component adapts its elevation and shadows per theme.</p>
+              </camelot-card>
+            </div>
+            <div class="demo-item">
+              <span class="demo-label">Menu System</span>
+              <camelot-menu id="menu-m" value="dash"></camelot-menu>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Advanced Utils -->
+        <section class="section">
+          <div class="section-header"><h2>Interactive Utilities</h2></div>
+          <div class="showcase-grid">
+            <div class="demo-item">
+              <span class="demo-label">Expandable Content</span>
               <camelot-expand>
-                <div style="font-weight: bold; color: var(--cml-color-primary); ">
-                  ▶ Click to Expand Details
-                </div>
-                <div slot="body" style="padding: 12px; background: #f5f5f5; border-radius: 4px;">
-                  This is the expandable body content. It uses a smooth CSS Grid transition.
-                  <ul>
-                    <li>Dynamic height support</li>
-                    <li>No JS animation needed</li>
-                    <li>Reusable slots</li>
-                  </ul>
+                <div style="font-weight: 600; cursor: pointer;">Show Performance Metrics</div>
+                <div slot="body" style="padding: 16px; opacity: 0.8; font-size: 0.9rem;">
+                  Rendering Time: 12ms<br>
+                  Memory Usage: 4.2MB<br>
+                  Active Tokens: 182
                 </div>
               </camelot-expand>
             </div>
-          </camelot-theme>
-
-          <camelot-theme mode="scifi">
-            <div style="background-color: #05080a; border: 1px solid var(--cml-color-primary); padding: 16px;">
-              <camelot-expand>
-                <div
-                  style="color: var(--cml-color-primary); font-family: 'Share Tech Mono', monospace; display: flex; align-items: center; gap: 8px;">
-                  <camelot-scifi-reticle active
-                    style="position: relative; width: 16px; height: 16px; border: none;"></camelot-scifi-reticle>
-                  ACCESS_RESTRICTED_DATA // CLICK_TO_DECRYPT
-                </div>
-                <div slot="body"
-                  style="margin-top: 12px; border-left: 2px solid var(--cml-color-primary); padding-left: 12px; color: #fff; font-size: 0.9em; font-family: 'Share Tech Mono', monospace;">
-                  [DECRYPTED]: This data is wrapped in a CamelotExpand component using Scifi styling tokens.
-                </div>
-              </camelot-expand>
+            <div class="demo-item">
+              <span class="demo-label">Side Panels (Drawers)</span>
+              <div style="display: flex; gap: 12px;">
+                <camelot-button label="Open Panel" onclick="document.getElementById('drw-m').show()"></camelot-button>
+              </div>
+              <camelot-drawer id="drw-m" anchor="right" headline="System Configuration"></camelot-drawer>
             </div>
-          </camelot-theme>
-
-        </div>
-      </section>
-
-  <!-- 4. Form Selections Comparison (Grouped) -->
-  <section class="comparison-section">
-    <h2 class="section-title">4. Form Selections (Managed Groups)</h2>
-    <div class="comparison-grid">
-      <!-- Material Style Groups -->
-      <div class="style-column">
-        <div class="style-name">Material 3</div>
-
-        <camelot-switch checked label="System WiFi"></camelot-switch>
-
-        <camelot-radio-group label="Payment Type" value="credit" id="radio-group-m">
-          <camelot-radio label="Credit Card" value="credit"></camelot-radio>
-          <camelot-radio label="PayPal" value="paypal"></camelot-radio>
-        </camelot-radio-group>
-        <div class="value-display">Selected: <span id="val-radio-m">credit</span></div>
-
-        <camelot-checkbox-group label="User Interests" orientation="horizontal" id="cb-group-m">
-          <camelot-checkbox label="Design" value="design" checked></camelot-checkbox>
-          <camelot-checkbox label="Code" value="code" checked></camelot-checkbox>
-        </camelot-checkbox-group>
-        <div class="value-display">Selected: <span id="val-cb-m">design, code</span></div>
-      </div>
-
-      <!-- Cupertino Style Groups -->
-      <camelot-theme mode="cupertino">
-        <div class="style-column">
-          <div class="style-name">Cupertino</div>
-
-          <camelot-switch checked label="WiFi"></camelot-switch>
-
-          <camelot-radio-group label="Subscription" value="monthly" id="radio-group-c">
-            <camelot-radio label="Monthly Plan" value="monthly"></camelot-radio>
-            <camelot-radio label="Yearly Plan" value="yearly"></camelot-radio>
-          </camelot-radio-group>
-          <div class="value-display">Selected: <span id="val-radio-c">monthly</span></div>
-
-          <camelot-checkbox-group label="Notifications" orientation="horizontal" id="cb-group-c">
-            <camelot-checkbox label="Email" value="email" checked></camelot-checkbox>
-            <camelot-checkbox label="Push" value="push"></camelot-checkbox>
-            <camelot-checkbox label="SMS" value="sms"></camelot-checkbox>
-          </camelot-checkbox-group>
-          <div class="value-display">Selected: <span id="val-cb-c">email</span></div>
-        </div>
-      </camelot-theme>
-
-      <!-- Soft Style Groups -->
-      <camelot-theme mode="soft">
-        <div class="style-column">
-          <div class="style-name">Soft UI</div>
-
-          <camelot-switch checked label="Active Mode"></camelot-switch>
-
-          <camelot-radio-group label="Storage" value="ssd" id="radio-group-s">
-            <camelot-radio label="SSD" value="ssd"></camelot-radio>
-            <camelot-radio label="Cloud" value="cloud"></camelot-radio>
-          </camelot-radio-group>
-          <div class="value-display">Selected: <span id="val-radio-s">ssd</span></div>
-
-          <camelot-checkbox-group label="Privacy" orientation="vertical" id="cb-group-s">
-            <camelot-checkbox label="Global Tracking" value="tracking"></camelot-checkbox>
-            <camelot-checkbox label="Personal Ads" value="ads" checked></camelot-checkbox>
-          </camelot-checkbox-group>
-          <div class="value-display">Selected: <span id="val-cb-s">ads</span></div>
-        </div>
-      </camelot-theme>
-
-      <!-- Sci-fi HUD Style Groups -->
-      <camelot-theme mode="scifi">
-        <div class="style-column" style="background-color: #05080a; border: 1px solid var(--cml-color-primary);">
-          <div class="style-name" style="color: var(--cml-color-primary); border-bottom: 1px solid color-mix(in srgb, var(--cml-color-primary), transparent 80%);">Sci-fi HUD</div>
-
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div style="font-size: 0.75rem; color: var(--cml-color-primary); opacity: 0.6; font-family: 'Share Tech Mono';">UNIT_POWER_STATUS</div>
-            <camelot-switch checked label="POWER_CORE_ACTIVE"></camelot-switch>
           </div>
+        </section>
 
-          <camelot-radio-group label="MISSION_TYPE" value="scout" id="radio-group-sci-form" style="--cml-color-on-surface-variant: var(--cml-color-primary);">
-            <camelot-radio label="RECON_SCOUT" value="scout"></camelot-radio>
-            <camelot-radio label="TACTICAL_STRIKE" value="strike"></camelot-radio>
-          </camelot-radio-group>
-          <div class="value-display" style="font-family: 'Share Tech Mono';">TARGET: <span id="val-radio-sci-form">scout</span></div>
-
-          <camelot-checkbox-group label="PERIPHERAL_SYNC" orientation="vertical" id="cb-group-sci-form" style="--cml-color-on-surface-variant: var(--cml-color-primary);">
-            <camelot-checkbox label="HUD_OVERLAY" value="hud" checked></camelot-checkbox>
-            <camelot-checkbox label="AUTOPILOT_V2" value="auto"></camelot-checkbox>
-          </camelot-checkbox-group>
-          <div class="value-display" style="font-family: 'Share Tech Mono';">SYNC_LOG: <span id="val-cb-sci-form">hud</span></div>
-        </div>
-      </camelot-theme>
+      </main>
     </div>
-  </section>
-
-  <!-- 5. Form Inputs Comparison -->
-  <section class="comparison-section">
-    <h2 class="section-title">5. Inputs & Selects</h2>
-    <div class="comparison-grid">
-      <div class="style-column">
-        <div class="style-name">Material 3</div>
-        <camelot-input label="Username" placeholder="Type here..."></camelot-input>
-        <camelot-select label="Material Order" class="demo-select"></camelot-select>
-      </div>
-      <camelot-theme mode="cupertino">
-        <div class="style-column">
-          <div class="style-name">Cupertino</div>
-          <camelot-input label="Username" placeholder="Type here..."></camelot-input>
-          <camelot-select label="iOS Style" class="demo-select"></camelot-select>
-        </div>
-      </camelot-theme>
-      <camelot-theme mode="soft">
-        <div class="style-column">
-          <div class="style-name">Soft UI</div>
-          <camelot-input label="Username" placeholder="Type here..."></camelot-input>
-          <camelot-select label="Soft Depth" class="demo-select"></camelot-select>
-        </div>
-      </camelot-theme>
-    </div>
-  </section>
-
-  <!-- 6. Badges Comparison -->
-  <section class="comparison-section">
-    <h2 class="section-title">6. Badge & Status Chips</h2>
-    <div class="comparison-grid">
-      <div class="style-column">
-        <div class="style-name">Material 3</div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <camelot-badge label="Primary"></camelot-badge>
-          <camelot-badge label="Error" color="error"></camelot-badge>
-          <camelot-badge label="Outlined" variant="outlined" color="success"></camelot-badge>
-        </div>
-      </div>
-      <camelot-theme mode="cupertino">
-        <div class="style-column">
-          <div class="style-name">Cupertino</div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <camelot-badge label="Primary"></camelot-badge>
-            <camelot-badge label="Error" color="error"></camelot-badge>
-            <camelot-badge label="Outlined" variant="outlined" color="success"></camelot-badge>
-          </div>
-        </div>
-      </camelot-theme>
-      <camelot-theme mode="soft">
-        <div class="style-column">
-          <div class="style-name">Soft UI</div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <camelot-badge label="Primary"></camelot-badge>
-            <camelot-badge label="Error" color="error"></camelot-badge>
-            <camelot-badge label="Outlined" variant="outlined" color="success"></camelot-badge>
-          </div>
-        </div>
-      </camelot-theme>
-    </div>
-  </section>
-
-  <!-- 7. Containers (Cards) -->
-  <section class="comparison-section">
-    <h2 class="section-title">7. Cards & Surfaces</h2>
-    <div class="comparison-grid">
-      <div class="style-column">
-        <div class="style-name">Material 3</div>
-        <camelot-card>
-          <h4 style="margin:0 0 8px 0">Material Card</h4>
-          <p style="margin:0; font-size: 0.875rem; opacity: 0.8;">Standard surface shadow.</p>
-        </camelot-card>
-      </div>
-      <camelot-theme mode="cupertino">
-        <div class="style-column">
-          <div class="style-name">Cupertino</div>
-          <camelot-card>
-            <h4 style="margin:0 0 8px 0">iOS Card</h4>
-            <p style="margin:0; font-size: 0.875rem; opacity: 0.8;">Clean border and radius.</p>
-          </camelot-card>
-        </div>
-      </camelot-theme>
-      <camelot-theme mode="soft">
-        <div class="style-column">
-          <div class="style-name">Soft UI</div>
-          <camelot-card>
-            <h4 style="margin:0 0 8px 0">Soft Card</h4>
-            <p style="margin:0; font-size: 0.875rem; opacity: 0.8;">Realistic depth shadows.</p>
-          </camelot-card>
-        </div>
-      </camelot-theme>
-    </div>
-  </section>
-
-  <!-- 8. Navigation (Tabs) -->
-  <section class="comparison-section">
-    <h2 class="section-title">8. Tabs & Navigation</h2>
-    <div class="comparison-grid" style="grid-template-columns: 1fr;">
-      <div class="style-column">
-        <div class="style-name">Material 3</div>
-        <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
-      </div>
-      <camelot-theme mode="cupertino">
-        <div class="style-column">
-          <div class="style-name">Cupertino</div>
-          <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
-        </div>
-      </camelot-theme>
-      <camelot-theme mode="soft">
-        <div class="style-column">
-          <div class="style-name">Soft UI</div>
-          <camelot-tabs class="demo-tabs" value="tab1"></camelot-tabs>
-        </div>
-      </camelot-theme>
-    </div>
-  </section>
-
-  <!-- 9. Dialogs Comparison -->
-  <section class="comparison-section">
-    <h2 class="section-title">9. Popups & Dialogs</h2>
-    <div class="comparison-grid">
-      <!-- Material Dialog -->
-      <div class="style-column">
-        <div class="style-name">Material 3</div>
-        <camelot-button label="Show Material Dialog" onclick="document.getElementById('dlg-m').show()"></camelot-button>
-        <camelot-confirm-dialog id="dlg-m" title="Delete account?"
-          message="This action cannot be undone. All your data will be permanently removed." confirmText="Delete"
-          cancelText="Cancel"></camelot-confirm-dialog>
-      </div>
-
-      <!-- Cupertino Dialog -->
-      <camelot-theme mode="cupertino">
-        <div class="style-column">
-          <div class="style-name">Cupertino</div>
-          <camelot-button label="Show iOS Alert" onclick="document.getElementById('dlg-c').show()"></camelot-button>
-          <camelot-confirm-dialog id="dlg-c" title="Low Battery"
-            message="10% of battery remaining. Connect to a power source soon." confirmText="OK"
-            cancelText="Close"></camelot-confirm-dialog>
-        </div>
-      </camelot-theme>
-
-      <!-- Soft UI Dialog -->
-      <camelot-theme mode="soft">
-        <div class="style-column">
-          <div class="style-name">Soft UI</div>
-          <camelot-button label="Show Soft Dialog" onclick="document.getElementById('dlg-s').show()"></camelot-button>
-          <camelot-confirm-dialog id="dlg-s" title="Unsaved Changes"
-            message="You have unsaved changes in your profile. Do you want to save them now?" confirmText="Save"
-            cancelText="Discard"></camelot-confirm-dialog>
-        </div>
-      </camelot-theme>
-    </div>
-    <div class="value-display" style="text-align: center; margin-top: 20px;">
-      Last Action: <span id="dlg-action">None</span>
-    </div>
-  </section>
-  <!-- 10. Drawers Comparison -->
-  <section class="comparison-section">
-    <h2 class="section-title">10. Side Panels (Drawers) - All Directions</h2>
-    <div class="comparison-grid" style="grid-template-columns: 1fr;">
-
-      <!-- Material Drawer Matrix -->
-      <div class="style-column">
-        <div class="style-name">Material 3</div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <camelot-button label="Left" onclick="document.getElementById('drw-m-l').show()"></camelot-button>
-          <camelot-button label="Right" onclick="document.getElementById('drw-m-r').show()"></camelot-button>
-          <camelot-button label="Top" onclick="document.getElementById('drw-m-t').show()"></camelot-button>
-          <camelot-button label="Bottom" onclick="document.getElementById('drw-m-b').show()"></camelot-button>
-        </div>
-      </div>
-
-      <!-- Cupertino Drawer Matrix -->
-      <camelot-theme mode="cupertino">
-        <div class="style-column">
-          <div class="style-name">Cupertino</div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <camelot-button label="Left" onclick="document.getElementById('drw-c-l').show()"></camelot-button>
-            <camelot-button label="Right" onclick="document.getElementById('drw-c-r').show()"></camelot-button>
-            <camelot-button label="Top" onclick="document.getElementById('drw-c-t').show()"></camelot-button>
-            <camelot-button label="Bottom" onclick="document.getElementById('drw-c-b').show()"></camelot-button>
-          </div>
-        </div>
-      </camelot-theme>
-
-      <!-- Soft UI Drawer Matrix -->
-      <camelot-theme mode="soft">
-        <div class="style-column">
-          <div class="style-name">Soft UI</div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <camelot-button label="Left" onclick="document.getElementById('drw-s-l').show()"></camelot-button>
-            <camelot-button label="Right" onclick="document.getElementById('drw-s-r').show()"></camelot-button>
-            <camelot-button label="Top" onclick="document.getElementById('drw-s-t').show()"></camelot-button>
-            <camelot-button label="Bottom" onclick="document.getElementById('drw-s-b').show()"></camelot-button>
-          </div>
-        </div>
-      </camelot-theme>
-
-      <!-- Sci-fi HUD Drawer Matrix -->
-      <camelot-theme mode="scifi">
-        <div class="style-column" style="background-color: #05080a; border: 1px solid var(--cml-color-primary);">
-          <div class="style-name" style="color: var(--cml-color-primary);">Sci-fi HUD</div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <camelot-button label="Left" onclick="document.getElementById('drw-sci-l').show()"></camelot-button>
-            <camelot-button label="Right" onclick="document.getElementById('drw-sci-r').show()"></camelot-button>
-            <camelot-button label="Top" onclick="document.getElementById('drw-sci-t').show()"></camelot-button>
-            <camelot-button label="Bottom" onclick="document.getElementById('drw-sci-b').show()"></camelot-button>
-          </div>
-        </div>
-      </camelot-theme>
-    </div>
-
-    <!-- Matrix of Drawers -->
-    <!-- Material -->
-    <camelot-drawer id="drw-m-l" anchor="left" headline="Material Left"></camelot-drawer>
-    <camelot-drawer id="drw-m-r" anchor="right" headline="Material Right"></camelot-drawer>
-    <camelot-drawer id="drw-m-t" anchor="top" headline="Material Top"></camelot-drawer>
-    <camelot-drawer id="drw-m-b" anchor="bottom" headline="Material Bottom"></camelot-drawer>
-
-    <!-- Cupertino -->
-    <camelot-theme mode="cupertino">
-      <camelot-drawer id="drw-c-l" anchor="left" label="iCloud"></camelot-drawer>
-      <camelot-drawer id="drw-c-r" anchor="right" label="Settings"></camelot-drawer>
-      <camelot-drawer id="drw-c-t" anchor="top" label="Notifications"></camelot-drawer>
-      <camelot-drawer id="drw-c-b" anchor="bottom" label="Share Sheet"></camelot-drawer>
-    </camelot-theme>
-
-    <!-- Soft UI -->
-    <camelot-theme mode="soft">
-      <camelot-drawer id="drw-s-l" anchor="left" label="Soft Left"></camelot-drawer>
-      <camelot-drawer id="drw-s-r" anchor="right" label="Soft Right"></camelot-drawer>
-      <camelot-drawer id="drw-s-t" anchor="top" label="Soft Top"></camelot-drawer>
-      <camelot-drawer id="drw-s-b" anchor="bottom" label="Soft Bottom"></camelot-drawer>
-    </camelot-theme>
-
-    <!-- Sci-fi -->
-    <camelot-theme mode="scifi">
-      <camelot-drawer id="drw-sci-l" anchor="left" label="STATUS_REPORT"></camelot-drawer>
-      <camelot-drawer id="drw-sci-r" anchor="right" label="NETWORK_CONFIG"></camelot-drawer>
-      <camelot-drawer id="drw-sci-t" anchor="top" label="CRITICAL_ALERTS"></camelot-drawer>
-      <camelot-drawer id="drw-sci-b" anchor="bottom" label="DATA_STREAM"></camelot-drawer>
-    </camelot-theme>
-  </section>
-
-  <!-- 11. Navigation Menus -->
-  <section class="demo-section">
-    <h2 class="section-title">11. Navigation Menus (Data-driven)</h2>
-    <div class="comparison-grid">
-      <div class="style-column">
-        <div class="style-name">Material 3 / Cupertino</div>
-        <camelot-menu id="menu-m" value="dash" style-type="material"></camelot-menu>
-        <div class="value-display">Selected: <span id="val-menu-m">dash</span></div>
-      </div>
-      <div class="style-column">
-        <div class="style-name">Soft UI</div>
-        <camelot-theme mode="soft">
-          <camelot-menu id="menu-s" value="dash" style-type="soft"></camelot-menu>
-        </camelot-theme>
-        <div class="value-display">Selected: <span id="val-menu-s">dash</span></div>
-      </div>
-      <div class="style-column" style="background-color: #05080a; border: 1px solid var(--cml-color-primary);">
-        <div class="style-name" style="color: var(--cml-color-primary);">Sci-fi HUD</div>
-        <camelot-theme mode="scifi">
-          <camelot-menu id="menu-sci" value="dash" style-type="scifi"></camelot-menu>
-        </camelot-theme>
-        <div class="value-display">Selected: <span id="val-menu-sci">dash</span></div>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 32px;">Horizontal & Collapsed Demos</h3>
-    <div style="margin-bottom: 24px; padding: 24px; border-radius: 12px; border: 1px solid var(--demo-border);">
-      <div class="style-name">Material 3 Horizontal</div>
-      <camelot-menu id="menu-h-m" mode="horizontal" value="dash" style-type="material"></camelot-menu>
-    </div>
-
-    <div class="comparison-grid">
-      <div class="style-column">
-        <div class="style-name">Material 3 Collapsed</div>
-        <camelot-menu id="menu-col-m" collapsed style="width: 80px;" style-type="material"></camelot-menu>
-      </div>
-      <div class="style-column">
-        <div class="style-name">Soft UI Collapsed</div>
-        <camelot-theme mode="soft">
-          <camelot-menu id="menu-col-s" collapsed style="width: 80px;" style-type="soft"></camelot-menu>
-        </camelot-theme>
-      </div>
-      <div class="style-column" style="background-color: #05080a; border: 1px solid var(--cml-color-primary);">
-        <div class="style-name" style="color: var(--cml-color-primary);">Sci-fi HUD Collapsed</div>
-        <camelot-theme mode="scifi">
-          <camelot-menu id="menu-col-sci" collapsed style="width: 80px;" style-type="scifi"></camelot-menu>
-        </camelot-theme>
-      </div>
-    </div>
-
-    <div style="margin-top: 24px; text-align: center;">
-      <button onclick="toggleAllCollapses()">Toggle Global Collapse</button>
-    </div>
-  </section>
-  </main>
   </camelot-theme>
 
-  <style>
-    .section-title {
-      border-bottom: 2px solid var(--cml-color-outline-variant);
-      padding-bottom: 12px;
-      margin-top: 40px;
-    }
-  </style>
-
-  <script type="module">
-    import './src/components/theme/CamelotTheme.ts'
-    import { THEME_DEFAULT, THEME_SAPPHIRE, THEME_EMERALD, THEME_CYBER } from './src/styles/themes.ts'
-
-    // Buttons
-    import './src/components/button/filled/CamelotButton.ts'
-    import './src/components/button/icon/CamelotIconButton.ts'
-    import './src/components/button/outline/CamelotOutlineButton.ts'
-    import './src/components/button/text/CamelotTextButton.ts'
-
-    // Inputs & Selections
-    import './src/components/input/CamelotInput.ts'
-    import './src/components/checkbox/CamelotCheckbox.ts'
-    import './src/components/checkbox/CamelotCheckboxGroup.ts'
-    import './src/components/switch/CamelotSwitch.ts'
-    import './src/components/radio/CamelotRadio.ts'
-    import './src/components/radio/CamelotRadioGroup.ts'
-    import './src/components/select/CamelotSelect.ts'
-
-    import { html } from 'lit'
-    import './src/components/tabs/CamelotTabs.ts'
-    import './src/components/card/CamelotCard.ts'
-    import './src/components/badge/CamelotBadge.ts'
-    import './src/components/dialog/CamelotConfirmDialog.ts'
-    import './src/components/drawer/CamelotDrawer.ts'
-    import './src/components/menu/CamelotMenu.ts'
-    import './src/components/expand/CamelotExpand.ts'
-
-    // Global Controller Logic
-    const rootTheme = document.getElementById('root-theme')
-    const themeSelector = document.getElementById('theme-selector')
-    const paletteSelector = document.getElementById('palette-selector')
-
-    // 初始化 Select
-    const demoSelects = document.querySelectorAll('.demo-select')
-    demoSelects.forEach(select => {
-      select.options = [
-        { label: 'Standard Option', value: 'opt1' },
-        { label: 'Extended Choice', value: 'opt2' },
-        { label: 'Material Logic', value: 'opt3' }
-      ]
-    })
-
-    // 初始化 Tabs
-    const tabItems = [
-      { label: 'Overview', value: 'tab1' },
-      { label: 'Features', value: 'tab2' },
-      { label: 'Settings', value: 'tab3' }
-    ]
-    const demoTabs = document.querySelectorAll('.demo-tabs')
-    demoTabs.forEach(tabs => {
-      tabs.items = tabItems
-    })
-
-    // Group Demo Logic Helper
-    const setupGroup = (groupId, displayId) => {
-      const group = document.getElementById(groupId)
-      const display = document.getElementById(displayId)
-      if (group && display) {
-        group.addEventListener('change', (e) => {
-          const val = e.detail.value
-          display.textContent = Array.isArray(val) ? val.join(', ') : val
-        })
-      }
-    }
-
-    // Setup all groups
-    setupGroup('radio-group-m', 'val-radio-m')
-    setupGroup('cb-group-m', 'val-cb-m')
-    setupGroup('radio-group-c', 'val-radio-c')
-    setupGroup('cb-group-c', 'val-cb-c')
-    setupGroup('radio-group-s', 'val-radio-s')
-    setupGroup('cb-group-s', 'val-cb-s')
-    setupGroup('radio-group-sci-form', 'val-radio-sci-form')
-    setupGroup('cb-group-sci-form', 'val-cb-sci-form')
-
-    // Dialog Event Logic
-    const dlgActionDisplay = document.getElementById('dlg-action')
-    const setupDialog = (id) => {
-      const dlg = document.getElementById(id)
-      dlg.addEventListener('confirm', () => {
-        dlgActionDisplay.textContent = `[${id}] Confirmed`
-        dlgActionDisplay.style.color = 'var(--cml-color-success)'
-      })
-      dlg.addEventListener('cancel', () => {
-        dlgActionDisplay.textContent = `[${id}] Cancelled`
-        dlgActionDisplay.style.color = 'var(--cml-color-error)'
-      })
-    }
-
-    setupDialog('dlg-m')
-    setupDialog('dlg-c')
-    setupDialog('dlg-s')
-
-    // 初始化 Menus
-    const menuOptions = [
-      { label: 'Dashboard', key: 'dash', icon: '📊' },
-      {
-        label: 'Enterprise',
-        key: 'ent',
-        icon: '🏢',
-        children: [
-          {
-            label: 'Human Resources',
-            key: 'hr',
-            children: [
-              {
-                label: 'Employees',
-                key: 'emp',
-                children: [
-                  { label: 'Full-time', key: 'ft' },
-                  { label: 'Contractors', key: 'cont' },
-                  { label: 'Interns', key: 'int' }
-                ]
-              },
-              { label: 'Payroll', key: 'pay' }
-            ]
-          },
-          { label: 'Marketing', key: 'mkt' }
-        ]
-      },
-      { label: 'Control Center', key: 'ctrl', icon: '🕹️' },
-      { label: 'Settings', key: 'sett', icon: '⚙️' },
-      { label: 'Disabled Item', key: 'dis', icon: '🚫', disabled: true }
-    ]
-
-    const demoMenus = ['menu-m', 'menu-s', 'menu-sci', 'menu-h-m', 'menu-col-m', 'menu-col-s', 'menu-col-sci']
-    demoMenus.forEach(id => {
-      const menu = document.getElementById(id)
-      if (menu) {
-        menu.options = menuOptions
-        menu.addEventListener('select', (e) => {
-          const display = document.getElementById(`val-${id}`)
-          if (display) display.textContent = e.detail
-        })
-      }
-    })
-
-    window.toggleAllCollapses = () => {
-      const cols = ['menu-col-m', 'menu-col-s', 'menu-col-sci']
-      cols.forEach(id => {
-        const menu = document.getElementById(id)
-        if (menu) {
-          menu.collapsed = !menu.collapsed
-          menu.style.width = menu.collapsed ? '80px' : '240px'
-        }
-      })
-    }
-
-    // 初始設定使用預設主題物件
-    rootTheme.config = THEME_DEFAULT
-
-    themeSelector.addEventListener('change', (e) => {
-      rootTheme.setAttribute('theme', e.target.value)
-    })
-
-    paletteSelector.addEventListener('change', (e) => {
-      const val = e.target.value
-      if (val === 'sapphire') {
-        rootTheme.config = THEME_SAPPHIRE
-      } else if (val === 'emerald') {
-        rootTheme.config = THEME_EMERALD
-      } else if (val === 'cyber') {
-        rootTheme.config = THEME_CYBER
-      } else {
-        rootTheme.config = THEME_DEFAULT
-      }
-    })
-
-    // 演示：動態修改非顏色的變數 (字體與間距)
-    window.setCustomAesthetics = () => {
-      rootTheme.config = {
-        ...rootTheme.config,
-        font: {
-          family: "'Georgia', serif",
-          'size-headline': '2.5rem'
-        },
-        spacing: {
-          '4': '2rem'
-        }
-      }
-      console.log('Custom Aesthetics Applied: Serif Font & Large Spacing')
-    }
-
-    window.setCustomColor = (color) => {
-      rootTheme.config = { ...rootTheme.config, color: { primary: color } }
-      console.log(`Global Primary Color set to: ${color}`)
-    };
-
-    // --- Sci-fi HUD Demo Initialization ---
-    // Fix for static HTML not supporting property binding
-    const scifiSelect = document.getElementById('scifi-select-levels');
-    if (scifiSelect) {
-      scifiSelect.options = [
-        {label: 'LEVEL_01 (GUEST)', value: '01'},
-        {label: 'LEVEL_05 (ADMIN)', value: '05'},
-        {label: 'LEVEL_09 (ROOT)', value: '09'}
-      ];
-    }
-
-    const scifiTabs = document.getElementById('scifi-tabs-main');
-    if (scifiTabs) {
-      scifiTabs.items = [
-        {label: 'COMM_LOG', value: '1'},
-        {label: 'NAV_DATA', value: '2'},
-        {label: 'SYS_INFO', value: '3'}
-      ];
-    }
-
-    const scifiTermBtn = document.getElementById('scifi-btn-terminate');
-    const scifiDialog = document.getElementById('scifi-dialog');
-    if (scifiTermBtn && scifiDialog) {
-      scifiTermBtn.addEventListener('click', () => {
-        scifiDialog.open = true;
-      });
-    }
-  </script>
+  <script type="module" src="./src/main.ts"></script>
 </body>
-
 </html>

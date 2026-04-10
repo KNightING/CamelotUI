@@ -61,7 +61,12 @@ export class CamelotTheme extends LitElement {
 
   protected updated(changedProperties: Map<string | number | symbol, unknown>) {
     if (changedProperties.has('mode')) {
-      this.style.setProperty('--cml-active-ui-style', `"${this.mode}"`);
+      const parentTheme = this.parentElement?.closest('camelot-theme');
+      const isRoot = !parentTheme;
+      const target = isRoot ? (document.documentElement.style as any) : (this.style as any);
+      
+      target.setProperty('--cml-active-ui-style', `"${this.mode}"`);
+      
       window.dispatchEvent(new CustomEvent('camelot-theme-changed', {
         detail: { mode: this.mode },
         bubbles: true,
@@ -128,8 +133,25 @@ export class CamelotTheme extends LitElement {
     Object.entries(data).forEach(([key, value]) => {
       if (value !== undefined && value !== '') {
         target.setProperty(`--cml-${section}-${key}`, String(value));
+        
+        // 特殊處理：如果是顏色，試圖生成 RGB 數值片段以支持透明度 (rgba)
+        if (section === 'color' && String(value).startsWith('#')) {
+          const rgb = this._hexToRgb(String(value));
+          if (rgb) {
+            target.setProperty(`--cml-${section}-${key}-rgb`, `${rgb.r}, ${rgb.g}, ${rgb.b}`);
+          }
+        }
       }
     });
+  }
+
+  private _hexToRgb(hex: string) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
   }
 
   private _clearAllProperties() {

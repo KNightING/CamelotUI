@@ -9,7 +9,8 @@
 - **Styling**: Vanilla CSS (透過 Lit `css` 標籤)
 - **Styling tokens**: CSS Variables (定義於 `src/styles/tokens.css`)
 
-## 架構說明 (Architecture)
+- **Project Entry**: `index.html` (精簡畫布) 與 `src/main.ts` (統一邏輯入口)。
+- **Theme System**: 位於 `src/styles/themes.ts` 與 `src/components/theme/`，統一管理不同模式的色彩。支持 **Material 3, Cupertino, Soft UI, Sci-fi HUD** 四大風格。
 - **Base Components**: 位於 `src/components/base/`，為抽象底層組件。
 - **Component Facades**: 位於 `src/components/` 根目錄下，作為對外介面（如 `<camelot-button>`）。
 - **核心組件庫 (Core Components)**:
