@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 /**
  * <camelot-scifi-frame>
@@ -7,7 +8,7 @@ import { customElement, property } from 'lit/decorators.js';
  * 提供切角 (Cut-corner)、網格背景 (Grid)、掃描線 (Scanline) 與焦點發光效果。
  */
 @customElement('camelot-scifi-frame')
-export class CamelotScifiFrame extends LitElement {
+export class CamelotScifiFrame extends CamelotBaseElement {
   @property({ type: String, reflect: true })
   variant: '2-corner' | '4-corner' = '2-corner';
 
@@ -17,7 +18,6 @@ export class CamelotScifiFrame extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'show-scanline' })
   showScanline: boolean = true;
 
-  /** 是否顯示橫向脈衝掃描特效 (Borrowed from Switch aesthetics) */
   @property({ type: Boolean, reflect: true, attribute: 'show-pulse' })
   showPulse: boolean = false;
 
@@ -26,9 +26,6 @@ export class CamelotScifiFrame extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   filled: boolean = false;
-
-  @property({ type: String, reflect: true })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   @property({ type: Boolean, reflect: true })
   showShine: boolean = false;
@@ -49,7 +46,9 @@ export class CamelotScifiFrame extends LitElement {
       box-sizing: border-box;
       transition: all 0.3s ease;
       
-      --cml-scifi-color: var(--cml-color-primary);
+      /* 使用統一主題變數 */
+      --cml-scifi-color: var(--cml-color-current-color);
+      
       --cml-frame-clip: polygon(
         0% 0%, calc(100% - 10px) 0%, 100% 10px, 
         100% 100%, 10px 100%, 0% calc(100% - 10px)
@@ -62,9 +61,6 @@ export class CamelotScifiFrame extends LitElement {
         calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px
       );
     }
-
-    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
-    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
 
     .frame-container {
       position: relative;
@@ -162,7 +158,7 @@ export class CamelotScifiFrame extends LitElement {
       display: block;
     }
 
-    /* 橫向脈衝掃描特效 (Optimized for sharper, Switch-like appearance) */
+    /* 橫向脈衝掃描特效 */
     .pulse-bg {
       position: absolute;
       inset: 0;
@@ -272,6 +268,15 @@ export class CamelotScifiFrame extends LitElement {
         </div>
       </div>
     `;
+  }
+
+  /**
+   * 覆寫基礎類別的變數注入邏輯
+   * ScifiFrame 作為裝飾元件，預設應繼承父層（如 Button 或 Card）的 --cml-color-current 變數，
+   * 而非主動根據自己的屬性值去覆寫它。
+   */
+  protected _updateCurrentColors() {
+    // 故意留空：不主動注入變數，實現繼承。
   }
 }
 

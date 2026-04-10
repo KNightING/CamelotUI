@@ -20,5 +20,9 @@
   - [x] Outline Button
   - [x] Text Button
   - [x] Icon Button
+  - [x] 精煉裝飾元件 (Frame, Reticle)
 - [x] 重構 `CamelotScifiBase` 以移除舊有的顏色映射
-- [x] 執行類型檢查與展示頁面驗證
+- [x] 重構 `CamelotBaseElement` 以實現變數繼承 (Inheritance-aware)
+- [x] 清理 Proxy 與內部組件的多餘屬性傳遞
+- [x] 驗證 Sci-Fi HUD 組件是否正確繼承 `current-color`
+- [x] 執行最終類型檢查與驗證展示頁面

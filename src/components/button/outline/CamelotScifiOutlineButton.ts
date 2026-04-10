@@ -91,7 +91,6 @@ export class CamelotScifiOutlineButton extends CamelotScifiBase {
       >
         <camelot-scifi-reticle 
           .active=${this._isHovered || this._isActive}
-          .color=${this.color}
         ></camelot-scifi-reticle>
         
         <button ?disabled="${this.disabled}">

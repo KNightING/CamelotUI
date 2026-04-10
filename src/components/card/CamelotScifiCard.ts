@@ -57,7 +57,6 @@ export class CamelotScifiCard extends CamelotScifiBase {
   render() {
     return html`
       <camelot-scifi-frame 
-        .color="${this.color}"
         ?showGrid="${true}"
       >
         <div class="card-content">

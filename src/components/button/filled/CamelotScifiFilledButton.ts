@@ -65,7 +65,6 @@ export class CamelotScifiFilledButton extends CamelotScifiBase {
 
     return html`
       <camelot-scifi-frame
-        .color="${this.color}"
         ?focused="${this._isFocused}"
         ?filled="${isFilled && !this.disabled}"
         ?showGrid="${false}"

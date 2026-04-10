@@ -321,7 +321,10 @@ export const THEME_CYBER: CamelotThemeConfig = {
       'error': '#ff3d3d', 'on-error': '#ffffff', 'error-container': '#ffdadb', 'on-error-container': '#660000',
       'background': '#f0f4f5', 'on-background': '#101a1a', 'surface': '#ffffff', 'on-surface': '#101a1a',
       'surface-variant': '#e0ecef', 'on-surface-variant': '#304a5f', 'outline': '#80a0b0', 'outline-variant': '#c0d0d0',
-      'surface-container-low': '#f5f9fa', 'surface-container': '#ffffff', 'surface-container-high': '#eef4f6', 'surface-container-highest': '#e5eef1'
+      'surface-container-low': '#f5f9fa', 'surface-container': '#ffffff', 'surface-container-high': '#eef4f6', 'surface-container-highest': '#e5eef1',
+      'info': '#0061A4', 'on-info': '#FFFFFF', 'info-container': '#D1E4FF', 'on-info-container': '#001D36',
+      'warning': '#7D5800', 'on-warning': '#FFFFFF', 'warning-container': '#FFDEA1', 'on-warning-container': '#271900',
+      'success': '#006D3A', 'on-success': '#FFFFFF', 'success-container': '#98F7B5', 'on-success-container': '#00210E'
     },
     font: {
       'family': "'Share Tech Mono', 'Roboto Mono', monospace"
@@ -343,7 +346,10 @@ export const THEME_CYBER: CamelotThemeConfig = {
       'error': '#ff3d3d', 'on-error': '#ffffff', 'error-container': '#410002', 'on-error-container': '#ff3d3d',
       'background': '#05080a', 'on-background': '#c0d0d0', 'surface': '#0d121b', 'on-surface': '#c0d0d0',
       'surface-variant': '#1a2b3c', 'on-surface-variant': '#a0b0b0', 'outline': '#304a5f', 'outline-variant': '#1a2b3c',
-      'surface-container-low': '#081018', 'surface-container': '#0d121b', 'surface-container-high': '#1a212d', 'surface-container-highest': '#252e3f'
+      'surface-container-low': '#081018', 'surface-container': '#0d121b', 'surface-container-high': '#1a212d', 'surface-container-highest': '#252e3f',
+      'info': '#9ECAFF', 'on-info': '#003258', 'info-container': '#00497D', 'on-info-container': '#D1E4FF',
+      'warning': '#FFBA2A', 'on-warning': '#422C00', 'warning-container': '#5F4100', 'on-warning-container': '#FFDEA1',
+      'success': '#7DDA9B', 'on-success': '#00391C', 'success-container': '#00522B', 'on-success-container': '#98F7B5'
     },
     font: {
       'family': "'Share Tech Mono', 'Roboto Mono', monospace"

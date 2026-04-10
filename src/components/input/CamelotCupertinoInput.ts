@@ -36,7 +36,7 @@ export class CamelotCupertinoInput extends CamelotBaseElement {
         padding: 12px 16px;
         border: none;
         border-radius: 10px;
-        background-color: rgba(120, 120, 128, 0.12);
+        background-color: var(--cml-color-current-bg-color);
         color: var(--cml-color-on-surface);
         outline: none;
         transition: all 0.2s ease-in-out;

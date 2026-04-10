@@ -120,11 +120,9 @@ export class CamelotScifiIconButton extends CamelotScifiBase {
       >
         <camelot-scifi-reticle 
           .active=${isActive} 
-          .color=${this.color}
         ></camelot-scifi-reticle>
         
         <camelot-scifi-frame
-          .color="${this.color}"
           ?show-shine="${this._isHovered && !this.disabled}"
           ?show-pulse="${this._isFocused || this._isHovered}"
           ?show-grid="${false}"

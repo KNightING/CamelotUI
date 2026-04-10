@@ -31,6 +31,7 @@ export class CamelotOutlineButton extends CamelotBaseElement {
             .label=${this.label} 
             .color=${this.color}
             ?disabled=${this.disabled}
+            .isContainer=${this.isContainer}
           >
             <slot></slot>
           </camelot-soft-outline-button>
@@ -41,6 +42,7 @@ export class CamelotOutlineButton extends CamelotBaseElement {
             .label=${this.label} 
             .color=${this.color}
             ?disabled=${this.disabled}
+            .isContainer=${this.isContainer}
           >
             <slot></slot>
           </camelot-scifi-outline-button>
@@ -51,6 +53,7 @@ export class CamelotOutlineButton extends CamelotBaseElement {
             .label=${this.label} 
             .color=${this.color}
             ?disabled=${this.disabled}
+            .isContainer=${this.isContainer}
           >
             <slot></slot>
           </camelot-cupertino-outline-button>
@@ -62,6 +65,7 @@ export class CamelotOutlineButton extends CamelotBaseElement {
             .label=${this.label} 
             .color=${this.color}
             ?disabled=${this.disabled}
+            .isContainer=${this.isContainer}
           >
             <slot></slot>
           </camelot-material-outline-button>

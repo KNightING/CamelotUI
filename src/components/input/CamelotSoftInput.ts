@@ -36,7 +36,7 @@ export class CamelotSoftInput extends CamelotBaseElement {
         padding: 16px 20px;
         border: none;
         border-radius: 16px;
-        background-color: var(--cml-color-background);
+        background-color: var(--cml-color-current-bg-color);
         color: var(--cml-color-on-background);
         outline: none;
         box-shadow: 

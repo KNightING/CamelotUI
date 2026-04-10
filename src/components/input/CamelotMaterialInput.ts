@@ -29,7 +29,7 @@ export class CamelotMaterialInput extends CamelotBaseElement {
 
       .md-field {
         position: relative;
-        background-color: var(--cml-color-surface-variant);
+        background-color: var(--cml-color-current-bg-color);
         border-radius: 4px 4px 0 0;
         border-bottom: 1px solid var(--cml-color-outline);
         height: 56px;

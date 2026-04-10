@@ -31,6 +31,7 @@ export class CamelotButton extends CamelotBaseElement {
             .label=${this.label} 
             .color=${this.color}
             ?disabled=${this.disabled}
+            .isContainer=${this.isContainer}
           >
             <slot></slot>
           </camelot-scifi-filled-button>
@@ -41,6 +42,7 @@ export class CamelotButton extends CamelotBaseElement {
             .label=${this.label} 
             .color=${this.color}
             ?disabled=${this.disabled}
+            .isContainer=${this.isContainer}
           >
             <slot></slot>
           </camelot-soft-filled-button>
@@ -51,6 +53,7 @@ export class CamelotButton extends CamelotBaseElement {
             .label=${this.label} 
             .color=${this.color}
             ?disabled=${this.disabled}
+            .isContainer=${this.isContainer}
           >
             <slot></slot>
           </camelot-cupertino-filled-button>
@@ -62,6 +65,7 @@ export class CamelotButton extends CamelotBaseElement {
             .label=${this.label} 
             .color=${this.color}
             ?disabled=${this.disabled}
+            .isContainer=${this.isContainer}
           >
             <slot></slot>
           </camelot-material-filled-button>
