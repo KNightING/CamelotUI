@@ -38,7 +38,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
       .display-value {
         font-family: var(--cml-font-family-mono, monospace);
         font-size: 0.95rem;
-        color: #fff;
+        color: var(--cml-color-on-surface);
       }
       .placeholder {
         color: color-mix(in srgb, var(--cml-scifi-color) 40%, transparent);
@@ -60,7 +60,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         left: 0;
         width: 100%;
         z-index: 100;
-        background: #000;
+        background: var(--cml-color-surface);
       }
       .option-item {
         padding: 10px 14px;
@@ -73,8 +73,8 @@ export class CamelotScifiSelect extends CamelotScifiBase {
       }
       .option-item:hover {
         background: var(--cml-scifi-color);
-        border-left-color: #fff;
-        color: var(--cml-color-on-primary, #fff);
+        border-left-color: var(--cml-color-on-primary);
+        color: var(--cml-color-on-primary);
       }
       /* 基於顏色動態切換內容文字色 */
       :host([color="primary"]) .option-item:hover { color: var(--cml-color-on-primary); }
@@ -84,7 +84,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
       .option-item[selected] {
         background: color-mix(in srgb, var(--cml-scifi-color) 40%, transparent);
         border-left-color: var(--cml-scifi-color);
-        color: #fff;
+        color: var(--cml-color-on-primary);
       }
       .search-box {
         padding: 8px 12px;
@@ -97,7 +97,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
       .search-input {
         background: transparent;
         border: none;
-        color: #fff;
+        color: var(--cml-color-on-surface);
         font-family: var(--cml-font-family-mono, monospace);
         font-size: 0.8rem;
         width: 100%;

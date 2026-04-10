@@ -22,3 +22,4 @@
 | [2604091710-rename-completed-to-archive.md](./archive/2604091710-rename-completed-to-archive.md) | [優化] 將 completed 更名為 Archive 以提升語意 | 2026-04-09 17:10 | 2026-04-09 17:25 |
 | [2604100933-optimize-index-showcase](./archive/2604100933-optimize-index-showcase.md) | 優化 index.html 展示畫面，封裝 Showcase 組件並移除非自定義元件內容。 | 2026-04-10 09:33 | 2026-04-10 11:20 |
 | [2604101050-refine-scifi-components](./archive/2604101050-refine-scifi-components.md) | 修復 Cyber 主題字體殘留問題，並優化 Sci-fi Select 搜尋功能與 TextButton 流光動畫。 | 2026-04-10 10:50 | 2026-04-10 11:20 |
+| [2604101130-implement-light-scifi-aesthetic](./archive/2604101130-implement-light-scifi-aesthetic.md) | 實作 Sci-fi HUD 的 Light Mode 美學適配，支援磨砂玻璃背景與主題切換 | 2026-04-10 11:30 | 2026-04-10 11:32 |

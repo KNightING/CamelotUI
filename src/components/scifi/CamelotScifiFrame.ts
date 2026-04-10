@@ -107,7 +107,7 @@ export class CamelotScifiFrame extends LitElement {
       position: relative;
       width: 100%;
       height: 100%;
-      background: color-mix(in srgb, var(--cml-scifi-color) var(--cml-scifi-bg-opacity, 5%), #000);
+      background: color-mix(in srgb, var(--cml-scifi-color) var(--cml-scifi-bg-opacity, 5%), var(--cml-color-surface));
       clip-path: var(--cml-frame-clip); /* 內部也進行同樣裁切 */
       box-sizing: border-box;
       display: flex;

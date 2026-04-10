@@ -35,14 +35,15 @@ export class CamelotScifiInput extends CamelotScifiBase {
         border: none;
         outline: none;
         /* 參考 Tabs：預設使用高對比混色 */
-        color: color-mix(in srgb, var(--cml-scifi-color) 80%, white);
+        color: var(--cml-color-on-surface);
         font-family: var(--cml-font-family-mono, monospace);
         font-size: 0.95rem;
         box-sizing: border-box;
         transition: color 0.2s ease;
       }
       input::placeholder {
-        color: color-mix(in srgb, var(--cml-scifi-color) 30%, white);
+        color: color-mix(in srgb, var(--cml-scifi-color) 40%, var(--cml-color-on-surface));
+        opacity: 0.5;
       }
       
       /* 當元件處於 Focused 狀態時（此時 Frame 是實心的），切換文字顏色 */

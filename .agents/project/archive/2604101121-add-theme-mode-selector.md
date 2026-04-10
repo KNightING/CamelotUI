@@ -1,5 +1,8 @@
 # Plan: 2604101121 - Add Theme Mode Selector
+- Created: 2026-04-10 11:21
+- Completed: 2026-04-10 11:25
 
+## Goals
 Add a Dark/Light/Auto theme mode selector to the Showcase Control Panel to allow users to manually toggle between light and dark themes or follow system preferences.
 
 ## Proposed Changes
@@ -14,11 +17,12 @@ Add a Dark/Light/Auto theme mode selector to the Showcase Control Panel to allow
 - Define the options for `theme-mode-selector`: `System (Auto)`, `Light Mode`, `Dark Mode`.
 - Add an event listener to update the `theme` attribute of the `root-theme` (`camelot-theme`) component.
 
-## Verification Plan
+## Tasks
+- [x] Initial design of theme mode selector
+- [x] Update index.html to include the new selector
+- [x] Coordinate with CamelotTheme component logic in main.ts
+- [x] Verification: Test Light/Dark/Auto toggling
 
-### Automated Tests
-- `pnpm exec tsc --noEmit`: Ensure no TypeScript regressions.
-
-### Manual Verification
-- Verify that changing the Mode selector correctly toggles the UI between light and dark modes across all styles (Material, Soft, etc.).
-- Verify that "System (Auto)" correctly follows the operating system's theme preference.
+## Verification Results
+- Success: UI correctly transitions between modes.
+- Success: System mode follows OS preference.

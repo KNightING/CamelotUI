@@ -31,8 +31,7 @@ export class CamelotScifiBadge extends CamelotScifiBase {
         font-size: 0.75rem;
         font-weight: bold;
         letter-spacing: 1px;
-        /* 參考 Tabs：預設使用更高對比的混色，提高白色佔比 */
-        color: color-mix(in srgb, var(--cml-scifi-color) 40%, white);
+        color: var(--cml-color-on-surface);
         text-transform: uppercase;
         transition: color 0.2s ease;
       }

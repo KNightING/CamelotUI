@@ -38,7 +38,7 @@ export class CamelotScifiTabs extends CamelotScifiBase {
         font-family: var(--cml-font-family-mono, monospace);
         font-size: 0.85rem;
         font-weight: bold;
-        color: color-mix(in srgb, var(--cml-scifi-color) 60%, white);
+        color: var(--cml-color-on-surface);
         text-transform: uppercase;
         letter-spacing: 1px;
         transition: color 0.2s ease;

@@ -27,6 +27,7 @@
     - **Input & Select**: 具備高對比度 (On-Colors) 與 Filled 狀態感知，確保在發光背景下依然清晰。
 - **UI Components (Sci-fi HUD Suite)**:
     - **Architecture**: 採用 `Frame-first` 設計，所有 Sci-Fi 組件均封裝於 `CamelotScifiFrame` 中。
+    - **Adaptive Theme**: 支援動態切換 Light/Dark 模式。透過 `color-mix` 配合主題 `surface` 變數與 `glow-intensity` 參數，實現淺色 HUD (磨砂玻璃感) 與深色 HUD (極致科幻感) 的無縫切換。
     - **IconButton**: 整合十字絲標線動態效果。
     - **Tabs/Card/Badge**: 強制遵循 HUD 視覺語言，支持狀態填充。
 

@@ -139,6 +139,13 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
       'width': '360px',
       'height': '240px',
       'shadow': '0 8px 32px rgba(0,0,0,0.3)'
+    },
+    scifi: {
+      'glow-color': 'rgba(125, 218, 155, 0.4)',
+      'glow-intensity': 0.8,
+      'corner-size': '8px',
+      'scanline-opacity': 0.05,
+      'bracket-color': 'var(--cml-color-primary)'
     }
   }
 };
@@ -157,6 +164,13 @@ export const THEME_SAPPHIRE: CamelotThemeConfig = {
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.8)',
       'color-dark': 'rgba(0, 50, 88, 0.15)'
+    },
+    scifi: {
+      'glow-color': 'rgba(0, 97, 164, 0.2)',
+      'glow-intensity': 0.5,
+      'corner-size': '8px',
+      'scanline-opacity': 0.03,
+      'bracket-color': 'rgba(0, 97, 164, 0.6)'
     }
   },
   dark: {
@@ -172,6 +186,13 @@ export const THEME_SAPPHIRE: CamelotThemeConfig = {
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.05)',
       'color-dark': 'rgba(0, 0, 0, 0.6)'
+    },
+    scifi: {
+      'glow-color': 'rgba(158, 202, 255, 0.4)',
+      'glow-intensity': 0.8,
+      'corner-size': '10px',
+      'scanline-opacity': 0.1,
+      'bracket-color': '#9ECAFF'
     }
   }
 };
@@ -190,9 +211,17 @@ export const THEME_EMERALD: CamelotThemeConfig = {
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.8)',
       'color-dark': 'rgba(0, 50, 20, 0.1)'
+    },
+    scifi: {
+      'glow-color': 'rgba(0, 109, 58, 0.1)',
+      'glow-intensity': 0.4,
+      'corner-size': '8px',
+      'scanline-opacity': 0.02,
+      'bracket-color': 'rgba(0, 109, 58, 0.5)'
     }
   },
   dark: {
+// ... existing dark emerald
     color: {
       'primary': '#7DDA9B', 'on-primary': '#00391C', 'primary-container': '#00522B', 'on-primary-container': '#98F7B5',
       'secondary': '#B7CCB9', 'on-secondary': '#233427', 'secondary-container': '#394B3C', 'on-secondary-container': '#D2E8D4',
@@ -216,6 +245,28 @@ export const THEME_EMERALD: CamelotThemeConfig = {
 };
 
 export const THEME_CYBER: CamelotThemeConfig = {
+  light: {
+    color: {
+      'primary': '#00b7ff', 'on-primary': '#ffffff', 'primary-container': '#d0f4ff', 'on-primary-container': '#004c66',
+      'secondary': '#ff0055', 'on-secondary': '#ffffff', 'secondary-container': '#ffd0df', 'on-secondary-container': '#660022',
+      'tertiary': '#86b300', 'on-tertiary': '#ffffff', 'tertiary-container': '#e6facb', 'on-tertiary-container': '#334c00',
+      'error': '#ff3d3d', 'on-error': '#ffffff', 'error-container': '#ffdadb', 'on-error-container': '#660000',
+      'background': '#f0f4f5', 'on-background': '#101a1a', 'surface': '#ffffff', 'on-surface': '#101a1a',
+      'surface-variant': '#e0ecef', 'on-surface-variant': '#304a5f', 'outline': '#80a0b0', 'outline-variant': '#c0d0d0',
+      'surface-container-low': '#f5f9fa', 'surface-container': '#ffffff', 'surface-container-high': '#eef4f6', 'surface-container-highest': '#e5eef1'
+    },
+    font: {
+      'family': "'Share Tech Mono', 'Roboto Mono', monospace"
+    },
+    scifi: {
+      'glow-color': 'rgba(0, 183, 255, 0.2)',
+      'glow-intensity': 0.6,
+      'corner-size': '10px',
+      'scanline-opacity': 0.04,
+      'highlight': '#00b7ff',
+      'bracket-color': '#00b7ff'
+    }
+  },
   dark: {
     color: {
       'primary': '#00f3ff', 'on-primary': '#000000', 'primary-container': '#00373a', 'on-primary-container': '#00f3ff',
