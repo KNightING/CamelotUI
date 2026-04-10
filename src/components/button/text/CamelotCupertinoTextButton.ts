@@ -1,62 +1,57 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../../base/CamelotBaseElement';
 
 /**
  * <CamelotCupertinoTextButton>
  * iOS風格的文字按鈕 (Text Button)
  */
 @customElement('camelot-cupertino-text-button')
-export class CamelotCupertinoTextButton extends LitElement {
+export class CamelotCupertinoTextButton extends CamelotBaseElement {
   @property({ type: String })
   label: string = 'Button';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  static styles = [
+    css`
+      :host {
+        display: inline-block;
+      }
 
-  @property({ type: Boolean })
-  disabled: boolean = false;
+      button {
+        font-family: var(--cml-font-family);
+        font-weight: 400;
+        font-size: 1.0625rem;
+        padding: 12px 20px;
+        border: none;
+        background-color: transparent;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.1s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        
+        /* 使用統一主題變數 */
+        color: var(--cml-color-current-color);
+      }
 
-  static styles = css`
-    :host {
-      display: inline-block;
-    }
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.3;
+        filter: grayscale(1);
+      }
 
-    button {
-      font-family: var(--cml-font-family);
-      font-weight: 400;
-      font-size: 1.0625rem;
-      padding: 12px 20px;
-      border: none;
-      background-color: transparent;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    button:disabled {
-      cursor: not-allowed;
-      opacity: 0.3;
-      filter: grayscale(1);
-    }
-
-    .primary { color: var(--cml-color-primary); }
-    .secondary { color: var(--cml-color-secondary); }
-    .tertiary { color: var(--cml-color-tertiary); }
-
-    button:active:not(:disabled) {
-      opacity: 0.6;
-      transform: scale(0.97);
-    }
-  `;
+      button:active:not(:disabled) {
+        opacity: 0.6;
+        transform: scale(0.97);
+      }
+    `
+  ];
 
   render() {
     return html`
       <button 
-        class="${this.color}"
         ?disabled="${this.disabled}"
       >
         ${this.label}

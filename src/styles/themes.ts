@@ -27,6 +27,21 @@ export interface CamelotThemeColors {
   'surface-container'?: string;
   'surface-container-high'?: string;
   'surface-container-highest'?: string;
+
+  'info'?: string;
+  'on-info'?: string;
+  'info-container'?: string;
+  'on-info-container'?: string;
+
+  'warning'?: string;
+  'on-warning'?: string;
+  'warning-container'?: string;
+  'on-warning-container'?: string;
+
+  'success'?: string;
+  'on-success'?: string;
+  'success-container'?: string;
+  'on-success-container'?: string;
 }
 
 export interface CamelotThemeFont {
@@ -136,7 +151,10 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
       'error': '#B3261E', 'on-error': '#FFFFFF', 'error-container': '#F9DEDC', 'on-error-container': '#410E0B',
       'background': '#FEF7FF', 'on-background': '#1D1B20', 'surface': '#FEF7FF', 'on-surface': '#1D1B20',
       'surface-variant': '#E7E0EC', 'on-surface-variant': '#49454F', 'outline': '#79747E', 'outline-variant': '#CAC4D0',
-      'surface-container-low': '#F7F2FA', 'surface-container': '#F3EDF7', 'surface-container-high': '#ECE6F0', 'surface-container-highest': '#E6E0E9'
+      'surface-container-low': '#F7F2FA', 'surface-container': '#F3EDF7', 'surface-container-high': '#ECE6F0', 'surface-container-highest': '#E6E0E9',
+      'info': '#0061A4', 'on-info': '#FFFFFF', 'info-container': '#D1E4FF', 'on-info-container': '#001D36',
+      'warning': '#7D5800', 'on-warning': '#FFFFFF', 'warning-container': '#FFDEA1', 'on-warning-container': '#271900',
+      'success': '#006D3A', 'on-success': '#FFFFFF', 'success-container': '#98F7B5', 'on-success-container': '#00210E'
     },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.8)',
@@ -156,7 +174,10 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
       'error': '#F2B8B5', 'on-error': '#601410', 'error-container': '#8C1D18', 'on-error-container': '#F9DEDC',
       'background': '#141218', 'on-background': '#E6E1E5', 'surface': '#141218', 'on-surface': '#E6E1E5',
       'surface-variant': '#49454F', 'on-surface-variant': '#CAC4D0', 'outline': '#938F99', 'outline-variant': '#44474E',
-      'surface-container-low': '#1D1B20', 'surface-container': '#211F26', 'surface-container-high': '#2B2930', 'surface-container-highest': '#36343B'
+      'surface-container-low': '#1D1B20', 'surface-container': '#211F26', 'surface-container-high': '#2B2930', 'surface-container-highest': '#36343B',
+      'info': '#9ECAFF', 'on-info': '#003258', 'info-container': '#00497D', 'on-info-container': '#D1E4FF',
+      'warning': '#FFBA2A', 'on-warning': '#422C00', 'warning-container': '#5F4100', 'on-warning-container': '#FFDEA1',
+      'success': '#7DDA9B', 'on-success': '#00391C', 'success-container': '#00522B', 'on-success-container': '#98F7B5'
     },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.05)',
@@ -189,7 +210,10 @@ export const THEME_SAPPHIRE: CamelotThemeConfig = {
       'error': '#BA1A1A', 'on-error': '#FFFFFF', 'error-container': '#FFDAD6', 'on-error-container': '#410002',
       'background': '#F8F9FF', 'on-background': '#191C20', 'surface': '#F8F9FF', 'on-surface': '#191C20',
       'surface-variant': '#DFE2EB', 'on-surface-variant': '#43474E', 'outline': '#73777F', 'outline-variant': '#C3C7CF',
-      'surface-container-low': '#F0F4F9', 'surface-container': '#EAEFF6', 'surface-container-high': '#E4EAF2', 'surface-container-highest': '#DEE4ED'
+      'surface-container-low': '#F0F4F9', 'surface-container': '#EAEFF6', 'surface-container-high': '#E4EAF2', 'surface-container-highest': '#DEE4ED',
+      'info': '#0061A4', 'on-info': '#FFFFFF', 'info-container': '#D1E4FF', 'on-info-container': '#001D36',
+      'warning': '#7D5800', 'on-warning': '#FFFFFF', 'warning-container': '#FFDEA1', 'on-warning-container': '#271900',
+      'success': '#006D3A', 'on-success': '#FFFFFF', 'success-container': '#98F7B5', 'on-success-container': '#00210E'
     },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.8)',
@@ -211,7 +235,10 @@ export const THEME_SAPPHIRE: CamelotThemeConfig = {
       'error': '#FFB4AB', 'on-error': '#690005', 'error-container': '#93000A', 'on-error-container': '#FFDAD6',
       'background': '#111318', 'on-background': '#E2E2E9', 'surface': '#111318', 'on-surface': '#E2E2E9',
       'surface-variant': '#43474E', 'on-surface-variant': '#C3C7CF', 'outline': '#8D9199', 'outline-variant': '#43474E',
-      'surface-container-low': '#191C20', 'surface-container': '#1D2025', 'surface-container-high': '#272A30', 'surface-container-highest': '#32353B'
+      'surface-container-low': '#191C20', 'surface-container': '#1D2025', 'surface-container-high': '#272A30', 'surface-container-highest': '#32353B',
+      'info': '#9ECAFF', 'on-info': '#003258', 'info-container': '#00497D', 'on-info-container': '#D1E4FF',
+      'warning': '#FFBA2A', 'on-warning': '#422C00', 'warning-container': '#5F4100', 'on-warning-container': '#FFDEA1',
+      'success': '#7DDA9B', 'on-success': '#00391C', 'success-container': '#00522B', 'on-success-container': '#98F7B5'
     },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.05)',
@@ -239,7 +266,10 @@ export const THEME_EMERALD: CamelotThemeConfig = {
       'error': '#BA1A1A', 'on-error': '#FFFFFF', 'error-container': '#FFDAD6', 'on-error-container': '#410002',
       'background': '#F7FBF2', 'on-background': '#191C19', 'surface': '#F7FBF2', 'on-surface': '#191C19',
       'surface-variant': '#DDE5DA', 'on-surface-variant': '#424941', 'outline': '#727970', 'outline-variant': '#C1C9BE',
-      'surface-container-low': '#F1F6EC', 'surface-container': '#ECF1E7', 'surface-container-high': '#E6EADE', 'surface-container-highest': '#E1E5D8'
+      'surface-container-low': '#F1F6EC', 'surface-container': '#ECF1E7', 'surface-container-high': '#E6EADE', 'surface-container-highest': '#E1E5D8',
+      'info': '#0061A4', 'on-info': '#FFFFFF', 'info-container': '#D1E4FF', 'on-info-container': '#001D36',
+      'warning': '#7D5800', 'on-warning': '#FFFFFF', 'warning-container': '#FFDEA1', 'on-warning-container': '#271900',
+      'success': '#006D3A', 'on-success': '#FFFFFF', 'success-container': '#98F7B5', 'on-success-container': '#00210E'
     },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.8)',
@@ -261,7 +291,10 @@ export const THEME_EMERALD: CamelotThemeConfig = {
       'error': '#FFB4AB', 'on-error': '#690005', 'error-container': '#93000A', 'on-error-container': '#FFDAD6',
       'background': '#111411', 'on-background': '#E1E3DE', 'surface': '#111411', 'on-surface': '#E1E3DE',
       'surface-variant': '#424941', 'on-surface-variant': '#C1C9BE', 'outline': '#8B9389', 'outline-variant': '#424941',
-      'surface-container-low': '#191C19', 'surface-container': '#1D211D', 'surface-container-high': '#272B27', 'surface-container-highest': '#323632'
+      'surface-container-low': '#191C19', 'surface-container': '#1D211D', 'surface-container-high': '#272B27', 'surface-container-highest': '#323632',
+      'info': '#9ECAFF', 'on-info': '#003258', 'info-container': '#00497D', 'on-info-container': '#D1E4FF',
+      'warning': '#FFBA2A', 'on-warning': '#422C00', 'warning-container': '#5F4100', 'on-warning-container': '#FFDEA1',
+      'success': '#7DDA9B', 'on-success': '#00391C', 'success-container': '#00522B', 'on-success-container': '#98F7B5'
     },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.05)',

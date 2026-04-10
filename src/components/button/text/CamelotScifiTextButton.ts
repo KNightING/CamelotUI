@@ -26,7 +26,10 @@ export class CamelotScifiTextButton extends CamelotScifiBase {
       padding: 8px 16px;
       border: none;
       background-color: transparent;
-      color: var(--cml-scifi-color, var(--cml-color-primary));
+      
+      /* 使用地理統一主題變數 */
+      color: var(--cml-color-current-color);
+      
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
       outline: none;
@@ -41,7 +44,7 @@ export class CamelotScifiTextButton extends CamelotScifiBase {
     }
 
     button:hover {
-      text-shadow: 0 0 8px var(--cml-scifi-color);
+      text-shadow: 0 0 8px var(--cml-color-current-color);
     }
 
     /* 點擊效果 */

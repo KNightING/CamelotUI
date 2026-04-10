@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import '../label/CamelotLabel';
 
 /**
@@ -7,7 +8,7 @@ import '../label/CamelotLabel';
  * iOS 風格的輸入框，具備 Apple 設計語言的標籤。
  */
 @customElement('camelot-cupertino-input')
-export class CamelotCupertinoInput extends LitElement {
+export class CamelotCupertinoInput extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
@@ -17,48 +18,42 @@ export class CamelotCupertinoInput extends LitElement {
   @property({ type: String })
   placeholder: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  static styles = [
+    css`
+      :host {
+        display: block;
+      }
 
-  @property({ type: Boolean })
-  disabled: boolean = false;
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
 
-  static styles = css`
-    :host {
-      display: block;
-    }
+      input {
+        font-family: var(--cml-font-family);
+        font-size: 1.0625rem;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 10px;
+        background-color: rgba(120, 120, 128, 0.12);
+        color: var(--cml-color-on-surface);
+        outline: none;
+        transition: all 0.2s ease-in-out;
+      }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+      input:focus {
+        background-color: var(--cml-color-surface);
+        box-shadow: inset 0 0 0 1px var(--cml-color-current-color);
+      }
 
-    input {
-      font-family: var(--cml-font-family);
-      font-size: 1.0625rem;
-      padding: 12px 16px;
-      border: none;
-      border-radius: 10px;
-      background-color: rgba(120, 120, 128, 0.12);
-      color: var(--cml-color-on-surface);
-      outline: none;
-      transition: all 0.2s ease-in-out;
-    }
-
-    input:focus {
-      background-color: var(--cml-color-surface);
-      box-shadow: inset 0 0 0 1px var(--cml-color-primary);
-    }
-    .secondary.container input:focus { box-shadow: inset 0 0 0 1px var(--cml-color-secondary); }
-    .tertiary.container input:focus { box-shadow: inset 0 0 0 1px var(--cml-color-tertiary); }
-
-    .disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-  `;
+      .disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+    `
+  ];
 
   private _handleInput(e: Event) {
     this.value = (e.target as HTMLInputElement).value;
@@ -71,7 +66,7 @@ export class CamelotCupertinoInput extends LitElement {
 
   render() {
     return html`
-      <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
+      <div class="container ${this.disabled ? 'disabled' : ''}">
         ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="input"></camelot-label>` : ''}
         <input 
           id="input"
@@ -82,5 +77,11 @@ export class CamelotCupertinoInput extends LitElement {
         />
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'camelot-cupertino-input': CamelotCupertinoInput;
   }
 }

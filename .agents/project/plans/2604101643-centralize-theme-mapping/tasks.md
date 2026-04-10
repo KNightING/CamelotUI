@@ -1,0 +1,24 @@
+- [x] 設定 `themes.ts` 中的色系預設值 (info, warning, success)
+- [x] 實作 `CamelotBaseElement` 中的代理變數映射邏輯
+- [x] 遷移 Material 元件
+  - [x] Text Button
+  - [x] Filled Button
+  - [x] Outline Button
+  - [x] Icon Button
+- [x] 遷移 Cupertino 元件
+  - [x] Text Button
+  - [x] Filled Button
+  - [x] Outline Button
+  - [x] Icon Button
+- [x] 遷移 Soft UI 元件
+  - [x] Text Button
+  - [x] Filled Button
+  - [x] Outline Button
+  - [x] Icon Button
+- [x] 遷移 Sci-fi 元件
+  - [x] Filled Button (ScifiBase Bridge)
+  - [x] Outline Button
+  - [x] Text Button
+  - [x] Icon Button
+- [x] 重構 `CamelotScifiBase` 以移除舊有的顏色映射
+- [x] 執行類型檢查與展示頁面驗證

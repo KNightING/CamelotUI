@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { CamelotScifiBase } from '../../scifi/CamelotScifiBase';
 import '../../scifi/CamelotScifiReticle';
 import '../../scifi/CamelotScifiFrame';
 
@@ -9,33 +10,16 @@ import '../../scifi/CamelotScifiFrame';
  * 特色：懸停時顯示 Focus Reticle 鎖定動畫，具備掃描脈衝效果。
  */
 @customElement('camelot-scifi-icon-button-impl')
-export class CamelotScifiIconButton extends LitElement {
-  @property({ type: String, reflect: true })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
-
+export class CamelotScifiIconButton extends CamelotScifiBase {
   @property({ type: String })
   shape: 'circle' | 'square' = 'circle';
-
-  @property({ type: Boolean, reflect: true })
-  disabled: boolean = false;
-
-  @state()
-  private _isHovered = false;
-
-  @state()
-  private _isFocused = false;
 
   static styles = css`
     :host {
       display: inline-block;
       vertical-align: middle;
-      --cml-scifi-color: var(--cml-color-primary);
-      --cml-scifi-glow: color-mix(in srgb, var(--cml-scifi-color), transparent 80%);
       position: relative;
     }
-
-    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
-    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
 
     .btn-container {
       position: relative;
@@ -50,9 +34,12 @@ export class CamelotScifiIconButton extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: color-mix(in srgb, var(--cml-scifi-color), transparent 90%);
-      border: 1px solid color-mix(in srgb, var(--cml-scifi-color), transparent 60%);
-      color: var(--cml-scifi-color);
+      
+      /* 使用地理統一主題變數 */
+      background: color-mix(in srgb, var(--cml-color-current-color), transparent 90%);
+      border: 1px solid color-mix(in srgb, var(--cml-color-current-color), transparent 60%);
+      color: var(--cml-color-current-color);
+      
       width: 40px;
       height: 40px;
       cursor: pointer;
@@ -74,7 +61,7 @@ export class CamelotScifiIconButton extends LitElement {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle, var(--cml-scifi-color) 0%, transparent 70%);
+      background: radial-gradient(circle, var(--cml-color-current-color) 0%, transparent 70%);
       opacity: 0;
       transition: opacity 0.3s;
       pointer-events: none;
@@ -93,14 +80,14 @@ export class CamelotScifiIconButton extends LitElement {
 
     button:hover,
     button:focus-visible {
-      border-color: var(--cml-scifi-color);
-      box-shadow: 0 0 10px var(--cml-scifi-glow);
+      border-color: var(--cml-color-current-color);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--cml-color-current-color), transparent 80%);
       color: #fff;
     }
 
     button:active {
       transform: scale(0.92);
-      background: var(--cml-scifi-color);
+      background: var(--cml-color-current-color);
       color: #000;
     }
 
@@ -128,8 +115,8 @@ export class CamelotScifiIconButton extends LitElement {
     return html`
       <div 
         class="btn-container"
-        @mouseenter=${() => this._isHovered = true}
-        @mouseleave=${() => this._isHovered = false}
+        @mouseenter=${this._handleMouseEnter}
+        @mouseleave=${this._handleMouseLeave}
       >
         <camelot-scifi-reticle 
           .active=${isActive} 
@@ -145,8 +132,8 @@ export class CamelotScifiIconButton extends LitElement {
         >
           <button
             ?disabled=${this.disabled}
-            @focus=${() => this._isFocused = true}
-            @blur=${() => this._isFocused = false}
+            @focus=${this._handleFocus}
+            @blur=${this._handleBlur}
           >
             <slot></slot>
           </button>

@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import '../label/CamelotLabel';
 
 /**
@@ -7,7 +8,7 @@ import '../label/CamelotLabel';
  * Neumorphism 風格的輸入框，內凹陰影效果。
  */
 @customElement('camelot-soft-input')
-export class CamelotSoftInput extends LitElement {
+export class CamelotSoftInput extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
@@ -17,51 +18,47 @@ export class CamelotSoftInput extends LitElement {
   @property({ type: String })
   placeholder: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  static styles = [
+    css`
+      :host {
+        display: block;
+      }
 
-  @property({ type: Boolean })
-  disabled: boolean = false;
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
 
-  static styles = css`
-    :host {
-      display: block;
-    }
+      input {
+        font-family: var(--cml-font-family);
+        font-size: 1rem;
+        padding: 16px 20px;
+        border: none;
+        border-radius: 16px;
+        background-color: var(--cml-color-background);
+        color: var(--cml-color-on-background);
+        outline: none;
+        box-shadow: 
+          inset var(--cml-soft-distance) var(--cml-soft-distance) var(--cml-soft-blur) var(--cml-soft-color-dark), 
+          inset calc(-1 * var(--cml-soft-distance)) calc(-1 * var(--cml-soft-distance)) var(--cml-soft-blur) var(--cml-soft-color-light);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+      input:focus {
+        box-shadow: 
+          inset calc(var(--cml-soft-distance) * 0.5) calc(var(--cml-soft-distance) * 0.5) var(--cml-soft-blur) var(--cml-soft-color-dark), 
+          inset calc(-1 * var(--cml-soft-distance) * 0.5) calc(-1 * var(--cml-soft-distance) * 0.5) var(--cml-soft-blur) var(--cml-soft-color-light);
+      }
 
-    input {
-      font-family: var(--cml-font-family);
-      font-size: 1rem;
-      padding: 16px 20px;
-      border: none;
-      border-radius: 16px;
-      background-color: var(--cml-color-background);
-      color: var(--cml-color-on-background);
-      outline: none;
-      box-shadow: 
-        inset var(--cml-soft-distance) var(--cml-soft-distance) var(--cml-soft-blur) var(--cml-soft-color-dark), 
-        inset calc(-1 * var(--cml-soft-distance)) calc(-1 * var(--cml-soft-distance)) var(--cml-soft-blur) var(--cml-soft-color-light);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    input:focus {
-      box-shadow: 
-        inset calc(var(--cml-soft-distance) * 0.5) calc(var(--cml-soft-distance) * 0.5) var(--cml-soft-blur) var(--cml-soft-color-dark), 
-        inset calc(-1 * var(--cml-soft-distance) * 0.5) calc(-1 * var(--cml-soft-distance) * 0.5) var(--cml-soft-blur) var(--cml-soft-color-light);
-    }
-
-    .disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-      box-shadow: none !important;
-      pointer-events: none;
-    }
-  `;
+      .disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        box-shadow: none !important;
+        pointer-events: none;
+      }
+    `
+  ];
 
   private _handleInput(e: Event) {
     this.value = (e.target as HTMLInputElement).value;
@@ -74,7 +71,7 @@ export class CamelotSoftInput extends LitElement {
 
   render() {
     return html`
-      <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
+      <div class="container ${this.disabled ? 'disabled' : ''}">
         ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="input"></camelot-label>` : ''}
         <input 
           id="input"
@@ -85,5 +82,11 @@ export class CamelotSoftInput extends LitElement {
         />
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'camelot-soft-input': CamelotSoftInput;
   }
 }

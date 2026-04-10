@@ -34,8 +34,10 @@ export class CamelotScifiFilledButton extends CamelotScifiBase {
         gap: 8px;
         background: transparent;
         border: none;
-        /* 預設狀態：使用高亮度文字 */
-        color: color-mix(in srgb, var(--cml-scifi-color), white 80%);
+        
+        /* 使用統一主題變數：預設狀態使用 current-color 混合白色以提高亮度 */
+        color: color-mix(in srgb, var(--cml-color-current-color), white 80%);
+        
         font-family: var(--cml-font-family-mono, monospace);
         font-weight: bold;
         text-transform: uppercase;
@@ -46,15 +48,11 @@ export class CamelotScifiFilledButton extends CamelotScifiBase {
         pointer-events: none;
       }
       
-      /* 只有當真的填滿 (filled) 時（即 Active 狀態），才切換至對比色 (on-colors) */
+      /* 只有當真的填滿 (filled) 時（即 Active 狀態），才切換至對比色 (current-on-color) */
       :host([filled]) .btn-inner {
-        color: var(--cml-color-on-primary, #000);
+        color: var(--cml-color-current-on-color);
       }
       
-      :host([filled][color="secondary"]) .btn-inner { color: var(--cml-color-on-secondary, #000); }
-      
-      :host([filled][color="tertiary"]) .btn-inner { color: var(--cml-color-on-tertiary, #000); }
-
       /* 讓內容在 Filled 狀態下始終維持高對比 */
       :host .btn-inner ::slotted(*) {
         color: inherit;

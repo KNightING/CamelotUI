@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { CamelotScifiBase } from '../../scifi/CamelotScifiBase';
 import '../../scifi/CamelotScifiReticle';
 
 /**
@@ -7,34 +8,14 @@ import '../../scifi/CamelotScifiReticle';
  * 日系科幻風格 (Sci-fi HUD) 的外框按鈕
  */
 @customElement('camelot-scifi-outline-button')
-export class CamelotScifiOutlineButton extends LitElement {
+export class CamelotScifiOutlineButton extends CamelotScifiBase {
   @property({ type: String })
   label: string = 'Button';
-
-  @property({ type: String, reflect: true })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
-
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @state()
-  private _isHovered: boolean = false;
-
-  @state()
-  private _isPressed: boolean = false;
 
   static styles = css`
     :host {
       display: inline-block;
-      --cml-scifi-accent: var(--cml-color-primary);
-    }
-
-    :host([color="secondary"]) {
-      --cml-scifi-accent: var(--cml-color-secondary);
-    }
-
-    :host([color="tertiary"]) {
-      --cml-scifi-accent: var(--cml-color-tertiary);
+      position: relative;
     }
 
     .hud-container {
@@ -48,9 +29,12 @@ export class CamelotScifiOutlineButton extends LitElement {
       font-weight: var(--cml-font-weight-medium);
       font-size: var(--cml-font-size-label);
       padding: 8px 24px;
-      border: 1px solid var(--cml-scifi-accent);
+      
+      /* 使用地理統一主題變數 */
+      border: 1px solid var(--cml-color-current-color);
+      color: var(--cml-color-current-color);
+      
       background-color: transparent;
-      color: var(--cml-scifi-accent);
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
       outline: none;
@@ -68,7 +52,7 @@ export class CamelotScifiOutlineButton extends LitElement {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--cml-scifi-accent), transparent 80%), transparent);
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--cml-color-current-color), transparent 80%), transparent);
       transform: translateX(-100%);
       transition: transform 0.5s;
     }
@@ -79,8 +63,8 @@ export class CamelotScifiOutlineButton extends LitElement {
 
     /* 點擊效果 */
     button:active:not(:disabled) {
-      background-color: color-mix(in srgb, var(--cml-scifi-accent), transparent 80%);
-      box-shadow: 0 0 20px color-mix(in srgb, var(--cml-scifi-accent), transparent 50%);
+      background-color: color-mix(in srgb, var(--cml-color-current-color), transparent 80%);
+      box-shadow: 0 0 20px color-mix(in srgb, var(--cml-color-current-color), transparent 50%);
     }
 
     button:disabled {
@@ -100,13 +84,13 @@ export class CamelotScifiOutlineButton extends LitElement {
     return html`
       <div 
         class="hud-container"
-        @mouseenter=${() => this._isHovered = true}
-        @mouseleave=${() => this._isHovered = false}
-        @mousedown=${() => this._isPressed = true}
-        @mouseup=${() => this._isPressed = false}
+        @mouseenter=${this._handleMouseEnter}
+        @mouseleave=${this._handleMouseLeave}
+        @mousedown=${() => this._isActive = true}
+        @mouseup=${() => this._isActive = false}
       >
         <camelot-scifi-reticle 
-          .active=${this._isHovered || this._isPressed}
+          .active=${this._isHovered || this._isActive}
           .color=${this.color}
         ></camelot-scifi-reticle>
         

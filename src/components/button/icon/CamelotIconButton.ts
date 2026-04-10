@@ -16,19 +16,10 @@ import './CamelotScifiIconButton';
 @customElement('camelot-icon-button')
 export class CamelotIconButton extends CamelotBaseElement {
   /**
-   * 按鈕色彩：'primary', 'secondary', 'tertiary'
-   */
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
-
-  /**
    * 按鈕形狀：'circle', 'square'
    */
   @property({ type: String })
   shape: 'circle' | 'square' = 'circle';
-
-  @property({ type: Boolean, reflect: true })
-  disabled: boolean = false;
 
   render() {
     switch (this._activeStyle) {
@@ -38,6 +29,7 @@ export class CamelotIconButton extends CamelotBaseElement {
             .color=${this.color}
             .shape=${this.shape}
             ?disabled=${this.disabled}
+            ?is-container=${this.isContainer}
           >
             <slot></slot>
           </camelot-scifi-icon-button-impl>
@@ -48,6 +40,7 @@ export class CamelotIconButton extends CamelotBaseElement {
             .color=${this.color}
             .shape=${this.shape}
             ?disabled=${this.disabled}
+            ?is-container=${this.isContainer}
           >
             <slot></slot>
           </camelot-soft-icon-button>
@@ -58,6 +51,7 @@ export class CamelotIconButton extends CamelotBaseElement {
             .color=${this.color}
             .shape=${this.shape}
             ?disabled=${this.disabled}
+            ?is-container=${this.isContainer}
           >
             <slot></slot>
           </camelot-cupertino-icon-button>
@@ -69,6 +63,7 @@ export class CamelotIconButton extends CamelotBaseElement {
             .color=${this.color}
             .shape=${this.shape}
             ?disabled=${this.disabled}
+            ?is-container=${this.isContainer}
           >
             <slot></slot>
           </camelot-material-icon-button>

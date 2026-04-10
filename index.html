@@ -144,25 +144,47 @@
           <div class="section-header"><h2>Action Components</h2></div>
           <div class="showcase-grid">
             <div class="demo-item">
-              <span class="demo-label">Standard Buttons</span>
+              <span class="demo-label">Main Brand Colors</span>
               <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                 <camelot-button label="Primary Action"></camelot-button>
                 <camelot-button label="Secondary" color="secondary"></camelot-button>
-                <camelot-button label="Destructive" color="error"></camelot-button>
+                <camelot-button label="Tertiary" color="tertiary"></camelot-button>
               </div>
             </div>
             <div class="demo-item">
-              <span class="demo-label">Variants</span>
+              <span class="demo-label">Dynamic Feedback Roles (New)</span>
               <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                <camelot-outline-button label="Outline"></camelot-outline-button>
-                <camelot-text-button label="Plain Text"></camelot-text-button>
+                <camelot-button label="Error" color="error"></camelot-button>
+                <camelot-button label="Warning" color="warning"></camelot-button>
+                <camelot-button label="Success" color="success"></camelot-button>
+                <camelot-button label="Info" color="info"></camelot-button>
+              </div>
+            </div>
+            <div class="demo-item">
+              <span class="demo-label">Container Variants</span>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <camelot-button label="Primary Container" is-container></camelot-button>
+                <camelot-button label="Success Container" color="success" is-container></camelot-button>
+                <camelot-button label="Info Container" color="info" is-container></camelot-button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="showcase-grid" style="margin-top: 32px;">
+            <div class="demo-item">
+              <span class="demo-label">Style Variants</span>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <camelot-outline-button label="Outline Case" color="success"></camelot-outline-button>
+                <camelot-text-button label="Text Warning" color="warning"></camelot-text-button>
+                <camelot-outline-button label="Info Outline" color="info" is-container></camelot-outline-button>
               </div>
             </div>
             <div class="demo-item">
               <span class="demo-label">Icon Actions</span>
               <div style="display: flex; gap: 12px;">
                 <camelot-icon-button color="primary"><span>🏠</span></camelot-icon-button>
-                <camelot-icon-button color="secondary" shape="square"><span>⚙️</span></camelot-icon-button>
+                <camelot-icon-button color="success" shape="square"><span>✅</span></camelot-icon-button>
+                <camelot-icon-button color="warning" is-container><span>⚠️</span></camelot-icon-button>
               </div>
             </div>
           </div>
