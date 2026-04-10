@@ -105,6 +105,9 @@ export const THEME_DEFAULT: CamelotThemeConfig = {
       'surface-variant': '#E7E0EC', 'on-surface-variant': '#49454F', 'outline': '#79747E', 'outline-variant': '#CAC4D0',
       'surface-container-low': '#F7F2FA', 'surface-container': '#F3EDF7', 'surface-container-high': '#ECE6F0', 'surface-container-highest': '#E6E0E9'
     },
+    font: {
+      'family': "'Noto Sans TC', 'Roboto', sans-serif"
+    },
     soft: {
       'color-light': 'rgba(255, 255, 255, 0.8)',
       'color-dark': 'rgba(0, 0, 0, 0.1)'

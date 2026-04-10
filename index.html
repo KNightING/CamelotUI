@@ -37,40 +37,21 @@
       top: 20px;
       z-index: 1000;
       display: flex;
-      gap: 24px;
-      align-items: center;
-      padding: 16px 24px;
-      background: rgba(var(--cml-color-surface-rgb, 255, 255, 255), 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 16px;
-      border: 1px solid rgba(128, 128, 128, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      gap: 20px;
+      align-items: flex-end; /* Align to bottom of custom selects */
+      padding: 12px 24px;
+      background: rgba(var(--cml-color-surface-rgb, 255, 255, 255), 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 20px;
+      border: 1px solid rgba(128, 128, 128, 0.15);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
       margin-bottom: 60px;
     }
 
-    .control-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .control-group label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--cml-color-on-surface-variant);
-    }
-
-    .control-group select {
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--cml-color-outline-variant);
-      background: var(--cml-color-surface);
-      color: var(--cml-color-on-surface);
-      font-family: inherit;
-      cursor: pointer;
+    .control-panel camelot-select {
+      margin-bottom: 0; /* Remove default margin for header use */
+      min-width: 220px;
     }
 
     /* Clean Section Layout */
@@ -145,24 +126,8 @@
       
       <!-- Persistent Controls -->
       <div class="control-panel">
-        <div class="control-group">
-          <label>Theme Style</label>
-          <select id="theme-selector">
-            <option value="material">Material 3</option>
-            <option value="cupertino">Cupertino (iOS)</option>
-            <option value="soft">Soft UI (Neumorphism)</option>
-            <option value="scifi">Sci-fi HUD</option>
-          </select>
-        </div>
-        <div class="control-group">
-          <label>Color Palette</label>
-          <select id="palette-selector">
-            <option value="default">Amethyst (Purple)</option>
-            <option value="sapphire">Sapphire (Blue)</option>
-            <option value="emerald">Emerald (Green)</option>
-            <option value="cyber">Cyber (Cyberpunk)</option>
-          </select>
-        </div>
+        <camelot-select id="theme-selector" label="Theme Style" value="material"></camelot-select>
+        <camelot-select id="palette-selector" label="Color Palette" value="default"></camelot-select>
         <div style="flex-grow: 1;"></div>
         <div class="value-display" id="dlg-action">Status: Ready</div>
       </div>

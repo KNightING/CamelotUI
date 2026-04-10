@@ -35,8 +35,8 @@ import './components/scifi/CamelotScifiReticle'
  */
 document.addEventListener('DOMContentLoaded', () => {
     const rootTheme = document.getElementById('root-theme') as any;
-    const themeSelector = document.getElementById('theme-selector') as HTMLSelectElement;
-    const paletteSelector = document.getElementById('palette-selector') as HTMLSelectElement;
+    const themeSelector = document.getElementById('theme-selector') as any;
+    const paletteSelector = document.getElementById('palette-selector') as any;
 
     if (!rootTheme) return;
 
@@ -106,14 +106,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Control Panel Logic
     if (themeSelector) {
+        themeSelector.options = [
+            { label: 'Material 3', value: 'material' },
+            { label: 'Cupertino (iOS)', value: 'cupertino' },
+            { label: 'Soft UI (Neumorphism)', value: 'soft' },
+            { label: 'Sci-fi HUD', value: 'scifi' }
+        ];
         themeSelector.addEventListener('change', (e: any) => {
-            rootTheme.setAttribute('mode', e.target.value);
+            rootTheme.setAttribute('mode', e.detail.value);
         });
     }
 
     if (paletteSelector) {
+        paletteSelector.options = [
+            { label: 'Amethyst (Purple)', value: 'default' },
+            { label: 'Sapphire (Blue)', value: 'sapphire' },
+            { label: 'Emerald (Green)', value: 'emerald' },
+            { label: 'Cyber (Cyberpunk)', value: 'cyber' }
+        ];
         paletteSelector.addEventListener('change', (e: any) => {
-            const val = e.target.value;
+            const val = e.detail.value;
             switch(val) {
                 case 'sapphire': rootTheme.config = THEME_SAPPHIRE; break;
                 case 'emerald': rootTheme.config = THEME_EMERALD; break;
