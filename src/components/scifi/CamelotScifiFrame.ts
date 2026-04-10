@@ -5,54 +5,40 @@ import { customElement, property } from 'lit/decorators.js';
  * <camelot-scifi-frame>
  * 日系科幻風格 (Sci-fi HUD) 的統一外殼組件。
  * 提供切角 (Cut-corner)、網格背景 (Grid)、掃描線 (Scanline) 與焦點發光效果。
- * 
- * 使用方式：
- * <camelot-scifi-frame 
- *   variant="4-corner" 
- *   ?focused="${this._isFocused}"
- *   ?showGrid="${true}">
- *   <slot></slot>
- * </camelot-scifi-frame>
  */
 @customElement('camelot-scifi-frame')
 export class CamelotScifiFrame extends LitElement {
-  /** 框架變體: 2-corner (對角切) 或 4-corner (四角皆切) */
   @property({ type: String, reflect: true })
   variant: '2-corner' | '4-corner' = '2-corner';
 
-  /** 是否顯示網格背景 */
   @property({ type: Boolean, reflect: true, attribute: 'show-grid' })
   showGrid: boolean = true;
 
-  /** 是否顯示掃描線動畫 */
   @property({ type: Boolean, reflect: true, attribute: 'show-scanline' })
   showScanline: boolean = true;
 
-  /** 是否處於獲取焦點狀態 (顯示發光邊框) */
+  /** 是否顯示橫向脈衝掃描特效 (Borrowed from Switch aesthetics) */
+  @property({ type: Boolean, reflect: true, attribute: 'show-pulse' })
+  showPulse: boolean = false;
+
   @property({ type: Boolean, reflect: true })
   focused: boolean = false;
 
-  /** 是否填滿背景色 */
   @property({ type: Boolean, reflect: true })
   filled: boolean = false;
 
-  /** 顏色類型 */
   @property({ type: String, reflect: true })
   color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
-  /** 是否顯示滑動流光特效 */
   @property({ type: Boolean, reflect: true })
   showShine: boolean = false;
 
-  /** 是否顯示鎖定準心 (Reticle) */
   @property({ type: Boolean, reflect: true })
   activeReticle: boolean = false;
   
-  /** 是否顯示外框線 */
   @property({ type: Boolean, reflect: true, attribute: 'show-borders' })
   showBorders: boolean = true;
 
-  /** 是否顯示 L 型端角補強裝飾 */
   @property({ type: Boolean, reflect: true, attribute: 'show-corners' })
   showCorners: boolean = true;
 
@@ -85,9 +71,9 @@ export class CamelotScifiFrame extends LitElement {
       width: 100%;
       height: 100%;
       min-height: inherit;
-      background: color-mix(in srgb, var(--cml-scifi-color) 40%, transparent); /* 邊框色 */
+      background: color-mix(in srgb, var(--cml-scifi-color) 40%, transparent);
       clip-path: var(--cml-frame-clip);
-      padding: 1px; /* 邊框寬度 */
+      padding: 1px;
       box-sizing: border-box;
       overflow: hidden;
       display: flex;
@@ -108,7 +94,7 @@ export class CamelotScifiFrame extends LitElement {
       width: 100%;
       height: 100%;
       background: color-mix(in srgb, var(--cml-scifi-color) var(--cml-scifi-bg-opacity, 5%), var(--cml-color-surface));
-      clip-path: var(--cml-frame-clip); /* 內部也進行同樣裁切 */
+      clip-path: var(--cml-frame-clip);
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -145,11 +131,11 @@ export class CamelotScifiFrame extends LitElement {
       );
       transform: skewX(-25deg);
       pointer-events: none;
-      z-index: 10; /* Ensure shine is visible on top of everything if needed, but not blocking text */
+      z-index: 10;
       opacity: 0;
     }
 
-    :host([showShine]) .shine-glide {
+    :host([show-shine]) .shine-glide {
       animation: shine-glide-anim 1s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
@@ -176,7 +162,36 @@ export class CamelotScifiFrame extends LitElement {
       display: block;
     }
 
-    /* 掃描線動畫 */
+    /* 橫向脈衝掃描特效 (Optimized for sharper, Switch-like appearance) */
+    .pulse-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        color-mix(in srgb, var(--cml-scifi-color), transparent 90%) 35%,
+        color-mix(in srgb, var(--cml-scifi-color), transparent 70%) 50%, 
+        color-mix(in srgb, var(--cml-scifi-color), transparent 90%) 65%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    :host([show-pulse]) .pulse-bg {
+      opacity: 1;
+      animation: pulse-scan-horizontal 3s linear infinite;
+    }
+
+    @keyframes pulse-scan-horizontal {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* 掃描線動畫 (垂直) */
     .scanline {
       position: absolute;
       inset: 0;
@@ -191,7 +206,7 @@ export class CamelotScifiFrame extends LitElement {
       width: 100%;
       opacity: 0.1;
       pointer-events: none;
-      z-index: 1;
+      z-index: 2;
       display: none;
     }
     :host([show-scanline]) .scanline {
@@ -206,13 +221,12 @@ export class CamelotScifiFrame extends LitElement {
 
     .content {
       position: relative;
-      z-index: 5; /* 提高 z-index 確保內容（文字）始終在最上方 */
+      z-index: 5;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
 
-    /* 裝飾性邊角線 - 微調厚度至 3px，達到平衡的視覺重量 */
     .corner-decoration {
       position: absolute;
       width: 24px;
@@ -220,7 +234,6 @@ export class CamelotScifiFrame extends LitElement {
       background: var(--cml-scifi-color);
       pointer-events: none;
       z-index: 5;
-      transform: translateZ(0);
     }
     .top-left { 
       top: 0; 
@@ -236,14 +249,12 @@ export class CamelotScifiFrame extends LitElement {
 
   render() {
     return html`
-      <!-- 準心標記放在最外層，避免被 overflow:hidden 裁切 -->
       <camelot-scifi-reticle 
         .active="${this.activeReticle}"
         .color="${this.color}"
       ></camelot-scifi-reticle>
 
       <div class="frame-container">
-        <!-- 裝飾線放在 Container 內，但與 Inner 對齊 -->
         ${this.showCorners ? html`
           <div class="corner-decoration top-left"></div>
           <div class="corner-decoration bottom-right"></div>
@@ -251,6 +262,7 @@ export class CamelotScifiFrame extends LitElement {
         
         <div class="frame-inner">
           <div class="grid-bg"></div>
+          <div class="pulse-bg"></div>
           <div class="scanline"></div>
           <div class="shine-glide"></div>
           

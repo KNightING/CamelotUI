@@ -17,7 +17,7 @@
 - **Component Facades**: 位於 `src/components/` 根目錄下，作為對外介面（如 `<camelot-button>`）。
 
 - **核心組件庫 (Core Components)**:
-    - **基礎框架 (Foundation)**: `CamelotScifiFrame` (提供邊框、內切角、掃描線、發光點等 Sci-Fi 視覺基礎)。
+    - **基礎框架 (Foundation)**: `CamelotScifiFrame` (提供邊框、內切角、網格、垂直掃描線、橫向脈衝掃描 (showPulse)、流光等視覺基礎)。
     - **按鈕 (Button)**: `CamelotButton`, `CamelotScifiFilledButton` (支持 Active 狀態填充、adaptive 寬度等)。
     - **表單 (Forms)**: `CamelotInput`, `CamelotSelect`, `CamelotCheckbox`, `CamelotRadio`, `CamelotSwitch` (適配 Sci-Fi / Standard 風格變體)。
     - **數據展示 (Data)**: `CamelotBadge`, `CamelotCard`, `CamelotTabs` (強化對比與 HUD 風格)。

@@ -168,8 +168,9 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         <camelot-scifi-frame 
           .color="${this.color}"
           ?focused="${isFocused}"
-          ?showGrid="${false}"
-          ?showShine="${this._isHovered && !this.disabled}"
+          ?show-pulse="${isFocused}"
+          ?show-grid="${false}"
+          ?show-shine="${this._isHovered && !this.disabled}"
           .activeReticle="${this._isHovered && !this.disabled}"
           @mouseenter="${this._handleMouseEnter}"
           @mouseleave="${this._handleMouseLeave}"

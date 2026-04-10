@@ -90,13 +90,13 @@ export class CamelotScifiInput extends CamelotScifiBase {
     return html`
       <div class="input-container">
         ${this.label ? html`<div class="label-text">${this.label}</div>` : ''}
-        <camelot-scifi-frame
+        <camelot-scifi-frame 
           .color="${this.color}"
           ?focused="${this._isFocused}"
-          ?filled="${this._isFocused}"
-          ?showGrid="${false}"
-          ?showScanline="${this._isFocused}"
-          ?showShine="${this._isFocused || this._isHovered}"
+          ?show-pulse="${this._isFocused}"
+          ?show-grid="${false}"
+          ?show-scanline="${this._isFocused}"
+          ?show-shine="${this._isFocused || this._isHovered}"
           .activeReticle="${this._isFocused || (this._isHovered && !this.disabled)}"
           @mouseenter="${this._handleMouseEnter}"
           @mouseleave="${this._handleMouseLeave}"

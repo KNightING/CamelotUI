@@ -26,3 +26,4 @@
 | [2604101143-standardize-theme-fonts](./archive/2604101143-standardize-theme-fonts.md) | 建立主題基準配置 (BASE_CONFIG)，修復主題切換時字體無法恢復預設的問題。 | 2026-04-10 11:43 | 2026-04-10 11:55 |
 | [2604101340-fix-scifi-input-label](./archive/2604101340-fix-scifi-input-label.md) | 修復 Sci-fi HUD Text Input 缺少 Label 顯示的問題，並優化視覺風格。 | 2026-04-10 13:40 | 2026-04-10 13:42 |
 | [2604101350-fix-scifi-select-label](./archive/2604101350-fix-scifi-select-label.md) | 修復 Sci-fi HUD Select 缺少 Label 顯示的問題，確保表單系列視覺統一。 | 2026-04-10 13:49 | 2026-04-10 13:51 |
+| [2604101357-implement-scifi-frame-pulse-effect](./archive/2604101357-implement-scifi-frame-pulse-effect.md) | 在 Sci-fi Frame 加入橫向脈衝掃描特效，並將其套用於 Input 的 Focus 狀態。 | 2026-04-10 13:57 | 2026-04-10 14:05 |
