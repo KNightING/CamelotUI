@@ -72,7 +72,7 @@ export class CamelotScifiFilledButton extends CamelotScifiBase {
         ?filled="${isFilled && !this.disabled}"
         ?showGrid="${false}"
         ?showScanline="${!this.disabled}"
-        ?showShine="${this._isHovered && !this.disabled}"
+          ?show-shine="${this._isHovered && !this.disabled}"
         .activeReticle="${this._isActive || this._isFocused || this._isHovered}"
         @mouseenter="${this._handleMouseEnter}"
         @mouseleave="${this._handleMouseLeave}"

@@ -62,7 +62,7 @@ export class CamelotScifiBadge extends CamelotScifiBase {
         ?filled="${isFilled}"
         ?showGrid="${false}"
         ?showScanline="${isFilled}"
-        ?showShine="${this._isHovered && !this.disabled}"
+          ?show-shine="${this._isHovered && !this.disabled}"
         .activeReticle="${false}"
         @mouseenter="${this._handleMouseEnter}"
         @mouseleave="${this._handleMouseLeave}"

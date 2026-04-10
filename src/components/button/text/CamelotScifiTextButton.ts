@@ -70,7 +70,7 @@ export class CamelotScifiTextButton extends CamelotScifiBase {
         .showGrid="${false}"
         .showBorders="${false}"
         .showCorners="${false}"
-        ?showShine="${this._isHovered && !this.disabled}"
+        ?show-shine="${this._isHovered && !this.disabled}"
         .activeReticle="${this._isHovered && !this.disabled}"
         @mouseenter="${this._handleMouseEnter}"
         @mouseleave="${this._handleMouseLeave}"

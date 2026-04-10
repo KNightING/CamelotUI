@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../../scifi/CamelotScifiReticle';
+import '../../scifi/CamelotScifiFrame';
 
 /**
  * <CamelotScifiIconButton>
@@ -135,13 +136,21 @@ export class CamelotScifiIconButton extends LitElement {
           .color=${this.color}
         ></camelot-scifi-reticle>
         
-        <button
-          ?disabled=${this.disabled}
-          @focus=${() => this._isFocused = true}
-          @blur=${() => this._isFocused = false}
+        <camelot-scifi-frame
+          .color="${this.color}"
+          ?show-shine="${this._isHovered && !this.disabled}"
+          ?show-pulse="${this._isFocused || this._isHovered}"
+          ?show-grid="${false}"
+          variant="none"
         >
-          <slot></slot>
-        </button>
+          <button
+            ?disabled=${this.disabled}
+            @focus=${() => this._isFocused = true}
+            @blur=${() => this._isFocused = false}
+          >
+            <slot></slot>
+          </button>
+        </camelot-scifi-frame>
       </div>
     `;
   }
