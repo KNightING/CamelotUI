@@ -12,46 +12,121 @@ import '../scifi/CamelotScifiFrame';
 export class CamelotScifiTabs extends CamelotScifiBase {
   @property({ type: Array }) items: Array<{label: string, value: string}> = [];
   @property({ type: String }) value = '';
+  @property({ type: Boolean, attribute: 'show-nav-codes' }) showNavCodes = false;
 
   static styles = [
     css`
       :host {
         display: block;
         width: 100%;
+        --cml-scifi-color: var(--cml-color-current-color);
       }
       .tabs-container {
         display: flex;
-        gap: 8px;
-        border-bottom: 1px solid color-mix(in srgb, var(--cml-scifi-color) 20%, transparent);
-        padding-bottom: 4px;
+        position: relative;
+        width: 100%;
+        padding-bottom: 2px;
+      }
+      /* 底部主導軌 */
+      .tabs-container::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: color-mix(in srgb, var(--cml-scifi-color) 30%, transparent);
+        z-index: 1;
+      }
+      .tab-wrapper {
+        flex: 1; /* 分散佈置 */
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 4px;
+        transition: all 0.3s ease;
+        overflow: hidden;
       }
       .tab-item {
-        cursor: pointer;
-        padding: 6px 16px;
-        transition: all 0.2s ease;
-        min-width: 100px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 2px;
+        width: 100%;
+        z-index: 2;
       }
       .tab-label {
         font-family: var(--cml-font-family-mono, monospace);
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         font-weight: bold;
-        color: var(--cml-color-on-surface);
+        color: color-mix(in srgb, var(--cml-scifi-color) 60%, var(--cml-color-on-surface));
         text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: color 0.2s ease;
+        letter-spacing: 1.5px;
+        transition: all 0.3s ease;
       }
-      .tab-wrapper:hover camelot-scifi-frame {
-        --cml-scifi-bg-opacity: 15%;
+      .nav-code {
+        font-size: 0.6rem;
+        opacity: 0.5;
+        font-family: var(--cml-font-family-mono);
+        margin-bottom: 2px;
       }
-      .tab-item[active] .tab-label {
-        color: var(--cml-color-on-primary, #fff);
+      
+      /* Active Indicator */
+      .active-indicator {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--cml-scifi-color);
+        box-shadow: 0 0 10px var(--cml-scifi-color);
+        transform: scaleX(0);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 3;
       }
-      :host([color="primary"]) .tab-item[active] .tab-label { color: var(--cml-color-on-primary); }
-      :host([color="secondary"]) .tab-item[active] .tab-label { color: var(--cml-color-on-secondary); }
-      :host([color="tertiary"]) .tab-item[active] .tab-label { color: var(--cml-color-on-tertiary); }
+      
+      .tab-wrapper[active] .active-indicator {
+        transform: scaleX(1);
+      }
+      .tab-wrapper[active] .tab-label {
+        color: var(--cml-scifi-color);
+        text-shadow: 0 0 8px color-mix(in srgb, var(--cml-scifi-color) 50%, transparent);
+      }
+
+      /* Hover Effects */
+      .tab-wrapper::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--cml-scifi-color) 5%, transparent));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .tab-wrapper:hover::before {
+        opacity: 1;
+      }
+      .tab-wrapper:hover .tab-label {
+        color: var(--cml-scifi-color);
+      }
+
+      /* Brackets for active */
+      .bracket {
+        position: absolute;
+        width: 6px;
+        height: 10px;
+        border-color: var(--cml-scifi-color);
+        border-style: solid;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+      .tab-wrapper[active] .bracket {
+        opacity: 0.8;
+      }
+      .bracket-tl { top: 6px; left: 10%; border-width: 1px 0 0 1px; }
+      .bracket-br { bottom: 6px; right: 10%; border-width: 0 1px 1px 0; }
     `
   ];
 
@@ -68,20 +143,24 @@ export class CamelotScifiTabs extends CamelotScifiBase {
   render() {
     return html`
       <div class="tabs-container">
-        ${this.items.map(item => {
+        ${this.items.map((item, index) => {
           const isActive = this.value === item.value;
+          const navCode = (index + 1).toString().padStart(2, '0');
           return html`
-            <div class="tab-wrapper" @click="${() => this._select(item.value)}">
-              <camelot-scifi-frame
-                .color="${this.color}"
-                ?filled="${isActive}"
-                ?showGrid="${false}"
-                ?showScanline="${isActive}"
-              >
-                <div class="tab-item" ?active="${isActive}">
-                  <span class="tab-label">${item.label}</span>
-                </div>
-              </camelot-scifi-frame>
+            <div 
+              class="tab-wrapper" 
+              ?active="${isActive}"
+              @click="${() => this._select(item.value)}"
+            >
+              <div class="bracket bracket-tl"></div>
+              <div class="bracket bracket-br"></div>
+              
+              <div class="tab-item">
+                ${this.showNavCodes ? html`<span class="nav-code">NAV:${navCode}</span>` : ''}
+                <span class="tab-label">${item.label}</span>
+              </div>
+              
+              <div class="active-indicator"></div>
             </div>
           `;
         })}

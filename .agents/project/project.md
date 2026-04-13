@@ -32,7 +32,7 @@
     - **Architecture**: 採用 `Frame-first` 設計，所有 Sci-Fi 組件均封裝於 `CamelotScifiFrame` 中。
     - **Adaptive Theme**: 支援動態切換 Light/Dark 模式。透過 `color-mix` 配合主題 `surface` 變數與 `glow-intensity` 參數，實現淺色 HUD (磨砂玻璃感) 與深色 HUD (極致科幻感) 的無縫切換。
     - **IconButton**: 整合十字絲標線動態效果。
-    - **Tabs/Card/Badge**: 強制遵循 HUD 視覺語言，支持狀態填充。
+    - **Tabs/Card/Badge**: 強制遵循 HUD 視覺語言。Tabs 已優化為整合式導軌設計，支援 `flex: 1` 分散佈局，並具備導航代碼 (`showNavCodes`) 與 Active 括號裝飾。
 
 ## 全域規則 (Global Rules)
 - 遵循 Material 3, iOS (Cupertino), Soft UI 與 Sci-fi HUD 設計規範。
