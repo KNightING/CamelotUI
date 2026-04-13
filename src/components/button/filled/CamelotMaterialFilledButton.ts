@@ -11,6 +11,9 @@ export class CamelotMaterialFilledButton extends CamelotBaseElement {
   @property({ type: String })
   label: string = 'Button';
 
+  @property({ type: Boolean, reflect: true })
+  disabled: boolean = false;
+
   static styles = [
     css`
       :host {

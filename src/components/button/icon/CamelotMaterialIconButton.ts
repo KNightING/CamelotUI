@@ -11,6 +11,9 @@ export class CamelotMaterialIconButton extends CamelotBaseElement {
   @property({ type: String })
   shape: 'circle' | 'square' = 'circle';
 
+  @property({ type: Boolean, reflect: true })
+  disabled: boolean = false;
+
   static styles = [
     css`
       :host {

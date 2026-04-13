@@ -21,6 +21,9 @@ export class CamelotIconButton extends CamelotBaseElement {
   @property({ type: String })
   shape: 'circle' | 'square' = 'circle';
 
+  @property({ type: Boolean, reflect: true })
+  disabled: boolean = false;
+
   render() {
     switch (this._activeStyle) {
       case 'scifi':
