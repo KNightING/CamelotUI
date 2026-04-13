@@ -28,7 +28,7 @@ export class CamelotScifiRadio extends LitElement {
     :host {
       display: inline-block;
       cursor: pointer;
-      font-family: 'Share Tech Mono', monospace;
+      font-family: var(--cml-font-family);
       --cml-scifi-color: var(--cml-color-primary);
     }
 

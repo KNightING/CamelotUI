@@ -59,7 +59,7 @@ export class CamelotScifiTabs extends CamelotScifiBase {
         z-index: 2;
       }
       .tab-label {
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 0.8rem;
         font-weight: bold;
         color: color-mix(in srgb, var(--cml-scifi-color) 60%, var(--cml-color-on-surface));
@@ -70,7 +70,7 @@ export class CamelotScifiTabs extends CamelotScifiBase {
       .nav-code {
         font-size: 0.6rem;
         opacity: 0.5;
-        font-family: var(--cml-font-family-mono);
+        font-family: var(--cml-font-family);
         margin-bottom: 2px;
       }
       

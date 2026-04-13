@@ -27,7 +27,7 @@ export class CamelotScifiInput extends CamelotScifiBase {
         gap: 6px;
       }
       .label-text {
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -58,7 +58,7 @@ export class CamelotScifiInput extends CamelotScifiBase {
         border: none;
         outline: none;
         color: var(--cml-color-on-surface);
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 0.95rem;
         box-sizing: border-box;
         transition: color 0.2s ease;

@@ -29,7 +29,7 @@ export class CamelotScifiCard extends CamelotScifiBase {
         padding-left: 10px;
       }
       .card-title {
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 1.1rem;
         font-weight: bold;
         color: var(--cml-scifi-color, var(--cml-color-primary));
@@ -39,7 +39,7 @@ export class CamelotScifiCard extends CamelotScifiBase {
       .card-subtitle {
         font-size: 0.75rem;
         color: color-mix(in srgb, var(--cml-scifi-color, var(--cml-color-primary)) 70%, transparent);
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
       }
       .id-tag {
         position: absolute;

@@ -30,7 +30,7 @@ export class CamelotScifiCheckbox extends LitElement {
       align-items: center;
       cursor: pointer;
       user-select: none;
-      font-family: 'Share Tech Mono', monospace;
+      font-family: var(--cml-font-family);
       --cml-scifi-color: var(--cml-color-primary);
     }
 

@@ -38,7 +38,7 @@ export class CamelotScifiFilledButton extends CamelotScifiBase {
         /* 使用統一主題變數：預設狀態使用 current-color 混合白色以提高亮度 */
         color: color-mix(in srgb, var(--cml-color-current-color), white 80%);
         
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 0.15em;

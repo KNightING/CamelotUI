@@ -24,7 +24,7 @@ export class CamelotScifiSwitch extends LitElement {
       display: inline-block;
       width: 60px;
       height: 28px;
-      font-family: 'Share Tech Mono', monospace;
+      font-family: var(--cml-font-family);
       --cml-scifi-color: var(--cml-color-primary);
     }
 

@@ -53,7 +53,7 @@ export class CamelotScifiConfirmDialog extends CamelotScifiBase {
         padding-bottom: 12px;
       }
       .dialog-title {
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 1.4rem;
         font-weight: bold;
         color: var(--cml-scifi-color);

@@ -20,7 +20,7 @@ export class CamelotScifiTextButton extends CamelotScifiBase {
 
     button {
       position: relative;
-      font-family: var(--cml-font-family-mono, monospace);
+      font-family: var(--cml-font-family);
       font-weight: var(--cml-font-weight-medium);
       font-size: var(--cml-font-size-label);
       padding: 8px 16px;

@@ -13,7 +13,7 @@ export class CamelotScifiMenu extends CamelotBaseMenu {
     ...CamelotBaseMenu.styles,
     css`
       :host {
-        font-family: 'Share Tech Mono', 'Roboto Mono', monospace;
+        font-family: var(--cml-font-family);
         --cml-scifi-accent: var(--cml-scifi-highlight, #ffffff);
         --cml-scifi-primary: var(--cml-color-primary);
       }

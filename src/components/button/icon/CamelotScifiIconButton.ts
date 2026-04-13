@@ -1,5 +1,5 @@
 import { html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { CamelotScifiBase } from '../../scifi/CamelotScifiBase';
 import '../../scifi/CamelotScifiReticle';
 import '../../scifi/CamelotScifiFrame';

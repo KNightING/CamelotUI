@@ -30,7 +30,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         gap: 6px;
       }
       .label-text {
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -58,7 +58,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         --cml-scifi-bg-opacity: 15%;
       }
       .display-value {
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 0.95rem;
         color: var(--cml-color-on-surface);
       }
@@ -87,7 +87,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
       .option-item {
         padding: 10px 14px;
         cursor: pointer;
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 0.85rem;
         color: color-mix(in srgb, var(--cml-scifi-color) 70%, white);
         border-left: 2px solid transparent;
@@ -120,7 +120,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         background: transparent;
         border: none;
         color: var(--cml-color-on-surface);
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 0.8rem;
         width: 100%;
         outline: none;

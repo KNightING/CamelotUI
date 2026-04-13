@@ -27,7 +27,7 @@ export class CamelotScifiBadge extends CamelotScifiBase {
         justify-content: center;
       }
       .label-text {
-        font-family: var(--cml-font-family-mono, monospace);
+        font-family: var(--cml-font-family);
         font-size: 0.75rem;
         font-weight: bold;
         letter-spacing: 1px;

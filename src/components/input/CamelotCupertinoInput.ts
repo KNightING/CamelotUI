@@ -11,6 +11,9 @@ import '../label/CamelotLabel';
 export class CamelotCupertinoInput extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
+  
+  @property({ type: Boolean })
+  disabled: boolean = false;
 
   @property({ type: String })
   value: string = '';
