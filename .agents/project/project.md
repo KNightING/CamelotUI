@@ -21,7 +21,8 @@
     - **按鈕 (Button)**: `CamelotButton`, `CamelotScifiFilledButton` (支持 Active 狀態填充、adaptive 寬度等)。
     - **表單 (Forms)**: `CamelotInput`, `CamelotSelect`, `CamelotCheckbox`, `CamelotRadio`, `CamelotSwitch` (適配 Sci-Fi / Standard 風格變體)。
     - **數據展示 (Data)**: `CamelotBadge`, `CamelotCard`, `CamelotTabs` (強化對比與 HUD 風格)。
-    - **反饋與對話 (Feedback)**: `CamelotConfirmDialog`, `CamelotNotification` (支持動態滑入與 Sci-Fi 氛圍裝飾)。
+    - **反饋與對話 (Feedback)**: `CamelotConfirmDialog`, `CamelotNotification` (支持動態滑入與 Sci-Fi 氛圍裝飾)。Sci-fi 版對話框已升級採用專屬 HUD 按鈕與玻璃顯影特效。
+
 
 ## 現有功能模組 (Existing Modules)
 - **Form Selections**:

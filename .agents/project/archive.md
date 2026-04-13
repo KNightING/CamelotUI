@@ -2,6 +2,7 @@
 
 | plan name | 說明 | 建立時間 (yyyy-MM-dd HH:mm) | 歸檔時間 (yyyy-MM-dd HH:mm) |
 | :--- | :--- | :--- | :--- |
+| [2604131540-fix-scifi-dialog-reopen](./archive/2604131540-fix-scifi-dialog-reopen.md) | 修正 Sci-Fi Dialog 重複開啟問題並升級採用專屬 HUD 按鈕。 | 2026-04-13 15:40 | 2026-04-13 15:34 |
 | [2604081601-refactor-button-variants](./archive/2604081601-refactor-button-variants.md) | 重構按鈕組件架構，分為 Filled, Outline, Text, Icon。 | 2026-04-08 16:01 | 2026-04-08 00:00 |
 | [2604081615-enhance-softui-drawer-aesthetics](./archive/2604081615-enhance-softui-drawer-aesthetics.md) | 優化 Soft UI Drawer 美學，強化陰影層次。 | 2026-04-08 16:15 | 2026-04-08 00:00 |
 | [2604081629-implement-menu-component](./archive/2604081629-implement-menu-component.md) | 實作支援多主題風格的選單組件 (Menu)。 | 2026-04-08 16:29 | 2026-04-08 00:00 |
