@@ -13,6 +13,7 @@ import './components/button/text/CamelotTextButton'
 
 // Inputs & Selections
 import './components/input/CamelotInput'
+import './components/textarea/CamelotTextarea'
 import './components/checkbox/CamelotCheckbox'
 import './components/checkbox/CamelotCheckboxGroup'
 import './components/switch/CamelotSwitch'

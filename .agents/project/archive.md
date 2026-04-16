@@ -2,6 +2,7 @@
 
 | plan name | 說明 | 建立時間 (yyyy-MM-dd HH:mm) | 歸檔時間 (yyyy-MM-dd HH:mm) |
 | :--- | :--- | :--- | :--- |
+| [2604161720-implement-textarea](./archive/2604161720-implement-textarea.md) | [組件庫] 實作多主題支援的長文字輸入框 (Textarea)。 | 2026-04-16 17:20 | 2026-04-16 17:27 |
 | [2604131542-redesign-scifi-tabs](./archive/2604131542-redesign-scifi-tabs.md) | 優化 Sci-Fi Tabs 視覺風格、修復 stale 編譯問題並優化 tsconfig。 | 2026-04-13 15:42 | 2026-04-13 15:56 |
 | [2604131540-fix-scifi-dialog-reopen](./archive/2604131540-fix-scifi-dialog-reopen.md) | 修正 Sci-Fi Dialog 重複開啟問題並升級採用專屬 HUD 按鈕。 | 2026-04-13 15:40 | 2026-04-13 15:34 |
 | [2604081601-refactor-button-variants](./archive/2604081601-refactor-button-variants.md) | 重構按鈕組件架構，分為 Filled, Outline, Text, Icon。 | 2026-04-08 16:01 | 2026-04-08 00:00 |
