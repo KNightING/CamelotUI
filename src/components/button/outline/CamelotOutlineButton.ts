@@ -20,8 +20,6 @@ export class CamelotOutlineButton extends CamelotBaseElement {
   @property({ type: Boolean, reflect: true })
   disabled: boolean = false;
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   render() {
     switch (this._activeStyle) {

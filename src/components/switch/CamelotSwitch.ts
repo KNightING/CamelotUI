@@ -21,11 +21,6 @@ export class CamelotSwitch extends CamelotBaseElement {
   @property({ type: Boolean, reflect: true })
   disabled: boolean = false;
 
-  /**
-   * 開關色彩：'primary', 'secondary', 'tertiary'
-   */
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   private _handleChanged(e: CustomEvent) {
     this.checked = e.detail.checked;

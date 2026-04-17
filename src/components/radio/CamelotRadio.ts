@@ -30,11 +30,6 @@ export class CamelotRadio extends CamelotBaseElement {
   @property({ type: String })
   value: string = '';
 
-  /**
-   * 單選色彩：'primary', 'secondary', 'tertiary'
-   */
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   private _handleChanged(e: CustomEvent) {
     this.checked = e.detail.checked;

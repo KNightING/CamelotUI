@@ -27,8 +27,6 @@ export class CamelotInput extends CamelotBaseElement {
   @property({ type: String })
   error: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   @property({ type: Boolean, reflect: true })
   disabled: boolean = false;

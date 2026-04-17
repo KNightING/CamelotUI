@@ -27,8 +27,6 @@ export class CamelotCheckbox extends CamelotBaseElement {
   /**
    * 勾選框色彩：'primary', 'secondary', 'tertiary'
    */
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   /**
    * 勾選框形狀 (僅專對 Cupertino 風格)：'square' 或 'circle'

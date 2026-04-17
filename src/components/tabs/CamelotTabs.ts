@@ -27,11 +27,6 @@ export class CamelotTabs extends CamelotBaseElement {
   @property({ type: String })
   value: string = '';
 
-  /**
-   * 標籤色彩：'primary', 'secondary', 'tertiary'
-   */
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   private _handleChanged(e: CustomEvent) {
     this.value = e.detail.value;

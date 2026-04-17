@@ -12,8 +12,6 @@ export class CamelotLabel extends CamelotBaseElement {
   @property({ type: String })
   text: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   @property({ type: Boolean })
   required: boolean = false;

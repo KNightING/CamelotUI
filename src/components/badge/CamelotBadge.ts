@@ -18,8 +18,6 @@ export class CamelotBadge extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' = 'primary';
 
   @property({ type: String })
   variant: 'filled' | 'outlined' = 'filled';
