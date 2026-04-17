@@ -12,7 +12,11 @@ Welcome to the CamelotUI Brain. This is a graph-connected wiki.
 - [System Architecture](./wiki/arch/system.md): Theme system, HUD engine, base classes.
 
 ## 📦 Components
-- [Library Overview](./wiki/components/lib.md): Frames, buttons, forms, data, feedback elements.
+- [Foundations: Scifi Frame](./wiki/components/frame.md)
+- [Tabs Component](./wiki/components/tabs.md)
+- [Select Component](./wiki/components/select.md)
+- [Buttons (Pending Atomic Sync)](#)
+- [Forms (Pending Atomic Sync)](#)
 
 ## 📋 Governance
 - [Rules & Standards](./wiki/rules/std.md): Design specs, workflow, coding conventions.
