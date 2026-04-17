@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property, queryAssignedElements } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import { CamelotRadio } from './CamelotRadio';
 
 /**
@@ -7,7 +8,7 @@ import { CamelotRadio } from './CamelotRadio';
  * 用於管理一組 CamelotRadio，確保單選邏輯。
  */
 @customElement('camelot-radio-group')
-export class CamelotRadioGroup extends LitElement {
+export class CamelotRadioGroup extends CamelotBaseElement {
   /**
    * 目前選取的值
    */
@@ -26,12 +27,6 @@ export class CamelotRadioGroup extends LitElement {
   @property({ type: String })
   label: string = '';
 
-  /**
-   * 色彩：'primary' | 'secondary' | 'tertiary'
-   * 設定後將套用到所有子項目
-   */
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   /**
    * 是否整組禁用

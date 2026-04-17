@@ -15,7 +15,7 @@ export class CamelotScifiMenu extends CamelotBaseMenu {
       :host {
         font-family: var(--cml-font-family);
         --cml-scifi-accent: var(--cml-scifi-highlight, #ffffff);
-        --cml-scifi-primary: var(--cml-color-primary);
+        --cml-scifi-primary: var(--cml-color-current-color);
       }
 
       .camelot-menu-root {
@@ -72,7 +72,7 @@ export class CamelotScifiMenu extends CamelotBaseMenu {
 
       /* Hover 效果：邊界括號鎖定感 */
       .menu-item:hover:not(.is-disabled) {
-        background: rgba(0, 243, 255, 0.08);
+        background: color-mix(in srgb, var(--cml-scifi-primary), transparent 92%);
         color: var(--cml-scifi-primary);
         padding-left: 24px;
       }
@@ -93,7 +93,7 @@ export class CamelotScifiMenu extends CamelotBaseMenu {
         background: rgba(5, 8, 10, 0.98);
         backdrop-filter: blur(15px);
         border: 1px solid var(--cml-scifi-accent);
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 243, 255, 0.2);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 10px color-mix(in srgb, var(--cml-scifi-primary), transparent 80%);
         padding: 8px 0;
       }
 

@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import '../scifi/CamelotScifiReticle';
 
 /**
@@ -8,7 +9,7 @@ import '../scifi/CamelotScifiReticle';
  * 視覺重點：菱形框架、中心發光點、數位邊界。
  */
 @customElement('camelot-scifi-radio-impl')
-export class CamelotScifiRadio extends LitElement {
+export class CamelotScifiRadio extends CamelotBaseElement {
   @property({ type: Boolean })
   checked: boolean = false;
 
@@ -18,8 +19,6 @@ export class CamelotScifiRadio extends LitElement {
   @property({ type: String })
   label: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   @state()
   private _isHovered: boolean = false;
@@ -29,11 +28,8 @@ export class CamelotScifiRadio extends LitElement {
       display: inline-block;
       cursor: pointer;
       font-family: var(--cml-font-family);
-      --cml-scifi-color: var(--cml-color-primary);
+      --cml-scifi-color: var(--cml-color-current-color);
     }
-
-    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
-    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
 
     .container {
       display: flex;
@@ -148,7 +144,7 @@ export class CamelotScifiRadio extends LitElement {
   render() {
     return html`
       <div 
-        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
         @mouseenter="${() => this._isHovered = true}"
         @mouseleave="${() => this._isHovered = false}"

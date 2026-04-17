@@ -58,10 +58,10 @@ export class CamelotLabel extends CamelotBaseElement {
       color: var(--cml-color-on-background);
     }
 
-    /* Color variations */
-    .primary { color: var(--cml-color-primary); }
-    .secondary { color: var(--cml-color-secondary); }
-    .tertiary { color: var(--cml-color-tertiary); }
+    /* Use proxy variable if color is explicitly set */
+    :host label {
+      color: var(--cml-color-current-color);
+    }
 
     .required::after {
       content: '*';
@@ -79,7 +79,7 @@ export class CamelotLabel extends CamelotBaseElement {
 
   render() {
     return html`
-      <label for="${this.for}" class="${this.required ? 'required' : ''} ${this.color}">
+      <label for="${this.for}" class="${this.required ? 'required' : ''}">
         ${this.text}
       </label>
     `;

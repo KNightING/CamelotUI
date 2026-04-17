@@ -39,22 +39,14 @@ export class CamelotScifiBadge extends CamelotScifiBase {
       /* 當處於變體填充或 Host 被標記為 filled 時，切換至主題對比色 */
       :host([variant="filled"]) .label-text,
       :host([filled]) .label-text {
-        color: var(--cml-color-on-primary, #fff);
-      }
-      :host([variant="filled"][color="secondary"]) .label-text,
-      :host([filled][color="secondary"]) .label-text { 
-        color: var(--cml-color-on-secondary, #fff); 
-      }
-      :host([variant="filled"][color="tertiary"]) .label-text,
-      :host([filled][color="tertiary"]) .label-text { 
-        color: var(--cml-color-on-tertiary, #fff); 
+        color: var(--cml-color-current-on-color);
       }
     `
   ];
 
   render() {
     const isFilled = this.variant === 'filled';
-    const onColor = isFilled ? `var(--cml-color-on-${this.color})` : 'inherit';
+    const onColor = isFilled ? `var(--cml-color-current-on-color)` : 'inherit';
     
     return html`
       <camelot-scifi-frame 

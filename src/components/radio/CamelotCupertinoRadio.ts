@@ -1,9 +1,10 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import '../label/CamelotLabel';
 
 @customElement('camelot-cupertino-radio')
-export class CamelotCupertinoRadio extends LitElement {
+export class CamelotCupertinoRadio extends CamelotBaseElement {
   @property({ type: Boolean })
   checked: boolean = false;
 
@@ -13,8 +14,6 @@ export class CamelotCupertinoRadio extends LitElement {
   @property({ type: String })
   label: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -46,11 +45,9 @@ export class CamelotCupertinoRadio extends LitElement {
     }
 
     .checked .radio-circle {
-      background-color: var(--cml-color-primary);
-      border-color: var(--cml-color-primary);
+      background-color: var(--cml-color-current-color);
+      border-color: var(--cml-color-current-color);
     }
-    .checked.secondary .radio-circle { background-color: var(--cml-color-secondary); border-color: var(--cml-color-secondary); }
-    .checked.tertiary .radio-circle { background-color: var(--cml-color-tertiary); border-color: var(--cml-color-tertiary); }
 
     .radio-inner {
       width: 8px;
@@ -86,7 +83,7 @@ export class CamelotCupertinoRadio extends LitElement {
   render() {
     return html`
       <div 
-        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
       >
         <div class="radio-circle">

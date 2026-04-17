@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property, queryAssignedElements } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import { CamelotCheckbox } from './CamelotCheckbox';
 
 /**
@@ -7,7 +8,7 @@ import { CamelotCheckbox } from './CamelotCheckbox';
  * 用於管理一組 CamelotCheckbox，收集多個選取值。
  */
 @customElement('camelot-checkbox-group')
-export class CamelotCheckboxGroup extends LitElement {
+export class CamelotCheckboxGroup extends CamelotBaseElement {
   /**
    * 選取值的陣列
    */
@@ -26,12 +27,6 @@ export class CamelotCheckboxGroup extends LitElement {
   @property({ type: String })
   label: string = '';
 
-  /**
-   * 色彩：'primary' | 'secondary' | 'tertiary'
-   * 設定後將套用到所有子項目
-   */
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   /**
    * 是否整組禁用

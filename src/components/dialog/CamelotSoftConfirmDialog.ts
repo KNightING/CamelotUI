@@ -32,7 +32,7 @@ export class CamelotSoftConfirmDialog extends CamelotBaseDialog {
       }
 
       .title {
-        color: var(--cml-color-primary);
+        color: var(--cml-color-current-color);
         font-family: var(--cml-font-family);
         font-size: 1.25rem;
         font-weight: 700;

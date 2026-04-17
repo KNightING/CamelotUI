@@ -6,6 +6,11 @@ import { CamelotBaseMenu } from './CamelotBaseMenu';
  * Material 3 風格的選單組件。
  */
 export class CamelotMaterialMenu extends CamelotBaseMenu {
+  constructor() {
+    super();
+    this.isContainer = true;
+  }
+
   static styles = [
     ...CamelotBaseMenu.styles,
     css`
@@ -28,13 +33,13 @@ export class CamelotMaterialMenu extends CamelotBaseMenu {
       }
 
       .is-selected .menu-item {
-        background-color: var(--cml-color-primary-container) !important;
-        color: var(--cml-color-on-primary-container) !important;
+        background-color: var(--cml-color-current-color) !important;
+        color: var(--cml-color-current-on-color) !important;
         font-weight: var(--cml-font-weight-bold);
       }
 
       .is-active-parent > .menu-item {
-        color: var(--cml-color-primary);
+        color: var(--cml-color-current-color);
         font-weight: var(--cml-font-weight-bold);
       }
 

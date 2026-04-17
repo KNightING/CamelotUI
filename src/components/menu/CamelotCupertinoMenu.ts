@@ -44,7 +44,7 @@ export class CamelotCupertinoMenu extends CamelotBaseMenu {
 
       .is-selected > .menu-item {
         background-color: var(--cml-color-surface-container-highest);
-        color: var(--cml-color-primary);
+        color: var(--cml-color-current-color);
         font-weight: 600;
       }
 
@@ -80,13 +80,13 @@ export class CamelotCupertinoMenu extends CamelotBaseMenu {
       }
 
       .menu-item-icon {
-        color: var(--cml-color-primary);
+        color: var(--cml-color-current-color);
         font-size: 22px;
         margin-right: 16px;
       }
 
       .is-selected > .menu-item .menu-item-icon {
-        color: var(--cml-color-primary);
+        color: var(--cml-color-current-color);
       }
 
       .menu-item-arrow {

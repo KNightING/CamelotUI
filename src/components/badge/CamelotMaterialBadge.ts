@@ -1,13 +1,12 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-material-badge')
-export class CamelotMaterialBadge extends LitElement {
+export class CamelotMaterialBadge extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' = 'primary';
 
   @property({ type: String })
   variant: 'filled' | 'outlined' = 'filled';
@@ -29,25 +28,27 @@ export class CamelotMaterialBadge extends LitElement {
     }
 
     /* Filled Styles */
-    .filled.primary { background-color: var(--cml-color-primary-container); color: var(--cml-color-on-primary-container); }
-    .filled.secondary { background-color: var(--cml-color-secondary-container); color: var(--cml-color-on-secondary-container); }
-    .filled.tertiary { background-color: var(--cml-color-tertiary-container); color: var(--cml-color-on-tertiary-container); }
-    .filled.error { background-color: var(--cml-color-error-container); color: var(--cml-color-on-error-container); }
-    .filled.success { background-color: #C1E1C1; color: #1E4D2B; }
-
+    .filled {
+      background-color: var(--cml-color-current-color);
+      color: var(--cml-color-current-on-color);
+    }
+    
     /* Outlined Styles */
     .outlined {
       background-color: transparent;
-      border: 1px solid currentColor;
+      color: var(--cml-color-current-color);
+      border: 1px solid var(--cml-color-current-outline);
     }
-    .outlined.primary { color: var(--cml-color-primary); border-color: var(--cml-color-outline); }
-    .outlined.secondary { color: var(--cml-color-secondary); border-color: var(--cml-color-outline); }
-    .outlined.tertiary { color: var(--cml-color-tertiary); border-color: var(--cml-color-outline); }
-    .outlined.error { color: var(--cml-color-error); border-color: var(--cml-color-error); }
-    .outlined.success { color: #2E7D32; border-color: #2E7D32; }
   `;
 
+  protected updated(changedProperties: Map<string | number | symbol, unknown>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('variant')) {
+      this.isContainer = this.variant === 'filled';
+    }
+  }
+
   render() {
-    return html`<div class="badge ${this.variant} ${this.color}">${this.label}</div>`;
+    return html`<div class="badge ${this.variant}">${this.label}</div>`;
   }
 }

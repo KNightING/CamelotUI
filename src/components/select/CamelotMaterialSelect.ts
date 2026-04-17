@@ -41,11 +41,9 @@ export class CamelotMaterialSelect extends CamelotBaseSelect {
     }
 
     .select-trigger.active {
-      border-bottom: 2px solid var(--cml-color-primary);
-      background-color: rgba(var(--cml-color-primary-rgb), 0.12);
+      border-bottom: 2px solid var(--cml-color-current-color);
+      background-color: color-mix(in srgb, var(--cml-color-current-color), transparent 88%);
     }
-    .secondary .select-trigger.active { border-bottom-color: var(--cml-color-secondary); }
-    .tertiary .select-trigger.active { border-bottom-color: var(--cml-color-tertiary); }
 
     .chevron {
       width: 0;
@@ -58,10 +56,8 @@ export class CamelotMaterialSelect extends CamelotBaseSelect {
 
     .active .chevron {
       transform: rotate(180deg);
-      border-top-color: var(--cml-color-primary);
+      border-top-color: var(--cml-color-current-color);
     }
-    .secondary .active .chevron { border-top-color: var(--cml-color-secondary); }
-    .tertiary .active .chevron { border-top-color: var(--cml-color-tertiary); }
 
     .dropdown {
       position: absolute;
@@ -101,7 +97,7 @@ export class CamelotMaterialSelect extends CamelotBaseSelect {
     }
 
     .search-input:focus {
-      border-color: var(--cml-color-primary);
+      border-color: var(--cml-color-current-color);
     }
 
     .dropdown-content {
@@ -122,11 +118,9 @@ export class CamelotMaterialSelect extends CamelotBaseSelect {
     }
 
     .option.selected {
-      background-color: rgba(var(--cml-color-primary-rgb), 0.12);
-      color: var(--cml-color-primary);
+      background-color: color-mix(in srgb, var(--cml-color-current-color), transparent 88%);
+      color: var(--cml-color-current-color);
     }
-    .secondary .option.selected { color: var(--cml-color-secondary); }
-    .tertiary .option.selected { color: var(--cml-color-tertiary); }
 
     .no-results {
       padding: 16px;
@@ -148,7 +142,7 @@ export class CamelotMaterialSelect extends CamelotBaseSelect {
     const filteredOptions = ctrl.filteredOptions;
 
     return html`
-      <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
+      <div class="container ${this.disabled ? 'disabled' : ''}">
         ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="select"></camelot-label>` : ''}
         
         <div class="select-trigger ${ctrl.isOpen ? 'active' : ''}" @click=${() => ctrl.toggle()}>

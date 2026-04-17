@@ -1,9 +1,10 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import '../label/CamelotLabel';
 
 @customElement('camelot-material-checkbox')
-export class CamelotMaterialCheckbox extends LitElement {
+export class CamelotMaterialCheckbox extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
@@ -13,8 +14,6 @@ export class CamelotMaterialCheckbox extends LitElement {
   @property({ type: Boolean })
   disabled: boolean = false;
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -38,10 +37,10 @@ export class CamelotMaterialCheckbox extends LitElement {
       box-sizing: border-box;
     }
 
-    /* Checked style with color variations */
-    .checked.primary .checkbox-container { background-color: var(--cml-color-primary); border-color: var(--cml-color-primary); }
-    .checked.secondary .checkbox-container { background-color: var(--cml-color-secondary); border-color: var(--cml-color-secondary); }
-    .checked.tertiary .checkbox-container { background-color: var(--cml-color-tertiary); border-color: var(--cml-color-tertiary); }
+    .checked .checkbox-container {
+      background-color: var(--cml-color-current-color);
+      border-color: var(--cml-color-current-color);
+    }
 
     .checkbox-container::after {
       content: '';
@@ -83,7 +82,7 @@ export class CamelotMaterialCheckbox extends LitElement {
   render() {
     return html`
       <div 
-        class="${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         style="display: flex; align-items: center;"
         @click="${this._toggle}"
       >

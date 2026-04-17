@@ -25,27 +25,27 @@ export class CamelotScifiCard extends CamelotScifiBase {
       }
       .card-header {
         margin-bottom: 12px;
-        border-left: 3px solid var(--cml-scifi-color, var(--cml-color-primary));
+        border-left: 3px solid var(--cml-scifi-color);
         padding-left: 10px;
       }
       .card-title {
         font-family: var(--cml-font-family);
         font-size: 1.1rem;
         font-weight: bold;
-        color: var(--cml-scifi-color, var(--cml-color-primary));
+        color: var(--cml-scifi-color);
         text-transform: uppercase;
         margin: 0;
       }
       .card-subtitle {
         font-size: 0.75rem;
-        color: color-mix(in srgb, var(--cml-scifi-color, var(--cml-color-primary)) 70%, transparent);
+        color: color-mix(in srgb, var(--cml-scifi-color) 70%, transparent);
         font-family: var(--cml-font-family);
       }
       .id-tag {
         position: absolute;
         top: 0;
         right: 0;
-        background: var(--cml-scifi-color, var(--cml-color-primary));
+        background: var(--cml-scifi-color);
         color: #000;
         font-size: 10px;
         padding: 2px 6px;

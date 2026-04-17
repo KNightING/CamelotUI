@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import '../scifi/CamelotScifiReticle';
 
 /**
@@ -8,7 +9,7 @@ import '../scifi/CamelotScifiReticle';
  * 視覺重點：方括號框架 [ ]、內部掃描線、數位脈衝動畫。
  */
 @customElement('camelot-scifi-checkbox-impl')
-export class CamelotScifiCheckbox extends LitElement {
+export class CamelotScifiCheckbox extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
@@ -18,8 +19,6 @@ export class CamelotScifiCheckbox extends LitElement {
   @property({ type: Boolean })
   disabled: boolean = false;
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   @state()
   private _isHovered: boolean = false;
@@ -31,11 +30,8 @@ export class CamelotScifiCheckbox extends LitElement {
       cursor: pointer;
       user-select: none;
       font-family: var(--cml-font-family);
-      --cml-scifi-color: var(--cml-color-primary);
+      --cml-scifi-color: var(--cml-color-current-color);
     }
-
-    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
-    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
 
     .container {
       display: flex;
@@ -161,7 +157,7 @@ export class CamelotScifiCheckbox extends LitElement {
   render() {
     return html`
       <div 
-        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
         @mouseenter="${() => this._isHovered = true}"
         @mouseleave="${() => this._isHovered = false}"

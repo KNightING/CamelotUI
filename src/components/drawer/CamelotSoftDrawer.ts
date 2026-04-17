@@ -77,7 +77,7 @@ export class CamelotSoftDrawer extends CamelotBaseDrawer {
         font-family: inherit;
         font-size: 24px;
         font-weight: 800;
-        color: var(--cml-color-primary);
+        color: var(--cml-color-current-color);
         letter-spacing: -0.5px;
       }
 
@@ -86,11 +86,6 @@ export class CamelotSoftDrawer extends CamelotBaseDrawer {
         overflow-y: auto;
       }
 
-      @media (prefers-color-scheme: dark) {
-        .title {
-          color: var(--cml-color-primary-container);
-        }
-      }
     `
   ];
 

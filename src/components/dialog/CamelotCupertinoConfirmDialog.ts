@@ -63,7 +63,7 @@ export class CamelotCupertinoConfirmDialog extends CamelotBaseDialog {
         padding: 12px;
         background: transparent;
         border: none;
-        color: var(--cml-color-primary);
+        color: var(--cml-color-current-color);
         font-family: var(--cml-font-family);
         font-size: 1.0625rem;
         font-weight: 400;

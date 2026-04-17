@@ -1,13 +1,13 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import '../label/CamelotLabel';
 
 @customElement('camelot-cupertino-badge')
-export class CamelotCupertinoBadge extends LitElement {
+export class CamelotCupertinoBadge extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' = 'primary';
 
   @property({ type: String })
   variant: 'filled' | 'outlined' = 'filled';
@@ -26,25 +26,20 @@ export class CamelotCupertinoBadge extends LitElement {
       transition: opacity 0.2s;
     }
 
-    /* Apple Colors */
-    .filled.primary { background-color: #007AFF; color: #FFFFFF; }
-    .filled.secondary { background-color: #8E8E93; color: #FFFFFF; }
-    .filled.tertiary { background-color: #5856D6; color: #FFFFFF; }
-    .filled.error { background-color: #FF3B30; color: #FFFFFF; }
-    .filled.success { background-color: #34C759; color: #FFFFFF; }
-
+    /* Cupertino Styles using proxy variables */
+    .filled {
+      background-color: var(--cml-color-current-color);
+      color: var(--cml-color-current-on-color);
+    }
+    
     .outlined {
       background-color: transparent;
-      border: 1px solid currentColor;
+      border: 1px solid var(--cml-color-current-color);
+      color: var(--cml-color-current-color);
     }
-    .outlined.primary { color: #007AFF; }
-    .outlined.secondary { color: #8E8E93; }
-    .outlined.tertiary { color: #5856D6; }
-    .outlined.error { color: #FF3B30; }
-    .outlined.success { color: #34C759; }
   `;
 
   render() {
-    return html`<div class="badge ${this.variant} ${this.color}">${this.label}</div>`;
+    return html`<div class="badge ${this.variant}">${this.label}</div>`;
   }
 }

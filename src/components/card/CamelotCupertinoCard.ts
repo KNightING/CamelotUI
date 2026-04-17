@@ -1,8 +1,9 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-cupertino-card')
-export class CamelotCupertinoCard extends LitElement {
+export class CamelotCupertinoCard extends CamelotBaseElement {
   @property({ type: String })
   padding: string = '16px';
 

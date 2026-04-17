@@ -17,7 +17,7 @@ export class CamelotScifiDrawer extends CamelotBaseDrawer {
     css`
       :host {
         --cml-scifi-accent: var(--cml-scifi-highlight, #ffffff);
-        --cml-scifi-primary: var(--cml-color-primary);
+        --cml-scifi-primary: var(--cml-color-current-color);
       }
 
       .drawer-content {

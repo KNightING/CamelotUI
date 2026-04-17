@@ -1,9 +1,10 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import '../label/CamelotLabel';
 
 @customElement('camelot-material-radio')
-export class CamelotMaterialRadio extends LitElement {
+export class CamelotMaterialRadio extends CamelotBaseElement {
   @property({ type: Boolean })
   checked: boolean = false;
 
@@ -13,8 +14,6 @@ export class CamelotMaterialRadio extends LitElement {
   @property({ type: String })
   label: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -46,15 +45,13 @@ export class CamelotMaterialRadio extends LitElement {
     }
 
     .checked .radio-outer {
-      border-color: var(--cml-color-primary);
+      border-color: var(--cml-color-current-color);
     }
-    .checked.secondary .radio-outer { border-color: var(--cml-color-secondary); }
-    .checked.tertiary .radio-outer { border-color: var(--cml-color-tertiary); }
 
     .radio-inner {
       width: 10px;
       height: 10px;
-      background-color: var(--cml-color-primary);
+      background-color: var(--cml-color-current-color);
       border-radius: 50%;
       transform: scale(0);
       transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -62,8 +59,6 @@ export class CamelotMaterialRadio extends LitElement {
     .checked .radio-inner {
       transform: scale(1);
     }
-    .checked.secondary .radio-inner { background-color: var(--cml-color-secondary); }
-    .checked.tertiary .radio-inner { background-color: var(--cml-color-tertiary); }
 
     .disabled {
       cursor: not-allowed;
@@ -85,7 +80,7 @@ export class CamelotMaterialRadio extends LitElement {
   render() {
     return html`
       <div 
-        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
       >
         <div class="radio-outer">

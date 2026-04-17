@@ -1,13 +1,12 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-soft-badge')
-export class CamelotSoftBadge extends LitElement {
+export class CamelotSoftBadge extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' = 'primary';
 
   @property({ type: String })
   variant: 'filled' | 'outlined' = 'filled';
@@ -27,6 +26,7 @@ export class CamelotSoftBadge extends LitElement {
       background: var(--cml-color-background);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       white-space: nowrap;
+      color: var(--cml-color-current-color);
     }
 
     /* Filled - Classic Neumorphism */
@@ -44,14 +44,9 @@ export class CamelotSoftBadge extends LitElement {
         inset calc(-1 * var(--cml-soft-distance)/2) calc(-1 * var(--cml-soft-distance)/2) calc(var(--cml-soft-blur)/2) var(--cml-soft-color-light);
     }
 
-    .primary { color: var(--cml-color-primary); }
-    .secondary { color: var(--cml-color-secondary); }
-    .tertiary { color: var(--cml-color-tertiary); }
-    .error { color: #FF3B30; }
-    .success { color: #34C759; }
   `;
 
   render() {
-    return html`<div class="badge ${this.variant} ${this.color}">${this.label}</div>`;
+    return html`<div class="badge ${this.variant}">${this.label}</div>`;
   }
 }

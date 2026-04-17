@@ -1,9 +1,10 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 import '../label/CamelotLabel';
 
 @customElement('camelot-cupertino-checkbox')
-export class CamelotCupertinoCheckbox extends LitElement {
+export class CamelotCupertinoCheckbox extends CamelotBaseElement {
   @property({ type: String })
   label: string = '';
 
@@ -13,8 +14,6 @@ export class CamelotCupertinoCheckbox extends LitElement {
   @property({ type: Boolean })
   disabled: boolean = false;
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   /**
    * 勾選框形狀：'square' (預設，圓角正方形) 或 'circle' (圓形)
@@ -55,10 +54,10 @@ export class CamelotCupertinoCheckbox extends LitElement {
       border-radius: 50%;
     }
 
-    /* Checked style with color variations */
-    .checked.primary .checkbox-container { background-color: var(--cml-color-primary); border-color: var(--cml-color-primary); }
-    .checked.secondary .checkbox-container { background-color: var(--cml-color-secondary); border-color: var(--cml-color-secondary); }
-    .checked.tertiary .checkbox-container { background-color: var(--cml-color-tertiary); border-color: var(--cml-color-tertiary); }
+    .checked .checkbox-container {
+      background-color: var(--cml-color-current-color);
+      border-color: var(--cml-color-current-color);
+    }
 
     .check-icon {
       width: 10px;
@@ -94,7 +93,7 @@ export class CamelotCupertinoCheckbox extends LitElement {
   render() {
     return html`
       <div 
-        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="container ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
       >
         <div class="checkbox-container shape-${this.shape}">

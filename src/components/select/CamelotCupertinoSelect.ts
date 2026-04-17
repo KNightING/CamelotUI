@@ -107,11 +107,9 @@ export class CamelotCupertinoSelect extends CamelotBaseSelect {
     }
 
     .option.selected {
-      color: var(--cml-color-primary);
+      color: var(--cml-color-current-color);
       font-weight: 600;
     }
-    .secondary .option.selected { color: var(--cml-color-secondary); }
-    .tertiary .option.selected { color: var(--cml-color-tertiary); }
 
     .disabled {
       opacity: 0.5;
@@ -126,7 +124,7 @@ export class CamelotCupertinoSelect extends CamelotBaseSelect {
     const filteredOptions = ctrl.filteredOptions;
 
     return html`
-      <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
+      <div class="container ${this.disabled ? 'disabled' : ''}">
         ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="select"></camelot-label>` : ''}
         
         <div class="select-trigger ${ctrl.isOpen ? 'active' : ''}" @click=${() => ctrl.toggle()}>

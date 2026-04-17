@@ -60,10 +60,8 @@ export class CamelotSoftSelect extends CamelotBaseSelect {
 
     .active .chevron {
       transform: rotate(-135deg);
-      border-color: var(--cml-color-primary);
+      border-color: var(--cml-color-current-color);
     }
-    .secondary .active .chevron { border-color: var(--cml-color-secondary); }
-    .tertiary .active .chevron { border-color: var(--cml-color-tertiary); }
 
     .dropdown {
       position: absolute;
@@ -125,14 +123,12 @@ export class CamelotSoftSelect extends CamelotBaseSelect {
 
     .option.selected {
       background-color: var(--cml-color-background);
-      color: var(--cml-color-primary);
+      color: var(--cml-color-current-color);
       box-shadow: 
         inset 3px 3px 6px var(--cml-soft-color-dark), 
         inset -3px -3px 6px var(--cml-soft-color-light);
       font-weight: 600;
     }
-    .secondary .option.selected { color: var(--cml-color-secondary); }
-    .tertiary .option.selected { color: var(--cml-color-tertiary); }
 
     .disabled {
       opacity: 0.5;
@@ -148,7 +144,7 @@ export class CamelotSoftSelect extends CamelotBaseSelect {
     const filteredOptions = ctrl.filteredOptions;
 
     return html`
-      <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
+      <div class="container ${this.disabled ? 'disabled' : ''}">
         ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="select"></camelot-label>` : ''}
         
         <div class="select-trigger ${ctrl.isOpen ? 'active' : ''}" @click=${() => ctrl.toggle()}>
