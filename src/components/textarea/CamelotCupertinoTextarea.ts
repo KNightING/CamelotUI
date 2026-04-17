@@ -1,29 +1,15 @@
 import { html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseTextarea } from './CamelotBaseTextarea';
 import '../label/CamelotLabel';
 
 /**
  * <CamelotCupertinoTextarea>
  * iOS 風格的長文字輸入框，具備 Apple 設計語言的標籤。
+ * 已優化：繼承 CamelotBaseTextarea 以共用基礎邏輯。
  */
 @customElement('camelot-cupertino-textarea')
-export class CamelotCupertinoTextarea extends CamelotBaseElement {
-  @property({ type: String })
-  label: string = '';
-  
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @property({ type: String })
-  value: string = '';
-
-  @property({ type: String })
-  placeholder: string = '';
-
-  @property({ type: Number })
-  rows: number = 3;
-
+export class CamelotCupertinoTextarea extends CamelotBaseTextarea {
   static styles = [
     css`
       :host {
@@ -63,15 +49,6 @@ export class CamelotCupertinoTextarea extends CamelotBaseElement {
     `
   ];
 
-  private _handleInput(e: Event) {
-    this.value = (e.target as HTMLTextAreaElement).value;
-    this.dispatchEvent(new CustomEvent('input', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
   render() {
     return html`
       <div class="container ${this.disabled ? 'disabled' : ''}">
@@ -83,11 +60,20 @@ export class CamelotCupertinoTextarea extends CamelotBaseElement {
           placeholder=${this.placeholder}
           ?disabled=${this.disabled}
           @input=${this._handleInput}
+          @focus=${this._handleFocus}
+          @blur=${this._handleBlur}
         ></textarea>
       </div>
     `;
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'camelot-cupertino-textarea': CamelotCupertinoTextarea;
+  }
+}
+
 
 declare global {
   interface HTMLElementTagNameMap {

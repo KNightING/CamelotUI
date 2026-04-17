@@ -1,6 +1,6 @@
 import { html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseTextarea } from './CamelotBaseTextarea';
 
 // 確保風格元件已載入
 import './CamelotMaterialTextarea';
@@ -11,31 +11,10 @@ import './CamelotScifiTextarea';
 /**
  * <CamelotTextarea>
  * 通用長文字輸入框元件，根據主題切換風格。
- * 繼承自 CamelotBaseElement 以獲取自動風格偵測能力。
+ * 已優化：繼承 CamelotBaseTextarea 以獲取統一屬性與狀態。
  */
 @customElement('camelot-textarea')
-export class CamelotTextarea extends CamelotBaseElement {
-  @property({ type: String })
-  label: string = '';
-
-  @property({ type: String })
-  value: string = '';
-
-  @property({ type: String })
-  placeholder: string = '';
-
-  @property({ type: Number })
-  rows: number = 3;
-
-  @property({ type: String })
-  error: string = '';
-
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
-
-  @property({ type: Boolean, reflect: true })
-  disabled: boolean = false;
-
+export class CamelotTextarea extends CamelotBaseTextarea {
   render() {
     switch (this._activeStyle) {
       case 'scifi':
@@ -103,3 +82,4 @@ declare global {
     'camelot-textarea': CamelotTextarea;
   }
 }
+

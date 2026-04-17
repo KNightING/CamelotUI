@@ -1,32 +1,15 @@
 import { html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseTextarea } from './CamelotBaseTextarea';
 import '../label/CamelotLabel';
 
 /**
  * <CamelotMaterialTextarea>
  * Material 3 風格的長文字輸入框，具備 Floating Label 效果。
+ * 已優化：繼承 CamelotBaseTextarea 以共用基礎邏輯。
  */
 @customElement('camelot-material-textarea')
-export class CamelotMaterialTextarea extends CamelotBaseElement {
-  @property({ type: String })
-  label: string = '';
-  
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @property({ type: String })
-  value: string = '';
-
-  @property({ type: String })
-  placeholder: string = '';
-
-  @property({ type: Number })
-  rows: number = 3;
-
-  @state()
-  private _focused = false;
-
+export class CamelotMaterialTextarea extends CamelotBaseTextarea {
   static styles = [
     css`
       :host {
@@ -93,25 +76,8 @@ export class CamelotMaterialTextarea extends CamelotBaseElement {
     `
   ];
 
-  private _handleFocus() {
-    this._focused = true;
-  }
-
-  private _handleBlur() {
-    this._focused = false;
-  }
-
-  private _handleInput(e: Event) {
-    this.value = (e.target as HTMLTextAreaElement).value;
-    this.dispatchEvent(new CustomEvent('input', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
   render() {
-    const isFloating = this._focused || (this.value && this.value.length > 0);
+    const isFloating = this._isFocused || (this.value && this.value.length > 0);
     
     return html`
       <div class="md-field ${isFloating ? 'floating' : ''} ${this.disabled ? 'disabled' : ''}">
@@ -130,6 +96,13 @@ export class CamelotMaterialTextarea extends CamelotBaseElement {
     `;
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'camelot-material-textarea': CamelotMaterialTextarea;
+  }
+}
+
 
 declare global {
   interface HTMLElementTagNameMap {

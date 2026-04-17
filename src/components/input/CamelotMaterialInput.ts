@@ -1,29 +1,15 @@
 import { html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseInput } from './CamelotBaseInput';
 import '../label/CamelotLabel';
 
 /**
  * <CamelotMaterialInput>
  * Material 3 風格的輸入框，具備 Floating Label 效果。
+ * 已優化：繼承 CamelotBaseInput 以共用基礎邏輯。
  */
 @customElement('camelot-material-input')
-export class CamelotMaterialInput extends CamelotBaseElement {
-  @property({ type: String })
-  label: string = '';
-  
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @property({ type: String })
-  value: string = '';
-
-  @property({ type: String })
-  placeholder: string = '';
-
-  @state()
-  private _focused = false;
-
+export class CamelotMaterialInput extends CamelotBaseInput {
   static styles = [
     css`
       :host {
@@ -87,30 +73,14 @@ export class CamelotMaterialInput extends CamelotBaseElement {
     `
   ];
 
-  private _handleFocus() {
-    this._focused = true;
-  }
-
-  private _handleBlur() {
-    this._focused = false;
-  }
-
-  private _handleInput(e: Event) {
-    this.value = (e.target as HTMLInputElement).value;
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
   render() {
-    const isFloating = this._focused || (this.value && this.value.length > 0);
+    const isFloating = this._isFocused || (this.value && this.value.length > 0);
     
     return html`
       <div class="md-field ${isFloating ? 'floating' : ''} ${this.disabled ? 'disabled' : ''}">
         <input 
           id="input"
+          type="${this.type}"
           placeholder="${this.placeholder || ''}"
           .value=${this.value}
           ?disabled=${this.disabled}
@@ -123,6 +93,13 @@ export class CamelotMaterialInput extends CamelotBaseElement {
     `;
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'camelot-material-input': CamelotMaterialInput;
+  }
+}
+
 
 declare global {
   interface HTMLElementTagNameMap {

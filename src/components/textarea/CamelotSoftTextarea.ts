@@ -1,29 +1,15 @@
 import { html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseTextarea } from './CamelotBaseTextarea';
 import '../label/CamelotLabel';
 
 /**
  * <CamelotSoftTextarea>
  * Neumorphism 風格的長文字輸入框，內凹陰影效果。
+ * 已優化：繼承 CamelotBaseTextarea 以共用基礎邏輯。
  */
 @customElement('camelot-soft-textarea')
-export class CamelotSoftTextarea extends CamelotBaseElement {
-  @property({ type: String })
-  label: string = '';
-  
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @property({ type: String })
-  value: string = '';
-
-  @property({ type: String })
-  placeholder: string = '';
-
-  @property({ type: Number })
-  rows: number = 3;
-
+export class CamelotSoftTextarea extends CamelotBaseTextarea {
   static styles = [
     css`
       :host {
@@ -68,15 +54,6 @@ export class CamelotSoftTextarea extends CamelotBaseElement {
     `
   ];
 
-  private _handleInput(e: Event) {
-    this.value = (e.target as HTMLTextAreaElement).value;
-    this.dispatchEvent(new CustomEvent('input', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
   render() {
     return html`
       <div class="container ${this.disabled ? 'disabled' : ''}">
@@ -88,6 +65,8 @@ export class CamelotSoftTextarea extends CamelotBaseElement {
           placeholder=${this.placeholder}
           ?disabled=${this.disabled}
           @input=${this._handleInput}
+          @focus=${this._handleFocus}
+          @blur=${this._handleBlur}
         ></textarea>
       </div>
     `;

@@ -1,26 +1,15 @@
 import { html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { CamelotBaseElement } from '../base/CamelotBaseElement';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseInput } from './CamelotBaseInput';
 import '../label/CamelotLabel';
 
 /**
  * <CamelotCupertinoInput>
  * iOS 風格的輸入框，具備 Apple 設計語言的標籤。
+ * 已優化：繼承 CamelotBaseInput 以共用基礎邏輯。
  */
 @customElement('camelot-cupertino-input')
-export class CamelotCupertinoInput extends CamelotBaseElement {
-  @property({ type: String })
-  label: string = '';
-  
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @property({ type: String })
-  value: string = '';
-
-  @property({ type: String })
-  placeholder: string = '';
-
+export class CamelotCupertinoInput extends CamelotBaseInput {
   static styles = [
     css`
       :host {
@@ -58,30 +47,31 @@ export class CamelotCupertinoInput extends CamelotBaseElement {
     `
   ];
 
-  private _handleInput(e: Event) {
-    this.value = (e.target as HTMLInputElement).value;
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
   render() {
     return html`
       <div class="container ${this.disabled ? 'disabled' : ''}">
         ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="input"></camelot-label>` : ''}
         <input 
           id="input"
+          type="${this.type}"
           .value=${this.value}
           placeholder=${this.placeholder}
           ?disabled=${this.disabled}
           @input=${this._handleInput}
+          @focus=${this._handleFocus}
+          @blur=${this._handleBlur}
         />
       </div>
     `;
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'camelot-cupertino-input': CamelotCupertinoInput;
+  }
+}
+
 
 declare global {
   interface HTMLElementTagNameMap {

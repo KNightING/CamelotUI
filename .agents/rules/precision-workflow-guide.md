@@ -4,15 +4,22 @@
 
 ## 📂 Structure (.agents/project/)
 - **`project.md`**: Wiki Index. Entry → Brain.
-- **`plans.md`**: Active Index. **Clean Label List**. No prefixes (`說明:`).
+- **`plans.md`**: Active Index. **Clean Label List**. No top-level `[ ]`. Each entry has nested status checkboxes.
 - **`archive.md`**: History. **Table only.**
 - **`plans/`**: Details. Dir: `${YYMMDDHHmm}-${slug}`.
   - `plan.md`: Spec/Design/Impact.
-  - `tasks.md`: Task List. Nested. Labels only (No parent `[ ]`).
+  - `tasks.md`: **Pure Technical Steps**. Hierarchical only: Top-level is plain text; progress is in nested `[ ]`.
 - **`wiki/`**: Atomic Brain. Dir: `category/[topic].md` (No monoliths).
 - **`archive/`**: Final MD: `${folder_name}.md`.
 
 ---
+
+## ⚡ PrecWF Reflex (AUTO-INIT)
+**! Triggered when:**
+1. **User Request**: New feature / Fix / Arch change.
+2. **Manual Detection**: User manual refactor (detect via file diffs).
+3. **Scale**: If changes > 2 files or 50 lines.
+**! Mandatory Action**: AI **MUST** halt code edits and execute `P2: Init` first.
 
 ## 🔄 Exec (PrecWF)
 
@@ -34,17 +41,15 @@
 1. **ID**: `${YYMMDDHHmm}`.
 2. **Dir**: `.agents/project/plans/${ID}-${desc}`.
 3. **Create**: `plan.md` (Spec) & `tasks.md` (List).
-4. **Reg**: Add Clean Label block to `plans.md`.
+4. **Reg**: Add Clean Label block to `plans.md` (+ `[WAIT]` if needed).
 
 ### P3: Exec 🔄
 - **MANDATORY Sync**: Artifact `task.md` → Local `tasks.md`. Zero lag.
-- **Phasing**: Group tasks into `Phase 1, 2...` for large changes.
-- **WAIT Marker**: Using `[WAIT]` labels = STOP after phase. No autostart next Phase.
+- **Pure Tasks**: Nested technical checkboxes only.
 
 ### P4: Verify ✅
-1. **Checkpoint**: Pause on `[WAIT]` items; request explicit User GO.
-2. **Agent Mark**: Mark `完成待確認` as `[x]`.
-3. **User Mark**: User clicks `User確認後歸檔` as `[x]`.
+1. **Agent Mark**: Mark `完成待確認` as `[x]` in `plans.md` when implementation is done.
+2. **User Mark**: User marks `User確認後歸檔` as `[x]` in `plans.md` to trigger P5.
 
 ### P5: Final 📦
 1. **Consolidate**: Move metadata to `archive.md` + Save to `archive/`.
@@ -58,6 +63,14 @@
 - **Logic**: Why / Flow / Decision.
 - **Interface**: Props / Methods / CSS Vars.
 - **Gotchas**: Traps / Constraints / Integration.
+
+---
+
+## 🚫 Forbidden Patterns (P-Audit Fail)
+- **Top-Level Checkboxes**: Non-nested `[ ]` in `plans.md` or `tasks.md` index lines.
+- **Governance in Tech-Tasks**: `[WAIT]` or Archive/Wiki labels inside `tasks.md`.
+- **Monoliths**: `lib.md` or `general.md` in `wiki/`.
+- **Redundant Headers**: Repeating IDs/Titles in both `plans.md` and `tasks.md`.
 
 ---
 

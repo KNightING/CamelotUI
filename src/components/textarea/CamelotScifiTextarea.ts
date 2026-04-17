@@ -1,19 +1,15 @@
 import { html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { CamelotScifiBase } from '../scifi/CamelotScifiBase';
-import '../scifi/CamelotScifiFrame';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseTextarea } from './CamelotBaseTextarea';
+import '../scifi/CamelotScifiHUD';
 
 /**
  * <CamelotScifiTextarea>
  * 日系科幻風格 (Sci-fi HUD) 的長文字輸入框元件實作。
+ * 已優化：繼承 CamelotBaseTextarea 以共用基礎邏輯，並使用 CamelotScifiHUD 進行包裝。
  */
 @customElement('camelot-scifi-textarea-impl')
-export class CamelotScifiTextarea extends CamelotScifiBase {
-  @property({ type: String }) label = '';
-  @property({ type: String }) value = '';
-  @property({ type: String }) placeholder = '';
-  @property({ type: Number }) rows = 4;
-
+export class CamelotScifiTextarea extends CamelotBaseTextarea {
   static styles = [
     css`
       :host {
@@ -37,18 +33,15 @@ export class CamelotScifiTextarea extends CamelotScifiBase {
       }
       :host([focused]) .label-text {
         opacity: 1;
-        color: var(--cml-scifi-color);
-        text-shadow: 0 0 8px color-mix(in srgb, var(--cml-scifi-color), transparent 50%);
+        color: var(--cml-scifi-color, var(--cml-color-current-color));
+        text-shadow: 0 0 8px color-mix(in srgb, var(--cml-scifi-color, var(--cml-color-current-color)), transparent 50%);
       }
 
       .input-wrapper {
         position: relative;
         width: 100%;
-        transition: transform 0.2s ease;
       }
-      .input-wrapper:hover {
-        transform: translateY(-1px);
-      }
+
       textarea {
         width: 100%;
         padding: 12px 20px;
@@ -64,44 +57,26 @@ export class CamelotScifiTextarea extends CamelotScifiBase {
         min-height: 100px;
       }
       textarea::placeholder {
-        color: color-mix(in srgb, var(--cml-scifi-color) 40%, var(--cml-color-on-surface));
+        color: color-mix(in srgb, var(--cml-color-current-color) 40%, var(--cml-color-on-surface));
         opacity: 0.5;
       }
       
       :host([focused]) textarea {
-        color: var(--cml-scifi-color);
-        text-shadow: 0 0 8px color-mix(in srgb, var(--cml-scifi-color), transparent 50%);
+        color: var(--cml-color-current-color);
+        text-shadow: 0 0 8px color-mix(in srgb, var(--cml-color-current-color), transparent 50%);
         font-weight: 600;
       }
     `
   ];
 
-  private _handleInput(e: Event) {
-    const target = e.target as HTMLTextAreaElement;
-    this.value = target.value;
-    this.dispatchEvent(new CustomEvent('input', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
   render() {
     return html`
       <div class="input-container">
         ${this.label ? html`<div class="label-text">${this.label}</div>` : ''}
-        <camelot-scifi-frame 
+        <camelot-scifi-hud 
           .color="${this.color}"
-          ?focused="${this._isFocused}"
-          ?show-pulse="${this._isFocused}"
+          ?disabled="${this.disabled}"
           ?show-grid="${false}"
-          ?show-scanline="${this._isFocused}"
-          ?show-shine="${this._isFocused || this._isHovered}"
-          .activeReticle="${this._isFocused || (this._isHovered && !this.disabled)}"
-          @mouseenter="${this._handleMouseEnter}"
-          @mouseleave="${this._handleMouseLeave}"
-          @focus="${this._handleFocus}"
-          @blur="${this._handleBlur}"
         >
           <div class="input-wrapper">
             <textarea 
@@ -114,11 +89,12 @@ export class CamelotScifiTextarea extends CamelotScifiBase {
               @blur="${this._handleBlur}"
             ></textarea>
           </div>
-        </camelot-scifi-frame>
+        </camelot-scifi-hud>
       </div>
     `;
   }
 }
+
 
 declare global {
   interface HTMLElementTagNameMap {
