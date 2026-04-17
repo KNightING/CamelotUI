@@ -1,16 +1,15 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-cupertino-switch')
-export class CamelotCupertinoSwitch extends LitElement {
+export class CamelotCupertinoSwitch extends CamelotBaseElement {
   @property({ type: Boolean })
   checked: boolean = false;
 
   @property({ type: Boolean })
   disabled: boolean = false;
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -28,11 +27,8 @@ export class CamelotCupertinoSwitch extends LitElement {
     }
 
     .switch.checked {
-      background-color: #34C759; /* iOS Standard Green */
+      background-color: var(--cml-color-current-color);
     }
-    .switch.checked.primary { background-color: var(--cml-color-primary); }
-    .switch.checked.secondary { background-color: var(--cml-color-secondary); }
-    .switch.checked.tertiary { background-color: var(--cml-color-tertiary); }
 
     .thumb {
       position: absolute;
@@ -68,7 +64,7 @@ export class CamelotCupertinoSwitch extends LitElement {
   render() {
     return html`
       <div 
-        class="switch ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="switch ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
       >
         <div class="thumb"></div>

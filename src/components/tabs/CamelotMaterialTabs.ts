@@ -1,16 +1,15 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-material-tabs')
-export class CamelotMaterialTabs extends LitElement {
+export class CamelotMaterialTabs extends CamelotBaseElement {
   @property({ type: Array })
   items: Array<{ label: string, value: string }> = [];
 
   @property({ type: String })
   value: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -45,10 +44,8 @@ export class CamelotMaterialTabs extends LitElement {
     }
 
     .tab-item.active {
-      color: var(--cml-color-primary);
+      color: var(--cml-color-current-color);
     }
-    .active.secondary { color: var(--cml-color-secondary); }
-    .active.tertiary { color: var(--cml-color-tertiary); }
 
     .indicator-container {
       position: absolute;
@@ -62,12 +59,10 @@ export class CamelotMaterialTabs extends LitElement {
     .indicator {
       width: 40px; /* M3 characteristic: indicator is shorter than tab */
       height: 100%;
-      background-color: var(--cml-color-primary);
+      background-color: var(--cml-color-current-color);
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
     }
-    .secondary .indicator { background-color: var(--cml-color-secondary); }
-    .tertiary .indicator { background-color: var(--cml-color-tertiary); }
   `;
 
   private _select(val: string) {
@@ -83,7 +78,7 @@ export class CamelotMaterialTabs extends LitElement {
     const indicatorPos = activeIndex * tabWidth;
 
     return html`
-      <div class="tabs-container ${this.color}">
+      <div class="tabs-container">
         ${this.items.map(item => html`
           <button 
             class="tab-item ${this.value === item.value ? 'active' : ''}"

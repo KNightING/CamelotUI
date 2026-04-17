@@ -1,16 +1,15 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-cupertino-tabs')
-export class CamelotCupertinoTabs extends LitElement {
+export class CamelotCupertinoTabs extends CamelotBaseElement {
   @property({ type: Array })
   items: Array<{ label: string, value: string }> = [];
 
   @property({ type: String })
   value: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -44,10 +43,9 @@ export class CamelotCupertinoTabs extends LitElement {
     }
 
     .tab-item.active {
-      color: #000;
+      color: var(--cml-color-current-color);
       font-weight: 600;
     }
-    .active.primary { color: var(--cml-color-primary); }
 
     .selection-pill {
       position: absolute;
@@ -73,7 +71,7 @@ export class CamelotCupertinoTabs extends LitElement {
     const pillPos = activeIndex * tabWidth;
 
     return html`
-      <div class="segmented-control ${this.color}">
+      <div class="segmented-control">
         <div 
           class="selection-pill" 
           style="width: calc(${tabWidth}% - 4px); left: calc(${pillPos}% + 2px)"

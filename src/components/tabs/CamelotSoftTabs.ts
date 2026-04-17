@@ -1,16 +1,15 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-soft-tabs')
-export class CamelotSoftTabs extends LitElement {
+export class CamelotSoftTabs extends CamelotBaseElement {
   @property({ type: Array })
   items: Array<{ label: string, value: string }> = [];
 
   @property({ type: String })
   value: string = '';
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -46,11 +45,8 @@ export class CamelotSoftTabs extends LitElement {
     }
 
     .tab-item.active {
-      color: var(--cml-color-primary);
+      color: var(--cml-color-current-color);
     }
-    .active.primary { color: var(--cml-color-primary); }
-    .active.secondary { color: var(--cml-color-secondary); }
-    .active.tertiary { color: var(--cml-color-tertiary); }
 
     .selection-raised {
       position: absolute;
@@ -78,7 +74,7 @@ export class CamelotSoftTabs extends LitElement {
     const pillPos = activeIndex * tabWidth;
 
     return html`
-      <div class="tabs-track ${this.color}">
+      <div class="tabs-track">
         <div 
           class="selection-raised" 
           style="width: calc(${tabWidth}% - 8px); left: calc(${pillPos}% + 4px)"

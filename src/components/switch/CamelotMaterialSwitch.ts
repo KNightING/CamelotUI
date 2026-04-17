@@ -1,16 +1,15 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-material-switch')
-export class CamelotMaterialSwitch extends LitElement {
+export class CamelotMaterialSwitch extends CamelotBaseElement {
   @property({ type: Boolean })
   checked: boolean = false;
 
   @property({ type: Boolean })
   disabled: boolean = false;
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -31,11 +30,9 @@ export class CamelotMaterialSwitch extends LitElement {
     }
 
     .switch.checked {
-      background-color: var(--cml-color-primary);
-      border-color: var(--cml-color-primary);
+      background-color: var(--cml-color-current-color);
+      border-color: var(--cml-color-current-color);
     }
-    .switch.checked.secondary { background-color: var(--cml-color-secondary); border-color: var(--cml-color-secondary); }
-    .switch.checked.tertiary { background-color: var(--cml-color-tertiary); border-color: var(--cml-color-tertiary); }
 
     .thumb {
       position: absolute;
@@ -53,10 +50,8 @@ export class CamelotMaterialSwitch extends LitElement {
       left: 28px;
       width: 24px;
       height: 24px;
-      background-color: var(--cml-color-on-primary);
+      background-color: var(--cml-color-current-on-color);
     }
-    .switch.checked.secondary .thumb { background-color: var(--cml-color-on-secondary); }
-    .switch.checked.tertiary .thumb { background-color: var(--cml-color-on-tertiary); }
 
     .switch.disabled {
       cursor: not-allowed;
@@ -77,7 +72,7 @@ export class CamelotMaterialSwitch extends LitElement {
   render() {
     return html`
       <div 
-        class="switch ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="switch ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
       >
         <div class="thumb"></div>

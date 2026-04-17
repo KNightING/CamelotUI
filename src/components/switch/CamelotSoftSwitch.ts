@@ -1,16 +1,15 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 @customElement('camelot-soft-switch')
-export class CamelotSoftSwitch extends LitElement {
+export class CamelotSoftSwitch extends CamelotBaseElement {
   @property({ type: Boolean })
   checked: boolean = false;
 
   @property({ type: Boolean })
   disabled: boolean = false;
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -32,11 +31,8 @@ export class CamelotSoftSwitch extends LitElement {
 
     .switch.checked {
       background-color: var(--cml-color-background);
+      color: var(--cml-color-current-color);
     }
-    
-    .switch.checked.primary { color: var(--cml-color-primary); }
-    .switch.checked.secondary { color: var(--cml-color-secondary); }
-    .switch.checked.tertiary { color: var(--cml-color-tertiary); }
 
     .thumb {
       position: absolute;
@@ -95,7 +91,7 @@ export class CamelotSoftSwitch extends LitElement {
   render() {
     return html`
       <div 
-        class="switch ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="switch ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
       >
         <div class="thumb"></div>

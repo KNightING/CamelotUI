@@ -1,5 +1,6 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CamelotBaseElement } from '../base/CamelotBaseElement';
 
 import '../scifi/CamelotScifiReticle';
 
@@ -9,15 +10,13 @@ import '../scifi/CamelotScifiReticle';
  * 視覺重點：銳利稜角、掃描發光、菱形滑塊。
  */
 @customElement('camelot-scifi-switch-impl')
-export class CamelotScifiSwitch extends LitElement {
+export class CamelotScifiSwitch extends CamelotBaseElement {
   @property({ type: Boolean })
   checked: boolean = false;
 
   @property({ type: Boolean })
   disabled: boolean = false;
 
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   static styles = css`
     :host {
@@ -25,11 +24,8 @@ export class CamelotScifiSwitch extends LitElement {
       width: 60px;
       height: 28px;
       font-family: var(--cml-font-family);
-      --cml-scifi-color: var(--cml-color-primary);
+      --cml-scifi-color: var(--cml-color-current-color);
     }
-
-    :host([color="secondary"]) { --cml-scifi-color: var(--cml-color-secondary); }
-    :host([color="tertiary"]) { --cml-scifi-color: var(--cml-color-tertiary); }
 
     .switch {
       position: relative;
@@ -159,7 +155,7 @@ export class CamelotScifiSwitch extends LitElement {
   render() {
     return html`
       <div 
-        class="switch ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''} ${this.color}"
+        class="switch ${this.checked ? 'checked' : ''} ${this.disabled ? 'disabled' : ''}"
         @click="${this._toggle}"
       >
         <camelot-scifi-reticle 
