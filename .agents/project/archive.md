@@ -32,3 +32,4 @@
 | [2604101357-implement-scifi-frame-pulse-effect](./archive/2604101357-implement-scifi-frame-pulse-effect.md) | 在 Sci-fi Frame 加入橫向脈衝掃描特效，並將其套用於 Input 的 Focus 狀態。 | 2026-04-10 13:57 | 2026-04-10 14:05 |
 | [2604131435-standardize-button-disabled-property](./archive/2604131435-standardize-button-disabled-property.md) | [按鈕系列] 統一所有按鈕組件的 disabled 屬性定義，修復模板綁定遺漏屬性的問題。 | 2026-04-13 14:35 | 2026-04-13 14:34 |
 | [2604131640-standardize-mono-font](./archive/2604131640-standardize-mono-font.md) | 統一 HUD 組件使用全域字體變數且優化編譯配置 | 2026-04-13 16:40 | 2026-04-13 16:45 |
+| [2604171014-refactor-select-base-logic](./archive/2604171014-refactor-select-base-logic.md) | [Select 重構] 抽離邏輯層並修復 Bug | 2026-04-17 10:14 | 2026-04-17 11:28 |

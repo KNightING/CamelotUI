@@ -1,18 +1,14 @@
----
-trigger: always_on
----
-
 # PrecWF Guide (Ultra)
 
 ! workflow for all Agent tasks.
 
 ## 📂 Structure (.agents/project/)
 - **`project.md`**: Wiki Index. Entry → Brain.
-- **`plans.md`**: Active index. Items: `- [ ]`.
-- **`archive.md`**: History. **Table only. NO [x].**
+- **`plans.md`**: Active Index. **Clean Label List**. No prefixes (`說明:`).
+- **`archive.md`**: History. **Table only.**
 - **`plans/`**: Details. Dir: `${YYMMDDHHmm}-${slug}`.
   - `plan.md`: Spec/Design/Impact.
-  - `tasks.md`: Sync TODO.
+  - `tasks.md`: Task List. Nested. Labels only (No parent `[ ]`).
 - **`wiki/`**: Detailed Brain. Dir: `category/*.md`.
 - **`archive/`**: Final MD: `${folder_name}.md`.
 
@@ -22,51 +18,32 @@ trigger: always_on
 
 ### P0: Retrieval 🔍🧹
 **! START:**
-1. **Read `plans.md` & `archive.md`** → context (curr + last 3-5).
-2. **Auto-archive** → `[x]` in `plans.md` → **P5 NOW**.
-3. **Read `project.md`** → Wiki Entry → Follow `wiki/` links → Build Context.
-4. **Collision check** → vs active/recent work.
-5. **Scan KIs** → patterns.
+1. **Read `plans.md` & `archive.md`** → context.
+2. **Auto-archive** → `確認完成歸檔` sub-item check.
 
 ### P1: Categorization ⚖️
-- **Iter**: Extension/fix for active/recent.
-  - 🔄 **Action**: Update `plan.md` + `tasks.md`. NO new dir.
-- **Micro**: Typos/docs/code <10 lines.
-  - 🚀 **Action**: Direct impl. Skip P2.
-- **Std/Large**: Logic/multi-file/new comp.
-  - 🛠️ **Action**: FULL WF.
+- **Std/Large**: FULL WF.
 
 ### P2: Init 🏗️
 1. **ID**: `${YYMMDDHHmm}`.
 2. **Dir**: `.agents/project/plans/${ID}-${desc}`.
-3. **`plan.md`**: `Created: YYYY-MM-DD`. Rel paths only. Goals/Arch/Impact.
-4. **`tasks.md`**: `[ ]`, `[/]`, `[x]`.
-5. **Branch**: Ask user first. Name = Folder.
-6. **Reg**: Add link + summary to `plans.md`.
+3. **Reg**: Add Clean Label block to `plans.md`.
 
 ### P3: Exec 🔄
-- **Sync**: Context `task.md` = Plan `tasks.md`.
-- **Paths**: Rel everywhere.
+- **MANDATORY Sync**: Artifact `task.md` → Local `tasks.md`. Zero lag.
+- **Interactivity**: Nested `- [ ]` for UI clicking. No parent checkboxes in `tasks.md`.
 
 ### P4: Verify ✅
-1. **Tools**: Detect Lockfiles → Cmd.
-2. **Static**: Lint/Compile.
-3. **Test**: Logic.
-4. **User Check**: Ready. User marks `[x]` in `plans.md`.
+1. **Agent Mark**: Mark `完成待確認` as `[x]`.
+2. **User Mark**: User clicks `確認完成歸檔` `[x]`.
 
 ### P5: Final 📦
-1. **Consolidate**: Plan + Tasks → 1 MD.
-2. **Move**: Write `archive/` + delete plan dir.
-3. **Index**: Move to `archive.md`. **Table only.**
-   - **Paths**: Rel.
-   - **Check**: No absolute (`C:/`, `file:///`).
-4. **Update Brain**: Sync `project.md` + `wiki/*.md`. Maintain Graph.
+1. **Consolidate**: Move metadata to `archive.md` + Save to `archive/`.
+2. **MANDATORY Brain Sync**: Audit Wiki (`wiki/*.md`) vs Code diffs.
+3. **Index Finish**: Update `project.md` timestamp. No Wiki update = P5 FAIL.
 
 ---
 
 ## 📋 Global Rules
-- **Rel Paths**: No absolute.
-- **Manual Finish**: Agent NO `[x]` in `plans.md`.
-- **Context**: Link related/recent tasks.
-- **Status**: `[ ]`, `[/]`, `[x]`.
-- **Wiki**: Cat-based files. `project.md` links all. Graph sync mandatory.
+- **Clean UI**: No redundant labels (`說明`, `建立時間`). Use direct text + hierarchy.
+- **Proactive Tracking**: Mark `[x]` sub-items as work flows.

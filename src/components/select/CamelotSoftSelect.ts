@@ -1,30 +1,10 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, css } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseSelect } from './CamelotBaseSelect';
 import '../label/CamelotLabel';
 
 @customElement('camelot-soft-select')
-export class CamelotSoftSelect extends LitElement {
-  @property({ type: String })
-  label: string = '';
-
-  @property({ type: String })
-  value: string = '';
-
-  @property({ type: Array })
-  options: Array<{ label: string, value: string }> = [];
-
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
-
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @property({ type: Boolean })
-  isOpen: boolean = false;
-
-  @property({ type: String })
-  searchTerm: string = '';
-
+export class CamelotSoftSelect extends CamelotBaseSelect {
   static styles = css`
     :host {
       display: block;
@@ -85,7 +65,6 @@ export class CamelotSoftSelect extends LitElement {
     .secondary .active .chevron { border-color: var(--cml-color-secondary); }
     .tertiary .active .chevron { border-color: var(--cml-color-tertiary); }
 
-    /* Dropdown Overlay */
     .dropdown {
       position: absolute;
       top: calc(100% + 16px);
@@ -111,9 +90,6 @@ export class CamelotSoftSelect extends LitElement {
       padding: 12px;
       background-color: var(--cml-color-background);
       border-bottom: 1px solid var(--cml-soft-color-dark);
-      position: sticky;
-      top: 0;
-      z-index: 1;
     }
 
     .search-input {
@@ -123,7 +99,6 @@ export class CamelotSoftSelect extends LitElement {
       border-radius: 12px;
       background-color: var(--cml-color-background);
       color: var(--cml-color-on-background);
-      font-family: var(--cml-font-family);
       font-size: 0.875rem;
       outline: none;
       box-shadow: 
@@ -136,24 +111,16 @@ export class CamelotSoftSelect extends LitElement {
       overflow-y: auto;
       flex: 1;
       padding: 8px;
+      box-sizing: border-box;
     }
 
     .option {
       padding: 12px 16px;
       cursor: pointer;
       color: var(--cml-color-on-background);
-      font-family: var(--cml-font-family);
       border-radius: 12px;
       transition: all 0.2s;
       margin-bottom: 4px;
-    }
-
-    .option:last-child {
-      margin-bottom: 0;
-    }
-
-    .option:hover {
-      background-color: rgba(0, 0, 0, 0.03);
     }
 
     .option.selected {
@@ -167,13 +134,6 @@ export class CamelotSoftSelect extends LitElement {
     .secondary .option.selected { color: var(--cml-color-secondary); }
     .tertiary .option.selected { color: var(--cml-color-tertiary); }
 
-    .no-results {
-      padding: 16px;
-      text-align: center;
-      color: var(--cml-color-on-surface-variant);
-      font-size: 0.875rem;
-    }
-
     .disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -182,54 +142,28 @@ export class CamelotSoftSelect extends LitElement {
     }
   `;
 
-  private _toggleDropdown() {
-    if (this.disabled) return;
-    this.isOpen = !this.isOpen;
-    if (this.isOpen) {
-      setTimeout(() => {
-        this.shadowRoot?.querySelector<HTMLInputElement>('.search-input')?.focus();
-      }, 0);
-    }
-  }
-
-  private _selectOption(option: { label: string, value: string }) {
-    this.value = option.value;
-    this.isOpen = false;
-    this.searchTerm = '';
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
-  private _handleSearch(e: Event) {
-    this.searchTerm = (e.target as HTMLInputElement).value;
-  }
-
   render() {
-    const selectedOption = this.options.find(opt => opt.value === this.value);
-    const filteredOptions = this.options.filter(opt => 
-      opt.label.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    const ctrl = this.selectController;
+    const selectedLabel = ctrl.selectedLabel;
+    const filteredOptions = ctrl.filteredOptions;
 
     return html`
       <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
         ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="select"></camelot-label>` : ''}
         
-        <div class="select-trigger ${this.isOpen ? 'active' : ''}" @click=${this._toggleDropdown}>
-          <span>${selectedOption ? selectedOption.label : 'Select...'}</span>
+        <div class="select-trigger ${ctrl.isOpen ? 'active' : ''}" @click=${() => ctrl.toggle()}>
+          <span>${selectedLabel || this.placeholder}</span>
           <div class="chevron"></div>
         </div>
 
-        <div class="dropdown ${this.isOpen ? 'open' : ''}">
+        <div class="dropdown ${ctrl.isOpen ? 'open' : ''}">
           <div class="dropdown-header">
             <input 
               type="text" 
               class="search-input" 
               placeholder="Search..." 
-              .value=${this.searchTerm}
-              @input=${this._handleSearch}
+              .value=${ctrl.searchTerm}
+              @input=${(e: any) => ctrl.handleSearch(e.target.value)}
               @click=${(e: Event) => e.stopPropagation()}
             />
           </div>
@@ -237,18 +171,20 @@ export class CamelotSoftSelect extends LitElement {
             ${filteredOptions.map(opt => html`
               <div 
                 class="option ${opt.value === this.value ? 'selected' : ''}"
-                @click=${(e: Event) => {
-                  e.stopPropagation();
-                  this._selectOption(opt);
-                }}
+                @click=${() => ctrl.select(opt.value)}
               >
                 ${opt.label}
               </div>
             `)}
-            ${filteredOptions.length === 0 ? html`<div class="no-results">No results found</div>` : ''}
           </div>
         </div>
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'camelot-soft-select': CamelotSoftSelect;
   }
 }

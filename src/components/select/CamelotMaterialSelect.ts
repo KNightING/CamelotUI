@@ -1,30 +1,10 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, css } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { CamelotBaseSelect } from './CamelotBaseSelect';
 import '../label/CamelotLabel';
 
 @customElement('camelot-material-select')
-export class CamelotMaterialSelect extends LitElement {
-  @property({ type: String })
-  label: string = '';
-
-  @property({ type: String })
-  value: string = '';
-
-  @property({ type: Array })
-  options: Array<{ label: string, value: string }> = [];
-
-  @property({ type: String })
-  color: 'primary' | 'secondary' | 'tertiary' = 'primary';
-
-  @property({ type: Boolean })
-  disabled: boolean = false;
-
-  @property({ type: Boolean })
-  isOpen: boolean = false;
-
-  @property({ type: String })
-  searchTerm: string = '';
-
+export class CamelotMaterialSelect extends CamelotBaseSelect {
   static styles = css`
     :host {
       display: block;
@@ -42,62 +22,60 @@ export class CamelotMaterialSelect extends LitElement {
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      background-color: var(--cml-color-surface-container-low);
-      border: 1px solid var(--cml-color-outline);
-      border-radius: var(--cml-radius-s);
-      padding: 12px 16px;
+      height: 56px;
+      padding: 0 16px;
+      background-color: var(--cml-color-surface-variant);
+      border-radius: 4px 4px 0 0;
+      border-bottom: 1px solid var(--cml-color-outline);
       font-family: var(--cml-font-family);
-      font-size: 1rem;
+      font-size: var(--cml-font-size-body);
       color: var(--cml-color-on-surface);
       cursor: pointer;
       box-sizing: border-box;
       transition: all 0.2s;
-      min-height: 48px;
     }
 
     .select-trigger:hover:not(.disabled) {
-      background-color: var(--cml-color-surface-container-medium);
+      background-color: rgba(var(--cml-color-on-surface-rgb), 0.08);
+      border-bottom-color: var(--cml-color-on-surface);
     }
 
     .select-trigger.active {
-      border-color: var(--cml-color-primary);
-      border-width: 2px;
-      padding: 11px 15px; /* Adjust for border width change */
+      border-bottom: 2px solid var(--cml-color-primary);
+      background-color: rgba(var(--cml-color-primary-rgb), 0.12);
     }
-    .secondary .select-trigger.active { border-color: var(--cml-color-secondary); }
-    .tertiary .select-trigger.active { border-color: var(--cml-color-tertiary); }
+    .secondary .select-trigger.active { border-bottom-color: var(--cml-color-secondary); }
+    .tertiary .select-trigger.active { border-bottom-color: var(--cml-color-tertiary); }
 
-    .arrow {
+    .chevron {
       width: 0;
       height: 0;
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
-      border-top: 5px solid var(--cml-color-outline);
-      transition: transform 0.2s;
+      border-top: 5px solid var(--cml-color-on-surface-variant);
+      transition: transform 0.3s;
     }
 
-    .active .arrow {
+    .active .chevron {
       transform: rotate(180deg);
       border-top-color: var(--cml-color-primary);
     }
-    .secondary .active .arrow { border-top-color: var(--cml-color-secondary); }
-    .tertiary .active .arrow { border-top-color: var(--cml-color-tertiary); }
+    .secondary .active .chevron { border-top-color: var(--cml-color-secondary); }
+    .tertiary .active .chevron { border-top-color: var(--cml-color-tertiary); }
 
-    /* Dropdown */
     .dropdown {
       position: absolute;
-      top: calc(100% + 4px);
+      top: 100%;
       left: 0;
       right: 0;
-      background-color: var(--cml-color-surface-container-high);
-      border-radius: var(--cml-radius-s);
-      box-shadow: var(--cml-shadow-3);
+      background-color: var(--cml-color-surface);
+      border-radius: 4px;
+      box-shadow: var(--cml-elevation-3);
       z-index: 1000;
       overflow: hidden;
       display: none;
       flex-direction: column;
       max-height: 300px;
-      border: 1px solid var(--cml-color-outline-variant);
     }
 
     .dropdown.open {
@@ -107,18 +85,14 @@ export class CamelotMaterialSelect extends LitElement {
     .dropdown-header {
       padding: 8px;
       border-bottom: 1px solid var(--cml-color-outline-variant);
-      background-color: var(--cml-color-surface-container-high);
-      position: sticky;
-      top: 0;
-      z-index: 1;
     }
 
     .search-input {
       width: 100%;
       padding: 8px 12px;
-      border: 1px solid var(--cml-color-outline-variant);
-      border-radius: var(--cml-radius-xs);
-      background-color: var(--cml-color-surface);
+      border: 1px solid var(--cml-color-outline);
+      border-radius: 4px;
+      background: transparent;
       color: var(--cml-color-on-surface);
       font-family: var(--cml-font-family);
       font-size: 0.875rem;
@@ -138,27 +112,26 @@ export class CamelotMaterialSelect extends LitElement {
     .option {
       padding: 12px 16px;
       cursor: pointer;
-      transition: background-color 0.2s;
       color: var(--cml-color-on-surface);
       font-family: var(--cml-font-family);
+      transition: background-color 0.2s;
     }
 
     .option:hover {
-      background-color: var(--cml-color-surface-variant);
+      background-color: rgba(var(--cml-color-on-surface-rgb), 0.08);
     }
 
     .option.selected {
-      background-color: var(--cml-color-primary-container);
-      color: var(--cml-color-on-primary-container);
-      font-weight: 500;
+      background-color: rgba(var(--cml-color-primary-rgb), 0.12);
+      color: var(--cml-color-primary);
     }
-    .secondary .option.selected { background-color: var(--cml-color-secondary-container); color: var(--cml-color-on-secondary-container); }
-    .tertiary .option.selected { background-color: var(--cml-color-tertiary-container); color: var(--cml-color-on-tertiary-container); }
+    .secondary .option.selected { color: var(--cml-color-secondary); }
+    .tertiary .option.selected { color: var(--cml-color-tertiary); }
 
     .no-results {
       padding: 16px;
       text-align: center;
-      color: var(--cml-color-outline);
+      color: var(--cml-color-on-surface-variant);
       font-size: 0.875rem;
     }
 
@@ -169,54 +142,28 @@ export class CamelotMaterialSelect extends LitElement {
     }
   `;
 
-  private _toggleDropdown() {
-    if (this.disabled) return;
-    this.isOpen = !this.isOpen;
-    if (this.isOpen) {
-      setTimeout(() => {
-        this.shadowRoot?.querySelector<HTMLInputElement>('.search-input')?.focus();
-      }, 0);
-    }
-  }
-
-  private _selectOption(option: { label: string, value: string }) {
-    this.value = option.value;
-    this.isOpen = false;
-    this.searchTerm = '';
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: { value: this.value },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
-  private _handleSearch(e: Event) {
-    this.searchTerm = (e.target as HTMLInputElement).value;
-  }
-
   render() {
-    const selectedOption = this.options.find(opt => opt.value === this.value);
-    const filteredOptions = this.options.filter(opt => 
-      opt.label.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    const ctrl = this.selectController;
+    const selectedLabel = ctrl.selectedLabel;
+    const filteredOptions = ctrl.filteredOptions;
 
     return html`
       <div class="container ${this.color} ${this.disabled ? 'disabled' : ''}">
-        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.isOpen ? this.color : 'outline'}"></camelot-label>` : ''}
+        ${this.label ? html`<camelot-label .text="${this.label}" .color="${this.color}" .for="select"></camelot-label>` : ''}
         
-        <div class="select-trigger ${this.isOpen ? 'active' : ''}" @click=${this._toggleDropdown}>
-          <span>${selectedOption ? selectedOption.label : 'Select...'}</span>
-          <div class="arrow"></div>
+        <div class="select-trigger ${ctrl.isOpen ? 'active' : ''}" @click=${() => ctrl.toggle()}>
+          <span>${selectedLabel || this.placeholder}</span>
+          <div class="chevron"></div>
         </div>
 
-        <div class="dropdown ${this.isOpen ? 'open' : ''}">
+        <div class="dropdown ${ctrl.isOpen ? 'open' : ''}">
           <div class="dropdown-header">
             <input 
               type="text" 
               class="search-input" 
               placeholder="Search..." 
-              .value=${this.searchTerm}
-              @input=${this._handleSearch}
+              .value=${ctrl.searchTerm}
+              @input=${(e: any) => ctrl.handleSearch(e.target.value)}
               @click=${(e: Event) => e.stopPropagation()}
             />
           </div>
@@ -224,10 +171,7 @@ export class CamelotMaterialSelect extends LitElement {
             ${filteredOptions.map(opt => html`
               <div 
                 class="option ${opt.value === this.value ? 'selected' : ''}"
-                @click=${(e: Event) => {
-                  e.stopPropagation();
-                  this._selectOption(opt);
-                }}
+                @click=${() => ctrl.select(opt.value)}
               >
                 ${opt.label}
               </div>
@@ -237,5 +181,11 @@ export class CamelotMaterialSelect extends LitElement {
         </div>
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'camelot-material-select': CamelotMaterialSelect;
   }
 }

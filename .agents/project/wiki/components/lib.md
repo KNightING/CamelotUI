@@ -12,7 +12,7 @@ Current set of UI components.
 
 ## Forms
 - **Input/Textarea**: High-contrast, filled-state aware.
-- **Select**: HUD adapted.
+- **Select**: 多主題支援組合。核心為 `CamelotSelectController` (Reactive Controller)，將下拉與過濾邏輯分離。Sci-fi 主題採 **Composition (組合模式)** 以繞過繼承限制。
 - **Checkbox/Radio**: Reticle markers + scanning fill.
 - **Switch**: Adaptive variants.
 

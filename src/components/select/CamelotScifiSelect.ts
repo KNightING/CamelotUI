@@ -1,21 +1,30 @@
 import { html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { CamelotScifiBase } from '../scifi/CamelotScifiBase';
+import { CamelotSelectController, SelectOption } from './CamelotSelectController';
 import '../scifi/CamelotScifiFrame';
 
 /**
  * <CamelotScifiSelect>
  * 日系科幻風格 (Sci-fi HUD) 的下拉選單實作。
- * 已優化：使用 CamelotScifiBase 與 CamelotScifiFrame。
+ * 解決了繼承衝突：繼承自 CamelotScifiBase，並使用 SelectController 處理邏輯。
  */
 @customElement('camelot-scifi-select-impl')
 export class CamelotScifiSelect extends CamelotScifiBase {
   @property({ type: String }) label = '';
-  @property({ type: Array }) options: Array<{label: string, value: string}> = [];
+  @property({ type: Array }) options: SelectOption[] = [];
   @property({ type: String }) value = '';
   @property({ type: String }) placeholder = 'SELECT_OPTION';
 
-  @state() private _isOpen = false;
+  // 使用邏輯控制器進行行為組合 (Composition)
+  private select = new CamelotSelectController(this);
+
+  protected willUpdate(changedProperties: Map<string | number | symbol, unknown>) {
+    super.willUpdate(changedProperties);
+    // 同步屬性到控制器
+    if (changedProperties.has('options')) this.select.options = this.options;
+    if (changedProperties.has('value')) this.select.value = this.value;
+  }
 
   static styles = [
     css`
@@ -39,8 +48,8 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         padding-left: 4px;
         transition: all 0.2s ease;
       }
-      :host([_is-open]) .label-text,
-      :host([focused]) .label-text {
+      :host([focused]) .label-text,
+      .label-text.active {
         opacity: 1;
         color: var(--cml-scifi-color);
         text-shadow: 0 0 8px color-mix(in srgb, var(--cml-scifi-color), transparent 50%);
@@ -73,7 +82,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         transform: rotate(45deg);
         transition: transform 0.3s ease;
       }
-      :host([_is-open]) .arrow {
+      .arrow.open {
         transform: rotate(-135deg);
       }
       .options-panel {
@@ -125,6 +134,7 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         width: 100%;
         outline: none;
         padding: 4px 0;
+        box-sizing: border-box;
       }
       .search-input::placeholder {
         color: color-mix(in srgb, var(--cml-scifi-color) 30%, transparent);
@@ -140,31 +150,13 @@ export class CamelotScifiSelect extends CamelotScifiBase {
     `
   ];
 
-  private _toggle() {
-    if (this.disabled) return;
-    this._isOpen = !this._isOpen;
-    if (this._isOpen) this._handleFocus();
-    else this._handleBlur();
-  }
-
-  private _select(val: string) {
-    this.value = val;
-    this._isOpen = false;
-    this._handleBlur();
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: { value: val },
-      bubbles: true,
-      composed: true
-    }));
-  }
-
   render() {
-    const selectedLabel = this.options.find(o => o.value === this.value)?.label;
-    const isFocused = this._isFocused || this._isOpen;
+    const isFocused = this._isFocused || this.select.isOpen;
+    const selectedLabel = this.select.selectedLabel;
 
     return html`
       <div class="select-container">
-        ${this.label ? html`<div class="label-text">${this.label}</div>` : ''}
+        ${this.label ? html`<div class="label-text ${isFocused ? 'active' : ''}">${this.label}</div>` : ''}
         <camelot-scifi-frame 
           .color="${this.color}"
           ?focused="${isFocused}"
@@ -177,15 +169,15 @@ export class CamelotScifiSelect extends CamelotScifiBase {
           @focus="${this._handleFocus}"
           @blur="${this._handleBlur}"
         >
-          <div class="select-trigger" @click="${this._toggle}">
+          <div class="select-trigger" @click="${() => this.select.toggle()}">
             <span class="display-value ${!selectedLabel ? 'placeholder' : ''}">
               ${selectedLabel || this.placeholder}
             </span>
-            <div class="arrow"></div>
+            <div class="arrow ${this.select.isOpen ? 'open' : ''}"></div>
           </div>
         </camelot-scifi-frame>
 
-        ${this._isOpen ? html`
+        ${this.select.isOpen ? html`
           <div class="options-panel">
             <camelot-scifi-frame .color="${this.color}" variant="2-corner" ?showGrid="${false}">
               <div class="search-box">
@@ -194,16 +186,17 @@ export class CamelotScifiSelect extends CamelotScifiBase {
                   type="text" 
                   class="search-input" 
                   placeholder="SEARCH_FILTER..."
-                  @input="${this._onSearchInput}"
+                  .value="${this.select.searchTerm}"
+                  @input="${(e: any) => this.select.handleSearch(e.target.value)}"
                   @click="${(e: Event) => e.stopPropagation()}"
                 />
               </div>
               <div class="options-list" style="max-height: 200px; overflow-y: auto;">
-                ${this.options.map(opt => html`
+                ${this.select.filteredOptions.map(opt => html`
                   <div 
                     class="option-item" 
                     ?selected="${this.value === opt.value}"
-                    @click="${() => this._select(opt.value)}"
+                    @click="${() => this.select.select(opt.value)}"
                   >
                     ${opt.label}
                   </div>
@@ -214,14 +207,6 @@ export class CamelotScifiSelect extends CamelotScifiBase {
         ` : ''}
       </div>
     `;
-  }
-
-  private _onSearchInput(e: any) {
-    this.dispatchEvent(new CustomEvent('search', {
-      detail: { value: e.target.value },
-      bubbles: true,
-      composed: true
-    }));
   }
 }
 
